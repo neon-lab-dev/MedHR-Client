@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
 import { useForm } from "react-hook-form";
 import Button from "../Button";
@@ -140,7 +141,7 @@ const Login = () => {
             onClick={() => {
               dispatch(setAuthModalType("SIGNUP"));
             }}
-            className="text-primary-500"
+            className="text-primary-500 cursor-pointer"
           >
             Signup
           </button>

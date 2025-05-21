@@ -93,7 +93,7 @@ const AuthModal = () => {
                     onClick={() => {
                       dispatch(setActiveTab(btn as IAuthTabs));
                     }}
-                    className={`text-base font-medium text-center flex-1 transition-all duration-300 h-12 rounded-lg ${
+                    className={`text-base font-medium text-center flex-1 transition-all duration-300 h-12 rounded-lg cursor-pointer ${
                       activeTab === btn
                         ? "text-white bg-primary-500"
                         : "text-secondary-400 bg-white px-5 "

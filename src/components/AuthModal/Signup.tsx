@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 import Button from "../Button";
@@ -372,13 +373,13 @@ const Signup = () => {
               <div ref={dropDownRef} className="relative">
                 <div
                   onClick={() => setOpen((prev) => !prev)}
-                  className="flex cursor-pointer border "
+                  className="flex cursor-pointer"
                 >
                   {countryCode}
                   <Image src={downArrow} alt="down-arrow" />
                 </div>
                 <ul
-                  className={`cursor-pointer bg-white flex flex-col gap-4 w-28 h-56 overflow-scroll ml-2 rounded ${
+                  className={`cursor-pointer bg-white flex flex-col gap-4 w-20! h-56 overflow-scroll ml-2 rounded ${
                     open ? "visible shadow-2xl" : "invisible"
                   } absolute -left-6 top-10 z-50 w-full space-y-1 py-2`}
                 >
@@ -486,7 +487,7 @@ const Signup = () => {
             onClick={() => {
               dispatch(setAuthModalType("LOGIN"));
             }}
-            className="text-primary-500"
+            className="text-primary-500 cursor-pointer"
           >
             Login
           </button>

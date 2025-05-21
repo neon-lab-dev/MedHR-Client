@@ -1,26 +1,205 @@
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
 @import "tailwindcss";
+@plugin "daisyui";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /* Fonts */
+  --font-plus-jakarta-sans: Plus Jakarta Sans, sans-serif;
+  --font-poppins: Poppins, sans-serif;
+
+  /* Primary */
+  --color-primary-25: #fff1f1;
+  --color-primary-50: #fff3f1;
+  --color-primary-100: #ffe4e0;
+  --color-primary-200: #ffcec7;
+  --color-primary-300: #ffaca0;
+  --color-primary-400: #ff7d69;
+  --color-primary-500: #f9533a;
+  --color-primary-550: #f9533a;
+  --color-primary-600: #e7361b;
+  --color-primary-650: #ff6464;
+  --color-primary-700: #c22a13;
+  --color-primary-800: #a02614;
+  --color-primary-900: #852517;
+  --color-primary-950: #481007;
+
+  /* Secondary */
+  --color-secondary-20: #ffffea;
+  --color-secondary-25: #fabb00;
+  --color-secondary-50: #f5f6fa;
+  --color-secondary-100: #eaecf4;
+  --color-secondary-200: #d0d7e7;
+  --color-secondary-300: #a6b4d3;
+  --color-secondary-400: #778db9;
+  --color-secondary-500: #556ea2;
+  --color-secondary-525: #2d65e8;
+  --color-secondary-550: #264fc6;
+  --color-secondary-575: #3e81f3;
+  --color-secondary-600: #425687;
+  --color-secondary-650: #556ea2;
+  --color-secondary-700: #37466d;
+  --color-secondary-800: #303d5c;
+  --color-secondary-900: #2c364e;
+  --color-secondary-925: #303d5c;
+  --color-secondary-930: #3b3b3e;
+  --color-secondary-950: #161a27;
+  --color-secondary-960: #91a0b5;
+
+  /* Neutral */
+  --color-neutral-50: #f7f7f8;
+  --color-neutral-100: #eeeef0;
+  --color-neutral-150: #e5e5e8;
+  --color-neutral-200: #d8d9df;
+  --color-neutral-300: #b6b7c3;
+  --color-neutral-400: #8f91a1;
+  --color-neutral-450: #f5f6fa;
+  --color-neutral-500: #717386;
+  --color-neutral-550: #eaecf4;
+  --color-neutral-600: #5b5c6e;
+  --color-neutral-650: #d0d7e7;
+  --color-neutral-700: #4a4a5a;
+  --color-neutral-800: #40414c;
+  --color-neutral-900: #383842;
+  --color-neutral-925: #434447;
+  --color-neutral-950: #25252c;
+  --color-neutral-960: #4a4a5a;
+  --color-neutral-970: #37466d;
+  --color-neutral-975: #434347;
+  --color-neutral-980: #374957;
+  --color-neutral-985: #e2e8f0;
+  --color-neutral-990: #697781;
+
+  /* Success */
+  --color-success-50: #effef7;
+  --color-success-100: #1acd81;
+  --color-success-110: #0fa968;
+
+  /* Warning */
+  --color-warning-50: #ffc244;
+
+  /* Error */
+  --color-error-500: #ff3333;
+
+  /* Woodsmoke */
+  --color-woodsmoke-800: #434347;
+
+  /* Shadows */
+  --shadow-primary-button: 0px 1px 2px 0px rgba(255, 255, 255, 0.30) inset, 0px -2px 0px 0px #E0381F inset, 0px 4px 16px 0px rgba(254, 71, 43, 0.30);
+--shadow-secondary-button: 0px 2px 8px 0px var(--Secondary-Color-100, #EAECF4);
+--shadow-job-card: 0px 4px 8px 0px var(--Neutral-Color-50, #F7F7F8);
+--shadow-event-card: 0px 3px 12px 0px var(--Secondary-Color-100, #EAECF4);
+
+
+    /* Boarders */
+    --border-white-horizontal-line: rgba(255, 255, 255, 0.12);
+--border-gray-horizontal-line: rgba(89, 90, 97, 0.15);
+
+  /* Gradients */
+  --bg-gradient-radial: radial-gradient(var(--tw-gradient-stops));
+--bg-gradient-conic: conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops));
+--bg-gradient-courseCard-blue: linear-gradient(282deg, #213FAC 0%, #2D65E8 100%);
+--bg-gradient-courseCard-white: linear-gradient(282deg, #DCEAFD 0%, #EFF6FF 100%);
+--bg-line: rgba(255, 255, 255, 0.12);
+--bg-gradient-primary-button: radial-gradient(99.79% 100% at 31.97% 99.5%, rgba(255, 255, 255, 0.00) 0%, rgba(206, 154, 146, 0.30) 100%), linear-gradient(180deg, #F9533A 0%, #FF3F22 100%);
+--bg-gradient-primary-button-hover: linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), linear-gradient(180deg, #F9533A 0%, #C22A13 93.51%);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+.bg-gradient-radial {
+  background-image: var(--bg-gradient-radial);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+.bg-gradient-conic {
+  background-image: var(--bg-gradient-conic);
+}
+
+.bg-gradient-courseCard-blue {
+  background-image: var(--bg-gradient-courseCard-blue);
+}
+
+.bg-gradient-courseCard-white {
+  background-image: var(--bg-gradient-courseCard-white);
+}
+
+.bg-line {
+  background: var(--bg-line);
+}
+
+.bg-gradient-primary-button {
+  background-image: var(--bg-gradient-primary-button);
+}
+
+.bg-gradient-primary-button-hover {
+  background-image: var(--bg-gradient-primary-button-hover);
+}
+
+
+
+.bg-landing-stats-heading {
+  background: linear-gradient(96deg, #f9533a 2.09%, #ffaca0 98.26%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+
+.card-border {
+  border: 1.654px solid rgba(255, 255, 255, 0.15);
+}
+
+.py-section {
+  padding-top: 64px;
+  padding-bottom: 64px;
+}
+
+/* XL breakpoint in Tailwind (1280px) */
+@media (min-width: 1280px) {
+  .py-section {
+    padding-top: 6rem;
+    padding-bottom: 6rem;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+.highlight {
+  background-color: #f9533a;
+  color: #ffffff;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+.section-heading {
+  font-weight: 700;
+  font-size: 24px;
+  color: #161a27;
+  letter-spacing: -0.5px;
+}
+
+@media (min-width: 1280px) {
+  .section-heading {
+    font-size: 40px;
+  }
+}
+
+
+
+
+/* For swiper dots */
+.pagination-orange .swiper-pagination-bullet {
+  background-color: #f9533a;
+  opacity: 0.4;
+}
+.pagination-orange .swiper-pagination-bullet-active {
+  opacity: 1;
+}
+
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.hide-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;     /* Firefox */
 }

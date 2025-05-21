@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+.max-width {
+  @apply max-w-[1440px] mx-auto;
+}
+
+.py-section {
+  @apply py-[64px] xl:py-24;
+}
+
+.wrapper-left {
+  @apply pl-[23px] md:pl-[64px] xl:pl-60;
+}
+
+.wrapper-right {
+  @apply pr-[23px] md:pr-[64px] xl:pr-32;
+}
+
+.wrapper {
+  @apply max-w-7xl mx-auto px-6 2xl:px-0;
+}
+
+.highlight {
+  @apply bg-primary-500 text-white px-2;
+}

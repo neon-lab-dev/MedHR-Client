@@ -106,15 +106,23 @@ const Navbar = () => {
               />
             </Link>
           </span>
-          <ul className="flex gap-8 max-xl:gap-2 text-base text-neutral-600 font-semibold max-lg:hidden font-poppins">
+          <ul className="footer flex gap-8 max-xl:gap-2 text-base text-neutral-600 font-semibold max-lg:hidden font-poppins">
             {navItems.map((item, index) => (
-              <Link
-                key={index}
+              <li key={index}>
+                <Link
                 href={item.path}
-                className="hover:text-primary-500 transition duration-300 max-xl:text-[13px] cursor-pointer px-2 py-1"
+                className="hover:text-primary-500 transition duration-300 max-xl:text-[13px] cursor-pointer px-2 py-1 hover-item"
               >
                 {item.text}
               </Link>
+              <Link
+                key={index}
+                href={item.path}
+                className="hover:text-primary-500 transition duration-300 max-xl:text-[13px] cursor-pointer px-2 py-1 hover-item2"
+              >
+                {item.text}
+              </Link>
+              </li>
             ))}
           </ul>
         </div>

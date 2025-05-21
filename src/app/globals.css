@@ -86,24 +86,45 @@
   --color-woodsmoke-800: #434347;
 
   /* Shadows */
-  --shadow-primary-button: 0px 1px 2px 0px rgba(255, 255, 255, 0.30) inset, 0px -2px 0px 0px #E0381F inset, 0px 4px 16px 0px rgba(254, 71, 43, 0.30);
---shadow-secondary-button: 0px 2px 8px 0px var(--Secondary-Color-100, #EAECF4);
---shadow-job-card: 0px 4px 8px 0px var(--Neutral-Color-50, #F7F7F8);
---shadow-event-card: 0px 3px 12px 0px var(--Secondary-Color-100, #EAECF4);
+  --shadow-primary-button: 0px 1px 2px 0px rgba(255, 255, 255, 0.3) inset,
+    0px -2px 0px 0px #e0381f inset, 0px 4px 16px 0px rgba(254, 71, 43, 0.3);
+  --shadow-secondary-button: 0px 2px 8px 0px var(--Secondary-Color-100, #eaecf4);
+  --shadow-job-card: 0px 4px 8px 0px var(--Neutral-Color-50, #f7f7f8);
+  --shadow-event-card: 0px 3px 12px 0px var(--Secondary-Color-100, #eaecf4);
 
-
-    /* Boarders */
-    --border-white-horizontal-line: rgba(255, 255, 255, 0.12);
---border-gray-horizontal-line: rgba(89, 90, 97, 0.15);
+  /* Boarders */
+  --border-white-horizontal-line: rgba(255, 255, 255, 0.12);
+  --border-gray-horizontal-line: rgba(89, 90, 97, 0.15);
 
   /* Gradients */
   --bg-gradient-radial: radial-gradient(var(--tw-gradient-stops));
---bg-gradient-conic: conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops));
---bg-gradient-courseCard-blue: linear-gradient(282deg, #213FAC 0%, #2D65E8 100%);
---bg-gradient-courseCard-white: linear-gradient(282deg, #DCEAFD 0%, #EFF6FF 100%);
---bg-line: rgba(255, 255, 255, 0.12);
---bg-gradient-primary-button: radial-gradient(99.79% 100% at 31.97% 99.5%, rgba(255, 255, 255, 0.00) 0%, rgba(206, 154, 146, 0.30) 100%), linear-gradient(180deg, #F9533A 0%, #FF3F22 100%);
---bg-gradient-primary-button-hover: linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), linear-gradient(180deg, #F9533A 0%, #C22A13 93.51%);
+  --bg-gradient-conic: conic-gradient(
+    from 180deg at 50% 50%,
+    var(--tw-gradient-stops)
+  );
+  --bg-gradient-courseCard-blue: linear-gradient(
+    282deg,
+    #213fac 0%,
+    #2d65e8 100%
+  );
+  --bg-gradient-courseCard-white: linear-gradient(
+    282deg,
+    #dceafd 0%,
+    #eff6ff 100%
+  );
+  --bg-line: rgba(255, 255, 255, 0.12);
+  --bg-gradient-primary-button: radial-gradient(
+      99.79% 100% at 31.97% 99.5%,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(206, 154, 146, 0.3) 100%
+    ),
+    linear-gradient(180deg, #f9533a 0%, #ff3f22 100%);
+  --bg-gradient-primary-button-hover: linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.2) 0%,
+      rgba(0, 0, 0, 0.2) 100%
+    ),
+    linear-gradient(180deg, #f9533a 0%, #c22a13 93.51%);
 }
 
 .bg-gradient-radial {
@@ -134,15 +155,12 @@
   background-image: var(--bg-gradient-primary-button-hover);
 }
 
-
-
 .bg-landing-stats-heading {
   background: linear-gradient(96deg, #f9533a 2.09%, #ffaca0 98.26%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-
 
 .card-border {
   border: 1.654px solid rgba(255, 255, 255, 0.15);
@@ -181,8 +199,40 @@
   }
 }
 
+/* navbar p hover effect */
+.footer li {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
 
+.footer li .hover-item {
+  transform: translateY(0px);
+  opacity: 1;
+  transition: all 0.4s ease-in-out;
+}
 
+.footer li .hover-item2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: all 0.4s ease-in-out;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.footer li:hover .hover-item {
+  opacity: 0;
+  transform: translateY(-20px);
+}
+
+.footer li:hover .hover-item2 {
+  opacity: 1;
+  transform: translateY(0px);
+  color: #f9533a;
+}
 
 /* For swiper dots */
 .pagination-orange .swiper-pagination-bullet {
@@ -193,13 +243,12 @@
   opacity: 1;
 }
 
-
 .hide-scrollbar::-webkit-scrollbar {
   display: none;
 }
 
 /* Hide scrollbar for IE, Edge and Firefox */
 .hide-scrollbar {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;     /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }

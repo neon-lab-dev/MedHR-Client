@@ -1,22 +1,15 @@
-import React, { useState } from "react";
 import Login from "./Login";
 import Signup from "./Signup";
-import OTP from "./OTP";
-import { TModalTypes } from "./AuthModal.types";
-import ChangePassword from "./ChangePassword";
 import ForgotPassword from "./ForgotPassword";
-import ConfirmationEmail from "./ConfirmationEmail";
 import { useAppDispatch, useAppSelector } from "@/hooks/store";
 import { closeAuthModal, setActiveTab } from "@/store/slices/authSlice";
 import { IAuthTabs } from "@/types/auth";
 
 const AuthModal = () => {
-  const [email, setEmail] = useState<string>("");
   const { isAuthModalOpen, authModalType, activeTab } = useAppSelector(
     (state) => state.auth
   );
   const dispatch = useAppDispatch();
-  const [confirmationEmail, setConfirmationEmail] = useState<string>("");
   const tabButtons = ["Aspirants", "Organization"];
   return (
     <div

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
 import React, { useState, useEffect } from 'react';
 import "../globals.css";
@@ -5,8 +6,6 @@ import Header from "./_components/Header";
 import Sidebar from "./_components/Sidebar";
 import ScreenWarning from '@/components/ScreenWarning';
 import home from "@/assets/icons/home.svg";
-import { useQuery } from '@tanstack/react-query';
-import { handleEmployeeLoginService } from '@/api/authentication';
 import { ICONS } from '@/assets';
 
 export default function EmployeeRootLayout({ children }: any) {
@@ -52,6 +51,11 @@ export default function EmployeeRootLayout({ children }: any) {
       label: "Skill Programmes",
       path: "/employer/skill-programmes",
       icon: ICONS.skillProgramme
+    },
+    {
+      label: "Create Event",
+      path: "/employer/create-event",
+      icon: ICONS.events
     },
   ];
 

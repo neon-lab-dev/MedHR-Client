@@ -55,7 +55,7 @@ const Header = () => {
   ];
 
   return (
-    <div className="bg-white px-7 py-4 font-plus-jakarta-sans flex justify-between items-center">
+    <div className="bg-white px-7 py-4 font-plus-jakarta-sans flex justify-between items-center sticky top-0 z-30 border-b border-neutral-150">
       {/* Heading */}
       <h1 className="text-2xl font-bold text-secondary-900">Home</h1>
       {/* Profile Dropdown */}

@@ -1,12 +1,15 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import { useParams } from "next/navigation";
-import { useQuery } from "@tanstack/react-query";
+import { useParams, useRouter } from "next/navigation";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import Image from "next/image";
 import axios from "axios";
 import Loading from "@/components/Loading";
 import Container from "@/components/Container";
 import Button from "@/components/Button";
+import { applyOnSkillProgram } from "@/api/employee";
+import { toast } from "sonner";
 
 
 interface ISkillProgramme {
@@ -43,6 +46,8 @@ const fetchCourseById = async (id: string) => {
 
 const CourseDetails = () => {
   const { id } = useParams();
+    const router = useRouter();
+  
 
   const skillId = Array.isArray(id) ? id[0] : id;
 
@@ -87,6 +92,30 @@ const CourseDetails = () => {
       value: skill?.isIncludedCertificate ? "Yes" : "No",
     },
   ];
+
+   // Apply on course
+  const { mutate: applySkillProgram } = useMutation({
+    mutationFn: (id: string) => applyOnSkillProgram(id),
+    onMutate: () => {
+      toast.loading("Please wait...", { id: "apply-on-skill-program" });
+    },
+    onSuccess: () => {
+      toast.success("Applied successfully", { id: "apply-on-skill-program" });
+      router.push("/success");
+    },
+    onError: (error: any) => {
+      const message =
+        error?.response?.data?.message ||
+        error?.message ||
+        "An error occurred while applying for the skill-program.";
+      toast.error(message, { id: "apply-on-skill-program" });
+    },
+  });
+
+  // Apply on course
+  const handleApplyOnSkillProgram = (id: string) => {
+    applySkillProgram(id);
+  };
 
   if (isLoading) return <Loading />;
 
@@ -158,17 +187,9 @@ const CourseDetails = () => {
 
               {/* href={skill?.programmeLink ? skill?.programmeLink : ""} */}
             
-              <Button variant="normal" className="px-6 py-[10px] w-full">
+              <Button onClick={() => handleApplyOnSkillProgram(skill?._id as string)} variant="normal" className="px-6 py-[10px] w-full">
                 Apply Now
               </Button>
-{/* 
-            <Link
-              href={skill?.programmeLink ? skill?.programmeLink : ""}
-              target="_blank">
-              <Button variant="normal" className="px-6 py-[10px] w-full">
-                View Details
-              </Button>
-            </Link> */}
           </div>
         </div>
       </div>

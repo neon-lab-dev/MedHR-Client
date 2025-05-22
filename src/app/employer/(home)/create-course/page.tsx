@@ -267,7 +267,7 @@ const CreateCourse = () => {
 
         <button
           type="submit"
-          className="bg-primary-600 text-white px-4 py-3 rounded-md"
+          className="bg-primary-600 text-white px-4 py-3 rounded-md cursor-pointer"
         >
           Create Course
         </button>

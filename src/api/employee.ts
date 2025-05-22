@@ -91,6 +91,24 @@ export const uploadResume = async (file: File) => {
   });
 };
 
+export const applyOnCourse = async (id:string) => {
+
+  const response =await axios.post(`${api.applyOnCourse}/${id}`, {}, {
+  withCredentials: true,
+});
+
+  return response.data;
+};
+
+export const applyOnSkillProgram = async (id:string) => {
+
+  const response =await axios.post(`${api.applySkillProgram}/${id}`, {}, {
+  withCredentials: true,
+});
+
+  return response.data;
+};
+
 export const fetchUserData = async () => {
   const response = await axios.get('https://carrerhub-backend.vercel.app/api/v1/me', {
     withCredentials: true,

@@ -24,6 +24,8 @@ const api = {
   RESUME_UPLOAD: baseUrl + "/resumes",
   events: baseUrl + "/events",
   getSingleEventById : baseUrl + "/event",
+  applyOnCourse : baseUrl + "/courses/apply",
+  applySkillProgram : baseUrl + "/skills/apply",
 
   // for employers
   employerJob: baseUrl + "/employeer/job",

@@ -35,38 +35,37 @@ const CreateSkillProgramme = () => {
   const queryClient = useQueryClient();
   const router = useRouter();
 
-   const editor = useRef(null);
-  
-    const [description, setDescription] = useState("");
-    const [selectedProgrammeType, setSelectedProgrammeType] = useState("");
-    const [selectedDepartment, setSelectedDepartment] = useState("");
-    const [pricingType, setPricingType] = useState("");
-    const [isIncludedCertificate, setIsIncludedCertificate] = useState("");
-    const [contentError, setDescriptionError] = useState("");
-  
-    useEffect(() => {
+  const editor = useRef(null);
+
+  const [description, setDescription] = useState("");
+  const [selectedProgrammeType, setSelectedProgrammeType] = useState("");
+  const [selectedDepartment, setSelectedDepartment] = useState("");
+  const [pricingType, setPricingType] = useState("");
+  const [isIncludedCertificate, setIsIncludedCertificate] = useState("");
+  const [contentError, setDescriptionError] = useState("");
+
+  useEffect(() => {
+    setDescriptionError("");
+    if (description?.length === 0) {
       setDescriptionError("");
-      if (description?.length === 0) {
-        setDescriptionError("");
-      } else if (description?.length < 1) {
-        setDescriptionError("Course description is required");
-      } else {
-        setDescriptionError("");
-      }
-    }, [description]);
+    } else if (description?.length < 1) {
+      setDescriptionError("Course description is required");
+    } else {
+      setDescriptionError("");
+    }
+  }, [description]);
 
   const {
-      register,
-      handleSubmit,
-      formState: { errors },
-    } = useForm<TSkillFormData>();
-
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<TSkillFormData>();
 
   const skillMutation = useMutation({
     mutationFn: async (data: FormData) => {
       const response = await axios.post(
-        "https://carrerhub-backend.vercel.app/api/v1/skills/create", 
-        data, 
+        "https://carrerhub-backend.vercel.app/api/v1/skills/create",
+        data,
         {
           withCredentials: true,
         }
@@ -74,6 +73,7 @@ const CreateSkillProgramme = () => {
       return response.data;
     },
     onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["skillprogrammes"] });
       toast.success("Skill programme created successfully!");
       router.push("/employer/skill-programmes");
     },
@@ -81,10 +81,8 @@ const CreateSkillProgramme = () => {
       toast.error("Failed to create skill programme.");
     },
   });
-  
 
   const handleCreateSkillProgramme = (data: TSkillFormData) => {
-  
     const formData = new FormData();
 
     formData.append("skillProgrammeName", data.skillProgrammeName);
@@ -110,17 +108,13 @@ const CreateSkillProgramme = () => {
     if (data.image && data.image.length > 0) {
       formData.append("image", data.image[0]);
     }
-  
-    toast.promise(
-      skillMutation.mutateAsync(formData),
-      {
-        loading: 'Creating skill programme...',
-        success: 'Skill programme created successfully!',
-        error: 'Failed to create skill programme.',
-      }
-    );
+
+    toast.promise(skillMutation.mutateAsync(formData), {
+      loading: "Creating skill programme...",
+      success: "Skill programme created successfully!",
+      error: "Failed to create skill programme.",
+    });
   };
-  
 
   return (
     <div className="bg-[#f5f6fa] p-6 flex flex-col gap-[51px]">
@@ -135,7 +129,9 @@ const CreateSkillProgramme = () => {
           label="Skill Programme Name"
           placeholder="Enter skill programme name"
           error={errors.skillProgrammeName}
-          {...register("skillProgrammeName", { required: "Skill programme name is required" })}
+          {...register("skillProgrammeName", {
+            required: "Skill programme name is required",
+          })}
         />
         <TextArea
           label="Programme Overview"
@@ -150,7 +146,13 @@ const CreateSkillProgramme = () => {
 
         <DropdownInput
           label="Programme Type"
-          options={["Offline", "Online", "Fellowship", "Scholarships", "Events"]}
+          options={[
+            "Offline",
+            "Online",
+            "Fellowship",
+            "Scholarships",
+            "Events",
+          ]}
           value={selectedProgrammeType}
           onChange={(e) => {
             setSelectedProgrammeType(e.target.value);
@@ -172,7 +174,9 @@ const CreateSkillProgramme = () => {
           label="Programme Duration"
           placeholder="ex- 3 Months"
           error={errors.duration}
-          {...register("duration", { required: "Programme duration is required" })}
+          {...register("duration", {
+            required: "Programme duration is required",
+          })}
         />
 
         <TextArea
@@ -270,9 +274,9 @@ const CreateSkillProgramme = () => {
 
         <button
           type="submit"
-          className="bg-primary-600 text-white px-4 py-3 rounded-md"
+          className="bg-primary-600 text-white px-4 py-3 rounded-md cursor-pointer"
         >
-         Submit
+          Submit
         </button>
       </form>
     </div>

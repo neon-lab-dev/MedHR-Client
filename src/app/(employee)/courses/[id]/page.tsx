@@ -1,13 +1,15 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import { useParams } from "next/navigation";
-import { useQuery } from "@tanstack/react-query";
+import { useParams, useRouter } from "next/navigation";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import Image from "next/image";
 import axios from "axios";
 import Loading from "@/components/Loading";
 import Container from "@/components/Container";
-import Link from "next/link";
 import Button from "@/components/Button";
+import { applyOnCourse } from "@/api/employee";
+import { toast } from "sonner";
 
 export type TCourse = {
   _id?: string;
@@ -43,6 +45,7 @@ const fetchCourseById = async (id: string) => {
 
 const CourseDetails = () => {
   const { id } = useParams();
+  const router = useRouter();
 
   const courseId = Array.isArray(id) ? id[0] : id;
 
@@ -89,6 +92,33 @@ const CourseDetails = () => {
       value: course?.isIncludedCertificate ? "Yes" : "No",
     },
   ];
+
+
+  
+  // Apply on course
+  const { mutate: applyCourse } = useMutation({
+    mutationFn: (id: string) => applyOnCourse(id),
+    onMutate: () => {
+      toast.loading("Please wait...", { id: "apply-on-course" });
+    },
+    onSuccess: () => {
+      toast.success("Applied successfully", { id: "apply-on-course" });
+      router.push("/success");
+    },
+    onError: (error: any) => {
+      const message =
+        error?.response?.data?.message ||
+        error?.message ||
+        "An error occurred while applying for the course.";
+      toast.error(message, { id: "apply-on-course" });
+    },
+  });
+
+  // Apply on course
+  const handleApplyOnCourse = (id: string) => {
+    applyCourse(id);
+  };
+
   if (isLoading) return <Loading />;
 
   return (
@@ -155,14 +185,9 @@ const CourseDetails = () => {
               </div>
             ))}
 
-            <Link
-              href={course?.courseLink ? course?.courseLink : ""}
-              target="_blank"
-            >
-              <Button variant="normal" className="px-6 py-[10px] w-full">
-                View Details
+             <Button onClick={() => handleApplyOnCourse(course?._id as string)} variant="normal" className="px-6 py-[10px] w-full">
+                Apply Now
               </Button>
-            </Link>
           </div>
         </div>
       </div>

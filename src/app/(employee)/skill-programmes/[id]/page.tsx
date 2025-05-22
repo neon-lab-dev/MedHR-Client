@@ -154,14 +154,13 @@ const CourseDetails = () => {
                 </p>
               </div>
             ))}
+            
 
-            <button
-              // href={skill?.programmeLink ? skill?.programmeLink : ""}
-              >
+              {/* href={skill?.programmeLink ? skill?.programmeLink : ""} */}
+            
               <Button variant="normal" className="px-6 py-[10px] w-full">
                 Apply Now
               </Button>
-            </button>
 {/* 
             <Link
               href={skill?.programmeLink ? skill?.programmeLink : ""}

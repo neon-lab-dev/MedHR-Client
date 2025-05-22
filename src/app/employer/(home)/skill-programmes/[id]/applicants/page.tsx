@@ -1,50 +1,74 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
-import { IMAGES } from "@/assets";
-import Image from "next/image";
+
+import { getSingleSkill } from "@/api/admin";
+import { handleGEtEmployerByIdForEmployer } from "@/api/employer";
+import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
-import { useState } from "react";
+import { useParams } from "next/navigation";
+import { useEffect, useState } from "react";
 import { Oval } from "react-loader-spinner";
-import { twMerge } from "tailwind-merge";
 
-type TCandidatesTableProps = {
-  candidates: any[];
-  isLoading: boolean;
-  className?: string;
-};
+const AllApplicantsPage = () => {
+  const { id } = useParams();
+  const [employeeData, setEmployeeData] = useState<any[]>([]);
+  const [loadingEmployees, setLoadingEmployees] = useState(true);
 
-const CandidatesTable: React.FC<TCandidatesTableProps> = ({
-  className,
-  candidates,
-  isLoading,
-}) => {
-  const [dropdownOpenId, setDropdownOpenId] = useState<string | null>(null);
+  const { isLoading, data } = useQuery({
+    queryKey: ["skillprogramme", id],
+    queryFn: () => getSingleSkill(id as string),
+  });
 
-  const handleMenuClick = (id: string) => {
-    setDropdownOpenId(dropdownOpenId === id ? null : id);
-  };
+  const applicants = data?.skill?.applicants;
 
-  if (isLoading) {
-    return (
-      <div className="flex justify-center items-center h-96">
-        <Oval
-          height={40}
-          width={40}
-          color="#F9533A"
-          visible={true}
-          ariaLabel="oval-loading"
-          secondaryColor="#f4f4f4"
-          strokeWidth={2}
-          strokeWidthSecondary={2}
-        />
-      </div>
-    );
-  }
+  useEffect(() => {
+    const fetchEmployees = async () => {
+      if (!applicants || applicants.length === 0) return;
+
+      setLoadingEmployees(true);
+      try {
+        const employees = await Promise.all(
+          applicants.map((applicant: any) =>
+            handleGEtEmployerByIdForEmployer(applicant.employee) // Fetch by ID
+          )
+        );
+        console.log(employees);
+        setEmployeeData(employees);
+      } catch (err) {
+        console.error("Error fetching employees", err);
+      } finally {
+        setLoadingEmployees(false);
+      }
+    };
+
+    fetchEmployees();
+  }, [applicants]);
+
+  console.log(employeeData);
+
+   if (loadingEmployees || isLoading) {
+      return (
+        <div className="flex justify-center items-center h-96">
+          <Oval
+            height={40}
+            width={40}
+            color="#F9533A"
+            visible={true}
+            ariaLabel="oval-loading"
+            secondaryColor="#f4f4f4"
+            strokeWidth={2}
+            strokeWidthSecondary={2}
+          />
+        </div>
+      );
+    }
+
   return (
-    <div
-      className={twMerge(
-        `w-full overflow-x-auto h-[700px] font-Poppins mx-auto px-0 ${className}`
-      )}
+    <div className="p-6 font-plus-jakarta-sans">
+      <h1 className="text-2xl font-bold mb-4 text-neutral-700">Applicants</h1>
+
+      <div
+      className="w-full overflow-x-auto h-[700px] font-Poppins mx-auto px-0"
     >
       <div className="rounded-[124px]">
         <table className="table w-full">
@@ -62,6 +86,11 @@ const CandidatesTable: React.FC<TCandidatesTableProps> = ({
               </td>
               <td>
                 <div className="flex items-center gap-2">
+                  <span>Phone Number</span>
+                </div>
+              </td>
+              <td>
+                <div className="flex items-center gap-2">
                   <span>Area of Interests</span>
                 </div>
               </td>
@@ -75,22 +104,17 @@ const CandidatesTable: React.FC<TCandidatesTableProps> = ({
                   <span>Download Resume</span>
                 </div>
               </td>
-              <td>
-                <div className="flex items-center gap-2">
-                  <span>Action</span>
-                </div>
-              </td>
             </tr>
           </thead>
           <tbody className="bg-white w-full text-base">
-            {candidates?.length === 0 ? (
+            {employeeData?.length === 0 ? (
               <tr>
                 <td colSpan={6} className="py-4 text-center font-Poppins">
                   No candidate found
                 </td>
               </tr>
             ) : (
-              candidates?.map((candidate) => (
+              employeeData?.map((candidate) => (
                 <tr key={candidate._id}>
                   <td>
                     <div className="flex items-center gap-2">
@@ -104,6 +128,11 @@ const CandidatesTable: React.FC<TCandidatesTableProps> = ({
                   </td>
                   <td>
                     <div className="flex items-center gap-2">
+                      <span>{candidate?.mobilenumber}</span>
+                    </div>
+                  </td>
+                  <td>
+                    <div className="flex items-center gap-2">
                       <span>
                         {candidate?.areasOfInterests?.length > 0
                           ? candidate?.areasOfInterests?.join(", ")
@@ -113,7 +142,7 @@ const CandidatesTable: React.FC<TCandidatesTableProps> = ({
                   </td>
                   <td>
                     <div className="flex items-center gap-2">
-                      {candidate?.address ? (
+                      {candidate?.address?.street ? (
                         <span>
                           {candidate?.address?.street}{" "}
                           {candidate?.address?.city}{" "}
@@ -122,7 +151,7 @@ const CandidatesTable: React.FC<TCandidatesTableProps> = ({
                           {candidate?.address?.country}
                         </span>
                       ) : (
-                        <span>Not available</span>
+                     "Not available"
                       )}
                     </div>
                   </td>
@@ -142,28 +171,6 @@ const CandidatesTable: React.FC<TCandidatesTableProps> = ({
                       )}
                     </div>
                   </td>
-                  <td>
-                    <div className="relative flex items-center gap-2">
-                      <div
-                        onClick={() => handleMenuClick(candidate._id)}
-                        className="cursor-pointer"
-                      >
-                        <Image src={IMAGES.menudots} alt="Menu Icon" />
-                      </div>
-                      {dropdownOpenId === candidate._id && (
-                        <div className="absolute right-0 mt-28 w-48 p-4 rounded-xl bg-white border shadow-lg z-10">
-                          <Link
-                            href={`/employer/find-candidates/${candidate?._id}`}
-                          >
-                            <div className="flex items-center gap-2 text-sm p-2">
-                              <Image src={IMAGES.view} alt="Role Icon" />
-                              <span>View Profile</span>
-                            </div>
-                          </Link>
-                        </div>
-                      )}
-                    </div>
-                  </td>
                 </tr>
               ))
             )}
@@ -171,7 +178,8 @@ const CandidatesTable: React.FC<TCandidatesTableProps> = ({
         </table>
       </div>
     </div>
+    </div>
   );
 };
 
-export default CandidatesTable;
+export default AllApplicantsPage;

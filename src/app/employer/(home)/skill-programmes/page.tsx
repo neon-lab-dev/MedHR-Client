@@ -20,6 +20,7 @@ import { getAllEmployerSkillProgrammes } from "@/api/employer";
 export interface ISkillDataItem {
   name: string;
   programmeType: string;
+  applications: string;
   department: string;
   duration: string;
   pricingType: string;
@@ -42,6 +43,7 @@ export interface ISkill {
     name: string;
     url: string;
   };
+  applicants: string[];
   createdAt: string;
   updatedAt: string;
   __v: number;
@@ -89,6 +91,7 @@ const SkillProgramme = () => {
   // Table data
   const headers: Header<ISkillDataItem>[] = [
     { header: "Name", accessor: "name" },
+    { header: "Total Applications", accessor: "applications" },
     { header: "Programme Type", accessor: "programmeType" },
     { header: "Department", accessor: "department" },
     { header: "Duration", accessor: "duration" },
@@ -103,16 +106,16 @@ const SkillProgramme = () => {
       return (
         <div key="actions">
           <div className="dropdown dropdown-end">
-            <div tabIndex={0} role="button">
+            <div tabIndex={0} role="button" className="cursor-pointer">
               {jobThatIsBeingDeleted === item.actions ? (
                 <span className="loading loading-spinner loading-sm"></span>
               ) : (
-                <Image src={menuDots} alt="menu-dots-icon" />
+                <Image src={menuDots} alt="menu-dots-icon cursor-pointer" />
               )}
             </div>
             <ul
               tabIndex={0}
-              className="dropdown-content menu bg-base-100 rounded-box z-[1] w-40 p-2 shadow"
+              className="dropdown-content menu bg-base-100 rounded-box z-[1] w-44 p-2 shadow"
             >
               <li>
                 <a
@@ -121,6 +124,15 @@ const SkillProgramme = () => {
                 >
                   <Image src={eye} alt="eye-icon" />
                   <span>Edit</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  href={`/employer/skill-programmes/${item.actions}/applicants`}
+                  className="flex gap-2"
+                >
+                  <Image src={eye} alt="eye-icon" />
+                  <span>View Applications</span>
                 </a>
               </li>
               <li>
@@ -165,6 +177,7 @@ const SkillProgramme = () => {
               data?.skills?.map((skill: ISkill) => ({
                 name: skill.skillProgrammeName,
                 programmeType: skill.programmeType,
+                applications: skill.applicants?.length,
                 department: skill.department,
                 duration: skill.duration,
                 pricingType: skill.pricingType,

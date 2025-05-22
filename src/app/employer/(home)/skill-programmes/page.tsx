@@ -16,6 +16,7 @@ import { Header } from "../courses/page";
 import SearchInput from "@/app/admin/_components/SearchInput";
 import Table from "@/components/Table";
 import { getAllEmployerSkillProgrammes } from "@/api/employer";
+import { IMAGES } from "@/assets";
 
 export interface ISkillDataItem {
   name: string;
@@ -122,7 +123,7 @@ const SkillProgramme = () => {
                   href={`/employer/skill-programmes/${item.actions}`}
                   className="flex gap-2"
                 >
-                  <Image src={eye} alt="eye-icon" />
+                  <Image src={IMAGES.pen} alt="pen-icon" className="size-4" />
                   <span>Edit</span>
                 </a>
               </li>
@@ -131,7 +132,7 @@ const SkillProgramme = () => {
                   href={`/employer/skill-programmes/${item.actions}/applicants`}
                   className="flex gap-2"
                 >
-                  <Image src={eye} alt="eye-icon" />
+                  <Image src={IMAGES.view} alt="eye-icon" />
                   <span>View Applications</span>
                 </a>
               </li>
@@ -142,7 +143,7 @@ const SkillProgramme = () => {
                   }}
                   className="flex gap-2 text-red-500"
                 >
-                  <Image src={trash} alt="eye-icon" />
+                  <Image src={IMAGES.bin} alt="eye-icon" />
                   <span>Delete</span>
                 </button>
               </li>

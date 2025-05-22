@@ -19,6 +19,7 @@ export type Header<T> = {
 export interface IDataItem {
   name: string;
   courseType: string;
+  applications: string;
   department: string;
   duration: string;
   pricingType: string;
@@ -42,6 +43,7 @@ export interface ICourse {
   duration: string;
   pricingType: string;
   fee: number;
+  applicants : string[];
   createdAt: string;
   updatedAt: string;
   __v: number;
@@ -80,6 +82,7 @@ const EmployerCoursesPage = () => {
   const headers: Header<IDataItem>[] = [
     { header: "Name", accessor: "name" },
     { header: "Course Type", accessor: "courseType" },
+    { header: "Total Applications", accessor: "applications" },
     { header: "Department", accessor: "department" },
     { header: "Duration", accessor: "duration" },
     { header: "Pricing Type", accessor: "pricingType" },
@@ -92,7 +95,7 @@ const EmployerCoursesPage = () => {
       return (
         <div key="actions">
           <div className="dropdown dropdown-end">
-            <div tabIndex={0} role="button">
+            <div tabIndex={0} role="button" className="cursor-pointer">
               {jobThatIsBeingDeleted === item.actions ? (
                 <span className="loading loading-spinner loading-sm"></span>
               ) : (
@@ -101,15 +104,24 @@ const EmployerCoursesPage = () => {
             </div>
             <ul
               tabIndex={0}
-              className="dropdown-content menu bg-base-100 rounded-box z-[1] w-40 p-2 shadow"
+              className="dropdown-content menu bg-base-100 rounded-box z-[1] w-44 p-2 shadow"
             >
               <li>
                 <a
                   href={`/employer/courses/${item.actions}`}
                   className="flex gap-2"
                 >
-                  <Image src={IMAGES.view} alt="eye-icon" />
+                  <Image src={IMAGES.pen} alt="eye-icon" className="size-4" />
                   <span>Edit Course</span>
+                </a>
+              </li>
+               <li>
+                <a
+                  href={`/employer/courses/${item.actions}/applicants`}
+                  className="flex gap-2"
+                >
+                  <Image src={IMAGES.view} alt="eye-icon" />
+                  <span>View Applications</span>
                 </a>
               </li>
               <li>
@@ -152,6 +164,7 @@ const EmployerCoursesPage = () => {
               data?.courses?.map((course: ICourse) => ({
                 name: course.courseName,
                 courseType: course.courseType,
+                applications: course.applicants?.length,
                 department: course.department,
                 duration: course.duration,
                 pricingType: course.pricingType,

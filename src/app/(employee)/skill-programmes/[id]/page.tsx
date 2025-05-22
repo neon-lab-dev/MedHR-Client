@@ -6,7 +6,6 @@ import Image from "next/image";
 import axios from "axios";
 import Loading from "@/components/Loading";
 import Container from "@/components/Container";
-import Link from "next/link";
 import Button from "@/components/Button";
 
 
@@ -77,7 +76,7 @@ const CourseDetails = () => {
     },
     {
       label: "Fee",
-      value: `₹${skill?.fee}`,
+      value: `₹${skill?.fee || 0}`,
     },
     {
       label: "Number of Seats",
@@ -156,13 +155,21 @@ const CourseDetails = () => {
               </div>
             ))}
 
+            <button
+              // href={skill?.programmeLink ? skill?.programmeLink : ""}
+              >
+              <Button variant="normal" className="px-6 py-[10px] w-full">
+                Apply Now
+              </Button>
+            </button>
+{/* 
             <Link
               href={skill?.programmeLink ? skill?.programmeLink : ""}
               target="_blank">
               <Button variant="normal" className="px-6 py-[10px] w-full">
                 View Details
               </Button>
-            </Link>
+            </Link> */}
           </div>
         </div>
       </div>

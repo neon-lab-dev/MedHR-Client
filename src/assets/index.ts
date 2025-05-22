@@ -66,6 +66,7 @@ import emailFooter from "@/assets/icons/email-footer.svg";
 import upArrow from "@/assets/icons/up-arrow.svg";
 import course from "@/assets/icons/course.svg";
 import skillProgramme from "@/assets/icons/skill-programme.svg";
+import success2 from "@/assets/icons/success.svg";
 
 import behance from "@/assets/icons/social media/behance.svg";
 import discord from "@/assets/icons/social media/discord.svg";
@@ -199,4 +200,5 @@ export const ICONS = {
   download2,
   student,
   lesson,
+  success2,
 };

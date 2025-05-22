@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import React, { useEffect, useState } from "react";
 import { useForm, Controller } from "react-hook-form";
@@ -37,7 +38,6 @@ const Page = () => {
   const {
     handleSubmit,
     control,
-    reset,
     formState: { errors },
   } = useForm<FormData>();
   const [step, setStep] = useState(1);
@@ -157,59 +157,16 @@ const Page = () => {
     }
   };
 
-  const medicalDepartments = [
-    "Anesthesia",
-    "Anatomy",
-    "Cardiology",
-    "Dermatology",
-    "Dentistry",
-    "Emergency Medicine",
-    "Endocrinology",
-    "ENT",
-    "Forensic Medicine & Toxicology",
-    "Gastroenterology",
-    "Geriatric Medicine",
-    "Gynecology",
-    "Hematology",
-    "Infertility & IVF",
-    "Medical Surgical",
-    "Medicine",
-    "Nephrology",
-    "Neurology",
-    "Surgery",
-    "Ophthalmology",
-    "Out Patient Department OPD",
-    "Orthopedics",
-    "Pediatrics",
-    "Physical Medicine & Rehabilitation",
-    "Physiology",
-    "Physiotherapy",
-    "Plastic Surgery",
-    "Pulmonary Medicine and sleep disorders",
-    "Psychiatry",
-    "Rheumatology",
-    "Surgery",
-    "Urology",
-
-    "Lab Technician",
-    "Blood Bank",
-    "Biochemistry",
-    "Microbiology",
-    "Pathology",
-    "Pharmacology",
-    "Radio diagnosis",
-    "Radiographers",
-
-    "OT Technicians",
-    "Technicians CSSD",
-    "Nursing",
-
-    "Hospital Administration",
-    "Laundry",
-    "Pharmacist",
-    "Dietician",
-    "HR",
-    "Ward assistance",
+  const organizationType = [
+    "Allopathy Hospital - No of beds",
+    "Allopathy Clinic",
+    "Ayurveda Hospital - No of beds",
+    "Ayurveda Clinic",
+    "Homeopathy Hospital - No of beds",
+    "Homeopathy Clinic",
+    "Nursing Home – No of Beds",
+    "Diagnostic Centers",
+    "Imaging Centers",
   ];
 
   return (
@@ -399,12 +356,12 @@ const Page = () => {
                         render={({ field }) => (
                           <select
                             {...field}
-                            className="py-4 px-2 border-none text-sm w-full border-neutral-300 max-md:text-xs"
+                            className="py-4 px-2 border-none text-sm w-full border-neutral-300 max-md:text-xs focus:outline-none"
                           >
                             <option value="" selected disabled>
-                              Select Industry
+                              Organization Type
                             </option>
-                            {medicalDepartments?.map((department) => (
+                            {organizationType?.map((department) => (
                               <option key={department} value={department}>
                                 {department}
                               </option>

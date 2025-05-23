@@ -30,7 +30,6 @@ type TEventCardProps = {
 const EventCard: React.FC<TEventCardProps> = ({
   wrapperClassName,
   isLoading,
-  _id,
   eventName,
   eventUrl,
   image,

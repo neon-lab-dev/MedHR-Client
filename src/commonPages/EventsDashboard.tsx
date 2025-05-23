@@ -127,7 +127,7 @@ const EventsDashboard = ({
             dateAndTime: `${convertDate(event?.date)} at ${event?.time}`,
             skillCovered: event?.skillCovered?.join(", "),
             actions: event?._id,
-          }))}
+          })) as any}
           renderCustomCell={renderCustomCell}
         />
       )}

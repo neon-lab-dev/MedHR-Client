@@ -1,8 +1,6 @@
 "use client";
-
-import Button from "@/components/Button";
 import React from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
 interface IFormInput {
   email: string;
@@ -11,11 +9,8 @@ interface IFormInput {
 
 const LoginModal = () => {
   const {
-    register,
-    handleSubmit,
-    formState: { errors },
   } = useForm<IFormInput>();
-  const onSubmit: SubmitHandler<IFormInput> = (data) => console.log(data);
+  // const onSubmit: SubmitHandler<IFormInput> = (data) => console.log(data);
   return (
     <dialog id="admin_login_modal" className="modal">
     

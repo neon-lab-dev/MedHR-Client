@@ -42,7 +42,7 @@ const Table = ({ className, formdata, jobId }: { className: string; formdata: { 
                             </tr>
                         ) : (
                             formdata.applicants.map((applicant: {
-                                [x: string]: any; _id: React.Key | null | undefined; status: string | number | bigint | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | Promise<React.AwaitedReactNode> | null | undefined; appliedDate: string | number | Date; employer: any;
+                                [x: string]: any; _id: React.Key | null | undefined; status: string | number | bigint | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | Promise<any> | null | undefined; appliedDate: string | number | Date; employer: any;
                             }) => (
                                 <tr key={applicant._id}>
                                     <td>

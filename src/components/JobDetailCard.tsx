@@ -20,7 +20,6 @@ const JobDetailCard = ({
   isDetailsBtnVisible=true,
   wrapperClassName,
   job,
-  isApplied,
 }: Props) => {
   if (!job) return null;
   return (

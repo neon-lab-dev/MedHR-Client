@@ -1,8 +1,8 @@
+/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
 "use client";
 import employeesIcon from "@/assets/icons/Employees.svg";
 import React, { useCallback, useState } from "react";
 import KPICard from "@/components/KPICard";
-import EmployeesHired from "@/assets/icons/Employees Hired.svg";
 import search from "@/assets/icons/Search.svg";
 import Image from "next/image";
 import menuDots from "@/assets/icons/menu-dots.svg";
@@ -159,13 +159,12 @@ const Employees = () => {
             className="w-full max-w-full pb-32 !text-base"
             headers={headers}
             data={
-              // @ts-ignore
               employees?.map((employee) => ({
                 userName: employee.full_name,
                 email: employee.email,
                 phone: employee.mobilenumber,
                 actions: employee._id,
-              }))! as DataItem[]
+              }))! as any[]
             }
             renderCustomCell={renderCustomCell}
           />

@@ -1,8 +1,8 @@
 "use client"
-import { useQuery, useMutation } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import Loading from '@/components/Loading';
 import NotFound from '@/components/NotFound';
-import { fetchEmployerProfileData, handleGEtEmployerByIdForEmployer, sendHiredEmail } from "@/api/employer";
+import {handleGEtEmployerByIdForEmployer } from "@/api/employer";
 import Image from "next/image";
 import { ICONS } from "@/assets";
 import EducationDetails from "../_components/EducationDetails";
@@ -12,11 +12,7 @@ import Certification from "../_components/Certification";
 import Skills from "../_components/Skills";
 import Button from "@/components/Button";
 import Link from "next/link";
-import { use, useState } from "react";
-import { useRouter } from "next/navigation";
-import { toast } from "sonner";
-import { pdf } from "@react-pdf/renderer";
-import { CertificateDocument } from "../_components/CertificateDocument";
+import { use} from "react";
 
 type Props = {
   params: Promise<{ id: string }>;
@@ -24,61 +20,51 @@ type Props = {
 
 const EmployeeProfileDetails = ({ params }: Props) => {
     const { id } = use(params);
-    const router = useRouter();
-    const [certificate, setCertificate] = useState();
+    // const router = useRouter();
+    // const [certificate, setCertificate] = useState();
     const { isLoading, data } = useQuery({
         queryKey: ["employer", "employee", id],
         queryFn: () => handleGEtEmployerByIdForEmployer(id),
       });
 
-    const { data:employerProfile } = useQuery({
-        queryKey: ["employerProfileData", id],
-        queryFn: () => fetchEmployerProfileData(),
-      });
+    // const { data:employerProfile } = useQuery({
+    //     queryKey: ["employerProfileData", id],
+    //     queryFn: () => fetchEmployerProfileData(),
+    //   });
 
-      const { mutate } = useMutation({
-        mutationFn: ({ userId, companyName }: { userId: string; companyName: string }) =>
-          sendHiredEmail(userId, companyName),
-        onSuccess: () => {
-          toast.success("Email sent successfully!");
-          router.push("/employer/find-candidates");
-        },
-        onError: (error: any) => {
-          toast.error(error?.message || "Failed to send email.");
-        },
-      });
+      // const { mutate } = useMutation({
+      //   mutationFn: ({ userId, companyName }: { userId: string; companyName: string }) =>
+      //     sendHiredEmail(userId, companyName),
+      //   onSuccess: () => {
+      //     toast.success("Email sent successfully!");
+      //     router.push("/employer/find-candidates");
+      //   },
+      //   onError: (error: any) => {
+      //     toast.error(error?.message || "Failed to send email.");
+      //   },
+      // });
       
-      const handleSendEmail = async () => {
-        // if (!id) return;
-        // mutate({
-        //   userId: id,
-        //   companyName: employerProfile?.user?.companyDetails[0]?.companyName || "Undefined",
-        // });
-
-        const blob = await pdf(
-          <CertificateDocument
-            name={data?.full_name as string}
-            from="XXXX"
-            role="YYY"
-            company={employerProfile?.user?.companyDetails[0]?.companyName as string}
-            certId="CH-UIUX-2023-234"
-            issueDate="SEPTEMBER 6, 2023"
-          />
-        ).toBlob();
+      // const handleSendEmail = async () => {
+      //   const blob = await pdf(
+      //     <CertificateDocument
+      //       name={data?.full_name as string}
+      //       from="XXXX"
+      //       role="YYY"
+      //       company={employerProfile?.user?.companyDetails[0]?.companyName as string}
+      //       certId="CH-UIUX-2023-234"
+      //       issueDate="SEPTEMBER 6, 2023"
+      //     />
+      //   ).toBlob();
       
-        // Store in state (optional)
-        // setCertificate(blob);
-      
-        // Trigger download
-        const url = URL.createObjectURL(blob);
-        const link = document.createElement("a");
-        link.href = url;
-        link.download = "Certificate.pdf";
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        URL.revokeObjectURL(url);
-      };
+      //   const url = URL.createObjectURL(blob);
+      //   const link = document.createElement("a");
+      //   link.href = url;
+      //   link.download = "Certificate.pdf";
+      //   document.body.appendChild(link);
+      //   link.click();
+      //   document.body.removeChild(link);
+      //   URL.revokeObjectURL(url);
+      // };
       
       if (isLoading) return <Loading className="h-[60vh] w-full" />;
       if (!data) return <NotFound />;

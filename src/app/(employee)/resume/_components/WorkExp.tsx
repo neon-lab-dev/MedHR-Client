@@ -1,7 +1,3 @@
-import React from 'react';
-import { ICONS, IMAGES } from '@/assets';
-import Image from 'next/image';
-import ResumeWorkExpModel from './ResumeWorkExpModel';
 
 interface WorkExperience {
   companyName: string;

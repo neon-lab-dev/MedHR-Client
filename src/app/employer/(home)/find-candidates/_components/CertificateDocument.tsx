@@ -9,7 +9,6 @@ import {
   Font,
   Image,
 } from "@react-pdf/renderer";
-import { IMAGES } from "@/assets";
 
 // Optional: Add a nice font (Google Fonts like Roboto)
 Font.register({
@@ -115,7 +114,6 @@ interface CertificateProps {
 
 export const CertificateDocument = ({
   name,
-  from,
   role,
   company,
   certId,

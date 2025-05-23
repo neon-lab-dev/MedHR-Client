@@ -1,9 +1,7 @@
 import { ICONS, IMAGES } from "@/assets";
-import Button from "@/components/Button";
 import Image from "next/image";
 import Link from "next/link";
 import { twMerge } from "tailwind-merge";
-import ApplyJob from "../../../(job-listing)/[jobType]/[jobId]/_components/ApplyJob";
 import { IJob } from "@/types/job";
 
 type TInternshipCardProps = {

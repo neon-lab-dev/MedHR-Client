@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React from "react";
 import Image, { StaticImageData } from "next/image";
 import { json2csv } from "json-2-csv";

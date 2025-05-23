@@ -1,13 +1,8 @@
 "use client";
 import React, {
-  ChangeEventHandler,
   Dispatch,
   SetStateAction,
-  useEffect,
-  useState,
 } from "react";
-import { IMAGES } from "@/assets";
-import Image from "next/image";
 import ExperiencedLevel from "./ExperiencedLevel";
 import InternshipMode from "./InternshipMode";
 import MonthlyStipend from "./MonthlyStipend";

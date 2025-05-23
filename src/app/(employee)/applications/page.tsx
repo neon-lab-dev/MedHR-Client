@@ -66,8 +66,7 @@ const Applications = () => {
   const renderCustomCell = (column: Header, item: DataItem) => {
     if (column.accessor === "status") {
       return (
-        // @ts-ignore
-        <StatusLabel key="status" variant={item.status.toLocaleLowerCase()}>
+        <StatusLabel key="status" variant={item.status.toLocaleLowerCase() as any}>
           {item.status}
         </StatusLabel>
       );
@@ -153,7 +152,6 @@ const Applications = () => {
       ) : (
         <Table
           headers={headers}
-          // @ts-ignore
           data={
             data?.map((item) => {
               return {
@@ -169,7 +167,7 @@ const Applications = () => {
                 )?.status,
                 actions: item._id,
               };
-            }) ?? []
+            }) ?? [] as any
           }
           renderCustomCell={renderCustomCell}
           className="pb-32"

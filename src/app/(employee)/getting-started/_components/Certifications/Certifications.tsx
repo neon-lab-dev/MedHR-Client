@@ -2,7 +2,6 @@
 import { ICONS, IMAGES } from "@/assets";
 import Image from "next/image";
 import { useState } from "react";
-import { FieldErrors, UseFormRegister } from "react-hook-form";
 import CertificationModal from "./CertificationModal";
 import { TCertificateDetails } from "../../page";
 

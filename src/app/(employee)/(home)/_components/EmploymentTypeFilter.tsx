@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, RefObject } from "react";
+import { Dispatch, SetStateAction } from "react";
 import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
 import { ICONS } from "@/assets";

@@ -5,7 +5,6 @@ import Modal from "@/components/Reusable/Modal/Modal";
 import TextArea from "@/components/Reusable/TextArea/TextArea";
 import TextInput from "@/components/Reusable/TextInput/TextInput";
 import { useState, KeyboardEvent, useEffect } from "react";
-import { FieldErrors, UseFormRegister } from "react-hook-form";
 import { TWorkExperience } from "../../page";
 
 type TWorkExperienceModalProps = {

@@ -58,7 +58,7 @@ const CoursesPageDashboard = ({courses, isLoading, navigatePath}: {courses: ICou
     },
     onSuccess: () => {
       toast.success("Course deleted successfully", { id: "delete-course" });
-      queryClient.invalidateQueries({ queryKey: ["employerCourses"] });
+      queryClient.invalidateQueries({ queryKey: ["courses"] });
     },
     onError: (error: string) => {
       toast.error(`Failed to delete course: ${error}`, { id: "delete-course" });

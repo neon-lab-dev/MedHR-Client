@@ -1,8 +1,3 @@
-import React from 'react';
-import { ICONS, IMAGES } from '@/assets';
-import Image from 'next/image';
-import ResumeProjectDetailsModel from './ResumeProjectDetailsModel';
-
 // Define the types for the project data
 interface Project {
   title: string;

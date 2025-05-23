@@ -133,7 +133,7 @@ const GettingStarted = () => {
     },
   });
 
-  const { mutate: uploadResumeMutation, isError, error } = useMutation({
+  const { mutate: uploadResumeMutation } = useMutation({
     mutationFn: uploadResume,
     onSuccess: () => {
       toast.success('Resume uploaded successfully');

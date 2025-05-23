@@ -1,8 +1,6 @@
 "use client";
-import { getAllCourses } from "@/api/admin";
 import Container from "@/components/Container";
 import NoDataFound from "@/components/NoDataFound";
-import { useQuery } from "@tanstack/react-query";
 import CourseCard from "../../(home)/_components/CourseCard";
 import { Oval } from "react-loader-spinner";
 import Image from "next/image";

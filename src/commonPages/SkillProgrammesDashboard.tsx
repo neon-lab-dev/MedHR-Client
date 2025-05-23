@@ -9,7 +9,7 @@ import Loading from "@/components/Loading";
 import { deleteSkillProgramme } from "@/api/admin";
 import Table from "@/components/Table";
 import { IMAGES } from "@/assets";
-import { Header } from "@/app/employer/(home)/courses/page";
+import { Header } from "./CoursesPageDashboard";
 
 export interface ISkillDataItem {
   name: string;

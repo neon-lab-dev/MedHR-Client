@@ -1,9 +1,11 @@
-const debounce = <T extends any[], R>(func: (...args: T) => R, delay = 300) => {
-  let timeoutId: any;
-  return function (...args: T) {
+const debounce = <T extends any[], R>(
+  func: (...args: T) => R,
+  delay = 300
+) => {
+  let timeoutId: ReturnType<typeof setTimeout>;
+  return function (this: unknown, ...args: T) {
     clearTimeout(timeoutId);
     timeoutId = setTimeout(() => {
-      // @ts-ignore
       func.apply(this, args);
     }, delay);
   };

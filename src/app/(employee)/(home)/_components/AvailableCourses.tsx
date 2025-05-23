@@ -5,7 +5,7 @@ import Image from "next/image";
 import CourseCard from "./CourseCard";
 import NoDataFound from "@/components/NoDataFound";
 import SectionHeading from "@/components/Reusable/SectionHeading/SectionHeading";
-import { ICONS, IMAGES } from "@/assets";
+import { ICONS } from "@/assets";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -14,7 +14,7 @@ import { Navigation, Pagination } from "swiper/modules";
 import Container from "@/components/Container";
 
 const AvailableCourses = () => {
-  const { isLoading, data } = useQuery({
+  const { data } = useQuery({
     queryKey: ["courses"],
     queryFn: getAllCourses,
   });

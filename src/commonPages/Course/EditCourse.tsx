@@ -107,6 +107,16 @@ const EditCourse = ({ id, navigatePath }: { id: string, navigatePath: string }) 
   const [pricingType, setPricingType] = useState("");
   const [isIncludedCertificate, setIsIncludedCertificate] = useState("");
   const [contentError, setDescriptionError] = useState("");
+   useEffect(() => {
+      setDescriptionError("");
+      if (description?.length === 0) {
+        setDescriptionError("");
+      } else if (description?.length < 1) {
+        setDescriptionError("Course description is required");
+      } else {
+        setDescriptionError("");
+      }
+    }, [description]);
 
   const {
     register,

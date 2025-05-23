@@ -14,7 +14,7 @@ import { Navigation, Pagination } from "swiper/modules";
 import Container from "@/components/Container";
 
 const SkillProgrammes = () => {
-  const { isLoading, data } = useQuery({
+  const { data } = useQuery({
     queryKey: ["skillprogrammes"],
     queryFn: getAllSkillProgrammes,
   });

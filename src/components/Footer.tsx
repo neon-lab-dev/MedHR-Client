@@ -2,12 +2,10 @@
 import { ICONS, IMAGES } from "@/assets";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import React from "react";
 import Container from "./Container";
 
 const Footer = () => {
-  const router = useRouter();
   // Define the array of other links
 
   const footerLinks = [

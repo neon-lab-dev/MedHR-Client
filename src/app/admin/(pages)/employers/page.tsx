@@ -154,7 +154,6 @@ const Employers = () => {
           <Table
             className="w-full max-w-full pb-32"
             headers={headers}
-            // @ts-ignore
             data={employees?.map((employee) => ({
               userName: employee.full_name,
               email: employee.email,
@@ -164,7 +163,7 @@ const Employers = () => {
                 "-",
               listingsPosted: 0, //todo
               actions: employee._id,
-            }))}
+            })) as any}
             renderCustomCell={renderCustomCell}
           />
         )}

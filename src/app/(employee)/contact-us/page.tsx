@@ -2,7 +2,6 @@
 "use client";
 
 import React, { useState, ChangeEvent, FormEvent } from "react";
-import Footer from "@/components/Footer";
 
 const ContactPage: React.FC = () => {
   const [formData, setFormData] = useState({

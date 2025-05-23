@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import axios from 'axios';
 import { Oval } from 'react-loader-spinner';
 import { toast } from 'sonner';
 import Image from 'next/image';

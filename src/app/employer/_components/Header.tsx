@@ -1,4 +1,3 @@
-// @ts-nocheck
 "use client";
 import React from "react";
 import { IMAGES } from "@/assets";
@@ -16,7 +15,7 @@ const Header = () => {
   const router = useRouter(); // Add useRouter hook
   const queryClient = useQueryClient(); // Add useQueryClient hook
 
-  const getTitle = (path) => {
+  const getTitle = (path : string) => {
     const knownPrefixes = ["/admin/", "/employer/"];
     let title = path;
     knownPrefixes.forEach((prefix) => {
@@ -27,6 +26,7 @@ const Header = () => {
     return title.charAt(0).toUpperCase() + title.slice(1);
   };
   const title = getTitle(pathname);
+  console.log(title);
 
   const { mutate } = useMutation({
     mutationFn: handleEmployerLogoutService,
@@ -42,7 +42,7 @@ const Header = () => {
         });
     },
     onError: (err) => {
-      toast.error(err);
+      toast.error(err.message);
     },
   });
 

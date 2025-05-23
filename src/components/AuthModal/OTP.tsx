@@ -1,9 +1,9 @@
+/* eslint-disable @typescript-eslint/no-unsafe-function-type */
 import React, { useState, useEffect } from "react";
 import Button from "../Button";
 import edit from "../../assets/icons/Edit.svg";
 import Image from "next/image";
 import { useForm } from "react-hook-form";
-import { Dispatch, SetStateAction } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { useAppDispatch, useAppSelector } from "@/hooks/store";

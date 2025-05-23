@@ -1,7 +1,5 @@
 "use client";
-
 import Image, { StaticImageData } from "next/image";
-import React, { useState } from "react";
 
 type Props = React.InputHTMLAttributes<HTMLInputElement> & {
   icon: StaticImageData;

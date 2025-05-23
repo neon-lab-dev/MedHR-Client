@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-expressions */
 "use client"
 import { useAppSelector } from "@/hooks/store";
 import { useSearchParams } from "next/navigation";
@@ -49,7 +50,7 @@ const JobTypePage = ({jobType} : {jobType:string}) => {
     debouncedSetParams(queryParams);
   }, [queryParams]);
 
-  const { isLoading, data, isError } = useQuery({
+  const { isLoading, data } = useQuery({
     queryKey: ["jobs", debouncedQueryParams, jobType],
     queryFn: () =>
       handleGetAllJobsByTypeService({

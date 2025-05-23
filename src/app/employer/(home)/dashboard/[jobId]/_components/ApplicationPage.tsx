@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-expressions */
 "use client";
 import React from 'react';
 import { toast } from 'sonner';
@@ -8,7 +9,7 @@ import Button from '@/components/Button';
 import addCircle from "@/assets/icons/Add Circle.svg";
 import { ICONS, IMAGES } from '@/assets';
 import Chip from '@/components/Chip';
-import { useQuery, useMutation, QueryClient, useQueryClient } from '@tanstack/react-query';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { approveApplicant, fetchProfileData, rejectApplicant } from '@/api/employer';
 import { useRouter } from 'next/navigation';
 
@@ -32,14 +33,6 @@ const Card: React.FC<CardProps> = ({ title, children, className = '' }) => {
         </div>
     );
 };
-
-// Profile Component
-interface ProfileProps {
-    params: {
-        applicantId: string;
-        jobId: string;
-    };
-}
 
 interface Project {
     _id: string;

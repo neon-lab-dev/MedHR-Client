@@ -17,7 +17,6 @@ const JobCard = ({
   showApplyButton,
   wrapperClassName,
   job,
-  isApplied,
 }: Props) => {
   if (!job) return null;
   return (

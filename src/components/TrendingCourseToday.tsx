@@ -8,8 +8,6 @@ import { COURSE_DETAILS } from "@/mockData/course";
 import CourseCard from "./CourseCard";
 import NoDataFound from "./NoDataFound";
 import SectionHeading from "./Reusable/SectionHeading/SectionHeading";
-import Image from "next/image";
-import { IMAGES } from "@/assets";
 
 const TrendingCourseToday = () => {
   return (

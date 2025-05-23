@@ -9,7 +9,7 @@ import {
 import axios from "axios";
 import { toast } from "sonner";
 import Image from "next/image";
-import { ICONS, IMAGES } from "@/assets";
+import { ICONS } from "@/assets";
 import Button from "@/components/Button";
 import Link from "next/link";
 import api from "@/api";

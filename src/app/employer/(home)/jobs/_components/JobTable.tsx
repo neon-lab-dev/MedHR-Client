@@ -19,10 +19,6 @@ interface Job {
     status: string;
   }
   
-  interface Props {
-    className: string;
-  }
-  
   const useFetchJobs = () => {
     return useQuery<Job[], Error>({
       queryKey: ['jobs-employer-job'],

@@ -1,7 +1,3 @@
-import React from 'react';
-import { ICONS, IMAGES } from '@/assets';
-import Image from 'next/image';
-import ResumeEducationModel from './ResumeEducationModel';
 import { convertDate } from '@/helpers/convertDate';
 
 interface Education {

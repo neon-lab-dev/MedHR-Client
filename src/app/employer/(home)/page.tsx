@@ -81,6 +81,7 @@ const Dashboard = () => {
         status: job.status,
       };
     });
+    console.log(openJobs);
 
   return (
     <div className="bg-[#f5f6fa] p-6 flex flex-col gap-6">

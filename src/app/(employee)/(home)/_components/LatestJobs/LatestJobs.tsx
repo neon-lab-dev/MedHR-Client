@@ -3,7 +3,6 @@ import { getLatestJobs } from "@/api/jobs";
 import Link from "next/link";
 import React from "react";
 import NoDataFound from "@/components/NoDataFound";
-import JobsHeading from "./JobsHeading";
 import SectionHeading from "@/components/Reusable/SectionHeading/SectionHeading";
 import Container from "@/components/Container";
 

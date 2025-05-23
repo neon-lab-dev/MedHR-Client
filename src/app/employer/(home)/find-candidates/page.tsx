@@ -3,7 +3,7 @@ import { ICONS } from "@/assets";
 import Button from "@/components/Button";
 import SelectDropdown from "@/components/Reusable/SelectDropdown/SelectDropdown";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import CandidatesTable from "./_components/CandidatesTable";
 import { handleGetAllCandidatesService } from "@/api/employer";
 import MultiSelectDropdown from "@/components/Reusable/MultiSelectDropdown/MultiSelectDropdown";

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-empty-object-type */
 "use client"
 import { fetchJobDetail, updateJobDetails } from "@/api/employer";
 import { ICONS, IMAGES } from "@/assets";
@@ -66,7 +67,7 @@ const ViewIdPage = ({viewId} : {viewId:string}) => {
     const queryClient = useQueryClient();
 
     // Fetch job details using React Query
-    const { data: jobData, isLoading, error } = useQuery({
+    const { data: jobData, isLoading } = useQuery({
         queryKey: ['job', viewId],
         queryFn: () => fetchJobDetail(viewId),
     });

@@ -90,7 +90,6 @@ const Profile: React.FC<ProfileProps> = ({
     updateProfileMutation.mutate(data);
   };
 
-  const [selectedResume, setSelectedResume] = useState<File | null>(null);
   const [isUploading, setIsUploading] = useState(false);
 
   const { mutate: uploadResumeMutation } = useMutation({

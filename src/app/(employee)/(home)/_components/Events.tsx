@@ -4,7 +4,7 @@ import EventCard from "./EventCard";
 import NoDataFound from "@/components/NoDataFound";
 import SectionHeading from "@/components/Reusable/SectionHeading/SectionHeading";
 import Image from "next/image";
-import { ICONS, IMAGES } from "@/assets";
+import { ICONS } from "@/assets";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";

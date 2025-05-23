@@ -1,5 +1,5 @@
 "use client";
-import { ICONS, IMAGES } from "@/assets";
+import { ICONS } from "@/assets";
 import Button from "@/components/Button";
 import Image from "next/image";
 import React from "react";

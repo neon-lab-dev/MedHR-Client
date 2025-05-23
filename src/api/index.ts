@@ -49,6 +49,8 @@ const api = {
   createEvent: baseUrl+"/events/create-event",
   updateEvent: baseUrl+"/events/update",
   getAllEventsForEmployer: baseUrl+"/employeer/events",
+  createCourse: baseUrl+"/courses/create",
+  updateCourse: baseUrl+"/updateCourse",
 
   // for admin
   adminLogin: baseUrl + "/login/admin",

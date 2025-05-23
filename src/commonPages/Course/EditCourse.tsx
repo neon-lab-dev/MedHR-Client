@@ -1,5 +1,5 @@
 "use client";
-import { deleteVideoById, getSingleCourse } from "@/api/admin";
+import { getSingleCourse } from "@/api/admin";
 import Loading from "@/components/Loading";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
@@ -13,6 +13,7 @@ import TextArea from "@/components/Reusable/TextArea/TextArea";
 import DropdownInput from "@/components/Reusable/DopdownInput/DropdownInput";
 import { departments } from "@/mockData/departments";
 import dynamic from "next/dynamic";
+import api from "@/api";
 const JoditEditor = dynamic(() => import("jodit-react"), {
   ssr: false,
   loading: () => <p>Loading...</p>
@@ -34,7 +35,7 @@ export type CourseFormData = {
   image: FileList;
 };
 
-const EditCoursePage = ({ id }: { id: string }) => {
+const EditCourse = ({ id, navigatePath }: { id: string, navigatePath: string }) => {
   const router = useRouter();
   const [editExpanded, setEditExpanded] = useState<boolean>(false);
   const queryClient = useQueryClient();
@@ -48,7 +49,7 @@ const EditCoursePage = ({ id }: { id: string }) => {
   const courseMutation = useMutation({
     mutationFn: async (data: FormData) => {
       const response = await axios.put(
-        `https://carrerhub-backend.vercel.app/api/v1/courses/${id}`,
+        `${api.updateCourse}/${id}`,
         data,
         {
           withCredentials: true,
@@ -59,7 +60,7 @@ const EditCoursePage = ({ id }: { id: string }) => {
     onSuccess: () => {
       toast.success("Course updated successfully!");
       queryClient.invalidateQueries({ queryKey: ["employerCourses"] });
-      router.push("/employer/courses");
+      router.push(`${navigatePath}/courses`);
     },
     onError: () => {
       toast.error("Failed to update Course.");
@@ -316,4 +317,4 @@ const EditCoursePage = ({ id }: { id: string }) => {
   );
 };
 
-export default EditCoursePage;
+export default EditCourse;

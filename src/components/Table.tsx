@@ -1,4 +1,3 @@
-import { DataItem } from "@/app/(employee)/applications/page";
 import { Header } from "@/app/admin/tableTypes";
 import React from "react";
 import { twMerge } from "tailwind-merge";

@@ -1,14 +1,14 @@
-import EditCoursePage from "../_components/EditCoursePage";
+import EditCourse from "@/commonPages/Course/EditCourse";
 
 
-const EditCourse = async ({ params }: { params: Promise<{ id: string }> }) => {
+const EditCoursePage = async ({ params }: { params: Promise<{ id: string }> }) => {
   const resolvedParams = await params;
   const { id } = resolvedParams;
   return (
     <div>
-      <EditCoursePage id={id} />
+      <EditCourse id={id} navigatePath="/employer" />
     </div>
   );
 };
 
-export default EditCourse;
+export default EditCoursePage;

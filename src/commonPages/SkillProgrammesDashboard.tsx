@@ -89,7 +89,7 @@ const SkillProgrammesDashboard = ({skillProgrammes, isLoading, navigatePath} : {
             </div>
             <ul
               tabIndex={0}
-              className="dropdown-content menu bg-base-100 rounded-box z-[1] w-44 p-2 shadow"
+              className="dropdown-content menu bg-neutral-50 border border-neutral-400/10 rounded-box z-[1] w-44 p-2 shadow"
             >
               <li>
                 <a

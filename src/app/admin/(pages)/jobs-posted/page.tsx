@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import React, { useCallback, useState } from "react";
 import KPICard from "@/components/KPICard";
@@ -25,6 +26,7 @@ import debounce from "@/helpers/debounce";
 
 type DataItem = {
   jobTitle: string;
+  applications: string;
   companyName: string;
   jobType: string;
   postedDate: string;
@@ -40,6 +42,7 @@ const Employers = () => {
     queryKey: ["admin", "job", { keyword }],
     queryFn: () => handleGetAllJobsForAdminService({ keyword }),
   });
+  console.log(data);
   const debouncedSetKeyword = useCallback(
     debounce((queryParams) => {
       setKeyword(queryParams);
@@ -68,6 +71,7 @@ const Employers = () => {
   // Table data
   const headers: Header<DataItem>[] = [
     { header: "Job Title", accessor: "jobTitle" },
+    { header: "Total Applications", accessor: "applications" },
     { header: "Company Name", accessor: "companyName" },
     { header: "Job Type", accessor: "jobType" },
     { header: "Posted Date", accessor: "postedDate" },
@@ -88,7 +92,7 @@ const Employers = () => {
             </div>
             <ul
               tabIndex={0}
-              className="dropdown-content menu bg-base-100 rounded-box z-[1] w-40 p-2 shadow"
+              className="dropdown-content menu bg-neutral-50 border border-neutral-400/10 rounded-box z-[1] w-40 p-2 shadow"
             >
               <li>
                 <Link
@@ -183,11 +187,12 @@ const Employers = () => {
             data={
               data?.map((job) => ({
                 jobTitle: job.title,
+                applications: job?.applicants?.length,
                 companyName: job.companyDetails.companyName,
                 jobType: job.employmentType,
                 postedDate: new Date(job.postedAt).toDateString(),
                 actions: job._id,
-              })) as DataItem[]
+              })) as any[]
             }
             renderCustomCell={renderCustomCell}
           />

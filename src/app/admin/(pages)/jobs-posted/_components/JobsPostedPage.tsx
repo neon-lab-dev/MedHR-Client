@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { handleGetJobByIdForAdminService } from "@/api/jobs";
 import SkillsAndExtraBenefits from "@/app/(employee)/(job-listing)/[jobType]/[jobId]/_components/SkillsAndExtraBenefits";
@@ -9,15 +9,15 @@ import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
 import Link from "next/link";
 
-const JobsPostedPage = ({id} : {id:string}) => {
-    const { isLoading, data: job } = useQuery({
-        queryKey: ["admin", "employee", id],
-        queryFn: () => handleGetJobByIdForAdminService(id),
-      });
-      if (isLoading) return <Loading className="h-[60vh] w-full" />;
-      if (!job) return <NotFound />;
-    return (
-        <div className="w-full p-6">
+const JobsPostedPage = ({ id }: { id: string }) => {
+  const { isLoading, data: job } = useQuery({
+    queryKey: ["admin", "employee", id],
+    queryFn: () => handleGetJobByIdForAdminService(id),
+  });
+  if (isLoading) return <Loading className="h-[60vh] w-full" />;
+  if (!job) return <NotFound />;
+  return (
+    <div className="w-full p-6">
       <div className="flex flex-col xl:gap-16 p-8 bg-white  rounded-xl">
         {/* job titles and cta */}
         <div className="py-16 flex items-end justify-between">
@@ -29,7 +29,7 @@ const JobsPostedPage = ({id} : {id:string}) => {
               <Image src={ICONS.leftArrow} className="h-9 w-9" alt="" />
             </Link>
             <Image
-              src={job.companyDetails.logo}
+              src={job?.companyDetails?.logo}
               alt="Company Logo"
               height={99}
               width={99}
@@ -109,9 +109,16 @@ const JobsPostedPage = ({id} : {id:string}) => {
                     {job.companyDetails.companyName}
                   </span>
                   <div className="flex gap-3 lg:gap-6 items-center text-sm lg:text-base font-medium text-primary-500">
-                    <Link href={job.companyDetails.websiteLink} target="_blank">
-                      Website
-                    </Link>
+                    {job?.companyDetails?.websiteLink ? (
+                      <Link
+                        href={job?.companyDetails?.websiteLink}
+                        target="_blank"
+                      >
+                        Website
+                      </Link>
+                    ) : (
+                      "Website not available"
+                    )}
                     <div className="h-2 w-2 rounded-full bg-secondary-100" />
                     <Link href="#" target="_blank">
                       {job.location}
@@ -143,7 +150,7 @@ const JobsPostedPage = ({id} : {id:string}) => {
         </div>
       </div>
     </div>
-    );
+  );
 };
 
 export default JobsPostedPage;

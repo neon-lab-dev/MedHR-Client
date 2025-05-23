@@ -6,7 +6,7 @@ const UpdateEvent = async ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = resolvedParams;
     return (
         <div>
-            <UpdateEventPage id={id} navigateRoute="/admin/events" />
+            <UpdateEventPage id={id} navigateRoute="/employer/events" />
         </div>
     );
 };

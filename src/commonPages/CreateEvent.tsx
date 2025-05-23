@@ -1,11 +1,12 @@
-"use client"
+"use client";
 import TextInput from "@/components/Reusable/TextInput/TextInput";
 import { useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
-import { toast } from 'sonner';
+import { toast } from "sonner";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import api from "@/api";
 
 type TCreateEventFormValues = {
   eventName: string;
@@ -14,11 +15,11 @@ type TCreateEventFormValues = {
   companyName: string;
   companyLocation: string;
   skillCovered: string;
-  eventUrl : string;
+  eventUrl: string;
   image: FileList;
 };
 
-const CreateEvent = () => {
+const CreateEvent = ({navigateRoute} : {navigateRoute: string}) => {
   const queryClient = useQueryClient();
   const {
     register,
@@ -60,11 +61,9 @@ const CreateEvent = () => {
   // Function to create event
   const createEventMutation = useMutation({
     mutationFn: async (data: FormData) => {
-      const response = await axios.post(
-        "https://carrerhub-backend.vercel.app/api/v1/events/create-event",
-        data,
-        { withCredentials: true }
-      );
+      const response = await axios.post(api.createEvent, data, {
+        withCredentials: true,
+      });
       return response.data;
     },
     onSuccess: () => {
@@ -92,24 +91,27 @@ const CreateEvent = () => {
     formData.append("skillCovered", JSON.stringify(selectedSkills));
     formData.append("file", data.image[0]);
 
-    toast.promise(createEventMutation.mutateAsync(formData), {
-      loading: "Creating event...",
-      success: "Event created successfully!",
-      error: "Failed to create event.",
-    }).unwrap()
-    .then(() => {
-      router.push("/admin/events");
-    })
-    .catch((error) => {
-      console.error("Error creating event:", error);
-    });
+    toast
+      .promise(createEventMutation.mutateAsync(formData), {
+        loading: "Creating event...",
+        success: "Event created successfully!",
+        error: "Failed to create event.",
+      })
+      .unwrap()
+      .then(() => {
+        router.push(navigateRoute);
+      })
+      .catch((error) => {
+        console.error("Error creating event:", error);
+      });
   };
 
   return (
     <div className="bg-neutral-450 p-6 flex flex-col gap-[51px]">
       <form
         className="bg-white p-6 rounded-lg shadow-md flex flex-col gap-4 max-w-[800px] w-full mx-auto"
-        onSubmit={handleSubmit(onSubmitEvent)}>
+        onSubmit={handleSubmit(onSubmitEvent)}
+      >
         <h3 className="text-xl font-semibold">Create Event</h3>
         <TextInput
           label="Event Name"
@@ -160,7 +162,9 @@ const CreateEvent = () => {
 
         {/* ✅ Skill Input Section */}
         <div className="w-full">
-          <label className="font-semibold text-sm mb-1 block">Skills Covered</label>
+          <label className="font-semibold text-sm mb-1 block">
+            Skills Covered
+          </label>
           <input
             type="text"
             value={skillInput}
@@ -206,7 +210,7 @@ const CreateEvent = () => {
 
         <button
           type="submit"
-          className="bg-primary-600 text-white px-4 py-3 rounded-md"
+          className="bg-primary-600 text-white px-4 py-3 rounded-md cursor-pointer"
         >
           Create Event
         </button>

@@ -46,6 +46,9 @@ const api = {
   sendHiredEmail: baseUrl+"/send-hired-email",
   getAllEmployerCourses: baseUrl+"/employeer/course",
   getAllEmployerSkillProgrammes: baseUrl+"/employeer/skill-programmes",
+  createEvent: baseUrl+"/events/create-event",
+  updateEvent: baseUrl+"/events/update",
+  getAllEventsForEmployer: baseUrl+"/employeer/events",
 
   // for admin
   adminLogin: baseUrl + "/login/admin",
@@ -62,12 +65,12 @@ const api = {
   allSkillProgrammes: baseUrl + "/skills",
   singleSkillProgramme: baseUrl + "/skills",
   deleteSkill: baseUrl + "/skills",
+  updateSkill: baseUrl + "/skills",
   getAllCourses: baseUrl + "/courses",
   getSingleCourse: baseUrl + "/courses",
   deleteCourse: baseUrl + "/courses",
   video: baseUrl + "/video",
-  deleteEvent: baseUrl + "/admin/events", //:id
-  createEvent: baseUrl + "/admin/events/create-event",
+  deleteEvent: baseUrl + "/events", //:id
 
 
 };

@@ -1,56 +1,81 @@
 "use client";
+
 import { getSingleSkill } from "@/api/admin";
 import Loading from "@/components/Loading";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
-import { SkillProgrammeFormData } from "@/app/employer/(home)/skill-programmes/_components/SkillsProgrammesPageEmployer";
-import dynamic from "next/dynamic";
 import TextInput from "@/components/Reusable/TextInput/TextInput";
-import TextArea from "@/components/Reusable/TextArea/TextArea";
 import DropdownInput from "@/components/Reusable/DopdownInput/DropdownInput";
+import TextArea from "@/components/Reusable/TextArea/TextArea";
 import { departments } from "@/mockData/departments";
+import dynamic from "next/dynamic";
+import api from "@/api";
 const JoditEditor = dynamic(() => import("jodit-react"), {
   ssr: false,
   loading: () => <p>Loading...</p>,
 });
 
-const SkillsProgrammesPageAdmin = ({ id }: { id: string }) => {
+export type SkillProgrammeFormData = {
+  skillProgrammeName: string;
+  programmeOverview: string;
+  programmeDescription?: string;
+  programmeType?:
+    | "Offline"
+    | "Online"
+    | "Fellowship"
+    | "Scholarships"
+    | "Events";
+  department: string;
+  duration: string;
+  desiredQualificationOrExperience?: string;
+  programmeLink?: string;
+  pricingType?: "Free" | "Paid";
+  fee?: number;
+  numberOfSeats?: number;
+  isIncludedCertificate?: boolean;
+  image: FileList;
+};
+
+const UpdateSkillProgrammeDashboard = ({
+  id,
+  navigatePath,
+}: {
+  id: string;
+  navigatePath: string;
+}) => {
   const router = useRouter();
   const [editExpanded, setEditExpanded] = useState<boolean>(false);
   const queryClient = useQueryClient();
 
   // Fetching data by id
   const { isLoading, data } = useQuery({
-    queryKey: ["skillProgramme", id],
+    queryKey: ["skillprogramme", id],
     queryFn: () => getSingleSkill(id),
   });
 
   const courseMutation = useMutation({
     mutationFn: async (data: FormData) => {
-      const response = await axios.put(
-        `https://carrerhub-backend.vercel.app/api/v1/skills/${id}`,
-        data,
-        {
-          withCredentials: true,
-        }
-      );
+      const response = await axios.put(`${api.updateSkill}/${id}`, data, {
+        withCredentials: true,
+      });
       return response.data;
     },
     onSuccess: () => {
-      toast.success("Updated successfully!");
+      toast.success("Course updated successfully!");
       queryClient.invalidateQueries({ queryKey: ["skillprogrammes"] });
-      router.push("/admin/skill-programmes");
+      router.push(`${navigatePath}/skill-programmes`);
     },
     onError: () => {
       toast.error("Failed to update Course.");
     },
   });
 
+  // Function to update skill programme
   const onSubmitCourse = (data: SkillProgrammeFormData) => {
     const formData = new FormData();
     formData.append("skillProgrammeName", data.skillProgrammeName);
@@ -78,7 +103,7 @@ const SkillsProgrammesPageAdmin = ({ id }: { id: string }) => {
 
     toast.promise(
       courseMutation.mutateAsync(formData).then(() => {
-        router.push("/admin/skill-programmes");
+        router.push("/employer/skill-programmes");
       }),
       {
         loading: "Updating...",
@@ -104,6 +129,7 @@ const SkillsProgrammesPageAdmin = ({ id }: { id: string }) => {
     setValue,
   } = useForm<SkillProgrammeFormData>();
 
+  //   Setting default values
   useEffect(() => {
     if (data?.skill) {
       setValue("skillProgrammeName", data.skill.skillProgrammeName || "");
@@ -125,6 +151,7 @@ const SkillsProgrammesPageAdmin = ({ id }: { id: string }) => {
   }, [data?.skill, setValue]);
 
   if (isLoading) return <Loading className="h-[60vh] w-full" />;
+
   return (
     <div className="w-full">
       <div className="bg-[#f5f6fa] p-6 flex flex-col gap-[51px]">
@@ -313,4 +340,4 @@ const SkillsProgrammesPageAdmin = ({ id }: { id: string }) => {
   );
 };
 
-export default SkillsProgrammesPageAdmin;
+export default UpdateSkillProgrammeDashboard;

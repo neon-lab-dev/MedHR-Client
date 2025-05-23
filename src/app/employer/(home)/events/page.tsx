@@ -1,15 +1,15 @@
 "use client";
-import { getAllEvents } from '@/api/events';
+import { getAllEmployerEvents } from '@/api/events';
 import EventsDashboard from '@/commonPages/EventsDashboard';
 import { useQuery } from '@tanstack/react-query';
 
 const EventsPage = () => {
   const { isLoading, data: events } = useQuery({
     queryKey: ["events"],
-    queryFn: getAllEvents,
+    queryFn: getAllEmployerEvents,
   });
   return (
-    <EventsDashboard navigateRoute="/admin" events={events?.data} isLoading={isLoading} />
+    <EventsDashboard navigateRoute="/employer" events={events?.events} isLoading={isLoading} />
   );
 };
 

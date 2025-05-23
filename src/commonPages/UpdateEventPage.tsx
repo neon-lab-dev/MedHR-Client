@@ -12,6 +12,7 @@ import Loading from "@/components/Loading";
 import NotFound from "@/components/NotFound";
 import { toast } from "sonner";
 import { Oval } from "react-loader-spinner";
+import api from "@/api";
 
 type EventFormValues = {
   eventName: string;
@@ -24,12 +25,11 @@ type EventFormValues = {
   image: FileList;
 };
 
-const UpdateEventPage = ({ id }: { id: string }) => {
+const UpdateEventPage = ({ id, navigateRoute }: { id: string, navigateRoute: string }) => {
   const router = useRouter();
   const {
     register,
     handleSubmit,
-    reset,
     setValue,
     formState: { errors },
   } = useForm<EventFormValues>();
@@ -94,14 +94,14 @@ const UpdateEventPage = ({ id }: { id: string }) => {
 
     try {
       await axios.put(
-        `https://carrerhub-backend.vercel.app/api/v1/admin/events/update/${id}`,
+        `${api.updateEvent}/${id}`,
         formData,
         {
           withCredentials: true,
         }
       );
       toast.success("Event updated successfully!");
-      router.push("/admin/events");
+      router.push(navigateRoute);
     } catch (error) {
       console.error("Failed to update event:", error);
       setIsSubmitting(false);
@@ -236,7 +236,7 @@ const UpdateEventPage = ({ id }: { id: string }) => {
 
       <button
         type="submit"
-        className="bg-primary-600 text-white px-4 py-3 rounded-md flex items-center justify-center"
+        className="bg-primary-600 text-white px-4 py-3 rounded-md flex items-center justify-center cursor-pointer"
       >
         {isSubmitting ? (
           <Oval height="25" width="25" color="white" strokeWidth="5" />

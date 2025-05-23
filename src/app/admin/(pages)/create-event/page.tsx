@@ -2,7 +2,7 @@ import CreateEvent from '@/commonPages/CreateEvent';
 
 const CreateEventPage = () => {
   return (
-      <CreateEvent/>
+      <CreateEvent navigateRoute="/admin/events" />
   );
 };
 

@@ -53,8 +53,8 @@ export default function EmployeeRootLayout({ children }: any) {
       icon: ICONS.skillProgramme
     },
     {
-      label: "Create Event",
-      path: "/employer/create-event",
+      label: "Events",
+      path: "/employer/events",
       icon: ICONS.events
     },
   ];

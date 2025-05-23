@@ -1,4 +1,4 @@
-import SkillsProgrammesPageEmployer from "../_components/SkillsProgrammesPageEmployer";
+import UpdateSkillProgrammeDashboard from "@/commonPages/UpdateSkillProgrammeDashboard";
 
 
 const Job = async ({ params }: { params: Promise<{ id: string }> }) => {
@@ -6,7 +6,7 @@ const Job = async ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = resolvedParams;
   return (
     <div>
-      <SkillsProgrammesPageEmployer id={id} />
+       <UpdateSkillProgrammeDashboard id={id} navigatePath="/employer" />
     </div>
   );
 };

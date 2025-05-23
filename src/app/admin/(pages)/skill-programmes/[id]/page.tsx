@@ -1,11 +1,12 @@
-import SkillsProgrammesPageAdmin from "../_components/SkillsProgrammesPageAdmin";
+import UpdateSkillProgrammeDashboard from "@/commonPages/UpdateSkillProgrammeDashboard";
+
 
 const Job = async ({ params }: { params: Promise<{ id: string }> }) => {
   const resolvedParams = await params;
   const { id } = resolvedParams;
   return (
     <div>
-      <SkillsProgrammesPageAdmin id={id} />
+      <UpdateSkillProgrammeDashboard id={id} navigatePath="/admin" />
     </div>
   );
 };

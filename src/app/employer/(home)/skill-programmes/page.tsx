@@ -1,3 +1,4 @@
+"use client";
 import { getAllEmployerSkillProgrammes } from '@/api/employer';
 import SkillProgrammesDashboard from '@/commonPages/SkillProgrammesDashboard';
 import { useQuery } from '@tanstack/react-query';

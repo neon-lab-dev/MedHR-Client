@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
-
 import { getSingleSkill } from "@/api/admin";
 import { handleGEtEmployerByIdForEmployer } from "@/api/employer";
 import { useQuery } from "@tanstack/react-query";
@@ -12,7 +11,6 @@ import { Oval } from "react-loader-spinner";
 const AllApplicantsPage = () => {
   const { id } = useParams();
   const [employeeData, setEmployeeData] = useState<any[]>([]);
-  const [loadingEmployees, setLoadingEmployees] = useState(true);
 
   const { isLoading, data } = useQuery({
     queryKey: ["skillprogramme", id],
@@ -25,7 +23,6 @@ const AllApplicantsPage = () => {
     const fetchEmployees = async () => {
       if (!applicants || applicants.length === 0) return;
 
-      setLoadingEmployees(true);
       try {
         const employees = await Promise.all(
           applicants.map((applicant: any) =>
@@ -37,16 +34,14 @@ const AllApplicantsPage = () => {
       } catch (err) {
         console.error("Error fetching employees", err);
       } finally {
-        setLoadingEmployees(false);
+        //
       }
     };
 
     fetchEmployees();
   }, [applicants]);
 
-  console.log(employeeData);
-
-   if (loadingEmployees || isLoading) {
+   if ( isLoading) {
       return (
         <div className="flex justify-center items-center h-96">
           <Oval

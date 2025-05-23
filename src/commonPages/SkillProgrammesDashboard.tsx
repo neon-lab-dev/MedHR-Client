@@ -134,7 +134,7 @@ const SkillProgrammesDashboard = ({skillProgrammes, isLoading, navigatePath} : {
         <div className="flex items-center justify-end px-4">
           {/* Download CSV button */}
           <Link
-            href={"/employer/create-skill-programme"}
+            href={`${navigatePath}/create-skill-programme`}
             className="bg-neutral-450 border border-neutral-550 rounded-[10px] font-plus-jakarta-sans text-base font-medium text-secondary-925 px-4 pt-3 pb-[14px]"
           >
             Create Programme

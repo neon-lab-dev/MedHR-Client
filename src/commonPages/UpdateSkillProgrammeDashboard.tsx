@@ -68,7 +68,6 @@ const UpdateSkillProgrammeDashboard = ({
     onSuccess: () => {
       toast.success("Course updated successfully!");
       queryClient.invalidateQueries({ queryKey: ["skillprogrammes"] });
-      router.push(`${navigatePath}/skill-programmes`);
     },
     onError: () => {
       toast.error("Failed to update Course.");
@@ -103,7 +102,7 @@ const UpdateSkillProgrammeDashboard = ({
 
     toast.promise(
       courseMutation.mutateAsync(formData).then(() => {
-        router.push("/employer/skill-programmes");
+        router.push(`${navigatePath}/skill-programmes`);
       }),
       {
         loading: "Updating...",
@@ -121,6 +120,8 @@ const UpdateSkillProgrammeDashboard = ({
   const [pricingType, setPricingType] = useState("");
   const [isIncludedCertificate, setIsIncludedCertificate] = useState("");
   const [contentError, setDescriptionError] = useState("");
+
+  console.log(navigatePath);
 
   const {
     register,
@@ -330,7 +331,7 @@ const UpdateSkillProgrammeDashboard = ({
 
           <button
             type="submit"
-            className="bg-primary-600 text-white px-4 py-3 rounded-md"
+            className="bg-primary-600 text-white px-4 py-3 rounded-md cursor-pointer"
           >
             Update Course
           </button>

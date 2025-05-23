@@ -256,7 +256,7 @@ const CreateSkillProgramme = () => {
 
         <button
           type="submit"
-          className="bg-primary-600 text-white px-4 py-3 rounded-md"
+          className="bg-primary-600 text-white px-4 py-3 rounded-md cursor-pointer"
         >
          Submit
         </button>

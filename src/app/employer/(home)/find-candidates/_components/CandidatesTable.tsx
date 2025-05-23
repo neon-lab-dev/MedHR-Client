@@ -151,7 +151,7 @@ const CandidatesTable: React.FC<TCandidatesTableProps> = ({
                         <Image src={IMAGES.menudots} alt="Menu Icon" />
                       </div>
                       {dropdownOpenId === candidate._id && (
-                        <div className="absolute right-0 mt-28 w-48 p-4 rounded-xl bg-white border shadow-lg z-10">
+                        <div className="absolute right-0 mt-28 w-48 p-4 rounded-xl bg-white border border-neutral-300/50 shadow-lg z-10">
                           <Link
                             href={`/employer/find-candidates/${candidate?._id}`}
                           >

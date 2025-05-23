@@ -9,21 +9,26 @@ import SimilarJobsForYou from "./_components/SimilarJobsForYouComponent";
 import SkillsAndExtraBenefits from "./_components/SkillsAndExtraBenefits";
 import { getJobById } from "@/api/jobs";
 import ApplyJob from "./_components/ApplyJob";
+import Container from "@/components/Container";
 
-
-const JobIdPage = async ({ params }: { params: Promise<{ jobType: string; jobId: string }> }) => {
+const JobIdPage = async ({
+  params,
+}: {
+  params: Promise<{ jobType: string; jobId: string }>;
+}) => {
   const resolvedParams = await params;
   const { jobType, jobId } = resolvedParams;
 
-  if (!AVAILABLE_JOB_TYPES.includes(jobType)) return <NotFound/>;
+  if (!AVAILABLE_JOB_TYPES.includes(jobType)) return <NotFound />;
 
   const job = await getJobById(jobId);
-  if (!job) return <NotFound/>;
+  if (!job) return <NotFound />;
 
-  const isClosed = job.status !== "Open" || new Date(job.applicationDeadline) < new Date();
+  const isClosed =
+    job.status !== "Open" || new Date(job.applicationDeadline) < new Date();
   return (
-    <div>
-      <div className="wrapper flex flex-col xl:gap-16 pb-6">
+    <Container>
+      <div className="wrapper flex flex-col pb-6">
         {/* job titles and cta */}
         <div className="py-16 flex items-end justify-between">
           <div className="flex gap-5 items-center">
@@ -34,14 +39,14 @@ const JobIdPage = async ({ params }: { params: Promise<{ jobType: string; jobId:
               width={99}
               className="h-[62px] w-[62px] xl:h-[99px] xl:w-[99px] rounded-lg"
             /> */}
-          
+
             <div className="bg-primary-550 p-2 rounded-full size-16 flex items-center justify-center text-white">
-          <p className="text-xs xl:text-2xl font-semibold -tracking-[0.32px]">
-            {job?.companyDetails?.companyName
-              ? job.companyDetails.companyName.charAt(0)
-              : "?"}
-          </p>
-        </div>
+              <p className="text-xs xl:text-2xl font-semibold -tracking-[0.32px]">
+                {job?.companyDetails?.companyName
+                  ? job.companyDetails.companyName.charAt(0)
+                  : "?"}
+              </p>
+            </div>
             <div className="flex flex-col gap-0.5">
               <h3 className="text-[20px] lg:text-[32px] -tracking-[0.44px] font-semibold text-neutral-900">
                 {job.title}
@@ -144,13 +149,19 @@ const JobIdPage = async ({ params }: { params: Promise<{ jobType: string; jobId:
                     {job.companyDetails.companyName}
                   </span>
                   <div className="flex gap-3 lg:gap-6 items-center text-sm lg:text-base font-medium text-primary-500">
-                    <Link href={job.companyDetails.websiteLink} target="_blank">
-                      Website
-                    </Link>
+                    {job.companyDetails.websiteLink ? (
+                      <Link
+                        href={job.companyDetails.websiteLink}
+                        target="_blank"
+                      >
+                        Website
+                      </Link>
+                    ) : (
+                      "Website not available"
+                    )}
+
                     <div className="h-2 w-2 rounded-full bg-secondary-100" />
-                    <span>
-                      {job.location}
-                    </span>
+                    <span>{job.location}</span>
                   </div>
                   <div className="flex gap-6 items-center text-base font-medium text-secondary-400">
                     <span>{job.companyDetails.industryType}</span>
@@ -164,12 +175,12 @@ const JobIdPage = async ({ params }: { params: Promise<{ jobType: string; jobId:
                   className="h-[56px] w-[56px] rounded-full"
                 /> */}
                 <div className="bg-primary-550 p-2 rounded-full size-10 flex items-center justify-center text-white">
-          <p className="text-xs xl:text-[16px] -tracking-[0.32px]">
-            {job?.companyDetails?.companyName
-              ? job.companyDetails.companyName.charAt(0)
-              : "?"}
-          </p>
-        </div>
+                  <p className="text-xs xl:text-[16px] -tracking-[0.32px]">
+                    {job?.companyDetails?.companyName
+                      ? job.companyDetails.companyName.charAt(0)
+                      : "?"}
+                  </p>
+                </div>
               </div>
               <hr />
               <p className=" text-neutral-700 flex flex-col gap-6">
@@ -193,7 +204,7 @@ const JobIdPage = async ({ params }: { params: Promise<{ jobType: string; jobId:
       {/* <TrendingCourseToday />
       <OurValuableHiringPartners />
       <WhatWeDo /> */}
-    </div>
+    </Container>
   );
 };
 

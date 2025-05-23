@@ -186,7 +186,7 @@ const Page = () => {
                 type="text"
                 {...register("title", { required: "Job title is required" })}
                 placeholder="e.g., Healthcare Operations Project Manager"
-                className="p-3 border rounded-xl w-[770px]"
+                className="p-3 border border-neutral-300 rounded-xl w-[770px]"
               />
               {errors.title && (
                 <p className="text-red-500">{errors.title.message}</p>
@@ -203,7 +203,7 @@ const Page = () => {
                   required: "Job description is required",
                 })}
                 placeholder="e.g., Oversee operational projects within healthcare facilities..."
-                className="p-3 border rounded-xl w-[770px]"
+                className="p-3 border border-neutral-300 rounded-xl w-[770px]"
               />
               {errors.description && (
                 <p className="text-red-500">{errors.description.message}</p>
@@ -220,7 +220,7 @@ const Page = () => {
                   required: "Requirements are required",
                 })}
                 placeholder="e.g., Experience in healthcare operations and project management."
-                className="p-3 border rounded-xl w-[770px]"
+                className="p-3 border border-neutral-300 rounded-xl w-[770px]"
               />
               {errors.requirements && (
                 <p className="text-red-500">{errors.requirements.message}</p>
@@ -239,7 +239,7 @@ const Page = () => {
                   required: "Required skills are required",
                 })}
                 placeholder="e.g., Healthcare Operations, Project Management"
-                className="p-3 border rounded-xl w-[770px]"
+                className="p-3 border border-neutral-300 rounded-xl w-[770px]"
               />
               {errors.requiredSkills && (
                 <p className="text-red-500">{errors.requiredSkills.message}</p>
@@ -256,7 +256,7 @@ const Page = () => {
                   required: "Roles and responsibilities are required",
                 })}
                 placeholder="e.g., Implement process improvements and manage operational projects..."
-                className="p-3 border rounded-xl w-[770px]"
+                className="p-3 border border-neutral-300 rounded-xl w-[770px]"
               />
               {errors.responsibilities && (
                 <p className="text-red-500">
@@ -274,7 +274,7 @@ const Page = () => {
                 {...register("locationType", {
                   required: "Location type is required",
                 })}
-                className="p-3 border rounded-xl w-[370px]"
+                className="p-3 border border-neutral-300 rounded-xl w-[370px]"
               >
                 <option value="">Select Location Type</option>
                 {validLocationTypes.map((type) => (
@@ -295,7 +295,7 @@ const Page = () => {
                 type="text"
                 {...register("location", { required: "Location is required" })}
                 placeholder="e.g., Operations HQ, MediPark, Bangalore"
-                className="p-3 border rounded-xl w-[370px]"
+                className="p-3 border border-neutral-300 rounded-xl w-[370px]"
               />
               {errors.location && (
                 <p className="text-red-500">{errors.location.message}</p>
@@ -312,7 +312,7 @@ const Page = () => {
                 {...register("employmentType", {
                   required: "Employment type is required",
                 })}
-                className="p-3 border rounded-xl w-full"
+                className="p-3 border border-neutral-300 rounded-xl w-full"
               >
                 <option value="">Select Employment Type</option>
                 {(pathname === "/employer/add-new-hiring/job"
@@ -337,7 +337,7 @@ const Page = () => {
                 {...register("employmentTypeCategory", {
                   required: "Job type is required",
                 })}
-                className="p-3 border rounded-xl w-full"
+                className="p-3 border border-neutral-300 rounded-xl w-full"
               >
                 <option value="">Select Employment Type</option>
                 {(pathname === "/employer/add-new-hiring/job"
@@ -367,7 +367,7 @@ const Page = () => {
                   valueAsNumber: true,
                 })}
                 placeholder="e.g., 3"
-                className="p-3 border rounded-xl w-full"
+                className="p-3 border border-neutral-300 rounded-xl w-full"
               />
               {errors.employmentDuration && (
                 <p className="text-red-500">
@@ -387,7 +387,7 @@ const Page = () => {
                 {...register("department", {
                   required: "Department is required",
                 })}
-                className="p-3 border rounded-xl w-[370px]"
+                className="p-3 border border-neutral-300 rounded-xl w-[370px]"
               >
                 <option value="">Select Department</option>
                 {Object.keys(subDepartmentOptions).map((dept) => (
@@ -410,7 +410,7 @@ const Page = () => {
                 {...register("subDepartment", {
                   required: "Sub Department is required",
                 })}
-                className="p-3 border rounded-xl w-[370px]"
+                className="p-3 border border-neutral-300 rounded-xl w-[370px]"
               >
                 <option value="">Select Sub Department</option>
                 {subDepartments.map((subDept) => (
@@ -437,7 +437,7 @@ const Page = () => {
                   valueAsNumber: true,
                 })}
                 placeholder="e.g., 10000000"
-                className="p-3 border rounded-xl w-[370px]"
+                className="p-3 border border-neutral-300 rounded-xl w-[370px]"
               />
               {errors.salary && (
                 <p className="text-red-500">{errors.salary.message}</p>
@@ -452,7 +452,7 @@ const Page = () => {
                 {...register("applicationDeadline", {
                   required: "Application deadline is required",
                 })}
-                className="p-3 border rounded-xl w-[370px]"
+                className="p-3 border border-neutral-300 rounded-xl w-[370px]"
               />
               {errors.applicationDeadline && (
                 <p className="text-red-500">
@@ -470,7 +470,7 @@ const Page = () => {
                 type="text"
                 {...register("extraBenefits")}
                 placeholder="e.g., Professional development programs, Health insurance"
-                className="p-3 border rounded-xl w-[370px]"
+                className="p-3 border border-neutral-300 rounded-xl w-[370px]"
               />
             </div>
             <div className="flex flex-col gap-2">
@@ -481,7 +481,7 @@ const Page = () => {
                 type="text"
                 {...register("experience")}
                 placeholder="e.g., 5+ years"
-                className="p-3 border rounded-xl w-[370px]"
+                className="p-3 border border-neutral-300 rounded-xl w-[370px]"
               />
             </div>
           </div>

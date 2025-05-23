@@ -201,7 +201,7 @@ const CreateEvent = ({navigateRoute} : {navigateRoute: string}) => {
             type="file"
             accept="image/*"
             {...register("image", { required: "Event image is required" })}
-            className="mt-1"
+            className="pl-4 pr-4 py-3 border border-neutral-300 rounded-xl focus:outline-none focus:border-primary-500 transition duration-300 w-full"
           />
           {errors.image && (
             <p className="text-red-500 text-sm">{errors.image.message}</p>

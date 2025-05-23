@@ -234,6 +234,10 @@
   color: #f9533a;
 }
 
+.button {
+  cursor: pointer;
+}
+
 /* For swiper dots */
 .pagination-orange .swiper-pagination-bullet {
   background-color: #f9533a;

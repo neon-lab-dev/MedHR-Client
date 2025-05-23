@@ -64,7 +64,7 @@ const Header = () => {
         role="button"
         className="dropdown bg-white border border-secondary-100 rounded-xl p-3 relative"
       >
-        <div className="flex justify-between gap-1 items-center">
+        <div className="flex justify-between gap-1 items-center cursor-pointer">
           <div className="flex items-center gap-[6px]">
             {/* User name */}
             <div className="size-10 rounded-full border border-primary-500 text-primary-500 font-bold flex justify-center items-center">

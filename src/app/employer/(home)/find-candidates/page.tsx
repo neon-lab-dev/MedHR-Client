@@ -161,7 +161,7 @@ const FindCandidates = () => {
     queryKey: ["candidates", filters],
     queryFn: () =>
       handleGetAllCandidatesService(filters as Record<string, string | null>),
-    enabled: false, // Disabling automatic fetching
+    enabled: false,
   });
 
   const handleClearFilter = () => {
@@ -170,7 +170,7 @@ const FindCandidates = () => {
 
   return (
     <div className="bg-[#f5f6fa] p-6 flex flex-col gap-6">
-      <div className="flex flex-wrap items-center gap-5 bg-white border border-neutral-984 rounded-xl p-6">
+      <div className="flex flex-wrap items-center gap-5 bg-white border border-neutral-550 rounded-xl p-6">
         {/* Search Input */}
         <div className="relative max-w-[633px] w-full">
           <input

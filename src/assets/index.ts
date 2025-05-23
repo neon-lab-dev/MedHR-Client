@@ -7,6 +7,7 @@ import hero3 from "@/assets/images/hero-3.png";
 import hero4 from "@/assets/images/hero-4.png";
 
 // ICONS
+import home from "@/assets/icons/home.svg";
 import hourGlass from "@/assets/icons/hourglass.svg";
 import correctPrimary from "@/assets/icons/correct-primary.svg";
 import crossPrimary from "@/assets/icons/correct-primary.svg";
@@ -68,6 +69,8 @@ import course from "@/assets/icons/course.svg";
 import skillProgramme from "@/assets/icons/skill-programme.svg";
 import success2 from "@/assets/icons/success.svg";
 import events from "@/assets/icons/events.svg";
+import employee from "@/assets/icons/employee.svg";
+import employer from "@/assets/icons/employer.svg";
 
 import behance from "@/assets/icons/social media/behance.svg";
 import discord from "@/assets/icons/social media/discord.svg";
@@ -140,6 +143,9 @@ export const IMAGES = {
 };
 
 export const ICONS = {
+  employee,
+  employer,
+  home,
   hourGlass,
   correctPrimary,
   crossPrimary,

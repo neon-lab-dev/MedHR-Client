@@ -7,7 +7,6 @@ import Button from "./Button";
 import AuthModal from "./AuthModal/AuthModal";
 import { useAppDispatch, useAppSelector } from "@/hooks/store";
 import {
-  closeAuthModal,
   openAuthModal,
   setEmployeeProfile,
   setEmployerProfile,
@@ -54,7 +53,7 @@ const Navbar = () => {
       path : "/courses"
     },
   ];
-  const { isAuthModalOpen, activeTab, employerProfile, studentProfile } =
+  const { isAuthModalOpen, employerProfile, studentProfile } =
     useAppSelector((state) => state.auth);
   const queryClient = useQueryClient();
   const dispatch = useAppDispatch();

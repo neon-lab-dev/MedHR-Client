@@ -21,13 +21,13 @@ const Sidebar: React.FC<SidebarProps> = ({ navlinks }) => {
   const pathname = usePathname();
 
   return (
-    <div className="w-[270px] sticky top-0 left-0 pl-6 py-7 font-plus-jakarta-sans bg-white border-r border-neutral-150 min-h-screen overflow-y-auto h-full flex flex-col gap-16">
-      <Link href="/" className="size-[80px]">
-        <Image src={IMAGES.medHr} alt="medHr" />
-      </Link>
+    <div className="w-[270px] sticky top-0 left-0 py-7 font-plus-jakarta-sans bg-white border-r border-neutral-150 min-h-screen overflow-y-auto h-full flex flex-col gap-16">
+       <div className="px-6">
+          <Link href="/" className=""><Image src={IMAGES.careerHublogo} alt="medHrPlus" /></Link>
+        </div>
 
       {/* NavLinks */}
-      <div className="flex flex-col gap-3">
+      <div className="flex flex-col gap-3 pl-6">
         {navlinks.map((navlink, index) => (
           <div key={index} className="py-2 flex items-center justify-between">
             <Link

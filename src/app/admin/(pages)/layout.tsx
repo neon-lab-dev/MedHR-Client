@@ -1,37 +1,77 @@
 import React from "react";
 import Sidebar from "../_components/Sidebar";
 import Header from "../_components/Header";
+import { ICONS } from "@/assets";
+
+// const navLinks = [
+//   {
+//     label: "Dashboard",
+//     path: "/admin",
+//   },
+//   {
+//     label: "Employees",
+//     path: "/admin/employees",
+//   },
+//   {
+//     label: "Employers",
+//     path: "/admin/employers",
+//   },
+//   {
+//     label: "Jobs Posted",
+//     path: "/admin/jobs-posted",
+//   },
+//   {
+//     label: "Skill Programmes",
+//     path: "/admin/skill-programmes",
+//   },
+//   {
+//     label: "Courses",
+//     path: "/admin/courses",
+//   },
+//   {
+//     label: "Events",
+//     path: "/admin/events",
+//   },
+// ];
+
 
 const navLinks = [
-  {
-    label: "Dashboard",
+    {
+      label: "Dashboard",
     path: "/admin",
-  },
-  {
-    label: "Employees",
+      icon: ICONS.home
+    },
+    {
+      label: "Employees",
     path: "/admin/employees",
-  },
-  {
-    label: "Employers",
+      icon: ICONS.employee
+    },
+    {
+      label: "Employers",
     path: "/admin/employers",
-  },
-  {
-    label: "Jobs Posted",
+      icon: ICONS.employer
+    },
+    {
+       label: "Jobs Posted",
     path: "/admin/jobs-posted",
-  },
-  {
-    label: "Skill Programmes",
-    path: "/admin/skill-programmes",
-  },
-  {
-    label: "Courses",
+      icon: ICONS.jobs
+    },
+    {
+      label: "Courses",
     path: "/admin/courses",
-  },
-  {
-    label: "Events",
+      icon: ICONS.course
+    },
+    {
+       label: "Skill Programmes",
+    path: "/admin/skill-programmes",
+      icon: ICONS.skillProgramme
+    },
+    {
+      label: "Events",
     path: "/admin/events",
-  },
-];
+      icon: ICONS.events
+    },
+  ];
 
 const AdminLayout = ({ children }: { children: React.ReactNode }) => {
   return (

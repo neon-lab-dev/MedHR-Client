@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+ 
 "use client";
 import { getSingleSkill } from "@/api/admin";
 import Applicants from "@/commonPages/Course/Applicants";

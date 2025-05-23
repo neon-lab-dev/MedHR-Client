@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+ 
 "use client";
 import { deleteEvent } from "@/api/events";
 import { useMutation, useQueryClient } from "@tanstack/react-query";

@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+ 
 "use client";
 import { handleGEtEmployerByIdForEmployer } from "@/api/employer";
 import Link from "next/link";

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/no-explicit-any */
+ 
 import { IJob } from "@/types/job";
 import { fetchData } from "./fetch";
 import api from ".";

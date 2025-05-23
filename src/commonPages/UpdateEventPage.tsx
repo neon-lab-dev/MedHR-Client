@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-/* eslint-disable react/jsx-no-duplicate-props */
+ 
 "use client";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";

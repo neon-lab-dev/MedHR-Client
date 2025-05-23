@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+ 
 "use client";
 import { IMAGES } from "@/assets";
 import Image from "next/image";

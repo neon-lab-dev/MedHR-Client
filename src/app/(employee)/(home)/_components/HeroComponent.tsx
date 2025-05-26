@@ -152,9 +152,9 @@ const HeroComponent = () => {
             className="text-secondary-950 text-3xl sm:text-4xl lg:text-5xl xl:text-[50px] font-bold leading-10 xl:leading-[70px] tracking-[-1.28px] relative max-w-sm xl:max-w-none sm:max-w-lg md:max-w-3xl text-center"
           >
             <span>Start your career in</span>{" "}
-            <span className="highlight text-white">{text}</span> Today{" "}
+            <span className="highlight text-white">{text}</span>{" "}
             <br className="hidden xl:block" />
-            industry with us…
+            sector with us…
             <Image
               src={IMAGES.hero1}
               alt="hero1"
@@ -173,8 +173,7 @@ const HeroComponent = () => {
             />
           </h1>
           <p className="text-secondary-600 xl:max-w-3xl text-base sm:text-lg xl:text-xl leading-[126%] max-w-sm md:max-w-3xl font-Poppins text-center">
-            Find the best opportunities from leading healthcare providers, i.e.
-            internships, jobs, skill programs, courses, events, etc.
+            Grab the best opportunities from leading healthcare providers, such as internships, jobs, skill programs, courses, and events.
           </p>
 
           <div className="xl:flex gap-3 items-center justify-center mt-7 hidden z-10">

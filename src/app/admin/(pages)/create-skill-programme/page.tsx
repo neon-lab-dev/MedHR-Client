@@ -180,7 +180,7 @@ const CreateSkillProgramme = () => {
         />
 
         <DropdownInput
-          label="Pricing Type"
+          label="Fees Type"
           options={["Free", "Paid"]}
           value={pricingType}
           onChange={(e) => {

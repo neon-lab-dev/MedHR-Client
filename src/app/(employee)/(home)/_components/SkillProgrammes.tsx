@@ -12,6 +12,8 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Navigation, Pagination } from "swiper/modules";
 import Container from "@/components/Container";
+import Link from "next/link";
+import Button from "@/components/Button";
 
 const SkillProgrammes = () => {
   const { data } = useQuery({
@@ -88,6 +90,13 @@ const SkillProgrammes = () => {
               </button>
             </div>
           </div>
+        )}
+        {data?.skills?.length > 0 && (
+          <Link href="/skill-programmes">
+            <Button variant="normal" className="px-9 py-4">
+              View all openings
+            </Button>
+          </Link>
         )}
       </div>
     </Container>

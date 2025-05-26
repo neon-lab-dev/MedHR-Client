@@ -5,7 +5,7 @@ import SectionHeading from "./Reusable/SectionHeading/SectionHeading";
 
 const WhatWeDo = () => {
   return (
-    <div className="py-section flex flex-col items-center justify-center gap-14 max-w-7xl mx-auto px-6 2xl:px-0 max-width">
+    <div className="py-section flex flex-col items-center justify-center gap-14 max-w-7xl mx-auto px-6 2xl:px-0 max-width font-plus-jakarta-sans">
       <SectionHeading
         highlightedText="Do?"
         normalText="What we"
@@ -16,20 +16,20 @@ const WhatWeDo = () => {
           {
             img:IMAGES.org,
             heading: "Platform provider ",
-            desc: "Medhrplus is an online platform for organisations and for aspirants, where both update their credentials and connect in between from their dedicated dashboards.",
+            desc: "Medhrplus is an online platform for “organisations” and “aspirants”, where both update their credentials and connect in between from their dedicated dashboards.",
           },
           {
             img:IMAGES.apr,
             heading: "For Aspirants ",
-            desc: "Aspirants update their credentials along with the field of interest, we provide them with a dedicated dashboard to apply their desired programs.",
+            desc: "Aspirants/students update their credentials and field of interest, and they can apply to their desired programs (skills, Internships, Jobs, courses, etc.) from their dashboard.",
           },
           {
             img:IMAGES.org,
             heading: "For Organisation ",
-            desc: "Organizations/employers may post their programs/requirements and get registered aspirants, filtering their details according to the requirements dashboard.",
+            desc: "Organizations/employers may post their programs/requirements and get registered aspirants by filtering their details according to their requirements.",
           },
         ].map((item, index) => (
-          <div key={index} className="flex flex-col items-center lg:items-start text-center lg:text-left max-w-80 font-Poppins">
+          <div key={index} className="flex flex-col items-center lg:items-start text-center lg:text-left max-w-80">
             <div className="rounded-2xl w-32 h-32">
               <Image src={item.img} alt="org" />
             </div>

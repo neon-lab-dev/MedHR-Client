@@ -11,14 +11,16 @@ type TAreaOfInterestsProps = {
 const AreaOfInterests: React.FC<TAreaOfInterestsProps> = ({ onChange }) => {
   // Interests
   const interests = [
-    "Marketing",
-    "Operations",
-    "Content Writing",
-    "JavaScript Development",
-    "Mobile App Development",
-    "Programming",
-    "Digital Marketing",
-    "UI/UX Design",
+    "Allopathy Hospital",
+    "Allopathy Clinic",
+    "Ayurveda Hospital",
+    "Ayurveda Clinic",
+    "Homeopathy Hospital",
+    "Homeopathy Clinic",
+    "Nursing Home",
+    "Diagnostic Centers",
+    "Imaging Centers",
+    "Educational Institution",
   ];
 
   const [selectedInterest, setSelectedInterest] = useState<string[]>([]);
@@ -45,7 +47,9 @@ const AreaOfInterests: React.FC<TAreaOfInterestsProps> = ({ onChange }) => {
 
   return (
     <div className="flex flex-col gap-9 mt-12 font-plus-jakarta-sans">
-      <h1 className="registration-form-heading">Your Areas of Interest?</h1>
+      <h1 className="registration-form-heading">
+        Types of <strong>Organization</strong> you are interested in?
+      </h1>
 
       {/* Search Input */}
       <div className="relative max-w-[633px] w-full">

@@ -14,38 +14,33 @@ const LatestJobs = async () => {
   return (
     <Container>
       <div className="py-section flex flex-col items-center justify-center gap-14">
-      <SectionHeading
-        highlightedText="Latest Jobs"
-        normalText="You Might Like"
-        align="left"
-      />
+        <SectionHeading
+          highlightedText="Latest Jobs"
+          normalText="You Might Like"
+          align="left"
+        />
 
-      {jobs?.length === 0 ? (
-        <NoDataFound message="No Jobs Available" />
-      ) : (
-        
-        <JobCarousel jobs={jobs} />
-      )}
-      <Link href="/jobs">
-        <Button variant="normal" className="px-9 py-4">
-          View all openings
-        </Button>
-      </Link>
-    </div>
+        {jobs?.length === 0 ? (
+          <NoDataFound message="No Jobs Available" />
+        ) : (
+          <JobCarousel jobs={jobs} />
+        )}
+        {jobs?.length > 0 && (
+          <Link href="/jobs">
+            <Button variant="normal" className="px-9 py-4">
+              View all openings
+            </Button>
+          </Link>
+        )}
+      </div>
     </Container>
   );
 };
 
 export default LatestJobs;
 
-
-
-
-
-
-
-
-{/* <div className="w-full overflow-hidden wrapper-left">
+{
+  /* <div className="w-full overflow-hidden wrapper-left">
           <div className="carousel carousel-center w-full p-4 space-x-6 bg-neutral rounded-box">
             {jobs?.map((details, index) => (
               <div key={index} className="carousel-item">
@@ -56,4 +51,5 @@ export default LatestJobs;
               </div>
             ))}
           </div>
-        </div> */}
+        </div> */
+}

@@ -13,7 +13,7 @@ import { ICONS } from "@/assets";
 import Button from "@/components/Button";
 import Link from "next/link";
 import api from "@/api";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 type FormData = {
   title: string;
@@ -108,7 +108,6 @@ const subDepartmentOptions: Record<string, string[]> = {
     "Pulmonary Medicine and sleep disorders",
     "Psychiatry",
     "Rheumatology",
-    "Surgery",
     "Urology",
   ],
   "Diagnostic Labs": [
@@ -121,8 +120,8 @@ const subDepartmentOptions: Record<string, string[]> = {
     "Radio diagnosis",
     "Radiographers",
   ],
-  "Technique": ["OT Technicians", "Technicians CSSD", "Nursing"],
-  "Other": [
+  Technique: ["OT Technicians", "Technicians CSSD", "Nursing"],
+  Other: [
     "Hospital Administration",
     "Laundry",
     "Pharmacist",
@@ -132,12 +131,13 @@ const subDepartmentOptions: Record<string, string[]> = {
   ],
 };
 
+const departments = ["Clinical", "Diagnostic Labs", "Technique", "Other"];
+
 const Page = () => {
   const pathname = usePathname();
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm<FormData>();
   const mutation = useCreateJobMutation();
@@ -151,17 +151,7 @@ const Page = () => {
   const jobTypes = ["Full-Time", "Part-Time", "Contract"];
   const internshipEmploymentTypes = ["Internship"];
   const internshipTypes = ["Shadow Internship", "Practice Internship"];
-
-  const selectedDepartment = watch("department"); // React Hook Form watch
   const [subDepartments, setSubDepartments] = useState<string[]>([]);
-
-  useEffect(() => {
-    if (selectedDepartment) {
-      setSubDepartments(subDepartmentOptions[selectedDepartment] || []);
-    } else {
-      setSubDepartments([]);
-    }
-  }, [selectedDepartment]);
 
   return (
     <div className="p-6 bg-[#f5f6fa]">
@@ -180,11 +170,21 @@ const Page = () => {
           <div className="flex justify-center mt-16 gap-6">
             <div className="flex flex-col gap-2">
               <label htmlFor="title">
-                <span className="text-lg">Job Title</span>
+                <span className="text-lg">
+                  {pathname === "/employer/add-new-hiring/job"
+                    ? "Job Title"
+                    : "Internship Title"}
+                </span>
               </label>
               <input
                 type="text"
-                {...register("title", { required: "Job title is required" })}
+                {...register("title", {
+                  required: `${
+                    pathname === "/employer/add-new-hiring/job"
+                      ? "Job Title"
+                      : "Internship Title"
+                  } is required`,
+                })}
                 placeholder="e.g., Healthcare Operations Project Manager"
                 className="p-3 border border-neutral-300 rounded-xl w-[770px]"
               />
@@ -196,11 +196,19 @@ const Page = () => {
           <div className="flex justify-center mt-8 gap-6">
             <div className="flex flex-col gap-2">
               <label htmlFor="description">
-                <span className="text-lg">Job Description</span>
+                <span className="text-lg">
+                  {pathname === "/employer/add-new-hiring/job"
+                    ? "Job Description"
+                    : "Internship Description"}
+                </span>
               </label>
               <textarea
                 {...register("description", {
-                  required: "Job description is required",
+                  required: `${
+                    pathname === "/employer/add-new-hiring/job"
+                      ? "Job Description"
+                      : "Internship Description"
+                  } is required`,
                 })}
                 placeholder="e.g., Oversee operational projects within healthcare facilities..."
                 className="p-3 border border-neutral-300 rounded-xl w-[770px]"
@@ -231,7 +239,7 @@ const Page = () => {
             <div className="flex flex-col gap-2">
               <label htmlFor="requiredSkills">
                 <span className="text-lg">
-                  Required Skills (comma-separated)
+                  Qualification Required (comma-separated)
                 </span>
               </label>
               <textarea
@@ -381,16 +389,21 @@ const Page = () => {
             {/* Department */}
             <div className="flex flex-col gap-2">
               <label htmlFor="department">
-                <span className="text-lg">Department</span>
+                <span className="text-lg">Type of Organizations</span>
+                {/* <span className="text-lg">Department</span> */}
               </label>
               <select
                 {...register("department", {
-                  required: "Department is required",
+                  required: "Organization type is required",
                 })}
+                onChange={(e) => {
+                  const selectedDept = e.target.value;
+                  setSubDepartments(subDepartmentOptions[selectedDept] || []);
+                }}
                 className="p-3 border border-neutral-300 rounded-xl w-[370px]"
               >
-                <option value="">Select Department</option>
-                {Object.keys(subDepartmentOptions).map((dept) => (
+                <option value="">Select Organization Type</option>
+                {departments?.map((dept) => (
                   <option key={dept} value={dept}>
                     {dept}
                   </option>
@@ -404,16 +417,17 @@ const Page = () => {
             {/* Sub Department */}
             <div className="flex flex-col gap-2">
               <label htmlFor="subDepartment">
-                <span className="text-lg">Sub Department</span>
+                <span className="text-lg">Department</span>
+                {/* <span className="text-lg">Sub Department</span> */}
               </label>
               <select
                 {...register("subDepartment", {
-                  required: "Sub Department is required",
+                  required: "Department is required",
                 })}
                 className="p-3 border border-neutral-300 rounded-xl w-[370px]"
               >
-                <option value="">Select Sub Department</option>
-                {subDepartments.map((subDept) => (
+                <option value="">Select Department</option>
+                {subDepartments?.map((subDept) => (
                   <option key={subDept} value={subDept}>
                     {subDept}
                   </option>

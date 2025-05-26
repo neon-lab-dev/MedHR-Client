@@ -50,6 +50,9 @@ const Education: React.FC<TEducationProps> = ({ onChange }) => {
             className="p-5 rounded-2xl bg-white border border-neutral-300 flex items-center justify-between"
           >
             <div>
+              <h1 className="text-neutral-900 text-xl font-bold">
+                {edu.designationType}
+              </h1>
               <h1 className="text-neutral-900 text-lg font-medium">
                 {edu.institutionName}
               </h1>

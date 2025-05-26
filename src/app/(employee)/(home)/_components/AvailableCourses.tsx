@@ -12,6 +12,8 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Navigation, Pagination } from "swiper/modules";
 import Container from "@/components/Container";
+import Link from "next/link";
+import Button from "@/components/Button";
 
 const AvailableCourses = () => {
   const { data } = useQuery({
@@ -24,7 +26,7 @@ const AvailableCourses = () => {
     <Container>
       <div
         id="courses"
-        className="py-section flex flex-col items-center justify-center gap-14 w-full"
+        className="py-section flex flex-col items-center justify-center w-full"
       >
         <SectionHeading
           highlightedText="Courses"
@@ -34,7 +36,7 @@ const AvailableCourses = () => {
         {data?.courses?.length < 1 ? (
           <NoDataFound message="No Course Available" />
         ) : (
-          <div className="w-full">
+          <div className="w-full mt-14">
             <Swiper
               spaceBetween={20}
               slidesPerView={1}
@@ -88,6 +90,14 @@ const AvailableCourses = () => {
               </button>
             </div>
           </div>
+        )}
+
+         {data?.courses?.length > 0 && (
+          <Link href="/courses">
+            <Button variant="normal" className="px-9 py-4">
+              View all openings
+            </Button>
+          </Link>
         )}
       </div>
     </Container>

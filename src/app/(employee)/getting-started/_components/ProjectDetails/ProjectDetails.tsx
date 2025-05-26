@@ -40,7 +40,8 @@ const ProjectDetails: React.FC<TProjectDetailsProps> = ({ onChange }) => {
   };
   return (
     <div className="flex flex-col gap-5 mt-12 font-plus-jakarta-sans">
-      <h1 className="registration-form-heading mb-4">Project Details</h1>
+      {/* <h1 className="registration-form-heading mb-4">Project Details</h1> */}
+      <h1 className="registration-form-heading mb-4">Any other qualification/experience details</h1>
       {/* Project details card */}
       <div className="flex flex-col gap-5">
         {projectList?.length > 0 ? (

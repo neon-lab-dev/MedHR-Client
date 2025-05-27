@@ -26,6 +26,9 @@ export type TEvents = {
     _id: string;
   };
   skillCovered: string[];
+  department: string;
+  organizationType: string;
+  organizerName: string;
   image: {
     fileId: string;
     name: string;

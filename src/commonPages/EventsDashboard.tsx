@@ -43,8 +43,11 @@ const EventsDashboard = ({
   // Table headers
   const eventsTableHeaders = [
     { header: "Event Name", accessor: "eventName" },
-    { header: "Company Name", accessor: "companyName" },
+    { header: "Organization Name", accessor: "companyName" },
     { header: "Company Location", accessor: "companyLocation" },
+    { header: "Type of Organization", accessor: "organizationType" },
+    { header: "Organizer Name", accessor: "organizerName" },
+    { header: "Department", accessor: "department" },
     { header: "Date and Time", accessor: "dateAndTime" },
     { header: "Skills Covered", accessor: "skillCovered" },
     { header: "Actions", accessor: "actions" },
@@ -124,6 +127,9 @@ const EventsDashboard = ({
             eventName: event?.eventName,
             companyName: event?.company?.companyName,
             companyLocation: event?.company?.companyLocation,
+            organizationType: event?.organizationType,
+            organizerName: event?.organizerName,
+            department: event?.department,
             dateAndTime: `${convertDate(event?.date)} at ${event?.time}`,
             skillCovered: event?.skillCovered?.join(", "),
             actions: event?._id,

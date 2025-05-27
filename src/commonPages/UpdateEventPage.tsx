@@ -13,6 +13,8 @@ import NotFound from "@/components/NotFound";
 import { toast } from "sonner";
 import { Oval } from "react-loader-spinner";
 import api from "@/api";
+import SelectDropdownInput from "@/components/Reusable/SelectDropdownInput/SelectDropdownInput";
+import { departments } from "@/mockData/departments";
 
 type EventFormValues = {
   eventName: string;
@@ -21,6 +23,9 @@ type EventFormValues = {
   companyName: string;
   companyLocation: string;
   eventUrl: string;
+  department: string;
+  organizationType: string;
+  organizerName: string;
   skillCovered: string[];
   image: FileList;
 };
@@ -53,6 +58,9 @@ const UpdateEventPage = ({ id, navigateRoute }: { id: string, navigateRoute: str
       setValue("eventUrl", event?.data?.eventUrl);
       setValue("companyName", event?.data?.company?.companyName);
       setValue("companyLocation", event?.data?.company?.companyLocation);
+      setValue("department", event?.data?.department);
+      setValue("organizationType", event?.data?.organizationType);
+      setValue("organizerName", event?.data?.organizerName);
       setSelectedSkills(event?.data?.skillCovered);
     }
   }, [event, setValue, setSelectedSkills]);
@@ -87,6 +95,9 @@ const UpdateEventPage = ({ id, navigateRoute }: { id: string, navigateRoute: str
     formData.append("eventUrl", data.eventUrl);
     formData.append("companyName", data.companyName);
     formData.append("companyLocation", data.companyLocation);
+    formData.append("organizerName", data.organizerName);
+    formData.append("organizationType", data.organizationType);
+    formData.append("department", data.department);
     formData.append("skillCovered", JSON.stringify(selectedSkills));
     if (data.image?.[0]) {
       formData.append("file", data.image[0]);
@@ -109,6 +120,19 @@ const UpdateEventPage = ({ id, navigateRoute }: { id: string, navigateRoute: str
       setIsSubmitting(false);
     }
   };
+
+  const typeOfOrganizations = [
+    "Allopathy Hospital",
+    "Allopathy Clinic",
+    "Ayurveda Hospital",
+    "Ayurveda Clinic",
+    "Homeopathy Hospital",
+    "Homeopathy Clinic",
+    "Nursing Home",
+    "Diagnostic Centers",
+    "Imaging Centers",
+    "Educational Institution",
+  ];
 
   if (isLoading) return <Loading className="h-[60vh] w-full" />;
   if (!event?.data) return <NotFound />;
@@ -141,7 +165,7 @@ const UpdateEventPage = ({ id, navigateRoute }: { id: string, navigateRoute: str
       />
 
       <TextInput
-        label="Company Name"
+        label="Organization Name"
         placeholder="Enter company name"
         error={errors.companyName}
         {...register("companyName", { required: "Company name is required" })}
@@ -157,6 +181,37 @@ const UpdateEventPage = ({ id, navigateRoute }: { id: string, navigateRoute: str
       />
 
       <TextInput
+          label="Name of Organizer"
+          placeholder="Enter company name"
+          error={errors.organizerName}
+          {...register("organizerName", {
+            required: "Organizer name is required",
+          })}
+        />
+
+        <SelectDropdownInput
+          label="Type of Organization"
+          {...register("organizationType")}
+          error={errors?.organizationType}
+          options={typeOfOrganizations}
+          // onChange={(e: ChangeEvent<HTMLSelectElement>) =>
+          //   handleBankInfoChange(e, "accType")
+          // }
+          isRequired={false}
+        />
+
+        <SelectDropdownInput
+          label="Department"
+          {...register("department")}
+          error={errors?.department}
+          options={departments}
+          // onChange={(e: ChangeEvent<HTMLSelectElement>) =>
+          //   handleBankInfoChange(e, "accType")
+          // }
+          isRequired={false}
+        />
+
+      <TextInput
           label="Event Link/URL"
           placeholder="Enter your event link"
           error={errors.eventUrl}
@@ -166,7 +221,7 @@ const UpdateEventPage = ({ id, navigateRoute }: { id: string, navigateRoute: str
         />
 
       <div className="w-full">
-        <label className="font-semibold text-sm mb-1 block">
+        <label className="text-neutral-700 font-medium font-plus-jakarta-sans">
           Skills Covered
         </label>
         <input
@@ -199,7 +254,7 @@ const UpdateEventPage = ({ id, navigateRoute }: { id: string, navigateRoute: str
 
       {isEditExpanded ? (
         <div className="flex flex-col gap-1">
-          <label className="font-semibold text-sm">
+          <label className="text-neutral-700 font-medium font-plus-jakarta-sans">
             Upload New Event Image
           </label>
           <input

@@ -7,6 +7,8 @@ import { toast } from "sonner";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import api from "@/api";
+import SelectDropdownInput from "@/components/Reusable/SelectDropdownInput/SelectDropdownInput";
+import { departments } from "@/mockData/departments";
 
 type TCreateEventFormValues = {
   eventName: string;
@@ -16,10 +18,13 @@ type TCreateEventFormValues = {
   companyLocation: string;
   skillCovered: string;
   eventUrl: string;
+  department: string;
+  organizationType: string;
+  organizerName: string;
   image: FileList;
 };
 
-const CreateEvent = ({navigateRoute} : {navigateRoute: string}) => {
+const CreateEvent = ({ navigateRoute }: { navigateRoute: string }) => {
   const queryClient = useQueryClient();
   const {
     register,
@@ -83,6 +88,10 @@ const CreateEvent = ({navigateRoute} : {navigateRoute: string}) => {
     formData.append("date", data.date);
     formData.append("time", data.time);
     formData.append("eventUrl", data.eventUrl);
+    formData.append("organizerName", data.organizerName);
+    formData.append("organizationType", data.organizationType);
+    formData.append("department", data.department);
+
     const company = {
       companyName: data.companyName,
       companyLocation: data.companyLocation,
@@ -105,6 +114,19 @@ const CreateEvent = ({navigateRoute} : {navigateRoute: string}) => {
         console.error("Error creating event:", error);
       });
   };
+
+  const typeOfOrganizations = [
+    "Allopathy Hospital",
+    "Allopathy Clinic",
+    "Ayurveda Hospital",
+    "Ayurveda Clinic",
+    "Homeopathy Hospital",
+    "Homeopathy Clinic",
+    "Nursing Home",
+    "Diagnostic Centers",
+    "Imaging Centers",
+    "Educational Institution",
+  ];
 
   return (
     <div className="bg-neutral-450 p-6 flex flex-col gap-[51px]">
@@ -136,19 +158,52 @@ const CreateEvent = ({navigateRoute} : {navigateRoute: string}) => {
         />
 
         <TextInput
-          label="Company Name"
-          placeholder="Enter company name"
+          label="Name of Organization"
+          placeholder="Enter organization name"
           error={errors.companyName}
-          {...register("companyName", { required: "Company name is required" })}
+          {...register("companyName", {
+            required: "Organization name is required",
+          })}
         />
 
         <TextInput
-          label="Company Location"
-          placeholder="Enter company location"
+          label="Organization Location"
+          placeholder="Enter organization location"
           error={errors.companyLocation}
           {...register("companyLocation", {
-            required: "Company location is required",
+            required: "Organization location is required",
           })}
+        />
+
+        <TextInput
+          label="Name of Organizer"
+          placeholder="Enter company name"
+          error={errors.organizerName}
+          {...register("organizerName", {
+            required: "Organizer name is required",
+          })}
+        />
+
+        <SelectDropdownInput
+          label="Type of Organization"
+          {...register("organizationType")}
+          error={errors?.organizationType}
+          options={typeOfOrganizations}
+          // onChange={(e: ChangeEvent<HTMLSelectElement>) =>
+          //   handleBankInfoChange(e, "accType")
+          // }
+          isRequired={false}
+        />
+
+        <SelectDropdownInput
+          label="Department"
+          {...register("department")}
+          error={errors?.department}
+          options={departments}
+          // onChange={(e: ChangeEvent<HTMLSelectElement>) =>
+          //   handleBankInfoChange(e, "accType")
+          // }
+          isRequired={false}
         />
 
         <TextInput
@@ -162,7 +217,7 @@ const CreateEvent = ({navigateRoute} : {navigateRoute: string}) => {
 
         {/* ✅ Skill Input Section */}
         <div className="w-full">
-          <label className="font-semibold text-sm mb-1 block">
+          <label className="text-neutral-700 font-medium font-plus-jakarta-sans">
             Skills Covered
           </label>
           <input
@@ -196,7 +251,9 @@ const CreateEvent = ({navigateRoute} : {navigateRoute: string}) => {
 
         {/* Image upload */}
         <div className="flex flex-col gap-1">
-          <label className="font-semibold text-sm">Event Image</label>
+          <label className="text-neutral-700 font-medium font-plus-jakarta-sans">
+            Event Image
+          </label>
           <input
             type="file"
             accept="image/*"

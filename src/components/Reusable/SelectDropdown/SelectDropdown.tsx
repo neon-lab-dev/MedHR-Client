@@ -56,7 +56,7 @@ const SelectDropdown: React.FC<TSelectDropdownProps> = ({
           <button
             key={idx}
             onClick={() => handleSelect(item)}
-            className={`rounded-md bg-neutral-100 text-neutral-700 font-medium text-start py-2 px-3 ${
+            className={`rounded-md bg-neutral-100 text-neutral-700 font-medium text-start py-2 px-3 cursor-pointer ${
               open ? "opacity-100 duration-500" : "opacity-0 duration-150"
             } hover:bg-neutral-200`}
             style={{

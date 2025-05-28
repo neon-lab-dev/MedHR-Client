@@ -21,7 +21,7 @@ const LatestInternships = async () => {
       <Container>
         <div className="py-section flex flex-col items-center justify-center gap-14">
           <SectionHeading
-            highlightedText="Latest Internships"
+            highlightedText="Internships"
             normalText="For You"
             align="left"
           />

@@ -58,7 +58,8 @@ const AvailableCourses = () => {
               }}
               className="w-full mt-10"
             >
-              {data?.courses?.map((course: any) => (
+              {
+              data?.courses?.map((course: any) => (
                 <SwiperSlide key={course?._id} className="mb-16 w-full">
                   <CourseCard
                     courseName={course?.courseName}
@@ -95,7 +96,7 @@ const AvailableCourses = () => {
          {data?.courses?.length > 0 && (
           <Link href="/courses">
             <Button variant="normal" className="px-9 py-4">
-              View all openings
+              View all courses
             </Button>
           </Link>
         )}

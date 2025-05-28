@@ -81,6 +81,7 @@ export type TSocialLinks = {
 type TFormValues = {
   full_name: string;
   dob: string;
+  designation: string;
   guardian: {
     guardianName: string;
     phoneNumber: string;
@@ -247,6 +248,7 @@ const GettingStarted = () => {
       const formData = {
         full_name: data.full_name,
         dob: data.dob,
+        designation: data.designation,
         guardian: {
           guardianName: data.guardian.guardianName,
           phoneNumber: data.guardian.phoneNumber,
@@ -342,6 +344,7 @@ const GettingStarted = () => {
       const formData = {
         full_name: getValues("full_name"),
         dob: getValues("dob"),
+        designation: getValues("designation"),
         guardian: getValues("guardian"),
         address: getValues("address"),
         education: selectedEducation,

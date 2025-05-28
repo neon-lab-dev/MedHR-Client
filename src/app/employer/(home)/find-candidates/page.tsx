@@ -118,10 +118,7 @@ const filtersConfig = [
   {
     label: "Designation",
     items: [
-      "Web Development",
-      "Backend Developer",
-      "Fullstack Developer",
-      "UI/UX Designer",
+      "Student", "Working Professional"
     ],
     icon: ICONS.downArrow,
     key: "designation",

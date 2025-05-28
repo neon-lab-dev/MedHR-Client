@@ -78,7 +78,7 @@ const EventCard: React.FC<TEventCardProps> = ({
       <Link
         href={eventUrl}
         target="_blank"
-        className="text-neutral-900 hover:underline text-lg font-bold leading-6"
+        className="text-neutral-900 hover:underline text-lg font-bold leading-6 capitalize"
       >
         {eventName}
       </Link>
@@ -110,7 +110,7 @@ const EventCard: React.FC<TEventCardProps> = ({
           {hasMore && (
             <button
               onClick={() => setExpanded(!expanded)}
-              className="text-primary-500 text-xs font-medium underline transition hover:text-primary-600"
+              className="text-primary-500 text-xs font-medium underline transition hover:text-primary-600 cursor-pointer"
             >
               {expanded ? "See less" : "See more"}
             </button>

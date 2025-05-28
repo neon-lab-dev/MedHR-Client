@@ -94,7 +94,7 @@ const SkillProgrammes = () => {
         {data?.skills?.length > 0 && (
           <Link href="/skill-programmes">
             <Button variant="normal" className="px-9 py-4">
-              View all openings
+              View all
             </Button>
           </Link>
         )}

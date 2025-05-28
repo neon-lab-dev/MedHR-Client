@@ -16,6 +16,8 @@ interface Job {
     salary: string;
     applicants: any[];
     employmentType: string;
+    city : string;
+    country : string;
     status: string;
   }
   
@@ -109,6 +111,11 @@ const JobTable = ({className} : {className:string}) => {
               </td>
               <td>
                 <div className="flex items-center gap-2">
+                  <span>City / Country</span>
+                </div>
+              </td>
+              <td>
+                <div className="flex items-center gap-2">
                   <span>Status</span>
                 </div>
               </td>
@@ -152,6 +159,11 @@ const JobTable = ({className} : {className:string}) => {
                   <td>
                     <div className="flex items-center gap-2">
                       <span>{job.employmentType}</span>
+                    </div>
+                  </td>
+                  <td>
+                    <div className="flex items-center gap-2">
+                      <span>{job?.city}, {job?.country}</span>
                     </div>
                   </td>
                   <td>

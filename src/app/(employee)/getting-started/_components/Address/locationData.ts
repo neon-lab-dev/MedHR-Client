@@ -880,3 +880,9 @@ export const locationData = [
     ],
   },
 ];
+
+export const countries = [
+  "India",
+  "Canada",
+  "Germany",
+]

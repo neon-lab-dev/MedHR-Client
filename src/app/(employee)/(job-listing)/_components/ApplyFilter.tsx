@@ -1,14 +1,13 @@
 "use client";
-import React, {
-  Dispatch,
-  SetStateAction,
-} from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import ExperiencedLevel from "./ExperiencedLevel";
 import InternshipMode from "./InternshipMode";
 import MonthlyStipend from "./MonthlyStipend";
 import MaxDuration from "./MaxDuration";
 import { useParams } from "next/navigation";
 import Button from "@/components/Button";
+import Country from "./Country";
+import City from "./City";
 
 export type IDefaultQueryParams = {
   keyword: string;
@@ -16,9 +15,10 @@ export type IDefaultQueryParams = {
   salary: number;
   duration: number;
   experienceLevel?: string;
-  employmentType : string;
-  location : string;
-  jobType : string;
+  employmentType: string;
+  country: string;
+  city: string;
+  jobType: string;
 };
 
 export const DEFAULT_QUERY_PARAMS: IDefaultQueryParams = {
@@ -27,9 +27,10 @@ export const DEFAULT_QUERY_PARAMS: IDefaultQueryParams = {
   salary: 0,
   duration: 0,
   experienceLevel: "",
-  employmentType : "",
-  location: "",
-  jobType : "",
+  employmentType: "",
+  country: "",
+  city: "",
+  jobType: "",
 };
 
 type Props = {
@@ -39,11 +40,12 @@ type Props = {
 
 const ApplyFilter = ({ setFilterParams, filterParams }: Props) => {
   const { jobType } = useParams();
+  const [selectedCountry, setSelectedCountry] = React.useState("");
 
   return (
     <div
       id="filter"
-      className="font-plus-jakarta-sans lg:static top-52 h-fit left-full transition-all fixed w-fit sm:w-full max-w-[401px] p-6 rounded-3xl bg-white border border-neutral-550 flex flex-col gap-8"
+      className="font-plus-jakarta-sans lg:static top-52 max-h-[700px] overflow-y-auto left-full transition-all fixed w-fit sm:w-full max-w-[401px] p-6 rounded-3xl bg-white border border-neutral-550 flex flex-col gap-8"
     >
       {/* Heading & HR */}
       <div className="flex flex-col gap-8">
@@ -82,6 +84,26 @@ const ApplyFilter = ({ setFilterParams, filterParams }: Props) => {
         setSelectedMode={(mode) => {
           setFilterParams((prev) => {
             return { ...prev, locationType: mode as string };
+          });
+        }}
+      />
+
+      <Country
+        country={filterParams.country!}
+        setSelectedCountry={setSelectedCountry}
+        setCountry={(country: string) => {
+          setFilterParams((prev) => {
+            return { ...prev, country };
+          });
+        }}
+      />
+
+      <City
+        city={filterParams.city!}
+        selectedCountry={selectedCountry}
+        setCity={(city: string) => {
+          setFilterParams((prev) => {
+            return { ...prev, city };
           });
         }}
       />

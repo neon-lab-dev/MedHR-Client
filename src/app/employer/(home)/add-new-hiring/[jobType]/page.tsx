@@ -22,7 +22,8 @@ type FormData = {
   requiredSkills: string;
   responsibilities: string;
   locationType: string;
-  location: string;
+  country: string;
+  city: string;
   employmentType: string;
   employmentTypeCategory: string;
   employmentDuration: number;
@@ -166,9 +167,9 @@ const Page = () => {
             </h1>
           </div>
         </div>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)} className="max-w-[800px] mx-auto">
           <div className="flex justify-center mt-16 gap-6">
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-2 w-full">
               <label htmlFor="title">
                 <span className="text-lg">
                   {pathname === "/employer/add-new-hiring/job"
@@ -186,7 +187,7 @@ const Page = () => {
                   } is required`,
                 })}
                 placeholder="e.g., Healthcare Operations Project Manager"
-                className="p-3 border border-neutral-300 rounded-xl w-[770px]"
+                className="p-3 border border-neutral-300 rounded-xl w-full"
               />
               {errors.title && (
                 <p className="text-red-500">{errors.title.message}</p>
@@ -194,7 +195,7 @@ const Page = () => {
             </div>
           </div>
           <div className="flex justify-center mt-8 gap-6">
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-2 w-full">
               <label htmlFor="description">
                 <span className="text-lg">
                   {pathname === "/employer/add-new-hiring/job"
@@ -211,7 +212,7 @@ const Page = () => {
                   } is required`,
                 })}
                 placeholder="e.g., Oversee operational projects within healthcare facilities..."
-                className="p-3 border border-neutral-300 rounded-xl w-[770px]"
+                className="p-3 border border-neutral-300 rounded-xl w-full"
               />
               {errors.description && (
                 <p className="text-red-500">{errors.description.message}</p>
@@ -219,7 +220,7 @@ const Page = () => {
             </div>
           </div>
           <div className="flex justify-center mt-8 gap-6">
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-2 w-full">
               <label htmlFor="requirements">
                 <span className="text-lg">Requirements</span>
               </label>
@@ -228,7 +229,7 @@ const Page = () => {
                   required: "Requirements are required",
                 })}
                 placeholder="e.g., Experience in healthcare operations and project management."
-                className="p-3 border border-neutral-300 rounded-xl w-[770px]"
+                className="p-3 border border-neutral-300 rounded-xl w-full"
               />
               {errors.requirements && (
                 <p className="text-red-500">{errors.requirements.message}</p>
@@ -236,7 +237,7 @@ const Page = () => {
             </div>
           </div>
           <div className="flex justify-center mt-8 gap-6">
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-2 w-full">
               <label htmlFor="requiredSkills">
                 <span className="text-lg">
                   Qualification Required (comma-separated)
@@ -247,7 +248,7 @@ const Page = () => {
                   required: "Required skills are required",
                 })}
                 placeholder="e.g., Healthcare Operations, Project Management"
-                className="p-3 border border-neutral-300 rounded-xl w-[770px]"
+                className="p-3 border border-neutral-300 rounded-xl w-full"
               />
               {errors.requiredSkills && (
                 <p className="text-red-500">{errors.requiredSkills.message}</p>
@@ -255,7 +256,7 @@ const Page = () => {
             </div>
           </div>
           <div className="flex justify-center mt-8 gap-6">
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-2 w-full">
               <label htmlFor="responsibilities">
                 <span className="text-lg">Roles and Responsibilities</span>
               </label>
@@ -264,7 +265,7 @@ const Page = () => {
                   required: "Roles and responsibilities are required",
                 })}
                 placeholder="e.g., Implement process improvements and manage operational projects..."
-                className="p-3 border border-neutral-300 rounded-xl w-[770px]"
+                className="p-3 border border-neutral-300 rounded-xl w-full"
               />
               {errors.responsibilities && (
                 <p className="text-red-500">
@@ -274,7 +275,7 @@ const Page = () => {
             </div>
           </div>
           <div className="flex justify-center mt-8 gap-6">
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-2 w-full">
               <label htmlFor="locationType">
                 <span className="text-lg">Location Type</span>
               </label>
@@ -282,7 +283,7 @@ const Page = () => {
                 {...register("locationType", {
                   required: "Location type is required",
                 })}
-                className="p-3 border border-neutral-300 rounded-xl w-[370px]"
+                className="p-3 border border-neutral-300 rounded-xl w-full"
               >
                 <option value="">Select Location Type</option>
                 {validLocationTypes.map((type) => (
@@ -295,24 +296,38 @@ const Page = () => {
                 <p className="text-red-500">{errors.locationType.message}</p>
               )}
             </div>
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-2 w-full">
               <label htmlFor="location">
-                <span className="text-lg">Location</span>
+                <span className="text-lg">Country</span>
               </label>
               <input
                 type="text"
-                {...register("location", { required: "Location is required" })}
+                {...register("country", { required: "Country is required" })}
                 placeholder="e.g., Operations HQ, MediPark, Bangalore"
-                className="p-3 border border-neutral-300 rounded-xl w-[370px]"
+                className="p-3 border border-neutral-300 rounded-xl w-full"
               />
-              {errors.location && (
-                <p className="text-red-500">{errors.location.message}</p>
+              {errors.country && (
+                <p className="text-red-500">{errors.country.message}</p>
+              )}
+            </div>
+            <div className="flex flex-col gap-2 w-full">
+              <label htmlFor="location">
+                <span className="text-lg">City</span>
+              </label>
+              <input
+                type="text"
+                {...register("city", { required: "City is required" })}
+                placeholder="e.g., Operations HQ, MediPark, Bangalore"
+                className="p-3 border border-neutral-300 rounded-xl w-full"
+              />
+              {errors.city && (
+                <p className="text-red-500">{errors.city.message}</p>
               )}
             </div>
           </div>
 
           <div className="flex justify-center mt-8 gap-6 w-full">
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-2 w-full">
               <label htmlFor="employmentType">
                 <span className="text-lg">Employment Type</span>
               </label>
@@ -337,7 +352,7 @@ const Page = () => {
               )}
             </div>
 
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-2 w-full">
               <label htmlFor="employmentTypeCategory">
                 <span className="text-lg">Job Type</span>
               </label>
@@ -364,9 +379,9 @@ const Page = () => {
               )}
             </div>
 
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-2 w-full">
               <label htmlFor="employmentDuration">
-                <span className="text-lg">Employment Duration (in years)</span>
+                <span className="text-lg">Employment Duration (years)</span>
               </label>
               <input
                 type="number"
@@ -387,7 +402,7 @@ const Page = () => {
 
           <div className="flex justify-center mt-8 gap-6 w-full">
             {/* Department */}
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-2 w-full">
               <label htmlFor="department">
                 <span className="text-lg">Type of Organizations</span>
                 {/* <span className="text-lg">Department</span> */}
@@ -400,7 +415,7 @@ const Page = () => {
                   const selectedDept = e.target.value;
                   setSubDepartments(subDepartmentOptions[selectedDept] || []);
                 }}
-                className="p-3 border border-neutral-300 rounded-xl w-[370px]"
+                className="p-3 border border-neutral-300 rounded-xl"
               >
                 <option value="">Select Organization Type</option>
                 {departments?.map((dept) => (
@@ -415,7 +430,7 @@ const Page = () => {
             </div>
 
             {/* Sub Department */}
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-2 w-full">
               <label htmlFor="subDepartment">
                 <span className="text-lg">Department</span>
                 {/* <span className="text-lg">Sub Department</span> */}
@@ -424,7 +439,7 @@ const Page = () => {
                 {...register("subDepartment", {
                   required: "Department is required",
                 })}
-                className="p-3 border border-neutral-300 rounded-xl w-[370px]"
+                className="p-3 border border-neutral-300 rounded-xl"
               >
                 <option value="">Select Department</option>
                 {subDepartments?.map((subDept) => (
@@ -440,7 +455,7 @@ const Page = () => {
           </div>
 
           <div className="flex justify-center mt-8 gap-6">
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-2 w-full">
               <label htmlFor="salary">
                 <span className="text-lg">Salary</span>
               </label>
@@ -451,13 +466,13 @@ const Page = () => {
                   valueAsNumber: true,
                 })}
                 placeholder="e.g., 10000000"
-                className="p-3 border border-neutral-300 rounded-xl w-[370px]"
+                className="p-3 border border-neutral-300 rounded-xl"
               />
               {errors.salary && (
                 <p className="text-red-500">{errors.salary.message}</p>
               )}
             </div>
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-2 w-full">
               <label htmlFor="applicationDeadline">
                 <span className="text-lg">Application Deadline</span>
               </label>
@@ -466,7 +481,7 @@ const Page = () => {
                 {...register("applicationDeadline", {
                   required: "Application deadline is required",
                 })}
-                className="p-3 border border-neutral-300 rounded-xl w-[370px]"
+                className="p-3 border border-neutral-300 rounded-xl"
               />
               {errors.applicationDeadline && (
                 <p className="text-red-500">
@@ -476,7 +491,7 @@ const Page = () => {
             </div>
           </div>
           <div className="flex justify-center mt-8 gap-6">
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-2 w-full">
               <label htmlFor="extraBenefits">
                 <span className="text-lg">Extra Benefits</span>
               </label>
@@ -484,10 +499,10 @@ const Page = () => {
                 type="text"
                 {...register("extraBenefits")}
                 placeholder="e.g., Professional development programs, Health insurance"
-                className="p-3 border border-neutral-300 rounded-xl w-[370px]"
+                className="p-3 border border-neutral-300 rounded-xl"
               />
             </div>
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-2 w-full">
               <label htmlFor="experience">
                 <span className="text-lg">Experience Required</span>
               </label>
@@ -495,7 +510,7 @@ const Page = () => {
                 type="text"
                 {...register("experience")}
                 placeholder="e.g., 5+ years"
-                className="p-3 border border-neutral-300 rounded-xl w-[370px]"
+                className="p-3 border border-neutral-300 rounded-xl"
               />
             </div>
           </div>

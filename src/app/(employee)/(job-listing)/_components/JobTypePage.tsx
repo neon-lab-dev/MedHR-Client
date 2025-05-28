@@ -23,14 +23,16 @@ const JobTypePage = ({jobType} : {jobType:string}) => {
   useEffect(() => {
     const employmentTypeCategory = searchParams.get("employmentTypeCategory");
     const locationType = searchParams.get("locationType");
-    const location = searchParams.get("location"); // Use .get to fetch a single value
+    const country = searchParams.get("country");
+    const city = searchParams.get("city");
 
   
     setQueryParams((prev) => ({
       ...prev,
       employmentTypeCategory: employmentTypeCategory || "",
       locationType: locationType || "",
-      location: location || "",  // Store as a string
+      country: country || "",
+      city: city || "",
     }));
   }, [searchParams]);
   

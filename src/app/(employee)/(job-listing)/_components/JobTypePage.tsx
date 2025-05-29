@@ -25,6 +25,9 @@ const JobTypePage = ({jobType} : {jobType:string}) => {
     const locationType = searchParams.get("locationType");
     const country = searchParams.get("country");
     const city = searchParams.get("city");
+    const department = searchParams.get("department");
+    const typeOfOrganization = searchParams.get("typeOfOrganization");
+
 
   
     setQueryParams((prev) => ({
@@ -33,6 +36,8 @@ const JobTypePage = ({jobType} : {jobType:string}) => {
       locationType: locationType || "",
       country: country || "",
       city: city || "",
+      department: department || "",
+      typeOfOrganization: typeOfOrganization || "",
     }));
   }, [searchParams]);
   

@@ -13,7 +13,7 @@ import { ICONS } from "@/assets";
 import Button from "@/components/Button";
 import Link from "next/link";
 import api from "@/api";
-import { useState } from "react";
+import { departments } from "@/mockData/departments";
 
 type FormData = {
   title: string;
@@ -28,12 +28,24 @@ type FormData = {
   employmentTypeCategory: string;
   employmentDuration: number;
   department: string;
-  subDepartment: string;
+  typeOfOrganization: string;
   salary: number;
   applicationDeadline: string;
   extraBenefits: string;
   experience: string;
 };
+
+export const organizationType = [
+    "Allopathy Hospital",
+    "Allopathy Clinic",
+    "Ayurveda Hospital",
+    "Ayurveda Clinic",
+    "Homeopathy Hospital",
+    "Homeopathy Clinic",
+    "Nursing Home",
+    "Diagnostic Centers",
+    "Imaging Centers",
+  ];
 
 // Function to format form data
 const formatFormData = (data: FormData) => {
@@ -77,63 +89,6 @@ const useCreateJobMutation = (): UseMutationResult<any, Error, FormData> => {
   });
 };
 
-const subDepartmentOptions: Record<string, string[]> = {
-  Clinical: [
-    "Anesthesia",
-    "Anatomy",
-    "Cardiology",
-    "Dermatology",
-    "Dentistry",
-    "Emergency Medicine",
-    "Endocrinology",
-    "ENT",
-    "Forensic Medicine & Toxicology",
-    "Gastroenterology",
-    "Geriatric Medicine",
-    "Gynecology",
-    "Hematology",
-    "Infertility & IVF",
-    "Medical Surgical",
-    "Medicine",
-    "Nephrology",
-    "Neurology",
-    "Surgery",
-    "Ophthalmology",
-    "Out Patient Department OPD",
-    "Orthopedics",
-    "Pediatrics",
-    "Physical Medicine & Rehabilitation",
-    "Physiology",
-    "Physiotherapy",
-    "Plastic Surgery",
-    "Pulmonary Medicine and sleep disorders",
-    "Psychiatry",
-    "Rheumatology",
-    "Urology",
-  ],
-  "Diagnostic Labs": [
-    "Lab Technician",
-    "Blood Bank",
-    "Biochemistry",
-    "Microbiology",
-    "Pathology",
-    "Pharmacology",
-    "Radio diagnosis",
-    "Radiographers",
-  ],
-  Technique: ["OT Technicians", "Technicians CSSD", "Nursing"],
-  Other: [
-    "Hospital Administration",
-    "Laundry",
-    "Pharmacist",
-    "Dietician",
-    "HR",
-    "Ward assistance",
-  ],
-};
-
-const departments = ["Clinical", "Diagnostic Labs", "Technique", "Other"];
-
 const Page = () => {
   const pathname = usePathname();
   const {
@@ -152,7 +107,9 @@ const Page = () => {
   const jobTypes = ["Full-Time", "Part-Time", "Contract"];
   const internshipEmploymentTypes = ["Internship"];
   const internshipTypes = ["Shadow Internship", "Practice Internship"];
-  const [subDepartments, setSubDepartments] = useState<string[]>([]);
+
+
+  
 
   return (
     <div className="p-6 bg-[#f5f6fa]">
@@ -408,48 +365,44 @@ const Page = () => {
                 {/* <span className="text-lg">Department</span> */}
               </label>
               <select
-                {...register("department", {
+                {...register("typeOfOrganization", {
                   required: "Organization type is required",
                 })}
-                onChange={(e) => {
-                  const selectedDept = e.target.value;
-                  setSubDepartments(subDepartmentOptions[selectedDept] || []);
-                }}
                 className="p-3 border border-neutral-300 rounded-xl"
               >
-                <option value="">Select Organization Type</option>
-                {departments?.map((dept) => (
+                <option value="" disabled selected>Select Organization Type</option>
+                {organizationType?.map((dept) => (
                   <option key={dept} value={dept}>
                     {dept}
                   </option>
                 ))}
               </select>
-              {errors.department && (
-                <p className="text-red-500">{errors.department.message}</p>
+              {errors.typeOfOrganization && (
+                <p className="text-red-500">{errors.typeOfOrganization.message}</p>
               )}
             </div>
 
             {/* Sub Department */}
             <div className="flex flex-col gap-2 w-full">
-              <label htmlFor="subDepartment">
+              <label htmlFor="department">
                 <span className="text-lg">Department</span>
                 {/* <span className="text-lg">Sub Department</span> */}
               </label>
               <select
-                {...register("subDepartment", {
+                {...register("department", {
                   required: "Department is required",
                 })}
                 className="p-3 border border-neutral-300 rounded-xl"
               >
-                <option value="">Select Department</option>
-                {subDepartments?.map((subDept) => (
+                <option value="" disabled selected>Select Department</option>
+                {departments?.map((subDept) => (
                   <option key={subDept} value={subDept}>
                     {subDept}
                   </option>
                 ))}
               </select>
-              {errors.subDepartment && (
-                <p className="text-red-500">{errors.subDepartment.message}</p>
+              {errors.department && (
+                <p className="text-red-500">{errors.department.message}</p>
               )}
             </div>
           </div>

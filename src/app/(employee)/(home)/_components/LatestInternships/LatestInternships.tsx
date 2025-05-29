@@ -19,7 +19,7 @@ const LatestInternships = async () => {
         className="absolute top-0 bottom-0 right-0 left-0 z-0 h-full w-full opacity-10"
       />
       <Container>
-        <div className="py-section flex flex-col items-center justify-center gap-14">
+        <div className="py-section flex flex-col items-center justify-center gap-14 z-10">
           <SectionHeading
             highlightedText="Internships"
             normalText="For You"
@@ -30,11 +30,13 @@ const LatestInternships = async () => {
           ) : (
             <InternshipCarousel internships={internships} />
           )}
-          <Link href="/internships">
-            <Button variant="normal" className="px-9 py-4">
-              View all openings
-            </Button>
-          </Link>
+          {internships?.length > 0 && (
+            <Link href="/internships">
+              <Button variant="normal" className="px-9 py-4 z-10 relative">
+                View all openings
+              </Button>
+            </Link>
+          )}
         </div>
       </Container>
     </div>

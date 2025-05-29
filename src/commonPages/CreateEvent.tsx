@@ -161,9 +161,7 @@ const CreateEvent = ({ navigateRoute }: { navigateRoute: string }) => {
           label="Name of Organization"
           placeholder="Enter organization name"
           error={errors.companyName}
-          {...register("companyName", {
-            required: "Organization name is required",
-          })}
+          {...register("companyName", {required: "Organization name is required" })}
         />
 
         <TextInput
@@ -179,9 +177,8 @@ const CreateEvent = ({ navigateRoute }: { navigateRoute: string }) => {
           label="Name of Organizer"
           placeholder="Enter company name"
           error={errors.organizerName}
-          {...register("organizerName", {
-            required: "Organizer name is required",
-          })}
+          {...register("organizerName")}
+          isRequired={false}
         />
 
         <SelectDropdownInput
@@ -189,9 +186,6 @@ const CreateEvent = ({ navigateRoute }: { navigateRoute: string }) => {
           {...register("organizationType")}
           error={errors?.organizationType}
           options={typeOfOrganizations}
-          // onChange={(e: ChangeEvent<HTMLSelectElement>) =>
-          //   handleBankInfoChange(e, "accType")
-          // }
           isRequired={false}
         />
 
@@ -200,9 +194,6 @@ const CreateEvent = ({ navigateRoute }: { navigateRoute: string }) => {
           {...register("department")}
           error={errors?.department}
           options={departments}
-          // onChange={(e: ChangeEvent<HTMLSelectElement>) =>
-          //   handleBankInfoChange(e, "accType")
-          // }
           isRequired={false}
         />
 

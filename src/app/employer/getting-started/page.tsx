@@ -158,13 +158,13 @@ const Page = () => {
   };
 
   const organizationType = [
-    "Allopathy Hospital - No of beds",
+    "Allopathy Hospital",
     "Allopathy Clinic",
-    "Ayurveda Hospital - No of beds",
+    "Ayurveda Hospital",
     "Ayurveda Clinic",
-    "Homeopathy Hospital - No of beds",
+    "Homeopathy Hospital",
     "Homeopathy Clinic",
-    "Nursing Home – No of Beds",
+    "Nursing Home",
     "Diagnostic Centers",
     "Imaging Centers",
   ];

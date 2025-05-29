@@ -8,6 +8,8 @@ import { useParams } from "next/navigation";
 import Button from "@/components/Button";
 import Country from "./Country";
 import City from "./City";
+import Department from "./Department";
+import TypeofOrganization from "./TypeofOrganization";
 
 export type IDefaultQueryParams = {
   keyword: string;
@@ -18,6 +20,8 @@ export type IDefaultQueryParams = {
   employmentType: string;
   country: string;
   city: string;
+  department: string;
+  typeOfOrganization: string;
   jobType: string;
 };
 
@@ -30,6 +34,8 @@ export const DEFAULT_QUERY_PARAMS: IDefaultQueryParams = {
   employmentType: "",
   country: "",
   city: "",
+  department: "",
+  typeOfOrganization: "",
   jobType: "",
 };
 
@@ -45,7 +51,7 @@ const ApplyFilter = ({ setFilterParams, filterParams }: Props) => {
   return (
     <div
       id="filter"
-      className="font-plus-jakarta-sans lg:static top-52 max-h-[700px] overflow-y-auto left-full transition-all fixed w-fit sm:w-full max-w-[401px] p-6 rounded-3xl bg-white border border-neutral-550 flex flex-col gap-8"
+      className="font-plus-jakarta-sans lg:static top-52 max-h-[700px] overflow-y-auto left-full transition-all fixed w-fit sm:w-full max-w-[401px] p-6 rounded-3xl bg-white border border-neutral-550 flex flex-col gap-5"
     >
       {/* Heading & HR */}
       <div className="flex flex-col gap-8">
@@ -58,7 +64,7 @@ const ApplyFilter = ({ setFilterParams, filterParams }: Props) => {
             onClick={() => {
               setFilterParams(DEFAULT_QUERY_PARAMS);
             }}
-            className="text-primary-550 text-[18px] font-medium"
+            className="text-primary-550 text-[18px] font-medium cursor-pointer"
           >
             Clear
           </button>
@@ -104,6 +110,24 @@ const ApplyFilter = ({ setFilterParams, filterParams }: Props) => {
         setCity={(city: string) => {
           setFilterParams((prev) => {
             return { ...prev, city };
+          });
+        }}
+      />
+
+      <Department
+        department={filterParams.department!}
+        setDepartment={(department: string) => {
+          setFilterParams((prev) => {
+            return { ...prev, department };
+          });
+        }}
+      />
+
+      <TypeofOrganization
+        typeOfOrganization={filterParams.typeOfOrganization!}
+        setTypeOfOrganization={(typeOfOrganization: string) => {
+          setFilterParams((prev) => {
+            return { ...prev, typeOfOrganization };
           });
         }}
       />

@@ -35,17 +35,7 @@ type FormData = {
   experience: string;
 };
 
-export const organizationType = [
-    "Allopathy Hospital",
-    "Allopathy Clinic",
-    "Ayurveda Hospital",
-    "Ayurveda Clinic",
-    "Homeopathy Hospital",
-    "Homeopathy Clinic",
-    "Nursing Home",
-    "Diagnostic Centers",
-    "Imaging Centers",
-  ];
+
 
 // Function to format form data
 const formatFormData = (data: FormData) => {
@@ -109,7 +99,17 @@ const Page = () => {
   const internshipTypes = ["Shadow Internship", "Practice Internship"];
 
 
-  
+   const organizationType = [
+    "Allopathy Hospital",
+    "Allopathy Clinic",
+    "Ayurveda Hospital",
+    "Ayurveda Clinic",
+    "Homeopathy Hospital",
+    "Homeopathy Clinic",
+    "Nursing Home",
+    "Diagnostic Centers",
+    "Imaging Centers",
+  ];
 
   return (
     <div className="p-6 bg-[#f5f6fa]">

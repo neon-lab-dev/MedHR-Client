@@ -106,7 +106,6 @@ export const handleApplyJobService = async (id: string): Promise<string> => {
 export const handleGetAllJobsByTypeService = async ({
   type,
   employmentType,
-  location,
   locationType,
   salary,
   duration,

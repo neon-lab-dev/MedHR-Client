@@ -1,4 +1,3 @@
-import { organizationType } from "@/app/employer/(home)/add-new-hiring/[jobType]/page";
 import React, { useEffect, useRef, useState } from "react";
 
 type TDepartmentProps = {
@@ -29,6 +28,18 @@ const TypeofOrganization: React.FC<TDepartmentProps> = ({
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+
+    const organizationType = [
+    "Allopathy Hospital",
+    "Allopathy Clinic",
+    "Ayurveda Hospital",
+    "Ayurveda Clinic",
+    "Homeopathy Hospital",
+    "Homeopathy Clinic",
+    "Nursing Home",
+    "Diagnostic Centers",
+    "Imaging Centers",
+  ];
 
   return (
     <div className="flex flex-col gap-[6px]">

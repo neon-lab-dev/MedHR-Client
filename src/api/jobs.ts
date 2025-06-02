@@ -110,6 +110,10 @@ export const handleGetAllJobsByTypeService = async ({
   salary,
   duration,
   experienceLevel,
+  country,
+  city,
+  department,
+  typeOfOrganization,
   ...params
 }: IDefaultQueryParams & {
   type: string;
@@ -126,10 +130,14 @@ export const handleGetAllJobsByTypeService = async ({
 
   if (employmentType) requestParams.employmentType = employmentType;
   if (locationType) requestParams.locationType = locationType;
-  if (location) requestParams.location = location;
+  // if (location) requestParams.location = location;
   if (salary) requestParams["salary[gte]"] = salary;
   if (duration) requestParams["employmentDuration[gte]"] = duration;
-
+  if (country) requestParams.country = country;
+  if (city) requestParams.city = city;
+  if (department) requestParams.department = department;
+  if (typeOfOrganization) requestParams.typeOfOrganization = typeOfOrganization;
+   console.log(type);
   return new Promise((resolve, reject) => {
     axios
       .get(`${api.jobs}`, {
@@ -138,6 +146,10 @@ export const handleGetAllJobsByTypeService = async ({
       })
       .then((res) => {
         let jobs = res.data?.jobs ?? [];
+
+        console.log(jobs);
+
+     
 
         // Filter jobs by type if a type is provided (internship or not)
         if (type) {

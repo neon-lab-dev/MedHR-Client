@@ -24,7 +24,6 @@ const CurrentlyLookingFor: React.FC<TCurrentlyLookingForProps> = ({
     "Bachelor Degree",
     "Master Degree",
     "Jobs",
-    "Business Proposal",
   ];
 
   const [searchTerm, setSearchTerm] = useState("");

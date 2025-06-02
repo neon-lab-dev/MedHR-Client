@@ -49,7 +49,7 @@ const ProjectDetailsModal: React.FC<TProjectDetailsModalProps> = ({
   };
   return (
     <Modal
-      heading="Add project details"
+      heading="Add qualification/experience details"
       isModalOpen={isModalOpen}
       setIsModalOpen={setIsModalOpen}
     >

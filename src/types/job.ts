@@ -6,6 +6,8 @@ export interface IJob {
     logo: string;
     bio: string;
   };
+  city : string;
+  country : string;
   requiredSkills: string[];
   status: string;
   applicants: {

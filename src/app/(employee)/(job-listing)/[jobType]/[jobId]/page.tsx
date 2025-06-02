@@ -65,7 +65,7 @@ const JobIdPage = async ({
         </div>
         {/* job details */}
         <div className="flex gap-6">
-          <div className="flex-grow flex flex-col gap-4 xl:gap-6">
+          <div className="flex flex-col gap-4 xl:gap-6 w-full xl:w-[30%]">
             <div className="p-6 rounded-[22px] border border-secondary-200 text-base lg:text-xl flex flex-col gap-3 lg:gap-3">
               <h3 className="capitalize font-semibold text-neutral-800">
                 About {jobType.substring(0, jobType.length - 1)}{" "}
@@ -109,7 +109,7 @@ const JobIdPage = async ({
               </ul>
               <div className="flex flex-col gap-1  mt-2 text-neutral-700">
                 <span>Job-Type: {job.employmentType}</span>
-                <span>Location: {job.location}</span>
+                <span>Location: {job?.city}, {job?.country}</span>
                 <span>Location Type: {job.locationType}</span>
                 {job.employmentType === "Internship" ? (
                   <span>Duration: {job.employmentDuration} months</span>
@@ -142,7 +142,7 @@ const JobIdPage = async ({
               <h3 className="capitalize font-semibold text-neutral-800 text-2xl">
                 About the Company
               </h3>
-              <hr />
+              <hr className="border border-neutral-500/20" />
               <div className="flex justify-between items-center">
                 <div className="flex flex-col gap-1">
                   <span className="font-bold text-lg lg:text-xl text-neutral-800">
@@ -182,7 +182,7 @@ const JobIdPage = async ({
                   </p>
                 </div>
               </div>
-              <hr />
+              <hr className="border border-neutral-500/20" />
               <p className=" text-neutral-700 flex flex-col gap-6">
                 {job.companyDetails.bio
                   .split("\n")

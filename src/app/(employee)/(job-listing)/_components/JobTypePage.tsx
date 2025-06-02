@@ -1,10 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-unused-expressions */
-"use client"
+"use client";
 import { useAppSelector } from "@/hooks/store";
 import { useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
-import ApplyFilter, { DEFAULT_QUERY_PARAMS, IDefaultQueryParams } from "./ApplyFilter";
+import ApplyFilter, {
+  DEFAULT_QUERY_PARAMS,
+  IDefaultQueryParams,
+} from "./ApplyFilter";
 import debounce from "@/helpers/debounce";
 import { useQuery } from "@tanstack/react-query";
 import { handleGetAllJobsByTypeService } from "@/api/jobs";
@@ -13,8 +16,9 @@ import { ICONS } from "@/assets";
 import Button from "@/components/Button";
 import JobCard from "./JobCard";
 
-const JobTypePage = ({jobType} : {jobType:string}) => {
-    const { studentProfile } = useAppSelector((state) => state.auth);
+const JobTypePage = ({ jobType }: { jobType: string }) => {
+  console.log(jobType);
+  const { studentProfile } = useAppSelector((state) => state.auth);
   const searchParams = useSearchParams();
   const [queryParams, setQueryParams] = useState<IDefaultQueryParams>({
     ...DEFAULT_QUERY_PARAMS,
@@ -29,8 +33,6 @@ const JobTypePage = ({jobType} : {jobType:string}) => {
     const department = searchParams.get("department");
     const typeOfOrganization = searchParams.get("typeOfOrganization");
 
-
-  
     setQueryParams((prev) => ({
       ...prev,
       employmentTypeCategory: employmentTypeCategory || "",
@@ -41,8 +43,7 @@ const JobTypePage = ({jobType} : {jobType:string}) => {
       typeOfOrganization: typeOfOrganization || "",
     }));
   }, [searchParams]);
-  
-  
+
   const [debouncedQueryParams, setDebouncedQueryParams] =
     useState<IDefaultQueryParams>(DEFAULT_QUERY_PARAMS);
 
@@ -66,9 +67,9 @@ const JobTypePage = ({jobType} : {jobType:string}) => {
         type: jobType,
       }),
   });
-    return (
-        <div className="bg-[#f5f6fa] h-full min-h-screen">
-        <div className="max-w-7xl mx-auto px-6 2xl:px-0 py-6">
+  return (
+    <div className="bg-[#f5f6fa] h-full min-h-screen">
+      <div className="max-w-7xl mx-auto px-6 2xl:px-0 py-6">
         <div className="flex justify-between gap-10">
           <ApplyFilter
             setFilterParams={setQueryParams}
@@ -112,7 +113,7 @@ const JobTypePage = ({jobType} : {jobType:string}) => {
                 />
               </Button>
             </div>
-  
+
             {/* Job cards */}
             {isLoading ? (
               <>
@@ -141,9 +142,9 @@ const JobTypePage = ({jobType} : {jobType:string}) => {
             )}
           </div>
         </div>
-        </div>
       </div>
-    );
+    </div>
+  );
 };
 
 export default JobTypePage;

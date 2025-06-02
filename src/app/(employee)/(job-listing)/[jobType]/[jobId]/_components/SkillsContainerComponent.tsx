@@ -1,5 +1,4 @@
 import React from "react";
-import SkillChip from "./SkillChipComponent";
 
 type Props = {
   title: string;
@@ -12,7 +11,7 @@ const SkillsContainerComponent = ({ labels, title }: Props) => {
       <span className="text-neutral-800 text-xl font-semibold">{title}</span>
       <div className="flex flex-wrap gap-3">
         {labels.map((label) => (
-          <SkillChip label={label} key={label} />
+          <div className="rounded-md border border-neutral-400/30 p-2" key={label}>{label}</div>
         ))}
       </div>
     </div>

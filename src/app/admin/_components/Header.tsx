@@ -5,6 +5,7 @@ import Button from "@/components/Button";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { handleAdminLogoutService } from "@/api/authentication";
 import { toast } from "sonner";
+import Cookies from 'js-cookie';
 
 const Header = () => {
   const pathname = usePathname();
@@ -14,6 +15,7 @@ const Header = () => {
   const { mutate, isPending } = useMutation({
     mutationFn: handleAdminLogoutService,
     onSuccess: (msg) => {
+       Cookies.remove("admin_auth_token");
       toast.success(msg);
       queryClient
         .invalidateQueries({

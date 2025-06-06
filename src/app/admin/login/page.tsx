@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import React from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "sonner";
+import Cookies from 'js-cookie';
 
 interface IFormInput {
   email: string;
@@ -24,8 +25,13 @@ const LoginPage = () => {
 
   const { mutate, isPending } = useMutation({
     mutationFn: handleAdminLoginService,
-    onSuccess: (msg) => {
-      toast.success(msg);
+    onSuccess: (data) => {
+      Cookies.set("admin_auth_token", data.accessToken, {
+        expires: 7,
+        secure: true,
+        sameSite: "Strict",
+      })
+      toast.success(data?.message ?? "Login successful");
       queryClient
         .invalidateQueries({
           queryKey: ["admin-profile"],

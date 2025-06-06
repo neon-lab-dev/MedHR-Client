@@ -17,7 +17,6 @@ import Button from "@/components/Button";
 import JobCard from "./JobCard";
 
 const JobTypePage = ({ jobType }: { jobType: string }) => {
-  console.log(jobType);
   const { studentProfile } = useAppSelector((state) => state.auth);
   const searchParams = useSearchParams();
   const [queryParams, setQueryParams] = useState<IDefaultQueryParams>({
@@ -67,6 +66,10 @@ const JobTypePage = ({ jobType }: { jobType: string }) => {
         type: jobType,
       }),
   });
+
+  console.log(data);
+
+  const jobs = data?.filter((job) => job?.status !== "Closed");
   return (
     <div className="bg-[#f5f6fa] h-full min-h-screen">
       <div className="max-w-7xl mx-auto px-6 2xl:px-0 py-6">
@@ -121,12 +124,12 @@ const JobTypePage = ({ jobType }: { jobType: string }) => {
                 <div className="skeleton h-32 w-full"></div>
                 <div className="skeleton h-32 w-full"></div>
               </>
-            ) : data?.length === 0 ? (
+            ) : jobs?.length === 0 ? (
               <div className="text-center text-neutral-500 flex items-center justify-center h-40">
                 <span>No {jobType} found</span>
               </div>
             ) : (
-              data?.map((details, index: number) => (
+              jobs?.map((details, index: number) => (
                 <JobCard
                   wrapperClassName=""
                   key={index}

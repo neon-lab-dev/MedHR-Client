@@ -7,7 +7,8 @@ import { usePathname, useRouter } from "next/navigation";
 import { useAppSelector } from "@/hooks/store";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { handleEmployerLogoutService } from "@/api/authentication";
-import { toast } from "sonner"; // Assuming 'sonner' is correctly imported and used
+import { toast } from "sonner";
+ import Cookies from "js-cookie";
 
 const Header = () => {
   const user = useAppSelector((state) => state.auth.employerProfile);
@@ -31,6 +32,7 @@ const Header = () => {
   const { mutate } = useMutation({
     mutationFn: handleEmployerLogoutService,
     onSuccess: (msg) => {
+      Cookies.remove("employeer_auth_token");
       toast.success(msg);
       queryClient
         .invalidateQueries({

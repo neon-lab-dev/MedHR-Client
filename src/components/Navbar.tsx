@@ -20,6 +20,7 @@ import { toast } from "sonner";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
 import Container from "./Container";
+ import Cookies from "js-cookie";
 
 const pfileItems = [
   { text: "My Applications", href: "/applications" },
@@ -58,36 +59,49 @@ const Navbar = () => {
   const queryClient = useQueryClient();
   const dispatch = useAppDispatch();
 
-  const { mutate, isPending } = useMutation({
-    mutationFn: handleEmployeeLogoutService,
-    onSuccess: () => {
-      toast.success("Logged out successfully");
-      queryClient.setQueryData(["student-profile"], null);
-      dispatch(setEmployeeProfile(null));
-      router.push("/");
-    },
-    onError: () => {
-      toast.error("An error occurred while logging out!");
-    },
-  });
 
-  const { mutate: employerMutate, isPending: isEmployerPending } = useMutation({
-    mutationFn: handleEmployerLogoutService,
-    onSuccess: () => {
-      toast.success("Logged out successfully");
-      queryClient.setQueryData(["employer-profile"], null);
-      dispatch(setEmployerProfile(null));
-      router.push("/");
-    },
-    onError: () => {
-      toast.error("An error occurred while logging out!");
-    },
-  });
+
+const { mutate, isPending } = useMutation({
+  mutationFn: handleEmployeeLogoutService,
+  onSuccess: () => {
+    toast.success("Logged out successfully");
+
+    // ✅ Remove employee token
+    Cookies.remove("employee_auth_token");
+
+    queryClient.setQueryData(["student-profile"], null);
+    dispatch(setEmployeeProfile(null));
+    router.push("/");
+  },
+  onError: () => {
+    toast.error("An error occurred while logging out!");
+  },
+});
+
+const { mutate: employerMutate, isPending: isEmployerPending } = useMutation({
+  mutationFn: handleEmployerLogoutService,
+  onSuccess: () => {
+    toast.success("Logged out successfully");
+
+    // ✅ Remove employer token
+    Cookies.remove("employeer_auth_token");
+
+    queryClient.setQueryData(["employer-profile"], null);
+    dispatch(setEmployerProfile(null));
+    router.push("/");
+  },
+  onError: () => {
+    toast.error("An error occurred while logging out!");
+  },
+});
+
 
   // close the sidebar on route change
   useEffect(() => {
     setIsMobileSidebarOpen(false);
   }, [pathname]);
+
+  console.log(studentProfile);
 
   return (
     <Container>
@@ -357,7 +371,7 @@ const Navbar = () => {
                   onClick={() => {
                     mutate();
                   }}
-                  className=" text-center text-primary-500 text-xl flex justify-center pl-36 py-4"
+                  className=" text-center text-primary-500 text-xl flex justify-center pl-36 py-4 cursor-pointer"
                 >
                   <span className=" text-center font-bold">
                     {isPending ? "Loading..." : "Logout"}

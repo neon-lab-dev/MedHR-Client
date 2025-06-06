@@ -7,14 +7,14 @@ import { IOTP, ISignupData } from "@/types/auth";
 export const handleAdminLoginService = async (data: {
   email: string;
   password: string;
-}): Promise<string> => {
+}): Promise<any> => {
   return new Promise((resolve, reject) => {
     axios
       .post(api.adminLogin, data, {
         withCredentials: true,
       })
       .then((res) => {
-        resolve(res.data?.message ?? "Login successful");
+        resolve(res.data);
       })
       .catch((err) => {
         reject(err.response?.data?.message ?? "Login failed");
@@ -95,6 +95,7 @@ export const handleGetEmployeeProfileService = async (): Promise<IEmployee> => {
         withCredentials: true,
       })
       .then((res) => {
+        console.log(res);
         resolve(res.data?.user);
       })
       .catch((err) => {
@@ -121,14 +122,14 @@ export const handleGetEmployerProfileService = async (): Promise<IEmployer> => {
 export const handleEmployeeLoginService = async (data: {
   email: string;
   password: string;
-}): Promise<string> => {
+}): Promise<any> => {
   return new Promise((resolve, reject) => {
     axios
       .post(api.employeeLogin, data, {
         withCredentials: true,
       })
       .then((res) => {
-        resolve(res.data?.message ?? "Login successful");
+        resolve(res.data);
       })
       .catch((err) => {
         reject(err.response?.data?.message ?? "Login failed");
@@ -139,14 +140,14 @@ export const handleEmployeeLoginService = async (data: {
 export const handleEmployerLoginService = async (data: {
   email: string;
   password: string;
-}): Promise<string> => {
+}): Promise<any> => {
   return new Promise((resolve, reject) => {
     axios
       .post(api.employerLogin, data, {
         withCredentials: true,
       })
       .then((res) => {
-        resolve(res.data?.message ?? "Login successful");
+        resolve(res.data);
       })
       .catch((err) => {
         reject(err.response?.data?.message ?? "Login failed");

@@ -2,7 +2,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import Button from "../Button";
-import { useRouter } from "next/navigation";
 import { useAppDispatch, useAppSelector } from "@/hooks/store";
 import { closeAuthModal, setAuthModalType } from "@/store/slices/authSlice";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -11,9 +10,9 @@ import {
   handleEmployerLoginService,
 } from "@/api/authentication";
 import { toast } from "sonner";
+import Cookies from "js-cookie";
 
 const Login = () => {
-  const router = useRouter();
   const dispatch = useAppDispatch();
   const queryClient = useQueryClient();
   const { activeTab } = useAppSelector((state) => state.auth);
@@ -22,36 +21,59 @@ const Login = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const { mutate: employeeMutate, isPending: isEmployeePending } = useMutation({
-    mutationFn: handleEmployeeLoginService,
-    onSuccess: (msg) => {
-      toast.success(msg);
-      queryClient.invalidateQueries({
-        queryKey: ["student-profile"],
+
+const { mutate: employeeMutate, isPending: isEmployeePending } = useMutation({
+  mutationFn: handleEmployeeLoginService,
+  onSuccess: (data) => {
+    console.log(data);
+
+    // ✅ Set token in cookies
+    if (data?.accessToken) {
+      Cookies.set("employee_auth_token", data.accessToken, {
+        expires: 7, // Days until expiration
+        secure: true,
+        sameSite: "Strict", // Or "Lax" / "None" if cross-site
       });
-      dispatch(closeAuthModal());
-    },
-    onError: (err: string) => {
-      toast.error(err);
-    },
-  });
+    }
+
+    toast.success(data?.message ?? "Login successful");
+    queryClient.invalidateQueries({ queryKey: ["student-profile"] });
+    dispatch(closeAuthModal());
+    window.location.reload();
+  },
+  onError: (err: string) => {
+    toast.error(err);
+  },
+});
+
+
+
   const { mutate: employerMutate, isPending: isEmployerPending } = useMutation({
-    mutationFn: handleEmployerLoginService,
-    onSuccess: (msg) => {
-      toast.success(msg);
-      queryClient
-        .invalidateQueries({
-          queryKey: ["employer-profile"],
-        })
-        .then(() => {
-          router.push("/employer/");
-        });
+  mutationFn: handleEmployerLoginService,
+  onSuccess: (data) => {
+    // ✅ Set employer token in cookie
+    if (data?.accessToken) {
+      Cookies.set("employeer_auth_token", data.accessToken, {
+        expires: 7,
+        secure: true,
+        sameSite: "Strict",
+      });
+    }
+
+    toast.success(data?.message ?? "Login successful");
+
+    // ✅ Invalidate and then force reload navigation
+    queryClient.invalidateQueries({ queryKey: ["employer-profile"] }).then(() => {
       dispatch(closeAuthModal());
-    },
-    onError: (err: string) => {
-      toast.error(err);
-    },
-  });
+      window.location.href = "/employer/";
+    });
+  },
+  onError: (err: string) => {
+    toast.error(err);
+  },
+});
+
+
 
   const onSubmit = async (data: any) => {
     if (activeTab === "Aspirants") {

@@ -25,7 +25,7 @@ const JobIdPage = async ({
   if (!job) return <NotFound />;
 
   const isClosed =
-    job.status !== "Open" || new Date(job.applicationDeadline) < new Date();
+    job.status !== "Open";
   return (
     <Container>
       <div className="wrapper flex flex-col pb-6">

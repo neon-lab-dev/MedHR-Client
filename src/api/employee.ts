@@ -112,7 +112,6 @@ export const applyOnSkillProgram = async (id: string): Promise<any> => {
 export const fetchUserData = async (): Promise<any> => {
   try {
     const response = await axiosInstance.get("/me", {
-      baseURL: "https://carrerhub-backend.vercel.app/api/v1",
       withCredentials: true,
     });
     return response.data;

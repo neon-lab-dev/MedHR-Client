@@ -1,14 +1,15 @@
- 
-import axios from "axios";
 import api from ".";
 import { IEmployer, TEmployee } from "@/types/employer";
 import { JobData } from "@/app/employer/(home)/page";
 import { User } from "@/app/employer/(home)/profile/page";
-import { JobDetails, UpdateJobPayload } from "@/app/employer/(home)/_components/ViewIdPage";
-
+import {
+  JobDetails,
+  UpdateJobPayload,
+} from "@/app/employer/(home)/_components/ViewIdPage";
+import axiosInstance from "./axiosInstance";
 
 export const handleGetAllCandidatesService = async (
-  filters: Record<string, string | null>
+  filters: Record<string, string | string[] | null>
 ): Promise<any[]> => {
   const params = new URLSearchParams();
 
@@ -21,20 +22,19 @@ export const handleGetAllCandidatesService = async (
       }
     }
   });
-  
-  const url = `${api.findCandidate}?${params.toString()}`;
-  return new Promise((resolve, reject) => {
-    axios
-      .get(url, { withCredentials: true })
-      .then((res) => {
-        resolve(res.data?.candidates ?? []);
-      })
-      .catch((err) => {
-        reject(err?.response?.data?.message ?? "Something went wrong");
-      });
-  });
-};
 
+  try {
+    const response = await axiosInstance.get(
+      `${api.findCandidate}?${params.toString()}`,
+      {
+        withCredentials: true,
+      }
+    );
+    return response.data?.candidates ?? [];
+  } catch (error: any) {
+    throw new Error(error?.response?.data?.message ?? "Something went wrong");
+  }
+};
 
 export const handleGetAllEmployersForAdminService = async ({
   keyword,
@@ -44,159 +44,152 @@ export const handleGetAllEmployersForAdminService = async ({
   const url = keyword
     ? `${api.allEmployers}?full_name=${keyword}`
     : api.allEmployers;
-  return new Promise((resolve, reject) => {
-    axios
-      .get(url, {
-        withCredentials: true,
-      })
-      .then((res) => {
-        resolve(res.data?.employers ?? []);
-      })
-      .catch((err) => {
-        reject(err?.response?.data?.message ?? "Something went wrong");
-      });
-  });
+
+  try {
+    const res = await axiosInstance.get(url, {
+      withCredentials: true,
+    });
+    return res.data?.employers ?? [];
+  } catch (err: any) {
+    throw new Error(err?.response?.data?.message ?? "Something went wrong");
+  }
 };
 
 export const handleDeleteEmployerService = async (
   id: string
 ): Promise<string> => {
-  return new Promise((resolve, reject) => {
-    axios
-      .delete(`${api.adminEmployer}/${id}`, {
-        withCredentials: true,
-      })
-      .then((res) => {
-        resolve(res.data?.message ?? "Employee deleted successfully");
-      })
-      .catch((err) => {
-        reject(err?.response?.data?.message ?? "Something went wrong");
-      });
-  });
+  try {
+    const res = await axiosInstance.delete(`${api.adminEmployer}/${id}`, {
+      withCredentials: true,
+    });
+    return res.data?.message ?? "Employer deleted successfully";
+  } catch (err: any) {
+    throw new Error(err?.response?.data?.message ?? "Something went wrong");
+  }
 };
 
 export const handleGEtEmployerByIdForAdminService = async (
   id: string
 ): Promise<IEmployer> => {
-  return new Promise((resolve, reject) => {
-    axios
-      .get(`${api.adminEmployer}/${id}`, {
-        withCredentials: true,
-      })
-      .then((res) => {
-        resolve(res.data?.employer);
-      })
-      .catch((err) => {
-        reject(err?.response?.data?.message ?? "Something went wrong");
-      });
-  });
+  try {
+    const res = await axiosInstance.get(`${api.adminEmployer}/${id}`, {
+      withCredentials: true,
+    });
+    return res.data?.employer;
+  } catch (err: any) {
+    throw new Error(err?.response?.data?.message ?? "Something went wrong");
+  }
 };
 
 export const handleGEtEmployerByIdForEmployer = async (
   id: string
 ): Promise<TEmployee> => {
-  return new Promise((resolve, reject) => {
-    axios
-      .get(`${api.employergetemploee}/${id}`, {
-        withCredentials: true,
-      })
-      .then((res) => {
-        resolve(res?.data?.emp);
-      })
-      .catch((err) => {
-        reject(err?.response?.data?.message ?? "Something went wrong");
-      });
-  });
+  try {
+    const res = await axiosInstance.get(`${api.employergetemploee}/${id}`, {
+      withCredentials: true,
+    });
+    return res?.data?.emp;
+  } catch (err: any) {
+    throw new Error(err?.response?.data?.message ?? "Something went wrong");
+  }
 };
 
-// api/employer.ts
-export const sendHiredEmail = async (userId: string, companyName: string): Promise<any> => {
-  return new Promise((resolve, reject) => {
-    axios
-      .post(
-        `${api.sendHiredEmail}/${userId}`,
-        { companyName },
-        { withCredentials: true }
-      )
-      .then((res) => resolve(res.data))
-      .catch((err) =>
-        reject(err?.response?.data?.message ?? "Something went wrong")
-      );
-  });
+export const sendHiredEmail = async (
+  userId: string,
+  companyName: string
+): Promise<any> => {
+  try {
+    const res = await axiosInstance.post(
+      `${api.sendHiredEmail}/${userId}`,
+      { companyName },
+      { withCredentials: true }
+    );
+    return res.data;
+  } catch (err: any) {
+    throw new Error(err?.response?.data?.message ?? "Something went wrong");
+  }
 };
 
 export const fetchEmployerProfileData = async () => {
-  const response = await axios.get('https://carrerhub-backend.vercel.app/api/v1/employeer/me', {
+  const response = await axiosInstance.get("/employeer/me", {
     withCredentials: true,
   });
   return response.data;
 };
 
-
 export const fetchJobData = async (): Promise<JobData> => {
-  const response = await axios.get(api.employerJob, {
+  const response = await axiosInstance.get(api.employerJob, {
     withCredentials: true,
   });
   return response.data;
 };
 
 export const getAllEmployerCourses = async (): Promise<any> => {
-  const response = await axios.get(api.getAllEmployerCourses, {
+  const response = await axiosInstance.get(api.getAllEmployerCourses, {
     withCredentials: true,
   });
   return response.data;
 };
 
 export const getAllEmployerSkillProgrammes = async (): Promise<any> => {
-  return new Promise((resolve, reject) => {
-    axios
-      .get(api.getAllEmployerSkillProgrammes, {
-        withCredentials: true,
-      })
-      .then((res) => {
-        resolve(res?.data ?? null);
-      })
-      .catch((err) => {
-        reject(err?.response?.message ?? "Something went wrong");
-      });
-  });
+  try {
+    const res = await axiosInstance.get(api.getAllEmployerSkillProgrammes, {
+      withCredentials: true,
+    });
+    return res?.data ?? null;
+  } catch (err: any) {
+    throw err?.response?.message ?? "Something went wrong";
+  }
 };
 
 export const fetchJobs = async () => {
-  const response = await axios.get(api.employerJob, {
+  const response = await axiosInstance.get(api.employerJob, {
     withCredentials: true,
   });
   return response.data.jobs;
 };
 
 export const deleteJob = async (id: string) => {
-  const response = await axios.delete(`${api.job}/${id}`, {
+  const response = await axiosInstance.delete(`${api.job}/${id}`, {
     withCredentials: true,
   });
   return response.data;
 };
 
 export const fetchProfileData = async (applicantId: string) => {
-  const response = await axios.get(`${api.employergetemploee}/${applicantId}`, {
-    withCredentials: true,
-  });
+  const response = await axiosInstance.get(
+    `${api.employergetemploee}/${applicantId}`,
+    {
+      withCredentials: true,
+    }
+  );
   return response.data.emp;
 };
 
-export const approveApplicant = async (data: { jobId: string; applicantId: string; status: string }) => {
-  await axios.put(api.changeStatus, data, {
+export const approveApplicant = async (data: {
+  jobId: string;
+  applicantId: string;
+  status: string;
+}) => {
+  await axiosInstance.put(api.changeStatus, data, {
     withCredentials: true,
   });
 };
 
-export const rejectApplicant = async (data: { jobId: string; applicantId: string; status: string }) => {
-  await axios.put(api.changeStatus, data, {
+export const rejectApplicant = async (data: {
+  jobId: string;
+  applicantId: string;
+  status: string;
+}) => {
+  await axiosInstance.put(api.changeStatus, data, {
     withCredentials: true,
   });
 };
 
 export const fetchJobDetails = async (jobId: string) => {
-  const response = await axios.get(`${api.job}/${jobId}`);
+  const response = await axiosInstance.get(`${api.job}/${jobId}`, {
+    withCredentials: true,
+  });
   if (response.status !== 200) {
     throw new Error(`Failed to fetch job details. Status: ${response.status}`);
   }
@@ -204,44 +197,41 @@ export const fetchJobDetails = async (jobId: string) => {
 };
 
 export const fetchJobDetail = async (viewId: string): Promise<JobDetails> => {
-  const { data } = await axios.get(`${api.job}/${viewId}`, {
+  const { data } = await axiosInstance.get(`${api.job}/${viewId}`, {
     withCredentials: true,
   });
   return data.jobs;
 };
 
-
-export const updateJobDetails = async (viewId: string, payload: UpdateJobPayload) => {
-  const { data } = await axios.put(
-    `${api.job}/${viewId}`,
-    payload,
-    { withCredentials: true }
-  );
+export const updateJobDetails = async (
+  viewId: string,
+  payload: UpdateJobPayload
+) => {
+  const { data } = await axiosInstance.put(`${api.job}/${viewId}`, payload, {
+    withCredentials: true,
+  });
   return data;
 };
 
-
 export const uploadResume = async (file: File) => {
   const fileData = new FormData();
-  fileData.append('file', file);
+  fileData.append("file", file);
 
-  await axios.put(api.employeeUploadResume, fileData, {
-    headers: { 'Content-Type': 'multipart/form-data' },
+  await axiosInstance.put(api.employeeUploadResume, fileData, {
+    headers: { "Content-Type": "multipart/form-data" },
     withCredentials: true,
   });
 };
 
 export const fetchEmployerData = async () => {
-  const response = await axios.get('https://api.medhrplus.com/api/v1/employeer/me', {
+  const response = await axiosInstance.get("/employeer/me", {
     withCredentials: true,
   });
   return response.data;
 };
 
-
-
 export const updateEmployerData = async (updatedData: User) => {
-  const response = await axios.put("https://api.medhrplus.com/api/v1/employeer/details", updatedData, {
+  const response = await axiosInstance.put("/employeer/details", updatedData, {
     withCredentials: true,
   });
   return response.data;

@@ -14,8 +14,9 @@ axiosInstance.interceptors.request.use(
   (config) => {
     const employeeToken = Cookies.get("employee_auth_token");
     const employerToken = Cookies.get("employeer_auth_token");
+    const adminToken = Cookies.get("admin_auth_token");
 
-    const token = employeeToken || employerToken;
+    const token = employeeToken || employerToken || adminToken;
 
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;

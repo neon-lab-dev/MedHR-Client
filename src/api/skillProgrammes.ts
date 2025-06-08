@@ -1,18 +1,14 @@
-import axios from "axios";
 import api from ".";
+import axiosInstance from "./axiosInstance";
 
 // Get all skill programmes
 export const getAllSkillProgrammes = async (): Promise<any> => {
-    return new Promise((resolve, reject) => {
-      axios
-        .get(api.allSkillProgrammes, {
-          withCredentials: true,
-        })
-        .then((res) => {
-          resolve(res.data ?? null);
-        })
-        .catch((err) => {
-          reject(err?.response?.message ?? "Something went wrong");
-        });
+  try {
+    const res = await axiosInstance.get(api.allSkillProgrammes, {
+      withCredentials: true,
     });
-  };
+    return res.data ?? null;
+  } catch (err: any) {
+    throw err?.response?.message ?? "Something went wrong";
+  }
+};

@@ -1,26 +1,26 @@
 import { useMutation, UseMutationResult } from "@tanstack/react-query";
-import axios from "axios";
 import api from ".";
+import axiosInstance from "./axiosInstance";
 
 
-// Update User Details
-const updateUserDetails = (formData: any): Promise<any> => {
-  return new Promise((resolve, reject) => {
-    axios.put(api.employeedetails, formData, {
+const updateUserDetails = async (formData: any): Promise<any> => {
+  try {
+    const response = await axiosInstance.put(api.employeedetails, formData, {
       headers: {
         'Content-Type': 'application/json',
       },
       withCredentials: true,
-    })
-    .then(response => resolve(response.data))
-    .catch(error => reject(new Error(error?.response?.data?.message ?? 'Error updating user details')));
-  });
+    });
+    return response.data;
+  } catch (error: any) {
+    throw new Error(error?.response?.data?.message ?? 'Error updating user details');
+  }
 };
-
 
 export const useUpdateUserDetails = (): UseMutationResult<any, Error, any> => {
   return useMutation({
     mutationFn: updateUserDetails,
   });
 };
+
 

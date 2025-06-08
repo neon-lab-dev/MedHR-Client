@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import { useQuery } from "@tanstack/react-query";
 import { handleGetEmployeeProfileService, handleGetEmployerProfileService } from "@/api/authentication";
@@ -11,9 +11,16 @@ import { setEmployeeProfile, setEmployerProfile, setIsAuthenticating } from "@/s
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const dispatch = useAppDispatch();
 
-  // ✅ Check if tokens exist
-  const employeeToken = Cookies.get("employee_auth_token");
-  const employerToken = Cookies.get("employeer_auth_token");
+  const [employeeToken, setEmployeeToken] = useState<string | undefined>();
+  const [employerToken, setEmployerToken] = useState<string | undefined>();
+
+  useEffect(() => {
+    const empToken = Cookies.get("employee_auth_token");
+    const emrToken = Cookies.get("employeer_auth_token");
+
+    setEmployeeToken(empToken);
+    setEmployerToken(emrToken);
+  }, []);
 
   const student = useQuery({
     queryKey: ["student-profile"],
@@ -32,8 +39,6 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     refetchOnWindowFocus: false,
     staleTime: Infinity,
   });
-
-  console.log(employerToken);
 
   useEffect(() => {
     if (student.isSuccess) {

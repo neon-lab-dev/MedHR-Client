@@ -147,7 +147,7 @@ const { mutate: employerMutate, isPending: isEmployerPending } = useMutation({
                 <div className="dropdown dropdown-bottom dropdown-end">
                   <div tabIndex={0} role="button" className="  flex gap-1">
                     <div className="size-10 rounded-full border border-primary-500 text-primary-500 font-bold flex justify-center items-center">
-                      <p>{studentProfile.full_name[0]}</p>
+                      <p>{studentProfile?.full_name[0]}</p>
                     </div>
                     {/* <Image src={IMAGES.profile} alt={""} /> */}
                   </div>
@@ -329,11 +329,11 @@ const { mutate: employerMutate, isPending: isEmployerPending } = useMutation({
             {studentProfile && (
               <div className="flex  items-center gap-1 py-1">
                 <div className="size-10 rounded-full border border-primary-500 text-primary-500 font-bold flex justify-center items-center">
-                  <p>{studentProfile.full_name[0]}</p>
+                  <p>{studentProfile?.full_name[0]}</p>
                 </div>
                 <div className="flex flex-col">
-                  <span className=" font-bold">{studentProfile.full_name}</span>
-                  <span>{studentProfile.email}</span>
+                  <span className=" font-bold">{studentProfile?.full_name}</span>
+                  <span>{studentProfile?.email}</span>
                 </div>
               </div>
             )}

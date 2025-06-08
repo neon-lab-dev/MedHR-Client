@@ -1,6 +1,6 @@
 import React from "react";
 import HeroComponent from "./_components/HeroComponent";
-import TrendingToday from "../../../components/TrendingCourseToday";
+// import TrendingToday from "../../../components/TrendingCourseToday";
 import WhatWeDoComponent from "../../../components/WhatWeDo";
 import OurValuableHiringPartners from "@/components/OurValuableHiringPartners";
 import SkillProgrammes from "./_components/SkillProgrammes";
@@ -14,7 +14,7 @@ const HomePage = () => {
     <div className="flex flex-col">
       <HeroComponent />
       <SkillProgrammes/>
-      <TrendingToday />
+      {/* <TrendingToday /> */}
       <LatestJobs />
       <LatestInternships />
       <AvailableCourses/>

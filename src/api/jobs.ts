@@ -1,10 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
- 
+
 import { IJob } from "@/types/job";
-import { fetchData } from "./fetch";
 import api from ".";
-import axios from "axios";
 import { IDefaultQueryParams } from "@/app/(employee)/(job-listing)/_components/ApplyFilter";
+import axiosInstance from "./axiosInstance";
 
 export interface IJobResponse {
   success: boolean;
@@ -14,28 +13,28 @@ export interface IJobResponse {
   filteredJobsCount: number;
 }
 
-export const getLatestInternships = async () => {
-  const jobs = await fetchData<IJobResponse>(
+export const getLatestInternships = async (): Promise<IJob[]> => {
+  const { data } = await axiosInstance.get<IJobResponse>(
     `${api.jobs}?employmentType=Internship`
   );
-  return jobs?.jobs ?? [];
+  return data.jobs ?? [];
 };
 
-export const getLatestJobs = async () => {
-  const jobs = await fetchData<IJobResponse>(`${api.jobs}`);
-  return jobs?.jobs?.filter((j) => j.employmentType !== "Internship") ?? [];
+export const getLatestJobs = async (): Promise<IJob[]> => {
+  const { data } = await axiosInstance.get<IJobResponse>(`${api.jobs}`);
+  return data.jobs?.filter((j) => j.employmentType !== "Internship") ?? [];
 };
 
-export const getJobById = async (id: string) => {
-  const job = await fetchData<{
-    jobs: IJob;
-  }>(`${api.job}/${id}`);
-  return job?.jobs ?? null;
+export const getJobById = async (id: string): Promise<IJob | null> => {
+  const { data } = await axiosInstance.get<{ jobs: IJob }>(`${api.job}/${id}`);
+  return data.jobs ?? null;
 };
 
-export const getJobsByTitle = async (title: string) => {
-  const jobs = await fetchData<IJobResponse>(`${api.jobs}?keyword=${title}`);
-  return jobs?.jobs ?? [];
+export const getJobsByTitle = async (title: string): Promise<IJob[]> => {
+  const { data } = await axiosInstance.get<IJobResponse>(
+    `${api.jobs}?keyword=${title}`
+  );
+  return data.jobs ?? [];
 };
 
 export const handleGetAllJobsForAdminService = async ({
@@ -43,64 +42,45 @@ export const handleGetAllJobsForAdminService = async ({
 }: {
   keyword?: string;
 }): Promise<IJob[]> => {
-  const url = keyword ? `${api.jobs}?keyword=${keyword}` : api.jobs;
-  return new Promise((resolve, reject) => {
-    axios
-      .get(url, {
-        withCredentials: true,
-      })
-      .then((res) => {
-        resolve(res.data?.jobs ?? []);
-      })
-      .catch((err) => {
-        reject(err?.response?.data?.message ?? "Something went wrong");
-      });
-  });
+  try {
+    const url = keyword ? `${api.jobs}?keyword=${keyword}` : api.jobs;
+    const { data } = await axiosInstance.get<{ jobs: IJob[] }>(url, {
+      withCredentials: true,
+    });
+    return data.jobs ?? [];
+  } catch (err: any) {
+    throw err?.response?.data?.message ?? "Something went wrong";
+  }
 };
 
 export const handleDeleteJobService = async (id: string): Promise<string> => {
-  return new Promise((resolve, reject) => {
-    axios
-      .delete(`${api.adminJob}/${id}`, {
+  try {
+    const { data } = await axiosInstance.delete<{ message: string }>(
+      `${api.adminJob}/${id}`,
+      {
         withCredentials: true,
-      })
-      .then((res) => {
-        resolve(res.data?.message ?? "Job deleted successfully");
-      })
-      .catch((err) => {
-        reject(err?.response?.data?.message ?? "Something went wrong");
-      });
-  });
+      }
+    );
+    return data.message ?? "Job deleted successfully";
+  } catch (err: any) {
+    throw err?.response?.data?.message ?? "Something went wrong";
+  }
 };
 
 export const handleGetJobByIdForAdminService = async (
   id: string
-): Promise<IJob> => {
-  return new Promise((resolve, reject) => {
-    axios
-      .get(`${api.job}/${id}`, {
+): Promise<IJob | null> => {
+  try {
+    const { data } = await axiosInstance.get<{ jobs: IJob }>(
+      `${api.job}/${id}`,
+      {
         withCredentials: true,
-      })
-      .then((res) => {
-        resolve(res.data?.jobs ?? null);
-      })
-      .catch((err) => {
-        reject(err?.response?.message ?? "Something went wrong");
-      });
-  });
-};
-
-export const handleApplyJobService = async (id: string): Promise<string> => {
-  return new Promise((resolve, reject) => {
-    axios
-      .put(`${api.applyJob}/${id}`, {}, { withCredentials: true })
-      .then((res) => {
-        resolve(res.data?.message ?? "Applied successfully");
-      })
-      .catch((err) => {
-        reject(err?.response?.data?.message ?? "Failed to apply");
-      });
-  });
+      }
+    );
+    return data.jobs ?? null;
+  } catch (err: any) {
+    throw err?.response?.message ?? "Something went wrong";
+  }
 };
 
 export const handleGetAllJobsByTypeService = async ({
@@ -115,81 +95,84 @@ export const handleGetAllJobsByTypeService = async ({
   department,
   typeOfOrganization,
   ...params
-}: IDefaultQueryParams & {
-  type: string;
-}): Promise<IJob[]> => {
-  // Filter out parameters that are falsy or empty (no need to include them in the request)
-  const truthyParams = Object.fromEntries(
-    Object.entries(params).filter(([_, value]) => value)
-  );
+}: IDefaultQueryParams & { type: string }): Promise<IJob[]> => {
+  try {
+    // Filter out falsy or empty params
+    const truthyParams = Object.fromEntries(
+      Object.entries(params).filter(([_, value]) => Boolean(value))
+    );
 
-  // Only include parameters if they exist
-  const requestParams: any = {
-    ...truthyParams,
-  };
+    const requestParams: any = {
+      ...truthyParams,
+    };
 
-  if (employmentType) requestParams.employmentType = employmentType;
-  if (locationType) requestParams.locationType = locationType;
-  // if (location) requestParams.location = location;
-  if (salary) requestParams["salary[gte]"] = salary;
-  if (duration) requestParams["employmentDuration[gte]"] = duration;
-  if (country) requestParams.country = country;
-  if (city) requestParams.city = city;
-  if (department) requestParams.department = department;
-  if (typeOfOrganization) requestParams.typeOfOrganization = typeOfOrganization;
-   console.log(type);
-  return new Promise((resolve, reject) => {
-    axios
-      .get(`${api.jobs}`, {
-        withCredentials: true,
-        params: requestParams, // Send only the parameters that exist
-      })
-      .then((res) => {
-        let jobs = res.data?.jobs ?? [];
+    if (employmentType) requestParams.employmentType = employmentType;
+    if (locationType) requestParams.locationType = locationType;
+    if (salary) requestParams["salary[gte]"] = salary;
+    if (duration) requestParams["employmentDuration[gte]"] = duration;
+    if (country) requestParams.country = country;
+    if (city) requestParams.city = city;
+    if (department) requestParams.department = department;
+    if (typeOfOrganization)
+      requestParams.typeOfOrganization = typeOfOrganization;
 
-        console.log(jobs);
+    console.log(type);
 
-     
+    const { data } = await axiosInstance.get<{ jobs: IJob[] }>(api.jobs, {
+      withCredentials: true,
+      params: requestParams,
+    });
 
-        // Filter jobs by type if a type is provided (internship or not)
-        if (type) {
-          jobs = jobs.filter((job: IJob) => {
-            if (type === "internships") {
-              return job.employmentType === "Internship";
-            } else {
-              return job.employmentType !== "Internship";
-            }
-          });
+    let jobs = data.jobs ?? [];
+
+    console.log(jobs);
+
+    if (type) {
+      jobs = jobs.filter((job) => {
+        if (type === "internships") {
+          return job.employmentType === "Internship";
+        } else {
+          return job.employmentType !== "Internship";
         }
-
-        // Filter jobs by experience level if provided
-        if (experienceLevel) {
-          jobs = jobs.filter((job: IJob) => {
-            return (
-              job.experience.toLowerCase() === experienceLevel.toLowerCase()
-            );
-          });
-        }
-
-        resolve(jobs ?? []);
-      })
-      .catch((err) => {
-        reject(err?.response?.data?.message ?? "Something went wrong");
       });
-  });
+    }
+
+    if (experienceLevel) {
+      jobs = jobs.filter(
+        (job) => job.experience.toLowerCase() === experienceLevel.toLowerCase()
+      );
+    }
+
+    return jobs ?? [];
+  } catch (err: any) {
+    throw err?.response?.data?.message ?? "Something went wrong";
+  }
 };
 
 export const handleWithdrawApplicationService = async (
   id: string
 ): Promise<string> => {
-  return new Promise((resolve, reject) => {
-    axios
-      .put(`${api.withDrawApplication}/${id}`, {}, { withCredentials: true })
-      .then((res) => {
-        resolve(res.data?.message ?? "Application withdrawn successfully");
-      })
-      .catch((err) => {
-        reject(err?.response?.data?.message ?? "Something went wrong");
-      });
-  });
+  try {
+    const res = await axiosInstance.put(
+      `${api.withDrawApplication}/${id}`,
+      {},
+      { withCredentials: true }
+    );
+    return res.data?.message ?? "Application withdrawn successfully";
+  } catch (err: any) {
+    throw err?.response?.data?.message ?? "Something went wrong";
+  }
+};
+
+export const handleApplyJobService = async (id: string): Promise<string> => {
+  try {
+    const res = await axiosInstance.put(
+      `${api.applyJob}/${id}`,
+      {},
+      { withCredentials: true }
+    );
+    return res.data?.message ?? "Applied successfully";
+  } catch (err: any) {
+    throw err?.response?.data?.message ?? "Failed to apply";
+  }
 };

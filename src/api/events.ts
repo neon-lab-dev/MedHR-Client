@@ -1,70 +1,44 @@
- 
-import axios from "axios";
 import api from ".";
+import axiosInstance from "./axiosInstance";
 
-// Get all skill programmes
 export const getAllEvents = async (): Promise<any> => {
-    return new Promise((resolve, reject) => {
-      axios
-        .get(api.events, {
-          withCredentials: true,
-        })
-        .then((res) => {
-          resolve(res?.data ?? null);
-        })
-        .catch((err) => {
-          reject(err?.response?.message ?? "Something went wrong");
-        });
-    });
-  };
+  try {
+    const res = await axiosInstance.get(api.events, { withCredentials: true });
+    return res.data ?? null;
+  } catch (err: any) {
+    throw err?.response?.message ?? "Something went wrong";
+  }
+};
 
 export const getAllEmployerEvents = async (): Promise<any> => {
-    return new Promise((resolve, reject) => {
-      axios
-        .get(api.getAllEventsForEmployer, {
-          withCredentials: true,
-        })
-        .then((res) => {
-          resolve(res?.data ?? null);
-        })
-        .catch((err) => {
-          reject(err?.response?.message ?? "Something went wrong");
-        });
+  try {
+    const res = await axiosInstance.get(api.getAllEventsForEmployer, {
+      withCredentials: true,
     });
-  };
+    return res.data ?? null;
+  } catch (err: any) {
+    throw err?.response?.message ?? "Something went wrong";
+  }
+};
 
-  export const getEventById = async (
-    id: string
-  ): Promise<any> => {
-    return new Promise((resolve, reject) => {
-      axios
-        .get(`${api.getSingleEventById}/${id}`, {
-          withCredentials: true,
-        })
-        .then((res) => {
-          resolve(res.data ?? {});
-        })
-        .catch((err) => {
-          reject(err?.response?.data?.message ?? "Something went wrong");
-        });
+export const getEventById = async (id: string): Promise<any> => {
+  try {
+    const res = await axiosInstance.get(`${api.getSingleEventById}/${id}`, {
+      withCredentials: true,
     });
-  };
-  
+    return res.data ?? {};
+  } catch (err: any) {
+    throw err?.response?.data?.message ?? "Something went wrong";
+  }
+};
 
-  // Function to delete a event by its id
-  // This is for admin only
-  export const deleteEvent = async (id: string): Promise<string> => {
-    return new Promise((resolve, reject) => {
-      axios
-        .delete(`${api.deleteEvent}/${id}`, {
-          withCredentials: true,
-        })
-        .then(() => {
-          resolve("Event deleted successfully"); 
-        })
-        .catch((err) => {
-          reject(err?.response?.message ?? "Failed to delete event");
-        });
+export const deleteEvent = async (id: string): Promise<string> => {
+  try {
+    await axiosInstance.delete(`${api.deleteEvent}/${id}`, {
+      withCredentials: true,
     });
-  };
-  
+    return "Event deleted successfully";
+  } catch (err: any) {
+    throw err?.response?.message ?? "Failed to delete event";
+  }
+};

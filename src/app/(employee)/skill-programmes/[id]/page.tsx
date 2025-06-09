@@ -4,12 +4,12 @@
 import { useParams, useRouter } from "next/navigation";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import Image from "next/image";
-import axios from "axios";
 import Loading from "@/components/Loading";
 import Container from "@/components/Container";
 import Button from "@/components/Button";
 import { applyOnSkillProgram } from "@/api/employee";
 import { toast } from "sonner";
+import axiosInstance from "@/api/axiosInstance";
 
 
 interface ISkillProgramme {
@@ -38,8 +38,8 @@ interface ISkillProgramme {
 }
 
 const fetchCourseById = async (id: string) => {
-  const { data } = await axios.get(
-    `https://carrerhub-backend.vercel.app/api/v1/skills/${id}`
+  const { data } = await axiosInstance.get(
+    `/skills/${id}`
   );
   return data;
 };

@@ -3,7 +3,6 @@
 import { getSingleSkill } from "@/api/admin";
 import Loading from "@/components/Loading";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import axios from "axios";
 import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
 import { useForm } from "react-hook-form";
@@ -15,6 +14,7 @@ import TextArea from "@/components/Reusable/TextArea/TextArea";
 import { departments } from "@/mockData/departments";
 import dynamic from "next/dynamic";
 import api from "@/api";
+import axiosInstance from "@/api/axiosInstance";
 const JoditEditor = dynamic(() => import("jodit-react"), {
   ssr: false,
   loading: () => <p>Loading...</p>,
@@ -60,7 +60,7 @@ const UpdateSkillProgrammeDashboard = ({
 
   const courseMutation = useMutation({
     mutationFn: async (data: FormData) => {
-      const response = await axios.put(`${api.updateSkill}/${id}`, data, {
+      const response = await axiosInstance.put(`${api.updateSkill}/${id}`, data, {
         withCredentials: true,
       });
       return response.data;

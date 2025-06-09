@@ -2,13 +2,13 @@
 import TextInput from "@/components/Reusable/TextInput/TextInput";
 import { useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import axios from "axios";
 import { toast } from "sonner";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import api from "@/api";
 import SelectDropdownInput from "@/components/Reusable/SelectDropdownInput/SelectDropdownInput";
 import { departments } from "@/mockData/departments";
+import axiosInstance from "@/api/axiosInstance";
 
 type TCreateEventFormValues = {
   eventName: string;
@@ -66,7 +66,7 @@ const CreateEvent = ({ navigateRoute }: { navigateRoute: string }) => {
   // Function to create event
   const createEventMutation = useMutation({
     mutationFn: async (data: FormData) => {
-      const response = await axios.post(api.createEvent, data, {
+      const response = await axiosInstance.post(api.createEvent, data, {
         withCredentials: true,
       });
       return response.data;

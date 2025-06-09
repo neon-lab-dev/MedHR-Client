@@ -3,13 +3,13 @@
 import React, { useEffect, useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
-import axios from "axios";
 import Button from "@/components/Button";
 import Input from "@/components/Input";
 import GetStartedLayout from "../../(employee)/getting-started/_components/getStartedLayout";
 import Successfully from "@/app/(employee)/getting-started/_components/Successfully";
 import api from "@/api";
 import { toast } from "sonner";
+import axiosInstance from "@/api/axiosInstance";
 
 const Page = () => {
   interface FormData {
@@ -48,7 +48,7 @@ const Page = () => {
   // Mutation for API call
   const mutation = useMutation({
     mutationFn: async (data: any) => {
-      await axios.put(api.updateEmployerCompanyDetails, data, {
+      await axiosInstance.put(api.updateEmployerCompanyDetails, data, {
         withCredentials: true,
       });
     },

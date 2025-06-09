@@ -5,10 +5,10 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
 import { useMutation, UseMutationOptions } from "@tanstack/react-query";
-import axios from "axios";
 import { uploadResume } from "@/api/employee";
 import { toast } from "sonner";
 import { Oval } from "react-loader-spinner";
+import axiosInstance from "@/api/axiosInstance";
 
 interface ProfileProps {
   avatarUrl?: string;
@@ -25,7 +25,7 @@ interface ProfileUpdateData {
 
 // Update profile function with FormData
 const updateProfile = async (data: FormData): Promise<void> => {
-  await axios.put("https://carrerhub-backend.vercel.app/api/v1/me/update", data, {
+  await axiosInstance.put("/me/update", data, {
     withCredentials: true,
     headers: {
       "Content-Type": "multipart/form-data",

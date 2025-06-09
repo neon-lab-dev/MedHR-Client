@@ -8,8 +8,8 @@ import { ICONS } from "@/assets";
 import { useState, useEffect } from "react";
 import FilterDropdown from "@/components/Reusable/FilterDropdown/FilterDropdown";
 import { departments } from "@/mockData/departments";
-import axios from "axios";
 import Button from "@/components/Button";
+import axiosInstance from "@/api/axiosInstance";
 
 const AllCourses = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -34,8 +34,8 @@ const AllCourses = () => {
     const fetchAllCourses = async () => {
       try {
         setIsLoading(true);
-        const response = await axios.get(
-          "https://carrerhub-backend.vercel.app/api/v1/courses",
+        const response = await axiosInstance.get(
+          "/courses",
           {
             params: {
               keyword: keyword || undefined,

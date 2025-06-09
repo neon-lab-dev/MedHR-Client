@@ -4,12 +4,12 @@ import NoDataFound from "@/components/NoDataFound";
 import CourseCard from "../../(home)/_components/CourseCard";
 import { Oval } from "react-loader-spinner";
 import { useState, useEffect } from "react";
-import axios from "axios";
 import Image from "next/image";
 import { ICONS } from "@/assets";
 import FilterDropdown from "@/components/Reusable/FilterDropdown/FilterDropdown";
 import { departments } from "@/mockData/departments";
 import Button from "@/components/Button";
+import axiosInstance from "@/api/axiosInstance";
 
 const AllSkillProgrammes = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -34,8 +34,8 @@ const AllSkillProgrammes = () => {
     const fetchAllCourses = async () => {
       try {
         setIsLoading(true);
-        const response = await axios.get(
-          "https://carrerhub-backend.vercel.app/api/v1/skills",
+        const response = await axiosInstance.get(
+          "/skills",
           {
             params: {
               keyword: keyword || undefined,

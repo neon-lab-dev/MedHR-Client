@@ -3,11 +3,11 @@ import Input from '@/components/Input';
 import Button from '@/components/Button';
 import Chip from '@/components/Chip';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import axios from 'axios';
 import { fetchUserData } from '@/api/employee'; // Function to fetch user data
+import axiosInstance from '@/api/axiosInstance';
 
 const updateUserProfile = async (userData: any) => {
-  const response = await axios.put('https://api.medhrplus.com/api/v1/user/details', userData, {
+  const response = await axiosInstance.put('/user/details', userData, {
     withCredentials: true,
     headers: {
       'Content-Type': 'application/json',

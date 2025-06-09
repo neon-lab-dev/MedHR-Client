@@ -1,7 +1,6 @@
 "use client";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
-import axios from "axios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
@@ -11,6 +10,7 @@ import DropdownInput from "@/components/Reusable/DopdownInput/DropdownInput";
 import { departments } from "@/mockData/departments";
 import dynamic from "next/dynamic";
 import api from "@/api";
+import axiosInstance from "@/api/axiosInstance";
 const JoditEditor = dynamic(() => import("jodit-react"), {
   ssr: false,
   loading: () => <p>Loading...</p>,
@@ -65,7 +65,7 @@ const CreateCourse = ({ navigatePath }: { navigatePath: string }) => {
 //   Create course function
   const courseMutation = useMutation({
     mutationFn: async (data: FormData) => {
-      const response = await axios.post(api.createCourse, data, {
+      const response = await axiosInstance.post(api.createCourse, data, {
         withCredentials: true,
       });
       return response.data;

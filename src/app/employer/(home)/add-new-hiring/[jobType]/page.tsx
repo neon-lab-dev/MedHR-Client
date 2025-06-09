@@ -6,7 +6,6 @@ import {
   UseMutationResult,
   useQueryClient,
 } from "@tanstack/react-query";
-import axios from "axios";
 import { toast } from "sonner";
 import Image from "next/image";
 import { ICONS } from "@/assets";
@@ -14,6 +13,7 @@ import Button from "@/components/Button";
 import Link from "next/link";
 import api from "@/api";
 import { departments } from "@/mockData/departments";
+import axiosInstance from "@/api/axiosInstance";
 
 type FormData = {
   title: string;
@@ -49,7 +49,7 @@ const formatFormData = (data: FormData) => {
 // Function to handle job creation request
 const createJobRequest = async (data: FormData) => {
   const payload = formatFormData(data);
-  const response = await axios.post(api.creatrjob, payload, {
+  const response = await axiosInstance.post(api.creatrjob, payload, {
     withCredentials: true,
   });
 

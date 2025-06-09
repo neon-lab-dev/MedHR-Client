@@ -2,7 +2,6 @@
 import { getSingleCourse } from "@/api/admin";
 import Loading from "@/components/Loading";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import axios from "axios";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -14,6 +13,7 @@ import DropdownInput from "@/components/Reusable/DopdownInput/DropdownInput";
 import { departments } from "@/mockData/departments";
 import dynamic from "next/dynamic";
 import api from "@/api";
+import axiosInstance from "@/api/axiosInstance";
 const JoditEditor = dynamic(() => import("jodit-react"), {
   ssr: false,
   loading: () => <p>Loading...</p>
@@ -48,7 +48,7 @@ const EditCourse = ({ id, navigatePath }: { id: string, navigatePath: string }) 
 
   const courseMutation = useMutation({
     mutationFn: async (data: FormData) => {
-      const response = await axios.put(
+      const response = await axiosInstance.put(
         `${api.updateCourse}/${id}`,
         data,
         {

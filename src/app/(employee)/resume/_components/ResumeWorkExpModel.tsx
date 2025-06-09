@@ -3,12 +3,12 @@ import React, { useState, useEffect } from 'react';
 import Input from "@/components/Input";
 import Button from '@/components/Button';
 import Chip from '@/components/Chip';
-import axios from 'axios';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { fetchUserData } from '@/api/employee';
+import axiosInstance from '@/api/axiosInstance';
 
 const addWorkExperience = async (workData: any) => {
-  const response = await axios.put('https://api.medhrplus.com/api/v1/user/details', workData, {
+  const response = await axiosInstance.put('/user/details', workData, {
     withCredentials: true,
     headers: {
       'Content-Type': 'application/json',

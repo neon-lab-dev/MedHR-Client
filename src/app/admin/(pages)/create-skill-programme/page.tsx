@@ -2,7 +2,6 @@
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { useRef, useState, useEffect } from "react";
-import axios from "axios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { departments } from "@/mockData/departments";
@@ -11,6 +10,7 @@ import { TSkillFormData } from "@/app/employer/(home)/create-skill-programme/pag
 import TextInput from "@/components/Reusable/TextInput/TextInput";
 import TextArea from "@/components/Reusable/TextArea/TextArea";
 import DropdownInput from "@/components/Reusable/DopdownInput/DropdownInput";
+import axiosInstance from "@/api/axiosInstance";
 const JoditEditor = dynamic(() => import("jodit-react"), {
   ssr: false,
   loading: () => <p>Loading...</p>,
@@ -49,8 +49,8 @@ const CreateSkillProgramme = () => {
 
   const skillMutation = useMutation({
     mutationFn: async (data: FormData) => {
-      const response = await axios.post(
-        "https://carrerhub-backend.vercel.app/api/v1/skills/create", 
+      const response = await axiosInstance.post(
+        "/skills/create", 
         data, 
         {
           withCredentials: true,

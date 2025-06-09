@@ -4,7 +4,6 @@
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
-import axios from "axios";
 import TextInput from "@/components/Reusable/TextInput/TextInput";
 import { useQuery } from "@tanstack/react-query";
 import { getEventById } from "@/api/events";
@@ -15,6 +14,7 @@ import { Oval } from "react-loader-spinner";
 import api from "@/api";
 import SelectDropdownInput from "@/components/Reusable/SelectDropdownInput/SelectDropdownInput";
 import { departments } from "@/mockData/departments";
+import axiosInstance from "@/api/axiosInstance";
 
 type EventFormValues = {
   eventName: string;
@@ -104,7 +104,7 @@ const UpdateEventPage = ({ id, navigateRoute }: { id: string, navigateRoute: str
     }
 
     try {
-      await axios.put(
+      await axiosInstance.put(
         `${api.updateEvent}/${id}`,
         formData,
         {

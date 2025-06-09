@@ -8,6 +8,7 @@ import React from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import Cookies from 'js-cookie';
+import Link from "next/link";
 
 interface IFormInput {
   email: string;
@@ -54,7 +55,7 @@ const LoginPage = () => {
         <div>
           <h1 className=" text-secondary-800 text-[28px] font-bold text-center">
             <span className="highlight">Login</span>
-            <span className="ml-2">to MeDHr</span>
+            <span className="ml-2">to <Link href="/" className="underline">MeDHr</Link></span>
           </h1>
         </div>
         <div className="">

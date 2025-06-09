@@ -70,7 +70,7 @@ export const handleResetPasswordService = async (
 
 export const handleGetEmployeeProfileService = async (): Promise<IEmployee> => {
   try {
-    const res = await axiosInstance.get("/me");
+    const res = await axiosInstance.get(api.employeeProfile);
     return res.data?.user;
   } catch (error: any) {
     throw new Error(error?.response?.data?.message ?? "Failed to get profile");
@@ -79,7 +79,7 @@ export const handleGetEmployeeProfileService = async (): Promise<IEmployee> => {
 
 export const handleGetEmployerProfileService = async (): Promise<IEmployer> => {
   try {
-    const res = await axiosInstance.get("/employeer/me", {
+    const res = await axiosInstance.get(api.employerProfile, {
       withCredentials: true,
     });
     return res.data?.user;

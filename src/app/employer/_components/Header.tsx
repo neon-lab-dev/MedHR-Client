@@ -3,20 +3,19 @@ import React from "react";
 import { IMAGES } from "@/assets";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { useAppSelector } from "@/hooks/store";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { handleEmployerLogoutService } from "@/api/authentication";
 import { toast } from "sonner";
- import Cookies from "js-cookie";
+import Cookies from "js-cookie";
 
 const Header = () => {
   const user = useAppSelector((state) => state.auth.employerProfile);
   const pathname = usePathname();
-  const router = useRouter(); // Add useRouter hook
-  const queryClient = useQueryClient(); // Add useQueryClient hook
+  const queryClient = useQueryClient();
 
-  const getTitle = (path : string) => {
+  const getTitle = (path: string) => {
     const knownPrefixes = ["/admin/", "/employer/"];
     let title = path;
     knownPrefixes.forEach((prefix) => {
@@ -34,13 +33,11 @@ const Header = () => {
     onSuccess: (msg) => {
       Cookies.remove("employeer_auth_token");
       toast.success(msg);
+
       queryClient
-        .invalidateQueries({
-          queryKey: ["employer-logout"],
-        })
-        .finally(() => {
-          router.push("/");
-          // window.location.reload();
+        .invalidateQueries({ queryKey: ["employer-logout"] })
+        .then(() => {
+          window.location.href = "/";
         });
     },
     onError: (err) => {

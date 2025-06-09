@@ -65,9 +65,9 @@ const CreateCourse = ({ navigatePath }: { navigatePath: string }) => {
 //   Create course function
   const courseMutation = useMutation({
     mutationFn: async (data: FormData) => {
-      const response = await axiosInstance.post(api.createCourse, data, {
-        withCredentials: true,
-      });
+      const response = await axiosInstance.post(api.createCourse, data ,{
+      withCredentials: true,
+    });
       return response.data;
     },
     onSuccess: () => {

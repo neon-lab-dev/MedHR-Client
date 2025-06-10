@@ -58,8 +58,6 @@ const CourseDetails = () => {
     enabled: !!courseId,
   });
 
-  console.log(data);
-
   const course: TCourse = data?.course;
 
   const courseData = [

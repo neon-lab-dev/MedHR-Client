@@ -116,16 +116,12 @@ export const handleGetAllJobsByTypeService = async ({
     if (typeOfOrganization)
       requestParams.typeOfOrganization = typeOfOrganization;
 
-    console.log(type);
-
     const { data } = await axiosInstance.get<{ jobs: IJob[] }>(api.jobs, {
       withCredentials: true,
       params: requestParams,
     });
 
     let jobs = data.jobs ?? [];
-
-    console.log(jobs);
 
     if (type) {
       jobs = jobs.filter((job) => {

@@ -43,7 +43,6 @@ const Page = () => {
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState<any>({});
-  console.log(formData);
 
   // Mutation for API call
   const mutation = useMutation({
@@ -105,7 +104,7 @@ const Page = () => {
       mutation.mutate(finalPayload);
       setLoading(false);
     }
-  }, [formData, step, loading]);
+  }, [formData, step, loading, mutation]);
 
   const handleSkip = () => {
     setFormData((prevData: FormData) => {

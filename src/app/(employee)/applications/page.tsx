@@ -38,7 +38,6 @@ const Applications = () => {
     queryFn: handleGetAppliedJobsByEmployeeService,
     queryKey: ["applications"],
   });
-  console.log(data);
 
   const { mutate, isPending } = useMutation({
     mutationFn: handleWithdrawApplicationService,
@@ -121,7 +120,7 @@ const Applications = () => {
     if (!studentProfile) {
       router.push("/");
     }
-  }, [studentProfile, isAuthenticating]);
+  }, [studentProfile, isAuthenticating, router]);
 
   return (
     <div className="bg-neutral-100 py-16 flex flex-col gap-[51px]">

@@ -101,8 +101,6 @@ const { mutate: employerMutate, isPending: isEmployerPending } = useMutation({
     setIsMobileSidebarOpen(false);
   }, [pathname]);
 
-  console.log(studentProfile);
-
   return (
     <Container>
       <div

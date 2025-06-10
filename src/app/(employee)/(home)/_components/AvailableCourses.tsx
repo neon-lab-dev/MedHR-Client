@@ -20,7 +20,6 @@ const AvailableCourses = () => {
     queryKey: ["courses"],
     queryFn: getAllCourses,
   });
-  console.log(data);
 
   return (
     <Container>

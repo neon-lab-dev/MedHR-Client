@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
  
 "use client";
 import React, { useCallback, useState } from "react";
@@ -42,7 +43,6 @@ const Employers = () => {
     queryKey: ["admin", "job", { keyword }],
     queryFn: () => handleGetAllJobsForAdminService({ keyword }),
   });
-  console.log(data);
   const debouncedSetKeyword = useCallback(
     debounce((queryParams) => {
       setKeyword(queryParams);

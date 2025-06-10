@@ -55,7 +55,7 @@ const City: React.FC<TCityProps> = ({
     }
     setSelectedState("");
     setCity("");
-  }, [selectedCountry]);
+  }, [selectedCountry, setCity]);
 
   useEffect(() => {
     const foundCountry = locationData.find(
@@ -70,7 +70,7 @@ const City: React.FC<TCityProps> = ({
       setCityOptions([]);
     }
     setCity("");
-  }, [selectedState]);
+  }, [selectedState, selectedCountry, setCity]);
 
   return (
     <div className="flex flex-col gap-6">

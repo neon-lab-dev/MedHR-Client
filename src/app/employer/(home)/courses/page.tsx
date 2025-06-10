@@ -8,7 +8,6 @@ const EmployerCoursesPage = () => {
     queryKey: ["courses"],
     queryFn: getAllEmployerCourses,
   });
-  console.log(data);
   
   return (
     <CoursesPageDashboard courses={data?.courses} isLoading={isLoading} navigatePath="/employer" />

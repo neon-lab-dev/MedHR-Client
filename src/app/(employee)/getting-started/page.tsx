@@ -165,8 +165,6 @@ const GettingStarted = () => {
   const [selectedSocialLinks, setSelectedSocialLinks] = useState<TSocialLinks[]>([]);
   const [selectedResume, setSelectedResume] = useState<File | null>(null);
 
-  console.log(selectedSkills)
-
   useEffect(() => {
     console.log("Updated resume:", selectedResume);
   }, [selectedResume]);

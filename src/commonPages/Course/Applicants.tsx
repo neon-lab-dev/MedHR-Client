@@ -32,7 +32,6 @@ const Applicants = ({
               handleGEtEmployerByIdForEmployer(applicant.employee) // Fetch by ID
           )
         );
-        console.log(employees);
         setEmployeeData(employees);
       } catch (err) {
         console.error("Error fetching employees", err);

@@ -24,7 +24,6 @@ const Login = () => {
   const { mutate: employeeMutate, isPending: isEmployeePending } = useMutation({
     mutationFn: handleEmployeeLoginService,
     onSuccess: (data) => {
-      console.log(data);
 
       // ✅ Set token in cookies
       if (data?.accessToken) {

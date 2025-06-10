@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 import { ICONS, IMAGES } from "@/assets";
 import Button from "@/components/Button";

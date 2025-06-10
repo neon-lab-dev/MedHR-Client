@@ -69,7 +69,6 @@ const JobTypePage = ({ jobType }: { jobType: string }) => {
 
   
   const jobs = data?.filter((job) => job?.status !== "Closed");
-  console.log(jobs);
   return (
     <div className="bg-[#f5f6fa] h-full min-h-screen">
       <div className="max-w-7xl mx-auto px-6 2xl:px-0 py-6">

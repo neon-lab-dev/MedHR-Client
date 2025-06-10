@@ -38,7 +38,7 @@ const ApplyJob = ({
     setIsApplied(
       data.applicants.findIndex((a) => a.employee === studentProfile?._id) > -1
     );
-  }, [data]);
+  }, [data, studentProfile]);
 
   return (
     <>

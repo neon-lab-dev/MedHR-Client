@@ -1,5 +1,4 @@
 import React from 'react'
-import Link from 'next/link'
 import Button from '@/components/Button'
 import { IMAGES } from '@/assets'
 import Image from 'next/image'
@@ -15,10 +14,10 @@ const Successfully = () => {
                 <Image src={IMAGES.success} alt='completed' />
             </div>
             <div className=' flex justify-center'>
-                <Link href='/'><Button variant="primary" type="submit" className=' max-md:w-[230px] max-lg:w-[400px]'>
-                    Go to Homepage
+                <button onClick={() => (window.location.href = "/employer/")}><Button variant="primary" type="submit" className=' max-md:w-[230px] max-lg:w-[400px]'>
+                    Go to Dashboard
                 </Button>
-                </Link>
+                </button>
             </div>
         </div></div>
     )

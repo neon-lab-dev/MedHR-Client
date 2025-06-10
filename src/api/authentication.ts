@@ -166,12 +166,12 @@ export const handleEmployeeSignupService = async (
 
 export const handleVerifyEmployeeOTPService = async (
   data: IOTP
-): Promise<string> => {
+): Promise<any> => {
   try {
     const res = await axiosInstance.post(api.employeeOTPVerify, data, {
       withCredentials: true,
     });
-    return res.data?.message ?? "OTP verified successfully!";
+    return res.data;
   } catch (error: any) {
     throw new Error(
       error?.response?.data?.message ?? "OTP verification failed"
@@ -181,12 +181,12 @@ export const handleVerifyEmployeeOTPService = async (
 
 export const handleVerifyEmployerOTPService = async (
   data: IOTP
-): Promise<string> => {
+): Promise<any> => {
   try {
     const res = await axiosInstance.post(api.employerOTPVerify, data, {
       withCredentials: true,
     });
-    return res.data?.message ?? "OTP verified successfully!";
+    return res.data;
   } catch (error: any) {
     throw new Error(
       error?.response?.data?.message ?? "OTP verification failed"

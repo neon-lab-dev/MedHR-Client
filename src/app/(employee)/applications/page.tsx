@@ -38,6 +38,7 @@ const Applications = () => {
     queryFn: handleGetAppliedJobsByEmployeeService,
     queryKey: ["applications"],
   });
+  console.log(data);
 
   const { mutate, isPending } = useMutation({
     mutationFn: handleWithdrawApplicationService,

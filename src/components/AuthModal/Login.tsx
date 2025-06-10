@@ -1,4 +1,3 @@
- 
 import React from "react";
 import { useForm } from "react-hook-form";
 import Button from "../Button";
@@ -22,58 +21,56 @@ const Login = () => {
     formState: { errors },
   } = useForm();
 
-const { mutate: employeeMutate, isPending: isEmployeePending } = useMutation({
-  mutationFn: handleEmployeeLoginService,
-  onSuccess: (data) => {
-    console.log(data);
+  const { mutate: employeeMutate, isPending: isEmployeePending } = useMutation({
+    mutationFn: handleEmployeeLoginService,
+    onSuccess: (data) => {
+      console.log(data);
 
-    // ✅ Set token in cookies
-    if (data?.accessToken) {
-      Cookies.set("employee_auth_token", data.accessToken, {
-        expires: 7, // Days until expiration
-        secure: true,
-        sameSite: "Strict", // Or "Lax" / "None" if cross-site
-      });
-    }
+      // ✅ Set token in cookies
+      if (data?.accessToken) {
+        Cookies.set("employee_auth_token", data.accessToken, {
+          expires: 7, // Days until expiration
+          secure: true,
+          sameSite: "Strict", // Or "Lax" / "None" if cross-site
+        });
+      }
 
-    toast.success(data?.message ?? "Login successful");
-    queryClient.invalidateQueries({ queryKey: ["student-profile"] });
-    dispatch(closeAuthModal());
-    window.location.reload();
-  },
-  onError: (err: string) => {
-    toast.error(err);
-  },
-});
-
-
+      toast.success(data?.message ?? "Login successful");
+      queryClient.invalidateQueries({ queryKey: ["student-profile"] });
+      dispatch(closeAuthModal());
+      window.location.reload();
+    },
+    onError: (err: string) => {
+      toast.error(err);
+    },
+  });
 
   const { mutate: employerMutate, isPending: isEmployerPending } = useMutation({
-  mutationFn: handleEmployerLoginService,
-  onSuccess: (data) => {
-    // ✅ Set employer token in cookie
-    if (data?.accessToken) {
-      Cookies.set("employeer_auth_token", data.accessToken, {
-        expires: 7,
-        secure: true,
-        sameSite: "Strict",
-      });
-    }
+    mutationFn: handleEmployerLoginService,
+    onSuccess: (data) => {
+      // ✅ Set employer token in cookie
+      if (data?.accessToken) {
+        Cookies.set("employeer_auth_token", data.accessToken, {
+          expires: 7,
+          secure: true,
+          sameSite: "Strict",
+        });
+      }
 
-    toast.success(data?.message ?? "Login successful");
+      toast.success(data?.message ?? "Login successful");
 
-    // ✅ Invalidate and then force reload navigation
-    queryClient.invalidateQueries({ queryKey: ["employer-profile"] }).then(() => {
-      dispatch(closeAuthModal());
-      window.location.href = "/employer/";
-    });
-  },
-  onError: (err: string) => {
-    toast.error(err);
-  },
-});
-
-
+      // ✅ Invalidate and then force reload navigation
+      queryClient
+        .invalidateQueries({ queryKey: ["employer-profile"] })
+        .then(() => {
+          dispatch(closeAuthModal());
+          window.location.href = "/employer/";
+        });
+    },
+    onError: (err: string) => {
+      toast.error(err);
+    },
+  });
 
   const onSubmit = async (data: any) => {
     if (activeTab === "Aspirants") {

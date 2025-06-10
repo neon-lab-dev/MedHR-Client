@@ -13,6 +13,7 @@ import {
   handleVerifyEmployerOTPService,
 } from "@/api/authentication";
 import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
 
 const OTP = ({
   mail,
@@ -39,8 +40,18 @@ const OTP = ({
   // Mutation for verifying the OTP for employee
   const employee = useMutation({
     mutationFn: handleVerifyEmployeeOTPService,
-    onSuccess: (msg) => {
-      toast.success(msg);
+    onSuccess: (data) => {
+      // ✅ Set employee token in cookie
+      if (data?.accessToken) {
+        Cookies.set("employee_auth_token", data.accessToken, {
+          expires: 7,
+          secure: true,
+          sameSite: "Strict",
+        });
+      }
+
+      toast.success(data?.message ?? "Account verified");
+      // toast.success(data);
       queryClient
         .invalidateQueries({
           queryKey: ["student-profile"],
@@ -58,15 +69,23 @@ const OTP = ({
   // Mutation for verifying the OTP for employer
   const employer = useMutation({
     mutationFn: handleVerifyEmployerOTPService,
-    onSuccess: (msg) => {
-      toast.success(msg);
+    onSuccess: (data) => {
+       // ✅ Set employer token in cookie
+      if (data?.accessToken) {
+        Cookies.set("employeer_auth_token", data.accessToken, {
+          expires: 7,
+          secure: true,
+          sameSite: "Strict",
+        });
+      }
+
+      toast.success(data?.message ?? "Account verified");
       router.push("/employer/getting-started");
       queryClient
         .invalidateQueries({
           queryKey: ["employer-profile"],
         })
         .then(() => {
-          
           dispatch(closeAuthModal());
         });
     },
@@ -111,7 +130,10 @@ const OTP = ({
 
   return (
     <div>
-      <form onSubmit={handleSubmit(onSubmit)} className="font-plus-jakarta-sans">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="font-plus-jakarta-sans"
+      >
         {/* Phone number on which the OTP was sent */}
         <div className="flex gap-1 items-center justify-center">
           <p className="text-neutral-700 font-Poppins text-sm ">

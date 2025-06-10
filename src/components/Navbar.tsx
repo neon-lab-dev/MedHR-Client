@@ -180,7 +180,7 @@ const { mutate: employerMutate, isPending: isEmployerPending } = useMutation({
                     <hr />
                     <div className="flex justify-center">
                       <button
-                        className=" text-center text-primary-500 text-xl flex justify-center py-2 w-full"
+                        className=" text-center text-primary-500 text-xl flex justify-center py-2 w-full cursor-pointer"
                         onClick={() => {
                           mutate();
                         }}

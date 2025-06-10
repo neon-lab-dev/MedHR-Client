@@ -26,8 +26,8 @@ const ForgotPassword = () => {
     onSuccess: () => {
       dispatch(setAuthModalType("CONFIRMATION_EMAIL"));
     },
-    onError: (error: string) => {
-      toast.error(error);
+    onError: (error: any) => {
+      toast.error(error?.message ?? "Something went wrong");
     },
     onSettled: () => {},
   });

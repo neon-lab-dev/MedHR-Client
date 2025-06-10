@@ -40,8 +40,8 @@ const Login = () => {
       dispatch(closeAuthModal());
       window.location.reload();
     },
-    onError: (err: string) => {
-      toast.error(err);
+    onError: (err: any) => {
+      toast.error(err?.message ?? "Login failed");
     },
   });
 
@@ -67,8 +67,8 @@ const Login = () => {
           window.location.href = "/employer/";
         });
     },
-    onError: (err: string) => {
-      toast.error(err);
+    onError: (err: any) => {
+      toast.error(err?.message);
     },
   });
 

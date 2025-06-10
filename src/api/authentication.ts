@@ -98,7 +98,8 @@ export const handleEmployeeLoginService = async (data: {
     });
     return res.data;
   } catch (error: any) {
-    throw new Error(error?.response?.data?.message ?? "Login failed");
+   const message = error?.response?.data?.message ?? "Login failed";
+    throw new Error(message);
   }
 };
 

@@ -127,7 +127,7 @@ const CourseDetails = () => {
         </h3>
         <div className="flex flex-col lg:flex-row gap-10 font-plus-jakarta-sans mt-7">
           <div className="w-full lg:w-[70%]">
-            <div className="flex flex-col items-center lg:items-start gap-6">
+            <div className="flex flex-col items-start gap-6">
               <Image
                 src={course?.thumbnail?.url as string}
                 alt={course?.thumbnail?.name as string}

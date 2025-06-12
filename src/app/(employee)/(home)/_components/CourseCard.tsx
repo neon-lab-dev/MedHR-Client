@@ -21,6 +21,9 @@ const CourseCard: React.FC<TCourseCardProps> = ({
   pricingType,
   fee,
 }) => {
+  const displayCourseName = courseName.length > 20 
+  ? `${courseName.substring(0, 20)}...` 
+  : courseName;
   return (
     <div
       className={`bg-white w-full max-w-[350px] h-[355px] rounded-3xl border border-neutral-300 shadow-job-card-shadow font-plus-jakarta-sans flex flex-col cursor-pointer relative group overflow-hidden`}
@@ -49,8 +52,14 @@ const CourseCard: React.FC<TCourseCardProps> = ({
         </div>
         {/* Course Name */}
         <h1 className="text-neutral-600 text-lg font-bold mt-4 leading-7">
-          {courseName}
+          {displayCourseName}
         </h1>
+
+        <Link href={href ? href : ""}>
+          <Button variant="normal" className="px-3 py-2 text-sm w-full mt-3 block xl:hidden">
+            View Details
+          </Button>
+        </Link>
 
         {/* Student and lesson */}
         {/* 

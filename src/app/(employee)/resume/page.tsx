@@ -4,12 +4,13 @@ import { useQuery } from '@tanstack/react-query';
 import { Oval } from "react-loader-spinner";
 import Hero from "./_components/Hero";
 import Profile from "./_components/Profile";
-import EducationComponent from "./_components/EducationComponent";
-import Project from "./_components/Project";
-import WorkExp from "./_components/WorkExp";
-import Certifications from "./_components/Certifcation";
-import Skills from "./_components/Skills";
 import { fetchUserData } from '@/api/employee';
+import EducationDetails from '@/app/employer/(home)/find-candidates/_components/EducationDetails';
+import ProjectDetails from '@/app/employer/(home)/find-candidates/_components/ProjectDetails';
+import WorkExperience from '@/app/employer/(home)/find-candidates/_components/WorkExperience';
+import Certification from '@/app/employer/(home)/find-candidates/_components/Certification';
+import Container from '@/components/Container';
+import Skills from '@/app/employer/(home)/find-candidates/_components/Skills';
 
 const Dashboard = () => {
   const { data, error, isLoading } = useQuery({
@@ -44,8 +45,10 @@ const Dashboard = () => {
 
   const { avatar, full_name, education, resumes, projects, experience, certifications, skills } = data.user;
 
-  const avatarUrl = avatar?.url || '/path/to/default-avatar.png'; // Provide a valid path for default avatar
-  const resumeUrl = resumes?.url; // Provide a valid path or URL for default resume
+  const avatarUrl = avatar?.url || '/path/to/default-avatar.png';
+  const resumeUrl = resumes?.url;
+
+  console.log(data.user);
 
   return (
     <div>
@@ -56,11 +59,21 @@ const Dashboard = () => {
         institutionName={education.length > 0 ? education[0].institutionName : 'No education info'}
         resumeUrl={resumeUrl}
       />
-      <EducationComponent education={education} />
+      <Container>
+        
+      <div className="flex flex-col gap-6 mt-5">
+          <EducationDetails education={education ? education  : []} />
+          <ProjectDetails projects={projects ? projects : []} />
+          <WorkExperience experiences={experience ? experience : []} />
+          <Certification certifications={certifications ? certifications : []} />
+          <Skills skills={skills} />
+        </div>
+      </Container>
+      {/* <EducationComponent education={education} />
       <Project projects={projects} />
-      <WorkExp experiences={experience} /> {/* Ensure WorkExp handles the experiences prop correctly */}
-      <Certifications certifications={certifications} /> {/* Ensure Certifications handles the certifications prop correctly */}
-      <Skills skills={skills} /> {/* Ensure Skills handles the skills prop correctly */}
+      <WorkExp experiences={experience} />
+      <Certifications certifications={certifications} />
+      <Skills skills={skills} /> */}
     </div>
   );
 };

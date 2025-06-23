@@ -28,16 +28,16 @@ const EducationDetails = ({education} : {education:TEducationDetails[]}) => {
         education?.map((education:TEducationDetails, index:number) => 
           <div key={index} className="bg-white border border-[#F7F7F8] rounded-[20px] p-5">
         <h1 className="text-lg font-medium text-[#383842]">
-          {education?.institutionName}
+          {education?.institutionName}, {education?.city}
         </h1>
         <p className="text-[#717386] mt-2">
-        {education?.designation} | {education?.courseName} | Grade {education?.grade}
+        {education?.courseName} | Grade {education?.grade}
         </p>
         <p className="text-[#717386] mt-[2px]">{convertDate(education?.startDate as string)} - {convertDate(education?.endDate as string)}</p>
       </div>
         )
         :
-        "No education details added"
+        <p className="text-gray-400">No education details added</p>
       }
       </div>
     </div>

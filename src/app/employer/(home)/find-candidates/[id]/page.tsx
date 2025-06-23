@@ -65,6 +65,8 @@ const EmployeeProfileDetails = ({ params }: Props) => {
       //   document.body.removeChild(link);
       //   URL.revokeObjectURL(url);
       // };
+
+      console.log(data);
       
       if (isLoading) return <Loading className="h-[60vh] w-full" />;
       if (!data) return <NotFound />;

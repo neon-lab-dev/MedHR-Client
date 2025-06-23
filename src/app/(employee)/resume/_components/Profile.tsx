@@ -129,9 +129,9 @@ const Profile: React.FC<ProfileProps> = ({
   };
 
   return (
-    <div className="pt-10 pb-2 bg-secondary-50">
-      <div className="max-width flex">
-        <div className="flex max-lg:flex-col w-full bg-secondary-200 border border-neutral-100 p-6 max-lg:px-2 max-md:py-4 justify-between rounded-2xl items-center gap-5 max-lg:mx-10 mx-[120px] max-md:mx-4 text-center">
+    <div className="pt-10 pb-5 bg-secondary-50 ">
+      <div className="flex w-full max-w-full 2xl:max-w-[1440px] mx-auto px-5 md:px-7 2xl:px-0">
+        <div className="flex max-lg:flex-col w-full bg-secondary-200 border border-neutral-100 p-6 max-lg:px-2 max-md:py-4 justify-between rounded-2xl items-center gap-5 text-center">
           <div className="flex gap-4 items-center">
             <div>
               <div className="bg-neutral-100 border-[3px] border-white rounded-full w-[60px] h-[60px]">

@@ -86,7 +86,7 @@ const CertificationModal:React.FC<TCertificationModalProps> = ({
         
           <TextInput
           label="Issued Date"
-          type="date"
+          type="month"
           value={formValues.issueDate}
             onChange={(e) => handleChange("issueDate", e.target.value)}
         />

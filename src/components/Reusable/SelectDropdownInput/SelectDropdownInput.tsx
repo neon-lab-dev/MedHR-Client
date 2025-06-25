@@ -4,7 +4,7 @@ import { FieldError, FieldErrorsImpl, Merge } from "react-hook-form";
 
 
 interface DropdownProps {
-  label: string;
+  label?: string;
   options: string[];
   error?: FieldError | Merge<FieldError, FieldErrorsImpl<any>>;
   isRequired?: boolean;

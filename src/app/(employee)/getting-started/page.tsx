@@ -103,6 +103,8 @@ type TFormValues = {
   languages: string[];
   areasOfInterests: string[];
   currentlyLookingFor: string[];
+  interestedDepartments: string;
+  interestedCountries: string;
   resume: File | null;
 };
 
@@ -157,6 +159,8 @@ const GettingStarted = () => {
   const [selectedLanguages, setSelectedLanguages] = useState<string[]>([]);
   const [selectedInterest, setSelectedInterest] = useState<string[]>([]);
   const [selectedCurrentlyLookingFor, setSelectedCurrentlyLookingFor] = useState<string[]>([]);
+  const [interestedDepartments, setInterestedDepartments] = useState<string[]>([]);
+  const [interestedCountries, setInterestedCountries] = useState<string[]>([]);
   const [selectedEducation, setSelectedEducation] = useState<TEducationDetails[]>([]);
   const [selectedProject, setSelectedProject] = useState<TProjectDetails[]>([]);
   const [selectedExperience, setSelectedExperience] = useState<TWorkExperience[]>([]);
@@ -168,6 +172,7 @@ const GettingStarted = () => {
   useEffect(() => {
     console.log("Updated resume:", selectedResume);
   }, [selectedResume]);
+
 
   const handleCompleteRegistration = async (data: TFormValues) => {
     const validateStep = () => {
@@ -268,6 +273,8 @@ const GettingStarted = () => {
         languages: selectedLanguages,
         areasOfInterests: selectedInterest,
         currentlyLookingFor: selectedCurrentlyLookingFor,
+        interestedDepartments: interestedDepartments,
+        interestedCountries: interestedCountries,
         resume: selectedResume,
       };
 
@@ -395,7 +402,7 @@ const GettingStarted = () => {
             {step === 1 && <PersonalInfoForm register={register} errors={errors} />}
             {step === 2 && <LanguagePreference onChange={setSelectedLanguages} />}
             {step === 3 && <AreaOfInterests onChange={setSelectedInterest} />}
-            {step === 4 && <CurrentlyLookingFor onChange={setSelectedCurrentlyLookingFor} />}
+            {step === 4 && <CurrentlyLookingFor onChange={setSelectedCurrentlyLookingFor} interestedDepartments={interestedDepartments} setInterestedDepartments={setInterestedDepartments} setInterestedCountries={setInterestedCountries} interestedCountries={interestedCountries} />}
             {step === 5 && <Address register={register} errors={errors} />}
             {step === 6 && <Education onChange={setSelectedEducation} />}
             {step === 7 && <ProjectDetails onChange={setSelectedProject} />}

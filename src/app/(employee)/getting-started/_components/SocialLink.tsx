@@ -79,8 +79,8 @@ const SocialLink: React.FC<TSocialLinkProps> = ({ setSelectedSocialLinks }) => {
 
   const socialMediaPlatforms = [
     { icon: ICONS.linkedin, platform: "LinkedIn" },
-    { icon: ICONS.facebook, platform: "Facebook" },
-    { icon: ICONS.instagram, platform: "Instagram" },
+    { icon: ICONS.facebookBlue, platform: "Facebook" },
+    { icon: ICONS.instagramLight, platform: "Instagram" },
     { icon: ICONS.twitter, platform: "Twitter" },
     { icon: ICONS.github, platform: "Github" },
     { icon: ICONS.youtube, platform: "YouTube" },

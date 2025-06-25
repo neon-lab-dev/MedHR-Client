@@ -85,6 +85,8 @@ import telegram from "@/assets/icons/social media/telegram.svg";
 import tiktok from "@/assets/icons/social media/tiktok.svg";
 import twitter from "@/assets/icons/social media/twitter.svg";
 import youtube from "@/assets/icons/social media/youtube.svg";
+import facebookBlue from "@/assets/icons/social media/facebook-blue.svg";
+import instagramLight from "@/assets/icons/social media/instagram-light.svg";
 
 import download from "@/assets/images/fi-br-download (1).svg";
 import penResume from "@/assets/images/Pen.svg";
@@ -202,6 +204,8 @@ export const ICONS = {
   tiktok,
   twitter,
   youtube,
+  facebookBlue,
+  instagramLight,
 
   sendArrow,
   download2,

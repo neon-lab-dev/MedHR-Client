@@ -8,6 +8,7 @@ type TGuardianErrors = {
   guardianName?: FieldError;
   phoneNumber?: FieldError;
   occupation?: FieldError;
+  countryCode?: FieldError;
 };
 
 type TPersonalInfoFormProps = {
@@ -16,6 +17,13 @@ type TPersonalInfoFormProps = {
     guardian?: TGuardianErrors;
   };
 };
+
+const countryCodes = [
+  { label: "India (+91)", value: "+91" },
+  { label: "Canada (+1)", value: "+1" },
+  { label: "Germany (+49)", value: "+49" },
+];
+
 const PersonalInfoForm: React.FC<TPersonalInfoFormProps> = ({
   register,
   errors,
@@ -23,6 +31,7 @@ const PersonalInfoForm: React.FC<TPersonalInfoFormProps> = ({
   return (
     <div className="flex flex-col gap-5 mt-12 font-plus-jakarta-sans">
       <h1 className="registration-form-heading mb-4">Let's get started</h1>
+
       <TextInput
         label="Full Name"
         placeholder="John Smith"
@@ -30,6 +39,7 @@ const PersonalInfoForm: React.FC<TPersonalInfoFormProps> = ({
         {...register("full_name", { required: "Full name is required" })}
         isRequired={false}
       />
+
       <TextInput
         label="Date of Birth"
         type="date"
@@ -37,6 +47,7 @@ const PersonalInfoForm: React.FC<TPersonalInfoFormProps> = ({
         {...register("dob", { required: "Date of birth is required" })}
         isRequired={false}
       />
+
       <SelectDropdownInput
         label="Designation"
         {...register("designation", { required: "Designation is required" })}
@@ -54,24 +65,38 @@ const PersonalInfoForm: React.FC<TPersonalInfoFormProps> = ({
           })}
           isRequired={false}
         />
-        <TextInput
-          label="Guardian Phone Number"
-          placeholder="+91 9737328323"
-          type="number"
-          error={errors.guardian?.phoneNumber}
-          {...register("guardian.phoneNumber", {
-            required: "Guardian phone number is required",
-          })}
-          isRequired={false}
-        />
+
+        <div className="w-full">
+          <label className="mb-1 block text-sm font-medium text-gray-700">
+            Guardian Phone Number
+          </label>
+          <div className="flex gap-2">
+            <select
+              className="p-4 rounded-xl bg-white border border-neutral-300 focus:outline-none focus:border-primary-500 transition duration-300"
+              {...register("guardian.countryCode", {
+                required: "Country code is required",
+              })}
+              defaultValue="+91"
+            >
+              {countryCodes.map((code) => (
+                <option key={code.value} value={code.value}>
+                  {code.label}
+                </option>
+              ))}
+            </select>
+            <TextInput
+              placeholder="9737328323"
+              type="number"
+              error={errors.guardian?.phoneNumber}
+              {...register("guardian.phoneNumber", {
+                required: "Guardian phone number is required",
+              })}
+              isRequired={false}
+            />
+          </div>
+        </div>
       </div>
-      {/* <DropdownInput
-        label="Occupation"
-        {...register("guardian.occupation" ,{required : "Occupation is required"})}
-        error={errors.guardian?.occupation}
-        options={["Teacher", "Engineer", "Other"]}
-        isRequired={false}
-      /> */}
+
       <TextInput
         label="Guardian Occupation"
         placeholder="Ex: Teacher, Engineer, Doctor, Farmer"

@@ -3,7 +3,7 @@ import { forwardRef } from "react";
 import { FieldError, FieldErrorsImpl, Merge } from "react-hook-form";
 
 interface TextInputProps {
-  label: string;
+  label?: string;
   name?: string;
   placeholder?: string;
   type?: string;

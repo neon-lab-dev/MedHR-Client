@@ -11,13 +11,9 @@ type TAreaOfInterestsProps = {
 const AreaOfInterests: React.FC<TAreaOfInterestsProps> = ({ onChange }) => {
   // Interests
   const interests = [
-    "Allopathy Hospital",
-    "Allopathy Clinic",
-    "Ayurveda Hospital",
-    "Ayurveda Clinic",
-    "Homeopathy Hospital",
-    "Homeopathy Clinic",
-    "Nursing Home",
+    "Allopathy",
+    "Ayurveda",
+    "Homeopathy",
     "Diagnostic Centers",
     "Imaging Centers",
     "Educational Institution",

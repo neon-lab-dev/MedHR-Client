@@ -192,9 +192,7 @@ const EducationModal: React.FC<TEducationModalProps> = ({
           ) : (
             <TextInput
               name="courseName"
-              label={
-                selectedDesignation === "11/12th" ? "Stream" : "Course"
-              }
+              label={selectedDesignation === "11/12th" ? "Stream" : "Course"}
               placeholder={
                 selectedDesignation === "11/12th"
                   ? "eg., Science"
@@ -214,14 +212,17 @@ const EducationModal: React.FC<TEducationModalProps> = ({
           <TextInput
             name="startDate"
             label="From"
-            type="date"
+            type="number"
+            placeholder="e.g. 2020"
             value={formValues.startDate}
             onChange={(e) => handleChange("startDate", e.target.value)}
           />
+
           <TextInput
             name="endDate"
             label="To"
-            type="date"
+            type="number"
+            placeholder="e.g. 2024"
             value={formValues.endDate}
             onChange={(e) => handleChange("endDate", e.target.value)}
           />

@@ -49,7 +49,7 @@ const ProjectDetailsModal: React.FC<TProjectDetailsModalProps> = ({
   };
   return (
     <Modal
-      heading="Add qualification/experience details"
+      heading="Add experience details"
       isModalOpen={isModalOpen}
       setIsModalOpen={setIsModalOpen}
     >
@@ -62,13 +62,13 @@ const ProjectDetailsModal: React.FC<TProjectDetailsModalProps> = ({
       >
         <div className="flex flex-col gap-5 mt-5">
           <TextInput
-            label="Project Title"
+            label="Title"
             placeholder="eg.,  Online Gaming App"
             value={formValues.title}
             onChange={(e) => handleChange("title", e.target.value)}
           />
           <TextArea
-            label="Project Description"
+            label="Description"
             placeholder="You can write about what was the goal of this project? How did you develop this project? and What are some important features of the project?"
             cols={4}
             rows={4}
@@ -76,7 +76,7 @@ const ProjectDetailsModal: React.FC<TProjectDetailsModalProps> = ({
             onChange={(e) => handleChange("description", e.target.value)}
           />
           <TextInput
-            label="Project Link"
+            label="Link"
             placeholder="eg.,  Link Here"
             value={formValues.link}
             onChange={(e) => handleChange("link", e.target.value)}
@@ -84,13 +84,13 @@ const ProjectDetailsModal: React.FC<TProjectDetailsModalProps> = ({
           <div className="flex items-center gap-5">
             <TextInput
               label="Start Date"
-              type="date"
+              type="month"
               value={formValues.startDate}
               onChange={(e) => handleChange("startDate", e.target.value)}
             />
             <TextInput
               label="End Date"
-              type="date"
+              type="month"
               value={formValues.endDate}
               onChange={(e) => handleChange("endDate", e.target.value)}
             />

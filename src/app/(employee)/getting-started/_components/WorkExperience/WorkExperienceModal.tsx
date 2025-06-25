@@ -119,14 +119,14 @@ const WorkExperienceModal: React.FC<TWorkExperienceModalProps> = ({
           />
           <TextInput
             label="From"
-            type="date"
+            type="month"
             value={formValues.startDate}
             onChange={(e) => handleChange("startDate", e.target.value)}
             isRequired={false}
           />
           <TextInput
             label="To"
-            type="date"
+            type="month"
             value={formValues.endDate}
             onChange={(e) => handleChange("endDate", e.target.value)}
           />

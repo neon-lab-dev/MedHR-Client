@@ -2,6 +2,9 @@ import api from "@/api";
 import axiosInstance from "@/api/axiosInstance";
 import { ICONS } from "@/assets";
 import Button from "@/components/Button";
+import SelectDropdownInput from "@/components/Reusable/SelectDropdownInput/SelectDropdownInput";
+import TextArea from "@/components/Reusable/TextArea/TextArea";
+import TextInput from "@/components/Reusable/TextInput/TextInput";
 import { departments } from "@/mockData/departments";
 import {
   useMutation,
@@ -35,13 +38,7 @@ type FormData = {
   experience: string;
 };
 
-const AddNewHiring = ({
-  path,
-  jobType,
-}: {
-  path: string;
-  jobType: string;
-}) => {
+const AddNewHiring = ({ path, jobType }: { path: string; jobType: string }) => {
   // Function to format form data
   const formatFormData = (data: FormData) => {
     const { requiredSkills, ...restData } = data;
@@ -113,376 +110,211 @@ const AddNewHiring = ({
     "Imaging Centers",
   ];
   return (
-    <div className="p-6 bg-[#f5f6fa]">
-      <div className="bg-white p-6 rounded-xl">
+    <div className="bg-[#f5f6fa] p-6 flex flex-col font-plus-jakarta-sans">
+      <div className="bg-white p-6 rounded-lg shadow-md flex flex-col gap-4 max-w-[800px] w-full mx-auto">
         <div className="flex justify-between">
-          <div className="flex gap-6 items-center">
-            <Link href="/admin/jobs/">
-              <Image src={ICONS.leftArrow} alt={""} />
+          <div className="flex gap-2 items-center">
+            <Link href={`${path}/jobs`}>
+              <Image src={ICONS.leftArrow} alt={""} className="size-7" />
             </Link>
-            <h1 className="text-neutral-950 text-[28px] font-bold">
+            <h1 className="text-neutral-950 text-xl font-bold">
               Add New Hiring
             </h1>
           </div>
         </div>
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="max-w-[800px] mx-auto"
+          className="mt-4 flex flex-col gap-8"
         >
-          <div className="flex justify-center mt-16 gap-6">
-            <div className="flex flex-col gap-2 w-full">
-              <label htmlFor="title">
-                <span className="text-lg">
-                  {jobType === "job"
-                    ? "Job Title"
-                    : "Internship Title"}
-                </span>
-              </label>
-              <input
-                type="text"
-                {...register("title", {
-                  required: `${
-                    jobType === "job"
-                      ? "Job Title"
-                      : "Internship Title"
-                  } is required`,
-                })}
-                placeholder="e.g., Healthcare Operations Project Manager"
-                className="p-3 border border-neutral-300 rounded-xl w-full"
-              />
-              {errors.title && (
-                <p className="text-red-500">{errors.title.message}</p>
-              )}
-            </div>
-          </div>
-          <div className="flex justify-center mt-8 gap-6">
-            <div className="flex flex-col gap-2 w-full">
-              <label htmlFor="description">
-                <span className="text-lg">
-                  {jobType === "job"
-                    ? "Job Description"
-                    : "Internship Description"}
-                </span>
-              </label>
-              <textarea
-                {...register("description", {
-                  required: `${
-                    jobType === "job"
-                      ? "Job Description"
-                      : "Internship Description"
-                  } is required`,
-                })}
-                placeholder="e.g., Oversee operational projects within healthcare facilities..."
-                className="p-3 border border-neutral-300 rounded-xl w-full"
-              />
-              {errors.description && (
-                <p className="text-red-500">{errors.description.message}</p>
-              )}
-            </div>
-          </div>
-          <div className="flex justify-center mt-8 gap-6">
-            <div className="flex flex-col gap-2 w-full">
-              <label htmlFor="requirements">
-                <span className="text-lg">Requirements</span>
-              </label>
-              <textarea
-                {...register("requirements", {
-                  required: "Requirements are required",
-                })}
-                placeholder="e.g., Experience in healthcare operations and project management."
-                className="p-3 border border-neutral-300 rounded-xl w-full"
-              />
-              {errors.requirements && (
-                <p className="text-red-500">{errors.requirements.message}</p>
-              )}
-            </div>
-          </div>
-          <div className="flex justify-center mt-8 gap-6">
-            <div className="flex flex-col gap-2 w-full">
-              <label htmlFor="requiredSkills">
-                <span className="text-lg">
-                  Qualification Required (comma-separated)
-                </span>
-              </label>
-              <textarea
-                {...register("requiredSkills", {
-                  required: "Required skills are required",
-                })}
-                placeholder="e.g., Healthcare Operations, Project Management"
-                className="p-3 border border-neutral-300 rounded-xl w-full"
-              />
-              {errors.requiredSkills && (
-                <p className="text-red-500">{errors.requiredSkills.message}</p>
-              )}
-            </div>
-          </div>
-          <div className="flex justify-center mt-8 gap-6">
-            <div className="flex flex-col gap-2 w-full">
-              <label htmlFor="responsibilities">
-                <span className="text-lg">Roles and Responsibilities</span>
-              </label>
-              <textarea
-                {...register("responsibilities", {
-                  required: "Roles and responsibilities are required",
-                })}
-                placeholder="e.g., Implement process improvements and manage operational projects..."
-                className="p-3 border border-neutral-300 rounded-xl w-full"
-              />
-              {errors.responsibilities && (
-                <p className="text-red-500">
-                  {errors.responsibilities.message}
-                </p>
-              )}
-            </div>
-          </div>
-          <div className="flex justify-center mt-8 gap-6">
-            <div className="flex flex-col gap-2 w-full">
-              <label htmlFor="locationType">
-                <span className="text-lg">Location Type</span>
-              </label>
-              <select
-                {...register("locationType", {
-                  required: "Location type is required",
-                })}
-                className="p-3 border border-neutral-300 rounded-xl w-full"
-              >
-                <option value="">Select Location Type</option>
-                {validLocationTypes.map((type) => (
-                  <option key={type} value={type}>
-                    {type}
-                  </option>
-                ))}
-              </select>
-              {errors.locationType && (
-                <p className="text-red-500">{errors.locationType.message}</p>
-              )}
-            </div>
-            <div className="flex flex-col gap-2 w-full">
-              <label htmlFor="location">
-                <span className="text-lg">Country</span>
-              </label>
-              <input
-                type="text"
-                {...register("country", { required: "Country is required" })}
-                placeholder="e.g., Operations HQ, MediPark, Bangalore"
-                className="p-3 border border-neutral-300 rounded-xl w-full"
-              />
-              {errors.country && (
-                <p className="text-red-500">{errors.country.message}</p>
-              )}
-            </div>
-            <div className="flex flex-col gap-2 w-full">
-              <label htmlFor="location">
-                <span className="text-lg">City</span>
-              </label>
-              <input
-                type="text"
-                {...register("city", { required: "City is required" })}
-                placeholder="e.g., Operations HQ, MediPark, Bangalore"
-                className="p-3 border border-neutral-300 rounded-xl w-full"
-              />
-              {errors.city && (
-                <p className="text-red-500">{errors.city.message}</p>
-              )}
-            </div>
+          {/* Title */}
+          <TextInput
+            label={jobType === "job" ? "Job Title" : "Internship Title"}
+            placeholder="e.g., Healthcare Operations Project Manager"
+            error={errors.title}
+            {...register("title", {
+              required: `${
+                jobType === "job" ? "Job Title" : "Internship Title"
+              } is required`,
+            })}
+          />
+
+          {/* Description */}
+          <TextArea
+            label={
+              jobType === "job" ? "Job Description" : "Internship Description"
+            }
+            placeholder="e.g., Oversee operational projects within healthcare facilities..."
+            rows={4}
+            cols={4}
+            error={errors.description}
+            {...register("description", {
+              required: `${
+                jobType === "job" ? "Job Description" : "Internship Description"
+              } is required`,
+            })}
+          />
+
+          {/* Requirements */}
+          <TextArea
+            label="Requirements"
+            placeholder="e.g., Experience in healthcare operations and project management."
+            rows={4}
+            cols={4}
+            error={errors.requirements}
+            {...register("requirements", {
+              required: "Requirements are required",
+            })}
+          />
+
+          {/* Qualification Required */}
+          <TextArea
+            label="Qualification Required (comma-separated)"
+            placeholder="e.g., Healthcare Operations, Project Management"
+            rows={4}
+            cols={4}
+            error={errors.requiredSkills}
+            {...register("requiredSkills", {
+              required: "Required skills are required",
+            })}
+          />
+
+          {/* Roles and Responsibilities */}
+          <TextArea
+            label="Roles and Responsibilities"
+            placeholder="e.g., Implement process improvements and manage operational projects..."
+            rows={4}
+            cols={4}
+            error={errors.responsibilities}
+            {...register("responsibilities", {
+              required: "Roles and responsibilities are required",
+            })}
+          />
+
+          <div className="flex justify-center gap-6">
+            <SelectDropdownInput
+              label="Location Type"
+              {...register("locationType", {
+                required: "Location type is required",
+              })}
+              error={errors?.locationType}
+              options={validLocationTypes}
+              isRequired={true}
+            />
+
+            <TextInput
+              label="Country"
+              placeholder="e.g., India"
+              error={errors.country}
+              {...register("country", { required: "Country is required" })}
+            />
+
+            <TextInput
+              label="City"
+              placeholder="e.g., Bangalore"
+              error={errors.city}
+              {...register("city", { required: "City is required" })}
+            />
           </div>
 
-          <div className="flex justify-center mt-8 gap-6 w-full">
-            <div className="flex flex-col gap-2 w-full">
-              <label htmlFor="employmentType">
-                <span className="text-lg">Employment Type</span>
-              </label>
-              <select
-                {...register("employmentType", {
-                  required: "Employment type is required",
-                })}
-                className="p-3 border border-neutral-300 rounded-xl w-full"
-              >
-                <option value="">Select Employment Type</option>
-                {(jobType === "job"
+          <div className="flex justify-center gap-6 w-full">
+            <SelectDropdownInput
+              label="Employment Type"
+              {...register("employmentType", {
+                required: "Employment type is required",
+              })}
+              error={errors?.employmentType}
+              options={
+                jobType === "job"
                   ? validEmploymentTypes
                   : internshipEmploymentTypes
-                ).map((type) => (
-                  <option key={type} value={type}>
-                    {type}
-                  </option>
-                ))}
-              </select>
-              {errors.employmentType && (
-                <p className="text-red-500">{errors.employmentType.message}</p>
-              )}
-            </div>
+              }
+              isRequired={true}
+            />
 
-            <div className="flex flex-col gap-2 w-full">
-              <label htmlFor="employmentTypeCategory">
-                <span className="text-lg">Job Type</span>
-              </label>
-              <select
-                {...register("employmentTypeCategory", {
-                  required: "Job type is required",
-                })}
-                className="p-3 border border-neutral-300 rounded-xl w-full"
-              >
-                <option value="">Select Employment Type</option>
-                {(jobType === "job"
-                  ? jobTypes
-                  : internshipTypes
-                ).map((type) => (
-                  <option key={type} value={type}>
-                    {type}
-                  </option>
-                ))}
-              </select>
-              {errors.employmentTypeCategory && (
-                <p className="text-red-500">
-                  {errors.employmentTypeCategory.message}
-                </p>
-              )}
-            </div>
+            <SelectDropdownInput
+              label="Job Type"
+              {...register("employmentTypeCategory", {
+                required: "Job type is required",
+              })}
+              error={errors?.employmentTypeCategory}
+              options={jobType === "job" ? jobTypes : internshipTypes}
+              isRequired={true}
+            />
 
-            <div className="flex flex-col gap-2 w-full">
-              <label htmlFor="employmentDuration">
-                <span className="text-lg">Employment Duration (years)</span>
-              </label>
-              <input
-                type="number"
-                {...register("employmentDuration", {
-                  required: "Employment duration is required",
-                  valueAsNumber: true,
-                })}
-                placeholder="e.g., 3"
-                className="p-3 border border-neutral-300 rounded-xl w-full"
-              />
-              {errors.employmentDuration && (
-                <p className="text-red-500">
-                  {errors.employmentDuration.message}
-                </p>
-              )}
-            </div>
+            <TextInput
+              label="Employment Duration (years)"
+              type="number"
+              placeholder="e.g., 3"
+              error={errors.employmentDuration}
+              {...register("employmentDuration", {
+                required: "Employment duration is required",
+                valueAsNumber: true,
+              })}
+            />
           </div>
 
-          <div className="flex justify-center mt-8 gap-6 w-full">
-            {/* Department */}
-            <div className="flex flex-col gap-2 w-full">
-              <label htmlFor="department">
-                <span className="text-lg">Type of Organizations</span>
-                {/* <span className="text-lg">Department</span> */}
-              </label>
-              <select
-                {...register("typeOfOrganization", {
-                  required: "Organization type is required",
-                })}
-                className="p-3 border border-neutral-300 rounded-xl"
-              >
-                <option value="" disabled selected>
-                  Select Organization Type
-                </option>
-                {organizationType?.map((dept) => (
-                  <option key={dept} value={dept}>
-                    {dept}
-                  </option>
-                ))}
-              </select>
-              {errors.typeOfOrganization && (
-                <p className="text-red-500">
-                  {errors.typeOfOrganization.message}
-                </p>
-              )}
-            </div>
+          <div className="flex justify-center gap-6 w-full">
+            <SelectDropdownInput
+              label="Type of Organization"
+              {...register("typeOfOrganization", {
+                required: "Organization type is required",
+              })}
+              error={errors?.typeOfOrganization}
+              options={organizationType}
+              isRequired={true}
+            />
 
-            {/* Sub Department */}
-            <div className="flex flex-col gap-2 w-full">
-              <label htmlFor="department">
-                <span className="text-lg">Department</span>
-                {/* <span className="text-lg">Sub Department</span> */}
-              </label>
-              <select
-                {...register("department", {
-                  required: "Department is required",
-                })}
-                className="p-3 border border-neutral-300 rounded-xl"
-              >
-                <option value="" disabled selected>
-                  Select Department
-                </option>
-                {departments?.map((subDept:string) => (
-                  <option key={subDept} value={subDept}>
-                    {subDept}
-                  </option>
-                ))}
-              </select>
-              {errors.department && (
-                <p className="text-red-500">{errors.department.message}</p>
-              )}
-            </div>
+            <SelectDropdownInput
+              label="Department"
+              {...register("department", {
+                required: "Department is required",
+              })}
+              error={errors?.department}
+              options={departments}
+              isRequired={true}
+            />
           </div>
 
-          <div className="flex justify-center mt-8 gap-6">
-            <div className="flex flex-col gap-2 w-full">
-              <label htmlFor="salary">
-                <span className="text-lg">Salary</span>
-              </label>
-              <input
-                type="number"
-                {...register("salary", {
-                  required: "Salary is required",
-                  valueAsNumber: true,
-                })}
-                placeholder="e.g., 10000000"
-                className="p-3 border border-neutral-300 rounded-xl"
-              />
-              {errors.salary && (
-                <p className="text-red-500">{errors.salary.message}</p>
-              )}
-            </div>
-            <div className="flex flex-col gap-2 w-full">
-              <label htmlFor="applicationDeadline">
-                <span className="text-lg">Application Deadline</span>
-              </label>
-              <input
-                type="date"
-                {...register("applicationDeadline", {
-                  required: "Application deadline is required",
-                })}
-                className="p-3 border border-neutral-300 rounded-xl"
-              />
-              {errors.applicationDeadline && (
-                <p className="text-red-500">
-                  {errors.applicationDeadline.message}
-                </p>
-              )}
-            </div>
+          <div className="flex justify-center gap-6">
+            <TextInput
+              label="Salary"
+              type="number"
+              placeholder="e.g., 10000000"
+              error={errors.salary}
+              {...register("salary", {
+                required: "Salary is required",
+                valueAsNumber: true,
+              })}
+            />
+
+            <TextInput
+              label="Application Deadline"
+              type="date"
+              error={errors.applicationDeadline}
+              {...register("applicationDeadline", {
+                required: "Application deadline is required",
+              })}
+            />
           </div>
-          <div className="flex justify-center mt-8 gap-6">
-            <div className="flex flex-col gap-2 w-full">
-              <label htmlFor="extraBenefits">
-                <span className="text-lg">Extra Benefits</span>
-              </label>
-              <input
-                type="text"
-                {...register("extraBenefits")}
-                placeholder="e.g., Professional development programs, Health insurance"
-                className="p-3 border border-neutral-300 rounded-xl"
-              />
-            </div>
-            <div className="flex flex-col gap-2 w-full">
-              <label htmlFor="experience">
-                <span className="text-lg">Experience Required</span>
-              </label>
-              <input
-                type="text"
-                {...register("experience")}
-                placeholder="e.g., 5+ years"
-                className="p-3 border border-neutral-300 rounded-xl"
-              />
-            </div>
+          <div className="flex justify-center gap-6">
+            <TextInput
+              label="Extra Benefits"
+              placeholder="e.g., Professional development programs, Health insurance"
+              error={errors.extraBenefits}
+              {...register("extraBenefits")}
+            />
+
+            <TextInput
+              label="Experience Required"
+              type="number"
+              placeholder="e.g., 5"
+              error={errors.experience}
+              {...register("experience")}
+            />
           </div>
           <div className="flex justify-center mt-10 gap-6">
             <Button type="submit" className="px-10">
-              Create{" "}
-              {jobType === "internship"
-                ? "Internship"
-                : "Job"}
+              Create {jobType === "internship" ? "Internship" : "Job"}
             </Button>
           </div>
         </form>

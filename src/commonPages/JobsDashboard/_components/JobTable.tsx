@@ -206,10 +206,10 @@ const JobTable = ({ className, path }: { className: string, path : string }) => 
                               <span>View Applications</span>
                             </div>
                           </Link>
-                          <Link href={`${path}/${job._id}`}>
+                          <Link href={`${path}/jobs/edit/${job._id}`}>
                             <div className="flex items-center gap-2 text-sm p-2">
-                              <Image src={IMAGES.view} alt="Role Icon" />
-                              <span>View</span>
+                              <Image src={IMAGES.pen} alt="Role Icon" className="size-4" />
+                              <span>Edit</span>
                             </div>
                           </Link>
                           <div

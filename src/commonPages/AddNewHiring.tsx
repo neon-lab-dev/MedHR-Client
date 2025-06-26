@@ -1,19 +1,19 @@
-"use client";
-import { usePathname, useRouter } from "next/navigation";
-import { useForm, SubmitHandler } from "react-hook-form";
+import api from "@/api";
+import axiosInstance from "@/api/axiosInstance";
+import { ICONS } from "@/assets";
+import Button from "@/components/Button";
+import { departments } from "@/mockData/departments";
 import {
   useMutation,
   UseMutationResult,
   useQueryClient,
 } from "@tanstack/react-query";
-import { toast } from "sonner";
 import Image from "next/image";
-import { ICONS } from "@/assets";
-import Button from "@/components/Button";
 import Link from "next/link";
-import api from "@/api";
-import { departments } from "@/mockData/departments";
-import axiosInstance from "@/api/axiosInstance";
+import { useRouter } from "next/navigation";
+import React from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { toast } from "sonner";
 
 type FormData = {
   title: string;
@@ -35,52 +35,55 @@ type FormData = {
   experience: string;
 };
 
-
-
-// Function to format form data
-const formatFormData = (data: FormData) => {
-  const { requiredSkills, ...restData } = data;
-  return {
-    ...restData,
-    requiredSkills: requiredSkills.split(",").map((skill) => skill.trim()),
+const AddNewHiring = ({
+  path,
+  jobType,
+}: {
+  path: string;
+  jobType: string;
+}) => {
+  // Function to format form data
+  const formatFormData = (data: FormData) => {
+    const { requiredSkills, ...restData } = data;
+    return {
+      ...restData,
+      requiredSkills: requiredSkills.split(",").map((skill) => skill.trim()),
+    };
   };
-};
 
-// Function to handle job creation request
-const createJobRequest = async (data: FormData) => {
-  const payload = formatFormData(data);
-  const response = await axiosInstance.post(api.creatrjob, payload, {
-    withCredentials: true,
-  });
+  const createJobRequest = async (data: FormData) => {
+    const payload = formatFormData(data);
+    const response = await axiosInstance.post(api.creatrjob, payload, {
+      withCredentials: true,
+    });
 
-  if (response.status !== 201) {
-    throw new Error("Failed to create job");
-  }
-  return response.data;
-};
+    if (response.status !== 201) {
+      throw new Error("Failed to create job");
+    }
+    return response.data;
+  };
 
-// Custom hook for job creation mutation
-const useCreateJobMutation = (): UseMutationResult<any, Error, FormData> => {
-  const router = useRouter();
-  const queryClient = useQueryClient();
-  return useMutation({
-    mutationFn: createJobRequest,
-    onSuccess: () => {
-      toast.success("Job created successfully");
-      queryClient.invalidateQueries({ queryKey: ["jobs-employer-job"] });
-      queryClient.invalidateQueries({ queryKey: ["jobs"] });
+  // Custom hook for job creation mutation
+  const useCreateJobMutation = (): UseMutationResult<any, Error, FormData> => {
+    const router = useRouter();
+    const queryClient = useQueryClient();
+    return useMutation({
+      mutationFn: createJobRequest,
+      onSuccess: () => {
+        toast.success(`${jobType.toUpperCase()} created successfully`);
+        queryClient.invalidateQueries({ queryKey: ["jobs-employer-job"] });
+        queryClient.invalidateQueries({ queryKey: ["jobs"] });
 
-      router.push("/employer");
-    },
-    onError: (error: Error) => {
-      console.error("Error creating job:", error);
-      toast.error(error.message || "Failed to create job");
-    },
-  });
-};
+        const navigateRoute = jobType === "job" ? "jobs" : "internships";
+        router.push(`${path}/${navigateRoute}`);
+      },
+      onError: (error: Error) => {
+        console.error("Error creating job:", error);
+        toast.error(error.message || "Failed to create job");
+      },
+    });
+  };
 
-const Page = () => {
-  const pathname = usePathname();
   const {
     register,
     handleSubmit,
@@ -98,8 +101,7 @@ const Page = () => {
   const internshipEmploymentTypes = ["Internship"];
   const internshipTypes = ["Shadow Internship", "Practice Internship"];
 
-
-   const organizationType = [
+  const organizationType = [
     "Allopathy Hospital",
     "Allopathy Clinic",
     "Ayurveda Hospital",
@@ -110,13 +112,12 @@ const Page = () => {
     "Diagnostic Centers",
     "Imaging Centers",
   ];
-
   return (
     <div className="p-6 bg-[#f5f6fa]">
       <div className="bg-white p-6 rounded-xl">
         <div className="flex justify-between">
           <div className="flex gap-6 items-center">
-            <Link href="/employer/">
+            <Link href="/admin/jobs/">
               <Image src={ICONS.leftArrow} alt={""} />
             </Link>
             <h1 className="text-neutral-950 text-[28px] font-bold">
@@ -124,12 +125,15 @@ const Page = () => {
             </h1>
           </div>
         </div>
-        <form onSubmit={handleSubmit(onSubmit)} className="max-w-[800px] mx-auto">
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="max-w-[800px] mx-auto"
+        >
           <div className="flex justify-center mt-16 gap-6">
             <div className="flex flex-col gap-2 w-full">
               <label htmlFor="title">
                 <span className="text-lg">
-                  {pathname === "/admin/add-new-hiring/job"
+                  {jobType === "job"
                     ? "Job Title"
                     : "Internship Title"}
                 </span>
@@ -138,7 +142,7 @@ const Page = () => {
                 type="text"
                 {...register("title", {
                   required: `${
-                    pathname === "/employer/add-new-hiring/job"
+                    jobType === "job"
                       ? "Job Title"
                       : "Internship Title"
                   } is required`,
@@ -155,7 +159,7 @@ const Page = () => {
             <div className="flex flex-col gap-2 w-full">
               <label htmlFor="description">
                 <span className="text-lg">
-                  {pathname === "/employer/add-new-hiring/job"
+                  {jobType === "job"
                     ? "Job Description"
                     : "Internship Description"}
                 </span>
@@ -163,7 +167,7 @@ const Page = () => {
               <textarea
                 {...register("description", {
                   required: `${
-                    pathname === "/employer/add-new-hiring/job"
+                    jobType === "job"
                       ? "Job Description"
                       : "Internship Description"
                   } is required`,
@@ -295,7 +299,7 @@ const Page = () => {
                 className="p-3 border border-neutral-300 rounded-xl w-full"
               >
                 <option value="">Select Employment Type</option>
-                {(pathname === "/employer/add-new-hiring/job"
+                {(jobType === "job"
                   ? validEmploymentTypes
                   : internshipEmploymentTypes
                 ).map((type) => (
@@ -320,7 +324,7 @@ const Page = () => {
                 className="p-3 border border-neutral-300 rounded-xl w-full"
               >
                 <option value="">Select Employment Type</option>
-                {(pathname === "/employer/add-new-hiring/job"
+                {(jobType === "job"
                   ? jobTypes
                   : internshipTypes
                 ).map((type) => (
@@ -370,7 +374,9 @@ const Page = () => {
                 })}
                 className="p-3 border border-neutral-300 rounded-xl"
               >
-                <option value="" disabled selected>Select Organization Type</option>
+                <option value="" disabled selected>
+                  Select Organization Type
+                </option>
                 {organizationType?.map((dept) => (
                   <option key={dept} value={dept}>
                     {dept}
@@ -378,7 +384,9 @@ const Page = () => {
                 ))}
               </select>
               {errors.typeOfOrganization && (
-                <p className="text-red-500">{errors.typeOfOrganization.message}</p>
+                <p className="text-red-500">
+                  {errors.typeOfOrganization.message}
+                </p>
               )}
             </div>
 
@@ -394,8 +402,10 @@ const Page = () => {
                 })}
                 className="p-3 border border-neutral-300 rounded-xl"
               >
-                <option value="" disabled selected>Select Department</option>
-                {departments?.map((subDept) => (
+                <option value="" disabled selected>
+                  Select Department
+                </option>
+                {departments?.map((subDept:string) => (
                   <option key={subDept} value={subDept}>
                     {subDept}
                   </option>
@@ -470,7 +480,7 @@ const Page = () => {
           <div className="flex justify-center mt-10 gap-6">
             <Button type="submit" className="px-10">
               Create{" "}
-              {pathname === "/employer/add-new-hiring/internship"
+              {jobType === "internship"
                 ? "Internship"
                 : "Job"}
             </Button>
@@ -487,4 +497,5 @@ const Page = () => {
     </div>
   );
 };
-export default Page;
+
+export default AddNewHiring;

@@ -1,12 +1,13 @@
 "use client"
+
 import InternshipDashboard from "@/commonPages/InternshipDashboard/page";
 
-const EmployerInternshipPage = () => {
+const AdminInternshipPage = () => {
     return (
         <div>
-          <InternshipDashboard path="/employer" />
+          <InternshipDashboard path="/admin" />
         </div>
     );
 };
 
-export default EmployerInternshipPage;
+export default AdminInternshipPage;

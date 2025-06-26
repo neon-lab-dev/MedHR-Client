@@ -10,17 +10,19 @@ import { Oval } from "react-loader-spinner";
 import { toast } from "sonner";
 import { twMerge } from "tailwind-merge";
 
-interface Internship {
+interface Job {
   _id: string;
   title: string;
   salary: string;
   applicants: any[];
   employmentType: string;
+  city: string;
+  country: string;
   status: string;
 }
 
-const useFetchInternships = () => {
-  return useQuery<Internship[], Error>({
+const useFetchJobs = () => {
+  return useQuery<Job[], Error>({
     queryKey: ["jobs-employer-job"],
     queryFn: fetchJobs,
   });
@@ -50,12 +52,11 @@ const useDeleteJob = () => {
   });
 };
 
-const InternshipTable = ({ className }: { className: string }) => {
+const JobTable = ({ className, path }: { className: string, path : string }) => {
   const [dropdownOpenId, setDropdownOpenId] = useState<string | null>(null);
-  const { data: jobs = [], isLoading, isError, error } = useFetchInternships();
-  const allInternship = jobs.filter(
-    (job) => job?.employmentType === "Internship"
-  );
+  const { data: jobs = [], isLoading, isError, error } = useFetchJobs();
+  console.log(jobs);
+  const allJobs = jobs.filter((job) => job?.employmentType !== "Internship");
   const { mutate: deleteJob } = useDeleteJob();
 
   const handleMenuClick = (id: string) => {
@@ -123,6 +124,11 @@ const InternshipTable = ({ className }: { className: string }) => {
               </td>
               <td>
                 <div className="flex items-center gap-2">
+                  <span>City / Country</span>
+                </div>
+              </td>
+              <td>
+                <div className="flex items-center gap-2">
                   <span>Status</span>
                 </div>
               </td>
@@ -134,14 +140,14 @@ const InternshipTable = ({ className }: { className: string }) => {
             </tr>
           </thead>
           <tbody className="bg-white w-full text-base">
-            {allInternship.length === 0 ? (
+            {allJobs.length === 0 ? (
               <tr>
                 <td colSpan={6} className="py-4 text-center font-Poppins">
                   No data found.
                 </td>
               </tr>
             ) : (
-              allInternship.map((job) => (
+              allJobs.map((job) => (
                 <tr key={job._id}>
                   <td>
                     <div className="flex items-center gap-2">
@@ -157,7 +163,7 @@ const InternshipTable = ({ className }: { className: string }) => {
                     <div className="flex items-center gap-2">
                       <span>
                         {job.applicants.length}{" "}
-                        <Link href={`/employer/dashboard/${job._id}`}>
+                        <Link href={`${path}/dashboard/${job._id}`}>
                           <span className="text-red-500 underline cursor-pointer">
                             View Applications
                           </span>
@@ -168,6 +174,13 @@ const InternshipTable = ({ className }: { className: string }) => {
                   <td>
                     <div className="flex items-center gap-2">
                       <span>{job.employmentType}</span>
+                    </div>
+                  </td>
+                  <td>
+                    <div className="flex items-center gap-2">
+                      <span>
+                        {job?.city}, {job?.country}
+                      </span>
                     </div>
                   </td>
                   <td>
@@ -187,13 +200,13 @@ const InternshipTable = ({ className }: { className: string }) => {
                       </div>
                       {dropdownOpenId === job._id && (
                         <div className="absolute right-0 mt-48 w-48 p-4 rounded-xl bg-white border shadow-lg z-10">
-                          <Link href={`/employer/dashboard/${job._id}`}>
+                          <Link href={`${path}/dashboard/${job._id}`}>
                             <div className="flex items-center gap-2 text-sm p-2">
                               <Image src={IMAGES.doc} alt="Role Icon" />
                               <span>View Applications</span>
                             </div>
                           </Link>
-                          <Link href={`/employer/${job._id}`}>
+                          <Link href={`${path}/${job._id}`}>
                             <div className="flex items-center gap-2 text-sm p-2">
                               <Image src={IMAGES.view} alt="Role Icon" />
                               <span>View</span>
@@ -220,4 +233,4 @@ const InternshipTable = ({ className }: { className: string }) => {
   );
 };
 
-export default InternshipTable;
+export default JobTable;

@@ -172,3 +172,14 @@ export const handleApplyJobService = async (id: string): Promise<string> => {
     throw err?.response?.data?.message ?? "Failed to apply";
   }
 };
+
+export const handleGetJobByIdService = async (id: any): Promise<IJob> => {
+  try {
+    const res = await axiosInstance.get(`${api.job}/${id}`, {
+      withCredentials: true,
+    });
+    return res.data?.jobs;
+  } catch (err: any) {
+    throw new Error(err?.response?.data?.message ?? "Something went wrong");
+  }
+};

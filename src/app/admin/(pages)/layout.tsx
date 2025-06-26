@@ -42,8 +42,8 @@ const navLinks = [
       icon: ICONS.home
     },
     {
-      label: "Employees",
-    path: "/admin/employees",
+      label: "Aspirants",
+    path: "/admin/aspirants",
       icon: ICONS.employee
     },
     {
@@ -55,6 +55,16 @@ const navLinks = [
        label: "Jobs Posted",
     path: "/admin/jobs-posted",
       icon: ICONS.jobs
+    },
+    {
+       label: "Jobs",
+    path: "/admin/jobs",
+      icon: ICONS.jobs
+    },
+    {
+       label: "Internships",
+    path: "/admin/internships",
+      icon: ICONS.internship
     },
     {
       label: "Courses",

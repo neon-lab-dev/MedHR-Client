@@ -1,23 +1,15 @@
 const GuardianDetails = ({ guardianDetails }: { guardianDetails: any }) => {
   const data = [
     {
-      title: "Street",
+      title: "Guardian Name",
       data: guardianDetails?.guardianName,
     },
     {
-      title: "City",
+      title: "Guardian Occupation",
       data: guardianDetails?.occupation,
     },
     {
-      title: "Post Code",
-      data: guardianDetails?.phoneNumber,
-    },
-    {
-      title: "State",
-      data: guardianDetails?.phoneNumber,
-    },
-    {
-      title: "Country",
+      title: "Guardian Phone Number",
       data: guardianDetails?.phoneNumber,
     },
   ];

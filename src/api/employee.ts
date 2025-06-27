@@ -121,3 +121,22 @@ export const fetchUserData = async (): Promise<any> => {
     );
   }
 };
+
+export const updateEmployeeProfile = async (
+  updatedData: Record<string, any>
+): Promise<any> => {
+  try {
+    const response = await axiosInstance.put(
+      api.updateEmployeeProfile,
+      updatedData,
+      {
+        withCredentials: true,
+      }
+    );
+    return response.data;
+  } catch (error: any) {
+    throw new Error(
+      error?.response?.data?.message ?? "Failed to update employee profile"
+    );
+  }
+};

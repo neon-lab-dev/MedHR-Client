@@ -12,6 +12,7 @@ import Certification from "@/app/employer/(home)/find-candidates/_components/Cer
 import Container from "@/components/Container";
 import Skills from "@/app/employer/(home)/find-candidates/_components/Skills";
 import PersonalDetails from "@/app/employer/(home)/find-candidates/_components/PersonalDetails";
+import GuardianDetails from "@/app/employer/(home)/find-candidates/_components/GuardianDetails";
 
 const Dashboard = () => {
   const { data, error, isLoading } = useQuery({
@@ -60,11 +61,17 @@ const Dashboard = () => {
 
   console.log(data.user);
 
-  const personalDeatils = {
+  const personalDetails = {
     email: data.user.email,
     mobilenumber: data.user.mobilenumber,
     dob : data.user.dob,
     designation : data.user.designation
+  };
+
+  const guardianDetails = {
+    guardianName: data.user.guardian.guardianName,
+    occupation: data.user.guardian.occupation,
+    phoneNumber : data.user.guardian.phoneNumber,
   };
 
   return (
@@ -82,7 +89,8 @@ const Dashboard = () => {
       />
       <Container>
         <div className="flex flex-col gap-6 mt-5">
-          <PersonalDetails personalDetails={personalDeatils} />
+          <PersonalDetails personalDetails={personalDetails} />
+          <GuardianDetails guardianDetails={guardianDetails} />
           <EducationDetails education={education ? education : []} />
           <ProjectDetails projects={projects ? projects : []} />
           <WorkExperience experiences={experience ? experience : []} />

@@ -3,7 +3,7 @@
 import { convertDate } from "@/helpers/convertDate";
 import { useState } from "react";
 import Image from "next/image";
-import { ICONS } from "@/assets";
+import { ICONS, IMAGES } from "@/assets";
 import Button from "@/components/Button";
 import TextInput from "@/components/Reusable/TextInput/TextInput";
 import { updateEmployeeProfile } from "@/api/employee";
@@ -23,10 +23,10 @@ type TEducationDetails = {
 
 const EducationDetails = ({
   education,
-  isEditable=false
+  isEditable = false,
 }: {
   education: TEducationDetails[];
-  isEditable?: boolean
+  isEditable?: boolean;
 }) => {
   const [editIndex, setEditIndex] = useState<number | null>(null);
   const [addMode, setAddMode] = useState(false);
@@ -55,25 +55,37 @@ const EducationDetails = ({
     }
   };
 
+  const handleDelete = async (index: number) => {
+    setIsLoading(true);
+    try {
+      const filtered = education.filter((_, i) => i !== index);
+      await updateEmployeeProfile({ education: filtered });
+      await queryClient.invalidateQueries({ queryKey: ["user"] });
+    } catch (err) {
+      console.error("Education data delete failed", err);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <div className="bg-white border border-[#F7F7F8] rounded-[20px] p-5 flex flex-col gap-6">
       <div className="flex justify-between items-center">
         <h1 className="text-2xl font-semibold text-[#37466D]">
           Education Details
         </h1>
-        {
-          isEditable &&
+        {isEditable && (
           <Button
-          variant="natural"
-          className="text-base bg-neutral-100 rounded-lg px-6 font-semibold py-2"
-          onClick={() => {
-            setAddMode(!addMode);
-            setEditIndex(null);
-          }}
-        >
-          Add More
-        </Button>
-        }
+            variant="natural"
+            className="text-base bg-neutral-100 rounded-lg px-6 font-semibold py-2"
+            onClick={() => {
+              setAddMode(!addMode);
+              setEditIndex(null);
+            }}
+          >
+            Add More
+          </Button>
+        )}
       </div>
 
       <hr className="border border-[#F7F7F8] w-full" />
@@ -99,19 +111,42 @@ const EducationDetails = ({
                     {convertDate(item?.endDate as string)}
                   </p>
                 </div>
-               {
-                isEditable &&
-                 <button
-                  className="text-primary-500 font-medium flex items-center gap-[6px] cursor-pointer"
-                  onClick={() => {
-                    setEditIndex((prev) => (prev === index ? null : index));
-                    setAddMode(false);
-                  }}
-                >
-                  Edit
-                  <Image src={ICONS.penEdit} alt="edit" className="size-4" />
-                </button>
-               }
+                {isEditable && (
+                  <div className="flex gap-4">
+                    <button
+                      className="text-primary-500 font-medium flex items-center gap-[6px] cursor-pointer"
+                      onClick={() => {
+                        setEditIndex((prev) => (prev === index ? null : index));
+                        setAddMode(false);
+                      }}
+                    >
+                      <Image
+                        src={ICONS.penEdit}
+                        alt="edit"
+                        className="size-4"
+                      />
+                    </button>
+                    <button
+                      className="text-red-500 cursor-pointer"
+                      onClick={() => handleDelete(index)}
+                    >
+                      {/* {isLoading && editIndex === index ? (
+                        <div className="w-4 h-4 border-2 border-primary-500 border-t-transparent rounded-full animate-spin" />
+                      ) : (
+                        <Image
+                          src={IMAGES.bin}
+                          alt="delete"
+                          className="size-4"
+                        />
+                      )} */}
+                      <Image
+                          src={IMAGES.bin}
+                          alt="delete"
+                          className="size-4"
+                        />
+                    </button>
+                  </div>
+                )}
               </div>
 
               {/* Accordion for editing this education */}

@@ -26,6 +26,7 @@ const PersonalDetails = ({
   const queryClient = useQueryClient();
   const [showAccordion, setShowAccordion] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  console.log(isEditable);
 
   const data = [
     {

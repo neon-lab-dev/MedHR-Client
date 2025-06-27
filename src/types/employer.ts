@@ -46,6 +46,7 @@ export type TEmployee = {
   email: string;
   mobilenumber: number;
   password: string;
+  designation : string;
   dob?: string;
   gender?: "Male" | "Female" | "Other";
   guardian?: {
@@ -54,6 +55,8 @@ export type TEmployee = {
     occupation?: string;
   };
   preferredLanguages: string[];
+  interestedCountries: string[];
+  interestedDepartments: string[];
   areasOfInterests: string[];
   currentlyLookingFor: string[];
   address?: {

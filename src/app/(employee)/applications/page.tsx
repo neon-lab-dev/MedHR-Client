@@ -155,7 +155,7 @@ const Applications = () => {
           data={
             data?.map((item) => {
               return {
-                companyName: item.companyDetails.companyName,
+                companyName: item.companyDetails.companyName || "___",
                 position: item.title,
                 appliedOn: new Date(
                   item.applicants.find(

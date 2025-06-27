@@ -52,7 +52,7 @@ const AddNewHiring = ({
   defaultValues?: any;
   isLoading?: boolean;
   actionType?: string;
-  backNavigationPath: string;
+  backNavigationPath?: string;
 }) => {
   // Function to format form data
   const formatFormData = (data: FormData) => {

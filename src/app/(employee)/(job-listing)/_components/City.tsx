@@ -45,32 +45,44 @@ const City: React.FC<TCityProps> = ({
   }, []);
 
   useEffect(() => {
-    const foundCountry = locationData.find(
-      (c) => c.countryName === selectedCountry
-    );
-    if (foundCountry) {
-      setStateOptions(foundCountry.states.map((s) => s.state));
-    } else {
-      setStateOptions([]);
-    }
-    setSelectedState("");
-    setCity("");
-  }, [selectedCountry, setCity]);
+  const foundCountry = locationData.find(
+    (c) => c.countryName === selectedCountry
+  );
 
-  useEffect(() => {
-    const foundCountry = locationData.find(
-      (c) => c.countryName === selectedCountry
-    );
-    const foundState = foundCountry?.states.find(
-      (s) => s.state === selectedState
-    );
-    if (foundState) {
-      setCityOptions(foundState.cities);
-    } else {
-      setCityOptions([]);
-    }
-    setCity("");
-  }, [selectedState, selectedCountry, setCity]);
+  if (foundCountry) {
+    setStateOptions(foundCountry.states.map((s) => s.state));
+  } else {
+    setStateOptions([]);
+  }
+
+  if (selectedState !== "") {
+    setSelectedState(""); // ✅ Only reset if needed
+  }
+
+  if (city !== "") {
+    setCity(""); // ✅ Prevents infinite loop
+  }
+}, [selectedCountry]);
+
+useEffect(() => {
+  const foundCountry = locationData.find(
+    (c) => c.countryName === selectedCountry
+  );
+  const foundState = foundCountry?.states.find(
+    (s) => s.state === selectedState
+  );
+
+  if (foundState) {
+    setCityOptions(foundState.cities);
+  } else {
+    setCityOptions([]);
+  }
+
+  if (city !== "") {
+    setCity(""); // ✅ Only reset city if it’s not already empty
+  }
+}, [selectedState, selectedCountry]);
+
 
   return (
     <div className="flex flex-col gap-6">

@@ -1,20 +1,21 @@
 "use client";
-import React from 'react';
-import { useQuery } from '@tanstack/react-query';
+import React from "react";
+import { useQuery } from "@tanstack/react-query";
 import { Oval } from "react-loader-spinner";
 import Hero from "./_components/Hero";
 import Profile from "./_components/Profile";
-import { fetchUserData } from '@/api/employee';
-import EducationDetails from '@/app/employer/(home)/find-candidates/_components/EducationDetails';
-import ProjectDetails from '@/app/employer/(home)/find-candidates/_components/ProjectDetails';
-import WorkExperience from '@/app/employer/(home)/find-candidates/_components/WorkExperience';
-import Certification from '@/app/employer/(home)/find-candidates/_components/Certification';
-import Container from '@/components/Container';
-import Skills from '@/app/employer/(home)/find-candidates/_components/Skills';
+import { fetchUserData } from "@/api/employee";
+import EducationDetails from "@/app/employer/(home)/find-candidates/_components/EducationDetails";
+import ProjectDetails from "@/app/employer/(home)/find-candidates/_components/ProjectDetails";
+import WorkExperience from "@/app/employer/(home)/find-candidates/_components/WorkExperience";
+import Certification from "@/app/employer/(home)/find-candidates/_components/Certification";
+import Container from "@/components/Container";
+import Skills from "@/app/employer/(home)/find-candidates/_components/Skills";
+import PersonalDetails from "@/app/employer/(home)/find-candidates/_components/PersonalDetails";
 
 const Dashboard = () => {
   const { data, error, isLoading } = useQuery({
-    queryKey: ['user'],
+    queryKey: ["user"],
     queryFn: fetchUserData,
   });
 
@@ -43,12 +44,28 @@ const Dashboard = () => {
     return <div>No data available</div>;
   }
 
-  const { avatar, full_name, education, resumes, projects, experience, certifications, skills } = data.user;
+  const {
+    avatar,
+    full_name,
+    education,
+    resumes,
+    projects,
+    experience,
+    certifications,
+    skills,
+  } = data.user;
 
-  const avatarUrl = avatar?.url || '/path/to/default-avatar.png';
+  const avatarUrl = avatar?.url || "/path/to/default-avatar.png";
   const resumeUrl = resumes?.url;
 
   console.log(data.user);
+
+  const personalDeatils = {
+    email: data.user.email,
+    mobilenumber: data.user.mobilenumber,
+    dob : data.user.dob,
+    designation : data.user.designation
+  };
 
   return (
     <div>
@@ -56,16 +73,22 @@ const Dashboard = () => {
       <Profile
         avatarUrl={avatarUrl}
         fullName={full_name}
-        institutionName={education.length > 0 ? education[0].institutionName : 'No education info'}
+        institutionName={
+          education.length > 0
+            ? education[0].institutionName
+            : "No education info"
+        }
         resumeUrl={resumeUrl}
       />
       <Container>
-        
-      <div className="flex flex-col gap-6 mt-5">
-          <EducationDetails education={education ? education  : []} />
+        <div className="flex flex-col gap-6 mt-5">
+          <PersonalDetails personalDetails={personalDeatils} />
+          <EducationDetails education={education ? education : []} />
           <ProjectDetails projects={projects ? projects : []} />
           <WorkExperience experiences={experience ? experience : []} />
-          <Certification certifications={certifications ? certifications : []} />
+          <Certification
+            certifications={certifications ? certifications : []}
+          />
           <Skills skills={skills} />
         </div>
       </Container>

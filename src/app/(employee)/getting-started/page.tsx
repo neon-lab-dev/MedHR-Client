@@ -50,6 +50,7 @@ export type TCertificateDetails = {
 };
 
 export type TWorkExperience = {
+  _id?: string;
   designation: string;
   companyName: string;
   workType: string;

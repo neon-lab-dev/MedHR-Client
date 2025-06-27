@@ -8,7 +8,7 @@ import TextInput from "@/components/Reusable/TextInput/TextInput";
 type EditableAccordionFormProps = {
   defaultValues: Record<string, any>;
   editableFields: string[];
-  onSubmit: (updatedData: Record<string, any>) => void;
+  onSubmit: any;
   fieldLabels?: Record<string, string>;
   isLoading?: boolean;
   customFieldRenderers?: {

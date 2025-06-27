@@ -33,6 +33,7 @@ export type TEducationDetails = {
 };
 
 export type TProjectDetails = {
+  _id? :string;
   title: string;
   description: string;
   startDate: string;

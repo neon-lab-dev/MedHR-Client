@@ -68,8 +68,8 @@ const PersonalDetails = ({ personalDetails }: PersonalDetailsProps) => {
         {data.length === 0 ? (
           <p className="text-gray-400">No data added</p>
         ) : (
-          <div className="flex justify-between gap-3 items-center">
-            <div className="grid grid-cols-2 xl:grid-cols-4 gap-5 flex-1">
+          <div className="flex items-start justify-between gap-3 md:items-center">
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5 flex-1">
               {data.map((data, index) => (
                 <div key={index}>
                   <h1 className="text-lg font-medium text-[#383842]">

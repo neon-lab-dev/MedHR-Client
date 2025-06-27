@@ -122,11 +122,6 @@ const Dashboard = () => {
           <InterestedDepartmentDetails interestedDepartments={interestedDepartments} />
         </div>
       </Container>
-      {/* <EducationComponent education={education} />
-      <Project projects={projects} />
-      <WorkExp experiences={experience} />
-      <Certifications certifications={certifications} />
-      <Skills skills={skills} /> */}
     </div>
   );
 };

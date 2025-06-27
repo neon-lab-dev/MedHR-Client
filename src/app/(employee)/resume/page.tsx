@@ -13,6 +13,11 @@ import Container from "@/components/Container";
 import Skills from "@/app/employer/(home)/find-candidates/_components/Skills";
 import PersonalDetails from "@/app/employer/(home)/find-candidates/_components/PersonalDetails";
 import GuardianDetails from "@/app/employer/(home)/find-candidates/_components/GuardianDetails";
+import AddressDetails from "@/app/employer/(home)/find-candidates/_components/AddressDetails";
+import OrganizationInterestedIn from "@/app/employer/(home)/find-candidates/_components/OrganizationInterestedIn";
+import CurrentlyLookingForDetails from "@/app/employer/(home)/find-candidates/_components/CurrentlyLookingForDetails";
+import InterestedCountriesDetails from "@/app/employer/(home)/find-candidates/_components/InterestedCountriesDetails";
+import InterestedDepartmentDetails from "@/app/employer/(home)/find-candidates/_components/InterestedDepartmentDetails";
 
 const Dashboard = () => {
   const { data, error, isLoading } = useQuery({
@@ -54,6 +59,10 @@ const Dashboard = () => {
     experience,
     certifications,
     skills,
+    areasOfInterests,
+    currentlyLookingFor,
+    interestedCountries,
+    interestedDepartments
   } = data.user;
 
   const avatarUrl = avatar?.url || "/path/to/default-avatar.png";
@@ -74,8 +83,16 @@ const Dashboard = () => {
     phoneNumber : data.user.guardian.phoneNumber,
   };
 
+  const addressDetails = {
+    street: data.user.address.street,
+    city: data.user.address.city,
+    postalCode : data.user.address.postalCode,
+    state : data.user.address.state,
+    country : data.user.address.country,
+  };
+
   return (
-    <div>
+      <div className="bg-[#f5f6fa]">
       <Hero />
       <Profile
         avatarUrl={avatarUrl}
@@ -91,6 +108,7 @@ const Dashboard = () => {
         <div className="flex flex-col gap-6 mt-5">
           <PersonalDetails personalDetails={personalDetails} />
           <GuardianDetails guardianDetails={guardianDetails} />
+          <AddressDetails addressDetails={addressDetails} />
           <EducationDetails education={education ? education : []} />
           <ProjectDetails projects={projects ? projects : []} />
           <WorkExperience experiences={experience ? experience : []} />
@@ -98,6 +116,10 @@ const Dashboard = () => {
             certifications={certifications ? certifications : []}
           />
           <Skills skills={skills} />
+          <OrganizationInterestedIn interestedOrganizations={areasOfInterests} />
+          <CurrentlyLookingForDetails currentlyLookingFor={currentlyLookingFor} />
+          <InterestedCountriesDetails interestedCountries={interestedCountries} />
+          <InterestedDepartmentDetails interestedDepartments={interestedDepartments} />
         </div>
       </Container>
       {/* <EducationComponent education={education} />

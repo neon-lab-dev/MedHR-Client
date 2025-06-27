@@ -1,30 +1,33 @@
-const PersonalDetails = ({ personalDetails }: { personalDetails: any }) => {
+const AddressDetails = ({ addressDetails }: { addressDetails: any }) => {
   const data = [
     {
-      title: "Email",
-      data: personalDetails?.email,
+      title: "Street",
+      data: addressDetails?.street,
     },
     {
-      title: "Mobile Number",
-      data: personalDetails?.mobilenumber,
+      title: "City",
+      data: addressDetails?.city,
     },
     {
-      title: "Date of Birth",
-      data: personalDetails?.dob,
+      title: "Post Code",
+      data: addressDetails?.postalCode,
     },
     {
-      title: "Designation",
-      data: personalDetails?.designation,
+      title: "State",
+      data: addressDetails?.state,
+    },
+    {
+      title: "Country",
+      data: addressDetails?.country,
     },
   ];
   return (
     <div className="bg-white border border-[#F7F7F8] rounded-[20px] p-5 flex flex-col gap-6">
       <h1 className="text-2xl font-semibold text-[#37466D]">
-        Personal Details
+        Address Details
       </h1>
       <hr className="border border-[#F7F7F8] w-full" />
 
-      {/* Project card list or fallback */}
       <div className="bg-white border border-[#F7F7F8] rounded-[20px] p-5">
         {data.length === 0 ? (
           <p className="text-gray-400">No data added</p>
@@ -35,7 +38,9 @@ const PersonalDetails = ({ personalDetails }: { personalDetails: any }) => {
                 <h1 className="text-lg font-medium text-[#383842]">
                   {data.title}
                 </h1>
-                <p className="text-[#717386] mt-2">{data.data}</p>
+                <p className="text-[#717386] mt-2 capitalize">
+                  {data.data ? data.data : "Not Set"}
+                </p>
               </div>
             ))}
           </div>
@@ -45,4 +50,4 @@ const PersonalDetails = ({ personalDetails }: { personalDetails: any }) => {
   );
 };
 
-export default PersonalDetails;
+export default AddressDetails;

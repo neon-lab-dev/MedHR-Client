@@ -71,6 +71,7 @@ import success2 from "@/assets/icons/success.svg";
 import events from "@/assets/icons/events.svg";
 import employee from "@/assets/icons/employee.svg";
 import employer from "@/assets/icons/employer.svg";
+import binWhite from "@/assets/icons/bin-white.svg";
 
 import behance from "@/assets/icons/social media/behance.svg";
 import discord from "@/assets/icons/social media/discord.svg";
@@ -145,6 +146,7 @@ export const IMAGES = {
 };
 
 export const ICONS = {
+  binWhite,
   employee,
   employer,
   home,

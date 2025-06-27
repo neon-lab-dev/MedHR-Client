@@ -11,8 +11,10 @@ const interests = ["Internship", "Skill Programs", "Courses", "Jobs"];
 
 const CurrentlyLookingForDetails = ({
   currentlyLookingFor,
+  isEditable = false,
 }: {
   currentlyLookingFor: string[];
+  isEditable?: boolean;
 }) => {
   const [selected, setSelected] = useState<string[]>(currentlyLookingFor || []);
   const [showSelector, setShowSelector] = useState(false);
@@ -58,13 +60,15 @@ const CurrentlyLookingForDetails = ({
         <h1 className="text-2xl font-semibold text-[#37466D] capitalize">
           Currently looking for
         </h1>
-        <Button
-          variant="natural"
-          className="text-base bg-neutral-100 rounded-lg px-6 font-semibold py-2"
-          onClick={() => setShowSelector((prev) => !prev)}
-        >
-          Add More
-        </Button>
+        {isEditable && (
+          <Button
+            variant="natural"
+            className="text-base bg-neutral-100 rounded-lg px-6 font-semibold py-2"
+            onClick={() => setShowSelector((prev) => !prev)}
+          >
+            Add More
+          </Button>
+        )}
       </div>
 
       <hr className="border border-[#F7F7F8] w-full" />
@@ -104,17 +108,23 @@ const CurrentlyLookingForDetails = ({
               className="flex items-center gap-2 bg-[#37466D] rounded-[10px] px-5 py-[10px] text-[#F5F6FA] text-sm font-medium capitalize"
             >
               {item}
-              <button
-                className="ml-1 cursor-pointer"
-                onClick={() => handleDelete(item)}
-                disabled={deleting !== null}
-              >
-                {deleting === item ? (
-                  <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                ) : (
-                  <Image src={ICONS.binWhite} alt="delete" className="w-4 h-4" />
-                )}
-              </button>
+              {isEditable && (
+                <button
+                  className="ml-1 cursor-pointer"
+                  onClick={() => handleDelete(item)}
+                  disabled={deleting !== null}
+                >
+                  {deleting === item ? (
+                    <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                  ) : (
+                    <Image
+                      src={ICONS.binWhite}
+                      alt="delete"
+                      className="w-4 h-4"
+                    />
+                  )}
+                </button>
+              )}
             </div>
           ))
         ) : (

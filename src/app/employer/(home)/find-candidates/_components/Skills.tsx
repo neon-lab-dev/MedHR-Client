@@ -8,7 +8,13 @@ import Button from "@/components/Button";
 import { ICONS } from "@/assets";
 import Image from "next/image";
 
-const Skills = ({ skills }: { skills: string[] }) => {
+const Skills = ({
+  skills,
+  isEditable = false,
+}: {
+  skills: string[];
+  isEditable?: boolean;
+}) => {
   const [skillList, setSkillList] = useState<string[]>(skills || []);
   const [inputValue, setInputValue] = useState<string>("");
   const [showInput, setShowInput] = useState(false);
@@ -55,13 +61,15 @@ const Skills = ({ skills }: { skills: string[] }) => {
       {/* Header */}
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-semibold text-[#37466D]">Skills</h1>
-        <Button
-          variant="natural"
-          className="text-base bg-neutral-100 rounded-lg px-6 font-semibold py-2"
-          onClick={() => setShowInput((prev) => !prev)}
-        >
-          Add More
-        </Button>
+        {isEditable && (
+          <Button
+            variant="natural"
+            className="text-base bg-neutral-100 rounded-lg px-6 font-semibold py-2"
+            onClick={() => setShowInput((prev) => !prev)}
+          >
+            Add More
+          </Button>
+        )}
       </div>
 
       <hr className="border border-[#F7F7F8] w-full" />
@@ -114,17 +122,24 @@ const Skills = ({ skills }: { skills: string[] }) => {
               className="flex items-center gap-2 bg-[#37466D] rounded-[10px] px-5 py-[10px] text-[#F5F6FA] text-sm font-medium capitalize"
             >
               {skill}
-              <button
-                className="ml-1 cursor-pointer"
-                onClick={() => handleDeleteSkill(skill)}
-                disabled={deletingSkill !== null}
-              >
-                {deletingSkill === skill ? (
-                  <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                ) : (
-                  <Image src={ICONS.binWhite} alt="delete" className="w-4 h-4" />
-                )}
-              </button>
+              
+              {isEditable && (
+                <button
+                  className="ml-1 cursor-pointer"
+                  onClick={() => handleDeleteSkill(skill)}
+                  disabled={deletingSkill !== null}
+                >
+                  {deletingSkill === skill ? (
+                    <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                  ) : (
+                    <Image
+                      src={ICONS.binWhite}
+                      alt="delete"
+                      className="w-4 h-4"
+                    />
+                  )}
+                </button>
+              )}
             </div>
           ))
         ) : (

@@ -21,8 +21,10 @@ export type TCertification = {
 
 const Certification = ({
   certifications,
+  isEditable = false,
 }: {
   certifications: TCertification[];
+  isEditable?: boolean;
 }) => {
   const [editIndex, setEditIndex] = useState<number | null>(null);
   const [addMode, setAddMode] = useState(false);
@@ -67,16 +69,18 @@ const Certification = ({
         <h1 className="text-2xl font-semibold text-[#37466D]">
           Certifications
         </h1>
-        <Button
-          variant="natural"
-          className="text-base bg-neutral-100 rounded-lg px-6 font-semibold py-2"
-          onClick={() => {
-            setAddMode(!addMode);
-            setEditIndex(null);
-          }}
-        >
-          Add More
-        </Button>
+        {isEditable && (
+          <Button
+            variant="natural"
+            className="text-base bg-neutral-100 rounded-lg px-6 font-semibold py-2"
+            onClick={() => {
+              setAddMode(!addMode);
+              setEditIndex(null);
+            }}
+          >
+            Add More
+          </Button>
+        )}
       </div>
 
       <hr className="border border-[#F7F7F8] w-full" />
@@ -110,23 +114,25 @@ const Certification = ({
                   View Certificate
                 </a>
               </div>
-              <div className="flex gap-4">
-                <button
-                  className="cursor-pointer text-primary-500 flex items-center gap-[6px]"
-                  onClick={() => {
-                    setEditIndex((prev) => (prev === index ? null : index));
-                    setAddMode(false);
-                  }}
-                >
-                  <Image src={ICONS.penEdit} alt="edit" className="size-4" />
-                </button>
-                <button
-                  className="cursor-pointer text-red-500"
-                  onClick={() => handleDelete(index)}
-                >
-                  <Image src={IMAGES.bin} alt="delete" className="size-4" />
-                </button>
-              </div>
+              {isEditable && (
+                <div className="flex gap-4">
+                  <button
+                    className="cursor-pointer text-primary-500 flex items-center gap-[6px]"
+                    onClick={() => {
+                      setEditIndex((prev) => (prev === index ? null : index));
+                      setAddMode(false);
+                    }}
+                  >
+                    <Image src={ICONS.penEdit} alt="edit" className="size-4" />
+                  </button>
+                  <button
+                    className="cursor-pointer text-red-500"
+                    onClick={() => handleDelete(index)}
+                  >
+                    <Image src={IMAGES.bin} alt="delete" className="size-4" />
+                  </button>
+                </div>
+              )}
             </div>
 
             {/* Accordion edit form */}

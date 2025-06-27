@@ -5,14 +5,16 @@ import { useQueryClient } from "@tanstack/react-query";
 import { updateEmployeeProfile } from "@/api/employee";
 import Button from "@/components/Button";
 import Image from "next/image";
-import { ICONS } from '@/assets';
+import { ICONS } from "@/assets";
 
 const countries = ["India", "Canada", "Germany"];
 
 const InterestedCountriesDetails = ({
   interestedCountries,
+  isEditable = false,
 }: {
   interestedCountries: string[];
+  isEditable?: boolean;
 }) => {
   const [selected, setSelected] = useState<string[]>(interestedCountries || []);
   const [showSelector, setShowSelector] = useState(false);
@@ -58,13 +60,15 @@ const InterestedCountriesDetails = ({
         <h1 className="text-2xl font-semibold text-[#37466D] capitalize">
           Interested Countries
         </h1>
-        <Button
-          variant="natural"
-          className="text-base bg-neutral-100 rounded-lg px-6 font-semibold py-2"
-          onClick={() => setShowSelector((prev) => !prev)}
-        >
-          Add More
-        </Button>
+        {isEditable && (
+          <Button
+            variant="natural"
+            className="text-base bg-neutral-100 rounded-lg px-6 font-semibold py-2"
+            onClick={() => setShowSelector((prev) => !prev)}
+          >
+            Add More
+          </Button>
+        )}
       </div>
 
       <hr className="border border-[#F7F7F8] w-full" />
@@ -104,17 +108,23 @@ const InterestedCountriesDetails = ({
               className="flex items-center gap-2 bg-[#37466D] rounded-[10px] px-5 py-[10px] text-[#F5F6FA] text-sm font-medium capitalize"
             >
               {country}
-              <button
-                className="ml-1 cursor-pointer"
-                onClick={() => handleDelete(country)}
-                disabled={deleting !== null}
-              >
-                {deleting === country ? (
-                  <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                ) : (
-                  <Image src={ICONS.binWhite} alt="delete" className="w-4 h-4" />
-                )}
-              </button>
+              {isEditable && (
+                <button
+                  className="ml-1 cursor-pointer"
+                  onClick={() => handleDelete(country)}
+                  disabled={deleting !== null}
+                >
+                  {deleting === country ? (
+                    <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                  ) : (
+                    <Image
+                      src={ICONS.binWhite}
+                      alt="delete"
+                      className="w-4 h-4"
+                    />
+                  )}
+                </button>
+              )}
             </div>
           ))
         ) : (

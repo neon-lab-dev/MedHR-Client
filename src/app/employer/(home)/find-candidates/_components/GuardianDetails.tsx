@@ -7,7 +7,7 @@ import { updateEmployeeProfile } from "@/api/employee";
 import { useQueryClient } from "@tanstack/react-query";
 import EditableAccordionForm from "@/app/(employee)/resume/_components/EditableAccordionForm";
 
-const GuardianDetails = ({ guardianDetails }: { guardianDetails: any }) => {
+const GuardianDetails = ({ guardianDetails, isEditable = false, }: { guardianDetails: any, isEditable?: boolean }) => {
   const [showAccordion, setShowAccordion] = useState(false);
   const queryClient = useQueryClient();
   const [isLoading, setIsLoading] = useState(false);
@@ -69,13 +69,16 @@ const GuardianDetails = ({ guardianDetails }: { guardianDetails: any }) => {
                 </div>
               ))}
             </div>
-            <button
+           {
+            isEditable &&
+             <button
               className="text-primary-500 font-medium flex items-center gap-[6px] cursor-pointer"
               onClick={() => setShowAccordion((prev) => !prev)}
             >
               Edit
               <Image src={ICONS.penEdit} alt="edit" className="size-4" />
             </button>
+           }
           </div>
         )}
       </div>

@@ -11,7 +11,13 @@ import { TProjectDetails } from "@/app/(employee)/getting-started/page";
 import EditableAccordionForm from "@/app/(employee)/resume/_components/EditableAccordionForm";
 import { convertDate } from "@/helpers/convertDate";
 
-const ProjectDetails = ({ projects }: { projects: TProjectDetails[] }) => {
+const ProjectDetails = ({
+  projects,
+  isEditable = false,
+}: {
+  projects: TProjectDetails[];
+  isEditable?: boolean;
+}) => {
   const [editIndex, setEditIndex] = useState<number | null>(null);
   const [addMode, setAddMode] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -53,16 +59,18 @@ const ProjectDetails = ({ projects }: { projects: TProjectDetails[] }) => {
         <h1 className="text-2xl font-semibold text-[#37466D]">
           Project Details
         </h1>
-        <Button
-          variant="natural"
-          className="text-base bg-neutral-100 rounded-lg px-6 font-semibold py-2"
-          onClick={() => {
-             setAddMode(!addMode);
-            setEditIndex(null);
-          }}
-        >
-          Add More
-        </Button>
+        {isEditable && (
+          <Button
+            variant="natural"
+            className="text-base bg-neutral-100 rounded-lg px-6 font-semibold py-2"
+            onClick={() => {
+              setAddMode(!addMode);
+              setEditIndex(null);
+            }}
+          >
+            Add More
+          </Button>
+        )}
       </div>
 
       <hr className="border border-[#F7F7F8] w-full" />
@@ -82,8 +90,8 @@ const ProjectDetails = ({ projects }: { projects: TProjectDetails[] }) => {
                     {project.title}
                   </h1>
                   <p className="text-[#717386] mt-[2px]">
-                    From {convertDate(project?.startDate as string)} -{" "}
-                    To {convertDate(project?.endDate as string)}
+                    From {convertDate(project?.startDate as string)} - To{" "}
+                    {convertDate(project?.endDate as string)}
                   </p>
                   {project.link && (
                     <a
@@ -96,23 +104,29 @@ const ProjectDetails = ({ projects }: { projects: TProjectDetails[] }) => {
                   )}
                   <p className="text-[#717386] mt-3">{project.description}</p>
                 </div>
-                <div className="flex gap-4">
-                  <button
-                    className="text-primary-500 font-medium flex items-center gap-[6px] cursor-pointer"
-                    onClick={() => {
-                      setEditIndex((prev) => (prev === index ? null : index));
-                      setAddMode(false);
-                    }}
-                  >
-                    <Image src={ICONS.penEdit} alt="edit" className="size-4" />
-                  </button>
-                  <button
-                    className="text-red-500 cursor-pointer"
-                    onClick={() => handleDelete(index)}
-                  >
-                    <Image src={IMAGES.bin} alt="delete" className="size-4" />
-                  </button>
-                </div>
+                {isEditable && (
+                  <div className="flex gap-4">
+                    <button
+                      className="text-primary-500 font-medium flex items-center gap-[6px] cursor-pointer"
+                      onClick={() => {
+                        setEditIndex((prev) => (prev === index ? null : index));
+                        setAddMode(false);
+                      }}
+                    >
+                      <Image
+                        src={ICONS.penEdit}
+                        alt="edit"
+                        className="size-4"
+                      />
+                    </button>
+                    <button
+                      className="text-red-500 cursor-pointer"
+                      onClick={() => handleDelete(index)}
+                    >
+                      <Image src={IMAGES.bin} alt="delete" className="size-4" />
+                    </button>
+                  </div>
+                )}
               </div>
 
               {/* Accordion for editing */}

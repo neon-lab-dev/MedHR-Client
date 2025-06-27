@@ -5,7 +5,13 @@ import Image from "next/image";
 import { ICONS } from "@/assets";
 import UpdateAddressForm from "@/app/(employee)/resume/_components/UpdateAddressForm";
 
-const AddressDetails = ({ addressDetails }: { addressDetails: any }) => {
+const AddressDetails = ({
+  addressDetails,
+  isEditable = false,
+}: {
+  addressDetails: any;
+  isEditable?: boolean;
+}) => {
   const [showAccordion, setShowAccordion] = useState(false);
 
   const data = [
@@ -29,18 +35,24 @@ const AddressDetails = ({ addressDetails }: { addressDetails: any }) => {
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5 flex-1">
               {data.map((item, index) => (
                 <div key={index}>
-                  <h1 className="text-lg font-medium text-[#383842]">{item.title}</h1>
-                  <p className="text-[#717386] mt-2 capitalize">{item.data || "Not Set"}</p>
+                  <h1 className="text-lg font-medium text-[#383842]">
+                    {item.title}
+                  </h1>
+                  <p className="text-[#717386] mt-2 capitalize">
+                    {item.data || "Not Set"}
+                  </p>
                 </div>
               ))}
             </div>
-            <button
-              className="text-primary-500 font-medium flex items-center gap-[6px] cursor-pointer"
-              onClick={() => setShowAccordion((prev) => !prev)}
-            >
-              Edit
-              <Image src={ICONS.penEdit} alt="edit" className="size-4" />
-            </button>
+            {isEditable && (
+              <button
+                className="text-primary-500 font-medium flex items-center gap-[6px] cursor-pointer"
+                onClick={() => setShowAccordion((prev) => !prev)}
+              >
+                Edit
+                <Image src={ICONS.penEdit} alt="edit" className="size-4" />
+              </button>
+            )}
           </div>
         )}
       </div>
@@ -48,13 +60,15 @@ const AddressDetails = ({ addressDetails }: { addressDetails: any }) => {
       {/* Accordion Edit Form */}
       <div
         className={`transition-all duration-500 ease-in-out overflow-hidden ${
-          showAccordion ? "max-h-[1000px] opacity-100 mt-4" : "max-h-0 opacity-0"
+          showAccordion
+            ? "max-h-[1000px] opacity-100 mt-4"
+            : "max-h-0 opacity-0"
         }`}
       >
         <UpdateAddressForm
-      defaultValues={addressDetails}
-      onClose={() => setShowAccordion(false)}
-    />
+          defaultValues={addressDetails}
+          onClose={() => setShowAccordion(false)}
+        />
       </div>
     </div>
   );

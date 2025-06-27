@@ -16,9 +16,13 @@ type PersonalDetailsProps = {
     dob: string;
     designation: string;
   };
+  isEditable?: boolean;
 };
 
-const PersonalDetails = ({ personalDetails }: PersonalDetailsProps) => {
+const PersonalDetails = ({
+  personalDetails,
+  isEditable = false,
+}: PersonalDetailsProps) => {
   const queryClient = useQueryClient();
   const [showAccordion, setShowAccordion] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -42,19 +46,19 @@ const PersonalDetails = ({ personalDetails }: PersonalDetailsProps) => {
     },
   ];
 
- const handleUpdate = async (updatedData: any) => {
-  setIsLoading(true);
-  try {
-    const res = await updateEmployeeProfile(updatedData);
-    console.log("Profile updated:", res);
-    queryClient.invalidateQueries({ queryKey: ["user"] });
-    setShowAccordion(false);
-  } catch (err) {
-    console.error("Error updating profile:", err);
-  } finally {
+  const handleUpdate = async (updatedData: any) => {
+    setIsLoading(true);
+    try {
+      const res = await updateEmployeeProfile(updatedData);
+      console.log("Profile updated:", res);
+      queryClient.invalidateQueries({ queryKey: ["user"] });
+      setShowAccordion(false);
+    } catch (err) {
+      console.error("Error updating profile:", err);
+    } finally {
       setIsLoading(false);
     }
-};
+  };
 
   return (
     <div className="bg-white border border-[#F7F7F8] rounded-[20px] p-5 flex flex-col gap-6">
@@ -80,13 +84,15 @@ const PersonalDetails = ({ personalDetails }: PersonalDetailsProps) => {
               ))}
             </div>
 
-            <button
-              className="text-primary-500 font-medium flex items-center gap-[6px] cursor-pointer"
-              onClick={() => setShowAccordion((prev) => !prev)}
-            >
-              Edit
-              <Image src={ICONS.penEdit} alt="edit" className="size-4" />
-            </button>
+            {isEditable && (
+              <button
+                className="text-primary-500 font-medium flex items-center gap-[6px] cursor-pointer"
+                onClick={() => setShowAccordion((prev) => !prev)}
+              >
+                Edit
+                <Image src={ICONS.penEdit} alt="edit" className="size-4" />
+              </button>
+            )}
           </div>
         )}
       </div>
@@ -100,35 +106,34 @@ const PersonalDetails = ({ personalDetails }: PersonalDetailsProps) => {
         }`}
       >
         <EditableAccordionForm
-  defaultValues={personalDetails}
-  editableFields={["mobilenumber", "dob", "designation"]}
-  fieldLabels={{
-    mobilenumber: "Mobile Number",
-    dob: "Date of Birth",
-    designation: "Designation",
-  }}
-  onSubmit={handleUpdate}
-  isLoading={isLoading}
-  customFieldRenderers={{
-    designation: (register, errors) => (
-      <SelectDropdownInput
-        label="Designation"
-        options={["Student", "Working Professional"]}
-        {...register("designation")}
-        error={errors.designation}
-      />
-    ),
-    dob: (register, errors) => (
-      <TextInput
-        label="Date of Birth"
-        type="date"
-        {...register("dob")}
-        error={errors.dob}
-      />
-    ),
-  }}
-/>
-
+          defaultValues={personalDetails}
+          editableFields={["mobilenumber", "dob", "designation"]}
+          fieldLabels={{
+            mobilenumber: "Mobile Number",
+            dob: "Date of Birth",
+            designation: "Designation",
+          }}
+          onSubmit={handleUpdate}
+          isLoading={isLoading}
+          customFieldRenderers={{
+            designation: (register, errors) => (
+              <SelectDropdownInput
+                label="Designation"
+                options={["Student", "Working Professional"]}
+                {...register("designation")}
+                error={errors.designation}
+              />
+            ),
+            dob: (register, errors) => (
+              <TextInput
+                label="Date of Birth"
+                type="date"
+                {...register("dob")}
+                error={errors.dob}
+              />
+            ),
+          }}
+        />
       </div>
     </div>
   );

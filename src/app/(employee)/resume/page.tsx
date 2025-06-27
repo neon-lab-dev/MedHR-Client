@@ -68,8 +68,6 @@ const Dashboard = () => {
   const avatarUrl = avatar?.url || "/path/to/default-avatar.png";
   const resumeUrl = resumes?.url;
 
-  console.log(data.user);
-
   const personalDetails = {
     email: data.user.email,
     mobilenumber: data.user.mobilenumber,
@@ -106,20 +104,21 @@ const Dashboard = () => {
       />
       <Container>
         <div className="flex flex-col gap-6 mt-5">
-          <PersonalDetails personalDetails={personalDetails} />
-          <GuardianDetails guardianDetails={guardianDetails} />
-          <AddressDetails addressDetails={addressDetails} />
-          <EducationDetails education={education ? education : []} />
-          <ProjectDetails projects={projects ? projects : []} />
-          <WorkExperience experiences={experience ? experience : []} />
+          <PersonalDetails personalDetails={personalDetails} isEditable={true} />
+          <GuardianDetails guardianDetails={guardianDetails} isEditable={true} />
+          <AddressDetails addressDetails={addressDetails} isEditable={true} />
+          <EducationDetails education={education ? education : []} isEditable={true} />
+          <ProjectDetails projects={projects ? projects : []} isEditable={true} />
+          <WorkExperience experiences={experience ? experience : []} isEditable={true} />
           <Certification
             certifications={certifications ? certifications : []}
+            isEditable={true}
           />
-          <Skills skills={skills} />
-          <OrganizationInterestedIn interestedOrganizations={areasOfInterests} />
-          <CurrentlyLookingForDetails currentlyLookingFor={currentlyLookingFor} />
-          <InterestedCountriesDetails interestedCountries={interestedCountries} />
-          <InterestedDepartmentDetails interestedDepartments={interestedDepartments} />
+          <Skills skills={skills} isEditable={true} />
+          <OrganizationInterestedIn interestedOrganizations={areasOfInterests} isEditable={true} />
+          <CurrentlyLookingForDetails currentlyLookingFor={currentlyLookingFor} isEditable={true} />
+          <InterestedCountriesDetails interestedCountries={interestedCountries} isEditable={true} />
+          <InterestedDepartmentDetails interestedDepartments={interestedDepartments} isEditable={true} />
         </div>
       </Container>
     </div>

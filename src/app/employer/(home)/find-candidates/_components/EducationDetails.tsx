@@ -23,8 +23,10 @@ type TEducationDetails = {
 
 const EducationDetails = ({
   education,
+  isEditable=false
 }: {
   education: TEducationDetails[];
+  isEditable?: boolean
 }) => {
   const [editIndex, setEditIndex] = useState<number | null>(null);
   const [addMode, setAddMode] = useState(false);
@@ -59,7 +61,9 @@ const EducationDetails = ({
         <h1 className="text-2xl font-semibold text-[#37466D]">
           Education Details
         </h1>
-        <Button
+        {
+          isEditable &&
+          <Button
           variant="natural"
           className="text-base bg-neutral-100 rounded-lg px-6 font-semibold py-2"
           onClick={() => {
@@ -69,6 +73,7 @@ const EducationDetails = ({
         >
           Add More
         </Button>
+        }
       </div>
 
       <hr className="border border-[#F7F7F8] w-full" />
@@ -94,7 +99,9 @@ const EducationDetails = ({
                     {convertDate(item?.endDate as string)}
                   </p>
                 </div>
-                <button
+               {
+                isEditable &&
+                 <button
                   className="text-primary-500 font-medium flex items-center gap-[6px] cursor-pointer"
                   onClick={() => {
                     setEditIndex((prev) => (prev === index ? null : index));
@@ -104,6 +111,7 @@ const EducationDetails = ({
                   Edit
                   <Image src={ICONS.penEdit} alt="edit" className="size-4" />
                 </button>
+               }
               </div>
 
               {/* Accordion for editing this education */}

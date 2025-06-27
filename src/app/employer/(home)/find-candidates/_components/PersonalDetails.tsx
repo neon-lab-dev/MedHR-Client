@@ -21,6 +21,7 @@ type PersonalDetailsProps = {
 const PersonalDetails = ({ personalDetails }: PersonalDetailsProps) => {
   const queryClient = useQueryClient();
   const [showAccordion, setShowAccordion] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const data = [
     {
@@ -42,6 +43,7 @@ const PersonalDetails = ({ personalDetails }: PersonalDetailsProps) => {
   ];
 
  const handleUpdate = async (updatedData: any) => {
+  setIsLoading(true);
   try {
     const res = await updateEmployeeProfile(updatedData);
     console.log("Profile updated:", res);
@@ -49,7 +51,9 @@ const PersonalDetails = ({ personalDetails }: PersonalDetailsProps) => {
     setShowAccordion(false);
   } catch (err) {
     console.error("Error updating profile:", err);
-  }
+  } finally {
+      setIsLoading(false);
+    }
 };
 
   return (
@@ -104,6 +108,7 @@ const PersonalDetails = ({ personalDetails }: PersonalDetailsProps) => {
     designation: "Designation",
   }}
   onSubmit={handleUpdate}
+  isLoading={isLoading}
   customFieldRenderers={{
     designation: (register, errors) => (
       <SelectDropdownInput

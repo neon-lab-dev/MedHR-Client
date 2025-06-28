@@ -1,4 +1,5 @@
 export interface IEmployee {
+  _id: string;
   resumes?: {
     public_id: string;
     url: string;
@@ -11,7 +12,7 @@ export interface IEmployee {
   interests?: string | null;
   verified: boolean;
   createdAt: string;
-  _id: string;
+  
   full_name: string;
   email: string;
   mobilenumber: number;

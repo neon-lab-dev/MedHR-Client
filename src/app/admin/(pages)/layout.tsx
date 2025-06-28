@@ -43,7 +43,7 @@ const navLinks = [
     },
     {
       label: "Aspirants",
-    path: "/admin/aspirants",
+    path: "/admin/employees",
       icon: ICONS.employee
     },
     {

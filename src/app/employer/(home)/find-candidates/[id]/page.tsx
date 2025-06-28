@@ -1,8 +1,8 @@
 "use client";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import Loading from "@/components/Loading";
 import NotFound from "@/components/NotFound";
-import { handleGEtEmployerByIdForEmployer } from "@/api/employer";
+import { fetchEmployerProfileData, handleGEtEmployerByIdForEmployer, sendContactEmail } from "@/api/employer";
 import Image from "next/image";
 import { ICONS } from "@/assets";
 import EducationDetails from "../_components/EducationDetails";
@@ -19,6 +19,8 @@ import OrganizationInterestedIn from "../_components/OrganizationInterestedIn";
 import CurrentlyLookingForDetails from "../_components/CurrentlyLookingForDetails";
 import InterestedCountriesDetails from "../_components/InterestedCountriesDetails";
 import InterestedDepartmentDetails from "../_components/InterestedDepartmentDetails";
+import Button from "@/components/Button";
+import { toast } from "sonner";
 
 type Props = {
   params: Promise<{ id: string }>;
@@ -72,7 +74,32 @@ const EmployeeProfileDetails = ({ params }: Props) => {
   //   URL.revokeObjectURL(url);
   // };
 
-  console.log(data);
+   const { data:employerProfile } = useQuery({
+      queryKey: ["employerProfileData", id],
+      queryFn: () => fetchEmployerProfileData(),
+    });
+
+  const { mutate, isPending } = useMutation({
+    mutationFn: ({ userId, companyName }: { userId: string; companyName: string }) =>
+      sendContactEmail(userId, companyName),
+    onSuccess: () => {
+      toast.success("Email sent successfully!");
+    },
+    onError: (error: any) => {
+      toast.error(error?.message || "Failed to send email.");
+    },
+  });
+
+  const handleSendContactMail = (userId: string) => {
+  const companyName = employerProfile?.user?.companyDetails?.[0]?.companyName;
+
+  if (!companyName) {
+    toast.error("Company name not found.");
+    return;
+  }
+
+  mutate({ userId, companyName });
+};
 
   const personalDetails = {
     email: data?.email,
@@ -113,14 +140,16 @@ const EmployeeProfileDetails = ({ params }: Props) => {
             </Link>
             <h1 className="text-[28px] font-bold text-[#25252C]">Candidate</h1>
           </div>
-          {/* <Button
-            onClick={handleSendEmail}
+          <Button
+            onClick={() => handleSendContactMail(data?._id as string)}
             variant="normal"
-            className="px-4 py-3 flex items-center gap-1"
+            className={`${isPending ? "cursor-not-allowed bg-orange-600" : "cursor-pointer"} px-4 py-3 flex items-center justify-center gap-1 w-[200px]`}
           >
-            Send Message
+            {
+              isPending ? "Sending..." : "Contact Candidate"
+            }
             <Image src={ICONS.sendArrow} alt="send-arrow" className="size-5" />
-          </Button> */}
+          </Button>
         </div>
 
         {/* Img and name */}

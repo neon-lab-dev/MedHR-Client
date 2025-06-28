@@ -44,6 +44,7 @@ const api = {
   creatrjob: "/createjob",
   findCandidate: "/employeer/find-candidates",
   sendHiredEmail: "/send-hired-email",
+  sendContactEmail: "/send-contact-email",
   getAllEmployerCourses: "/employeer/course",
   getAllEmployerSkillProgrammes: "/employeer/skill-programmes",
   createEvent: "/events/create-event",

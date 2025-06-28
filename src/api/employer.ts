@@ -110,6 +110,24 @@ export const sendHiredEmail = async (
   }
 };
 
+// To send contact mail to employees
+export const sendContactEmail = async (
+  userId: string,
+  companyName: string
+): Promise<any> => {
+  try {
+    const res = await axiosInstance.post(
+      `${api.sendContactEmail}/${userId}`,
+      { companyName },
+      { withCredentials: true }
+    );
+    return res.data;
+  } catch (err: any) {
+    throw new Error(err?.response?.data?.message ?? "Something went wrong");
+  }
+};
+
+
 export const fetchEmployerProfileData = async () => {
   const response = await axiosInstance.get("/employeer/me", {
     withCredentials: true,

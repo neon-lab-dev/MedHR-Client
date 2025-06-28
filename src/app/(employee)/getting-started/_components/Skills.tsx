@@ -1,64 +1,108 @@
 "use client";
-import { useState, KeyboardEvent, Dispatch, SetStateAction } from "react";
-import TextInput from "@/components/Reusable/TextInput/TextInput";
+import { useState } from "react";
 import Chip from "@/components/Chip";
+import Image from "next/image";
+import { ICONS } from "@/assets";
 
 type TSkillsProps = {
-  selectedSkills: string[];
-  setSelectedSkills: Dispatch<SetStateAction<string[]>>;
+  onChange: (interests: string[]) => void;
 };
 
-const Skills: React.FC<TSkillsProps> = ({
-  selectedSkills,
-  setSelectedSkills,
-}) => {
-  const [inputValue, setInputValue] = useState("");
+const Skills: React.FC<TSkillsProps> = ({ onChange }) => {
+   const interests = [
+   "Under Graduation", "Medical Bachelor Degree", "Paramedical Degree", "Paramedical Diploma", "Nursing", "Lab Technologist"
+  ];
 
-  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter" && inputValue.trim()) {
-      e.preventDefault();
-      if (!selectedSkills.includes(inputValue.trim())) {
-        setSelectedSkills((prev) => [...prev, inputValue.trim()]);
-      }
-      setInputValue("");
+  const [selectedSkill, setSelectedSkill] = useState<string[]>([]);
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const handleAddInterest = (interest: string) => {
+    if (!selectedSkill.includes(interest)) {
+      const updated = [...selectedSkill, interest];
+      setSelectedSkill(updated);
+      onChange(updated);
+      setSearchTerm("");
     }
   };
 
-  const handleRemoveSkill = (skill: string) => {
-    setSelectedSkills((prev) => prev.filter((s) => s !== skill));
+  const handleRemoveInterest = (interest: string) => {
+    const updated = selectedSkill.filter((i) => i !== interest);
+    setSelectedSkill(updated);
+    onChange(updated);
   };
 
-  return (
-    <div className="flex flex-col gap-5 mt-12 font-plus-jakarta-sans">
-      <h1 className="registration-form-heading mb-4">Qualifications</h1>
-      <div>
-        <TextInput
-          name="skills"
-          label="Enter your skills"
-          placeholder="eg., Design, Adobe, Figma, etc."
-          value={inputValue}
-          onChange={(e) => setInputValue(e.target.value)}
-          onKeyDown={handleKeyDown}
-          isRequired={false}
-        />
-        <p className="text-neutral-700 font-medium text-[15px] mt-[6px]">
-          Press Enter to add new skill*
-        </p>
+  const filteredInterests = interests.filter((interest) =>
+    interest.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
-        {/* Show skills */}
-        {selectedSkills.length > 0 && (
-          <div className="flex flex-wrap gap-2 mt-4">
-            {selectedSkills?.map((skill: string) => (
-              <Chip
-                key={skill}
-                onClick={() => handleRemoveSkill(skill)}
-                variant="close"
-              >
-                {skill}
-              </Chip>
-            ))}
+  return (
+    <div className="flex flex-col gap-9 mt-12 font-plus-jakarta-sans">
+      <h1 className="registration-form-heading">
+        Qualification/skills
+      </h1>
+
+      {/* Search Input */}
+      <div className="relative max-w-[633px] w-full">
+        <input
+          type="text"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          placeholder="Select skill/qualification or enter keyword"
+          className="pl-12 pr-4 py-4 border border-neutral-300 rounded-xl focus:outline-none focus:border-primary-500 transition duration-300 w-full"
+        />
+        <Image
+          src={ICONS.searchGray}
+          alt="search-icon"
+          className="size-6 absolute top-4 left-4"
+        />
+      </div>
+
+      {/* Add Custom Skill */}
+      {searchTerm &&
+        !interests
+          .map((i) => i.toLowerCase())
+          .includes(searchTerm.toLowerCase()) &&
+        !selectedSkill
+          .map((i) => i.toLowerCase())
+          .includes(searchTerm.toLowerCase()) && (
+          <div>
+            <Chip
+              variant="add"
+              onClick={() => handleAddInterest(searchTerm.trim())}
+            >
+              {`Add "${searchTerm}"`}
+            </Chip>
           </div>
         )}
+
+      {/* Selected Interests */}
+      <div className="flex flex-wrap gap-2">
+        {selectedSkill.length > 0 ? (
+          selectedSkill.map((interest) => (
+            <Chip
+              key={interest}
+              onClick={() => handleRemoveInterest(interest)}
+              variant="close"
+            >
+              {interest}
+            </Chip>
+          ))
+        ) : (
+          <Chip variant="close">No skill/qualification selected</Chip>
+        )}
+      </div>
+
+      {/* All Interests */}
+      <div className="flex flex-wrap gap-2 max-h-[300px] overflow-y-auto">
+        {filteredInterests.map((interest) => (
+          <Chip
+            key={interest}
+            onClick={() => handleAddInterest(interest)}
+            variant="add"
+          >
+            {interest}
+          </Chip>
+        ))}
       </div>
     </div>
   );

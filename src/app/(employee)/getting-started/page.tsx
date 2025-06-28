@@ -410,7 +410,7 @@ const GettingStarted = () => {
             {step === 7 && <ProjectDetails onChange={setSelectedProject} />}
             {step === 8 && <WorkExperience onChange={setSelectedExperience} />}
             {step === 9 && <Certifications onChange={setSelectedCertificate} />}
-            {step === 10 && <Skills selectedSkills={selectedSkills} setSelectedSkills={setSelectedSkills}/>}
+            {step === 10 && <Skills onChange={setSelectedSkills}/>}
             {step === 11 && <SocialLink setSelectedSocialLinks={setSelectedSocialLinks} />}
             {step === 12 && <ResumeUpload selectedResume={selectedResume} setSelectedResume={setSelectedResume}/>}
             {step === 13 && <SuccessTab />}

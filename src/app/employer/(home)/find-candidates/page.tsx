@@ -98,8 +98,8 @@ const filtersConfig = [
     key: "city",
   },
   {
-    label: "Skills",
-    items: ["JavaScript", "React", "Node.js", "Python"],
+    label: "Qualification/skills",
+    items: ["Under Graduation", "Medical Bachelor Degree", "Paramedical Degree", "Paramedical Diploma", "Nursing", "Lab Technologist"],
     icon: ICONS.downArrow,
     key: "skills",
   },

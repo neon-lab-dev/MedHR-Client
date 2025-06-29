@@ -3,13 +3,65 @@ import { ICONS } from "@/assets";
 import Button from "@/components/Button";
 import SelectDropdown from "@/components/Reusable/SelectDropdown/SelectDropdown";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CandidatesTable from "./_components/CandidatesTable";
 import { handleGetAllCandidatesService } from "@/api/employer";
 import MultiSelectDropdown from "@/components/Reusable/MultiSelectDropdown/MultiSelectDropdown";
 import { useQuery } from "@tanstack/react-query";
+import ISO6391 from 'iso-639-1';
 
-const filtersConfig = [
+
+
+const FindCandidates = () => {
+  const [languageList, setLanguageList] = useState<string[]>([]);
+    useEffect(() => {
+      setLanguageList(ISO6391.getAllNames());
+    }, []);
+
+
+  const [filters, setFilters] = useState<
+    Record<string, string | string[] | null>
+  >({});
+
+  const handleSelect = (key: string, value: string) => {
+    setFilters((prev) => {
+      const existing = prev[key];
+      if (
+        key === "skills" ||
+        key === "language" ||
+        key === "currentlyLookingFor" ||
+        key === "designationType" ||
+        key === "courseName"
+      ) {
+        const updatedArray = Array.isArray(existing) ? [...existing] : [];
+        return {
+          ...prev,
+          [key]: updatedArray.includes(value)
+            ? updatedArray.filter((item) => item !== value)
+            : [...updatedArray, value],
+        };
+      }
+      return { ...prev, [key]: value };
+    });
+  };
+
+  const {
+    data: candidates = [],
+    isFetching,
+    refetch,
+  } = useQuery({
+    queryKey: ["candidates", filters],
+    queryFn: () =>
+      handleGetAllCandidatesService(filters as Record<string, string | null>),
+    enabled: false,
+  });
+
+  const handleClearFilter = () => {
+    setFilters({});
+  };
+
+
+  const filtersConfig = [
   // {
   //   label: "Gender",
   //   items: ["Male", "Female", "Other"],
@@ -98,14 +150,14 @@ const filtersConfig = [
     key: "city",
   },
   {
-    label: "Qualification/skills",
+    label: "Qualification/Skills",
     items: ["Under Graduation", "Medical Bachelor Degree", "Paramedical Degree", "Paramedical Diploma", "Nursing", "Lab Technologist"],
     icon: ICONS.downArrow,
     key: "skills",
   },
   {
     label: "Language",
-    items: ["English", "Spanish", "Hindi", "French"],
+    items: languageList,
     icon: ICONS.downArrow,
     key: "language",
   },
@@ -125,48 +177,6 @@ const filtersConfig = [
   },
 ];
 
-const FindCandidates = () => {
-  const [filters, setFilters] = useState<
-    Record<string, string | string[] | null>
-  >({});
-
-  const handleSelect = (key: string, value: string) => {
-    setFilters((prev) => {
-      const existing = prev[key];
-      if (
-        key === "skills" ||
-        key === "language" ||
-        key === "currentlyLookingFor" ||
-        key === "designationType" ||
-        key === "courseName"
-      ) {
-        const updatedArray = Array.isArray(existing) ? [...existing] : [];
-        return {
-          ...prev,
-          [key]: updatedArray.includes(value)
-            ? updatedArray.filter((item) => item !== value)
-            : [...updatedArray, value],
-        };
-      }
-      return { ...prev, [key]: value };
-    });
-  };
-
-  const {
-    data: candidates = [],
-    isFetching,
-    refetch,
-  } = useQuery({
-    queryKey: ["candidates", filters],
-    queryFn: () =>
-      handleGetAllCandidatesService(filters as Record<string, string | null>),
-    enabled: false,
-  });
-
-  const handleClearFilter = () => {
-    setFilters({});
-  };
-
   return (
     <div className="bg-[#f5f6fa] p-6 flex flex-col gap-6">
       <div className="flex flex-wrap items-center gap-5 bg-white border border-neutral-550 rounded-xl p-6">
@@ -176,7 +186,7 @@ const FindCandidates = () => {
             type="text"
             value={filters.keyword ?? ""}
             onChange={(e) => handleSelect("keyword", e.target.value)}
-            placeholder="Select a category or enter keyword"
+            placeholder="Search by aspirants name"
             className="pl-12 pr-4 py-[14px] border border-[#CAD5E2] rounded-lg focus:outline-none focus:border-primary-500 transition duration-300 w-full"
           />
           <Image

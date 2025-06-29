@@ -55,7 +55,7 @@ const PersonalInfoForm: React.FC<TPersonalInfoFormProps> = ({
         options={["Student", "Working Professional"]}
       />
 
-      <div className="flex flex-col md:flex-row items-center gap-5">
+      <div className="flex flex-col items-center gap-5">
         <TextInput
           label="Guardian Name"
           placeholder="Smith John"
@@ -67,25 +67,26 @@ const PersonalInfoForm: React.FC<TPersonalInfoFormProps> = ({
         />
 
         <div className="w-full">
-          <label className="mb-1 block text-sm font-medium text-gray-700">
+          <label className="mb-1 block font-plus-jakarta-sans font-medium text-gray-700">
             Guardian Phone Number
           </label>
           <div className="flex gap-2">
             <select
-              className="p-4 rounded-xl bg-white border border-neutral-300 focus:outline-none focus:border-primary-500 transition duration-300"
+              className="px-4 py-3 rounded-xl bg-white border border-neutral-300 focus:outline-none focus:border-primary-500 transition duration-300 cursor-pointer"
               {...register("guardian.countryCode", {
                 required: "Country code is required",
               })}
               defaultValue="+91"
             >
               {countryCodes.map((code) => (
-                <option key={code.value} value={code.value}>
+                <option key={code.value} value={code.value} className="cursor-pointer">
                   {code.label}
                 </option>
               ))}
             </select>
+
             <TextInput
-              placeholder="9737328323"
+              placeholder="Enter your guardian phone number"
               type="number"
               error={errors.guardian?.phoneNumber}
               {...register("guardian.phoneNumber", {

@@ -41,7 +41,7 @@ const Education: React.FC<TEducationProps> = ({ onChange }) => {
 
   return (
     <div className="flex flex-col gap-5 mt-12 font-plus-jakarta-sans">
-      <h1 className="registration-form-heading mb-4">Education</h1>
+      <h1 className="registration-form-heading mb-4">Education (Completed/Ongoing)</h1>
 
       {educationList.length > 0 ? (
         educationList.map((edu, index) => (

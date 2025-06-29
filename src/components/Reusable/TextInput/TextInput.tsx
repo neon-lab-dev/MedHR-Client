@@ -20,13 +20,16 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
   ({ label, name, placeholder = "", type = "text", error, defaultValue, onKeyDown, isDisabled = false, isRequired = true, ...rest }, ref) => {
     return (
       <div className="flex flex-col gap-2 font-Inter w-full font-plus-jakarta-sans">
-        <label htmlFor={name} className="text-neutral-700 font-medium">
+        {
+          label &&
+          <label htmlFor={name} className="text-neutral-700 font-medium">
           {label}
           {
             isRequired &&
             <span className="text-red-600"> *</span>
           }
         </label>
+        }
         <input
           required={isRequired}
           id={name}

@@ -125,11 +125,11 @@ const EducationModal: React.FC<TEducationModalProps> = ({
 
   return (
     <Modal
-      heading="Designation"
+      heading="Designation (Completed/Ongoing)"
       isModalOpen={isModalOpen}
       setIsModalOpen={setIsModalOpen}
     >
-      <div className="flex items-center gap-6 flex-wrap">
+      <div className="flex items-center gap-6 flex-wrap mt-3">
         {designationTypes.map((designation) => (
           <button
             key={designation}
@@ -208,6 +208,7 @@ const EducationModal: React.FC<TEducationModalProps> = ({
             placeholder="eg., 3.85/4"
             value={formValues.grade}
             onChange={(e) => handleChange("grade", e.target.value)}
+            isRequired={false}
           />
           <TextInput
             name="startDate"

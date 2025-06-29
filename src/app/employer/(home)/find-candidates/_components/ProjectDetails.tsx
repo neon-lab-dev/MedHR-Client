@@ -53,6 +53,8 @@ const ProjectDetails = ({
     }
   };
 
+  console.log(projects);
+
   return (
     <div className="bg-white border border-[#F7F7F8] rounded-[20px] p-5 flex flex-col gap-6">
       <div className="flex justify-between items-center">
@@ -217,7 +219,7 @@ const ProjectDetails = ({
               startDate: (register, errors) => (
                 <TextInput
                   label="Start Date"
-                  type="month"
+                  type="date"
                   {...register("startDate")}
                   error={errors?.startDate}
                 />
@@ -225,7 +227,7 @@ const ProjectDetails = ({
               endDate: (register, errors) => (
                 <TextInput
                   label="End Date"
-                  type="month"
+                  type="date"
                   {...register("endDate")}
                   error={errors?.endDate}
                 />

@@ -242,7 +242,7 @@ const EducationDetails = ({
             startDate: (register, errors) => (
               <TextInput
                 label="Start Date"
-                type="date"
+                type="month"
                 {...register("startDate")}
                 error={errors?.startDate}
               />
@@ -250,7 +250,7 @@ const EducationDetails = ({
             endDate: (register, errors) => (
               <TextInput
                 label="End Date"
-                type="date"
+                type="month"
                 {...register("endDate")}
                 error={errors?.endDate}
               />

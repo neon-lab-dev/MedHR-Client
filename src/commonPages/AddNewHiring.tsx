@@ -137,7 +137,7 @@ const AddNewHiring = ({
 
   const useJobMutation = (
   jobType: "job" | "internship" | string,
-  actionType: "add" | "edit",
+  actionType: "add" | "edit" | string,
   path: string
 ): UseMutationResult<any, Error, any> => {
   const router = useRouter();

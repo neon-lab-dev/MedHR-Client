@@ -42,7 +42,7 @@ export interface IEmployer {
 }
 
 export type TEmployee = {
-  [x: string]: string;
+  _id: string;
   full_name: string;
   email: string;
   mobilenumber: number;

@@ -12,6 +12,7 @@ const EditJob = () => {
   const [job, setJob] = useState<IJob | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  console.log(error);
 
   console.log(job);
 

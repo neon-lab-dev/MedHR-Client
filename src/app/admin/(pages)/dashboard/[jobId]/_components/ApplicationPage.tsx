@@ -15,18 +15,18 @@ import {
   rejectApplicant,
 } from "@/api/employer";
 import { useRouter } from "next/navigation";
-import PersonalDetails from "../../../find-candidates/_components/PersonalDetails";
-import GuardianDetails from "../../../find-candidates/_components/GuardianDetails";
-import AddressDetails from "../../../find-candidates/_components/AddressDetails";
-import EducationDetails from "../../../find-candidates/_components/EducationDetails";
-import ProjectDetails from "../../../find-candidates/_components/ProjectDetails";
-import WorkExperience from "../../../find-candidates/_components/WorkExperience";
-import Certification from "../../../find-candidates/_components/Certification";
-import Skills from "../../../find-candidates/_components/Skills";
-import OrganizationInterestedIn from "../../../find-candidates/_components/OrganizationInterestedIn";
-import CurrentlyLookingForDetails from "../../../find-candidates/_components/CurrentlyLookingForDetails";
-import InterestedCountriesDetails from "../../../find-candidates/_components/InterestedCountriesDetails";
-import InterestedDepartmentDetails from "../../../find-candidates/_components/InterestedDepartmentDetails";
+import PersonalDetails from "@/app/employer/(home)/find-candidates/_components/PersonalDetails";
+import GuardianDetails from "@/app/employer/(home)/find-candidates/_components/GuardianDetails";
+import AddressDetails from "@/app/employer/(home)/find-candidates/_components/AddressDetails";
+import EducationDetails from "@/app/employer/(home)/find-candidates/_components/EducationDetails";
+import ProjectDetails from "@/app/employer/(home)/find-candidates/_components/ProjectDetails";
+import WorkExperience from "@/app/employer/(home)/find-candidates/_components/WorkExperience";
+import Certification from "@/app/employer/(home)/find-candidates/_components/Certification";
+import Skills from "@/app/employer/(home)/find-candidates/_components/Skills";
+import OrganizationInterestedIn from "@/app/employer/(home)/find-candidates/_components/OrganizationInterestedIn";
+import CurrentlyLookingForDetails from "@/app/employer/(home)/find-candidates/_components/CurrentlyLookingForDetails";
+import InterestedCountriesDetails from "@/app/employer/(home)/find-candidates/_components/InterestedCountriesDetails";
+import InterestedDepartmentDetails from "@/app/employer/(home)/find-candidates/_components/InterestedDepartmentDetails";
 
 const ApplicationPage = ({
   applicantId,

@@ -8,16 +8,25 @@ import CandidatesTable from "./_components/CandidatesTable";
 import { handleGetAllCandidatesService } from "@/api/employer";
 import MultiSelectDropdown from "@/components/Reusable/MultiSelectDropdown/MultiSelectDropdown";
 import { useQuery } from "@tanstack/react-query";
-import ISO6391 from 'iso-639-1';
+import ISO6391 from "iso-639-1";
 
+import countries from "i18n-iso-countries";
+import enLocale from "i18n-iso-countries/langs/en.json"; // load English names
 
+countries.registerLocale(enLocale);
+
+const countryList = Object.values(
+  countries.getNames("en", { select: "official" })
+).sort((a, b) => a.localeCompare(b));
 
 const FindCandidates = () => {
   const [languageList, setLanguageList] = useState<string[]>([]);
-    useEffect(() => {
-      setLanguageList(ISO6391.getAllNames());
-    }, []);
-
+  useEffect(() => {
+    const sortedLanguages = ISO6391.getAllNames().sort((a, b) =>
+      a.localeCompare(b)
+    );
+    setLanguageList(sortedLanguages);
+  }, []);
 
   const [filters, setFilters] = useState<
     Record<string, string | string[] | null>
@@ -60,122 +69,126 @@ const FindCandidates = () => {
     setFilters({});
   };
 
-
   const filtersConfig = [
-  // {
-  //   label: "Gender",
-  //   items: ["Male", "Female", "Other"],
-  //   icon: ICONS.downArrow,
-  //   key: "gender",
-  // },
-  {
-    label: "Type of Organization",
-    items: ["Medical", "Paramedical", "Paramedical Diploma", "Other"],
-    icon: ICONS.downArrow,
-    key: "designationType",
-  },
-  {
-    label: "Type of Department",
-    items: [
-      // Medical Courses
-      "Ayurvedic Medicine and Surgery",
-      "Dental Surgery",
-      "Medicine and Bachelor of Surgery",
-      "Naturopathy and Yoga Sciences",
-      "Siddha Medicine and Surgery",
-      "Unani Medicine and Surgery",
-      // Paramedical Courses
-      "Audiology and Speech Therapy",
-      "Biomedical Engineering",
-      "Biotechnology",
-      "Cardiac or Cardiovascular Technology",
-      "Healthcare Management",
-      "Medical Record Technology",
-      "Microbiology",
-      "Nursing and Midwifery",
-      "Nutrition and Dietetics",
-      "Occupational Therapy",
-      "Operation Theater Technology",
-      "Ophthalmic Technology",
-      "Optometry",
-      "Physiotherapy",
-      "Psychology",
-      "Radiography and Medical Imaging",
-      "Respiratory Therapy",
-      "X-Ray Technology",
-      // Paramedical Diploma Courses
-      "Anaesthesia Technology",
-      "Dialysis Technology",
-      "ECG Technology",
-      "Hearing Language and Speech",
-      "Medical Laboratory Technology",
-      "Nursing Care Assistance",
-      "Sanitary Inspection"
-    ],
-    
-    icon: ICONS.downArrow,
-    key: "courseName",
-  },
-  {
-    label: "Interested In",
-    items: [
-      "Shadow Internship",
-      "Practice Internship",
-      "Offline Programs",
-      "Online Programs",
-      "Fellowship",
-      "Scholarships",
-      "Events",
-      "Certification Course",
-      "Diploma Course",
-      "Bachelor Degree",
-      "Master Degree",
-      "Part Time",
-      "Full Time",
-      "Contract",
-    ],
-    icon: ICONS.downArrow,
-    key: "currentlyLookingFor",
-  },
-  {
-    label: "Country",
-    items: ["USA", "San Francisco", "Chicago", "Remote"],
-    icon: ICONS.downArrow,
-    key: "country",
-  },
-  {
-    label: "City",
-    items: ["New York", "San Francisco", "Chicago", "Remote"],
-    icon: ICONS.downArrow,
-    key: "city",
-  },
-  {
-    label: "Qualification/Skills",
-    items: ["Under Graduation", "Medical Bachelor Degree", "Paramedical Degree", "Paramedical Diploma", "Nursing", "Lab Technologist"],
-    icon: ICONS.downArrow,
-    key: "skills",
-  },
-  {
-    label: "Language",
-    items: languageList,
-    icon: ICONS.downArrow,
-    key: "language",
-  },
-  {
-    label: "Experience (Years)",
-    items: ["1", "2", "3", "4", "5", "6", "7", "8"],
-    icon: ICONS.downArrow,
-    key: "experience",
-  },
-  {
-    label: "Designation",
-    items: [
-      "Student", "Working Professional"
-    ],
-    icon: ICONS.downArrow,
-    key: "designation",
-  },
-];
+    // {
+    //   label: "Gender",
+    //   items: ["Male", "Female", "Other"],
+    //   icon: ICONS.downArrow,
+    //   key: "gender",
+    // },
+    {
+      label: "Type of Organization",
+      items: ["Medical", "Paramedical", "Paramedical Diploma", "Other"],
+      icon: ICONS.downArrow,
+      key: "designationType",
+    },
+    {
+      label: "Type of Department",
+      items: [
+        // Medical Courses
+        "Ayurvedic Medicine and Surgery",
+        "Dental Surgery",
+        "Medicine and Bachelor of Surgery",
+        "Naturopathy and Yoga Sciences",
+        "Siddha Medicine and Surgery",
+        "Unani Medicine and Surgery",
+        // Paramedical Courses
+        "Audiology and Speech Therapy",
+        "Biomedical Engineering",
+        "Biotechnology",
+        "Cardiac or Cardiovascular Technology",
+        "Healthcare Management",
+        "Medical Record Technology",
+        "Microbiology",
+        "Nursing and Midwifery",
+        "Nutrition and Dietetics",
+        "Occupational Therapy",
+        "Operation Theater Technology",
+        "Ophthalmic Technology",
+        "Optometry",
+        "Physiotherapy",
+        "Psychology",
+        "Radiography and Medical Imaging",
+        "Respiratory Therapy",
+        "X-Ray Technology",
+        // Paramedical Diploma Courses
+        "Anaesthesia Technology",
+        "Dialysis Technology",
+        "ECG Technology",
+        "Hearing Language and Speech",
+        "Medical Laboratory Technology",
+        "Nursing Care Assistance",
+        "Sanitary Inspection",
+      ],
+
+      icon: ICONS.downArrow,
+      key: "courseName",
+    },
+    {
+      label: "Interested In",
+      items: [
+        "Shadow Internship",
+        "Practice Internship",
+        "Offline Programs",
+        "Online Programs",
+        "Fellowship",
+        "Scholarships",
+        "Events",
+        "Certification Course",
+        "Diploma Course",
+        "Bachelor Degree",
+        "Master Degree",
+        "Part Time",
+        "Full Time",
+        "Contract",
+      ],
+      icon: ICONS.downArrow,
+      key: "currentlyLookingFor",
+    },
+    {
+      label: "Country",
+      items: countryList,
+      icon: ICONS.downArrow,
+      key: "country",
+    },
+    {
+      label: "City",
+      items: ["New York", "San Francisco", "Chicago", "Remote"],
+      icon: ICONS.downArrow,
+      key: "city",
+    },
+    {
+      label: "Qualification/Skills",
+      items: [
+        "Under Graduation",
+        "Medical Bachelor Degree",
+        "Paramedical Degree",
+        "Paramedical Diploma",
+        "Nursing",
+        "Lab Technologist",
+      ],
+      icon: ICONS.downArrow,
+      key: "skills",
+    },
+    {
+      label: "Language",
+      items: languageList,
+      icon: ICONS.downArrow,
+      key: "language",
+    },
+    {
+      label: "Experience (Years)",
+      items: ["1", "2", "3", "4", "5", "6", "7", "8"],
+      icon: ICONS.downArrow,
+      key: "experience",
+    },
+    {
+      label: "Designation",
+      items: ["Student", "Working Professional"],
+      icon: ICONS.downArrow,
+      key: "designation",
+    },
+  ];
 
   return (
     <div className="bg-[#f5f6fa] p-6 flex flex-col gap-6">

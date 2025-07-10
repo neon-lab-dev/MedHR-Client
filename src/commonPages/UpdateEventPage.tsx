@@ -132,6 +132,7 @@ const UpdateEventPage = ({ id, navigateRoute }: { id: string, navigateRoute: str
     "Diagnostic Centers",
     "Imaging Centers",
     "Educational Institution",
+    "Consultant (Others)"
   ];
 
   if (isLoading) return <Loading className="h-[60vh] w-full" />;

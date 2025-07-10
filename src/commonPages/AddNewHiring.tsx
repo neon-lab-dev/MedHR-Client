@@ -218,6 +218,7 @@ const AddNewHiring = ({
     "Nursing Home",
     "Diagnostic Centers",
     "Imaging Centers",
+    "Consultant (Others)"
   ];
   return (
     <div className="bg-[#f5f6fa] p-6 flex flex-col font-plus-jakarta-sans">

@@ -166,6 +166,7 @@ const Page = () => {
     "Nursing Home",
     "Diagnostic Centers",
     "Imaging Centers",
+    "Consultant (Others)"
   ];
 
   return (

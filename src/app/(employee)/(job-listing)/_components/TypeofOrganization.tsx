@@ -39,6 +39,7 @@ const TypeofOrganization: React.FC<TDepartmentProps> = ({
     "Nursing Home",
     "Diagnostic Centers",
     "Imaging Centers",
+    "Consultant (Others)"
   ];
 
   return (

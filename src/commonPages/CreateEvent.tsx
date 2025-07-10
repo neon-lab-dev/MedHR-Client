@@ -126,6 +126,7 @@ const CreateEvent = ({ navigateRoute }: { navigateRoute: string }) => {
     "Diagnostic Centers",
     "Imaging Centers",
     "Educational Institution",
+    "Consultant (Others)"
   ];
 
   return (

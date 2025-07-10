@@ -50,7 +50,7 @@ const SelectDropdown: React.FC<TSelectDropdownProps> = ({
       <div
         className={`${
           open ? "visible bg-white shadow-secondary-button" : "invisible"
-        } absolute top-12 z-50 w-full flex flex-col gap-2 p-3 rounded-b-2xl`}
+        } absolute top-12 max-h-60 overflow-y-auto z-50 w-full flex flex-col gap-2 p-3 rounded-b-2xl`}
       >
         {items.map((item, idx) => (
           <button

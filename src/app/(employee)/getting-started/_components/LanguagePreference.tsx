@@ -17,7 +17,10 @@ const LanguagePreference: React.FC<TLanguagePreferenceProps> = ({
   const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
-    setLanguageList(ISO6391.getAllNames());
+    const sortedLanguages = ISO6391.getAllNames().sort((a, b) =>
+      a.localeCompare(b)
+    );
+    setLanguageList(sortedLanguages);
   }, []);
 
   const handleAddLanguage = (language: string) => {

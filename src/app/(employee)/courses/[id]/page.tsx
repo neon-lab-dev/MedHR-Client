@@ -133,7 +133,7 @@ const CourseDetails = () => {
                 alt={course?.thumbnail?.name as string}
                 width={500}
                 height={300}
-                className="rounded-xl object-cover w-full h-full lg:h-[600px]"
+                className="rounded-xl object-cover w-full h-full lg:w-[600px] lg:h-[600px]"
               />
               <div>
                 <p className="text-neutral-600 font-semibold">Course Overview</p>

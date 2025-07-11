@@ -1,4 +1,3 @@
- 
 "use client";
 
 import { useParams, useRouter } from "next/navigation";
@@ -11,13 +10,17 @@ import { applyOnSkillProgram } from "@/api/employee";
 import { toast } from "sonner";
 import axiosInstance from "@/api/axiosInstance";
 
-
 interface ISkillProgramme {
-   _id?: string;
+  _id?: string;
   skillProgrammeName: string;
   programmeOverview: string;
   programmeDescription?: string;
-  programmeType?: "Offline" | "Online" | "Fellowship" | "Scholarships" | "Events";
+  programmeType?:
+    | "Offline"
+    | "Online"
+    | "Fellowship"
+    | "Scholarships"
+    | "Events";
   department: string;
   duration: string;
   desiredQualificationOrExperience?: string;
@@ -38,16 +41,13 @@ interface ISkillProgramme {
 }
 
 const fetchCourseById = async (id: string) => {
-  const { data } = await axiosInstance.get(
-    `/skills/${id}`
-  );
+  const { data } = await axiosInstance.get(`/skills/${id}`);
   return data;
 };
 
 const CourseDetails = () => {
   const { id } = useParams();
-    const router = useRouter();
-  
+  const router = useRouter();
 
   const skillId = Array.isArray(id) ? id[0] : id;
 
@@ -93,7 +93,7 @@ const CourseDetails = () => {
     },
   ];
 
-   // Apply on course
+  // Apply on course
   const { mutate: applySkillProgram } = useMutation({
     mutationFn: (id: string) => applyOnSkillProgram(id),
     onMutate: () => {
@@ -119,7 +119,6 @@ const CourseDetails = () => {
 
   if (isLoading) return <Loading />;
 
-
   return (
     <Container>
       <div className="py-section">
@@ -132,19 +131,23 @@ const CourseDetails = () => {
               <Image
                 src={skill?.thumbnail?.url as string}
                 alt={skill?.thumbnail?.name as string}
-                width={500}
+                width={300}
                 height={300}
-                className="rounded-xl object-cover w-full h-full lg:h-[600px]"
+                className="rounded-xl w-full h-full lg:w-[600px] lg:h-[600px]"
               />
               <div>
-                <p className="text-neutral-600 font-semibold">Programme Overview</p>
+                <p className="text-neutral-600 font-semibold">
+                  Programme Overview
+                </p>
                 <p className="text-neutral-600 text-[15px] mt-2">
                   {skill?.programmeOverview}
                 </p>
               </div>
 
               <div>
-                <p className="text-neutral-600 font-semibold">Programme Details</p>
+                <p className="text-neutral-600 font-semibold">
+                  Programme Details
+                </p>
                 <div
                   className="text-neutral-600 text-[15px] mt-2"
                   dangerouslySetInnerHTML={{
@@ -183,13 +186,16 @@ const CourseDetails = () => {
                 </p>
               </div>
             ))}
-            
 
-              {/* href={skill?.programmeLink ? skill?.programmeLink : ""} */}
-            
-              <Button onClick={() => handleApplyOnSkillProgram(skill?._id as string)} variant="normal" className="px-6 py-[10px] w-full">
-                Apply Now
-              </Button>
+            {/* href={skill?.programmeLink ? skill?.programmeLink : ""} */}
+
+            <Button
+              onClick={() => handleApplyOnSkillProgram(skill?._id as string)}
+              variant="normal"
+              className="px-6 py-[10px] w-full"
+            >
+              Apply Now
+            </Button>
           </div>
         </div>
       </div>

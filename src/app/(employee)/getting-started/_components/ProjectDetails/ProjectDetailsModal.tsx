@@ -49,7 +49,7 @@ const ProjectDetailsModal: React.FC<TProjectDetailsModalProps> = ({
   };
   return (
     <Modal
-      heading="Add experience details"
+      heading="Add Educational Experience Details"
       isModalOpen={isModalOpen}
       setIsModalOpen={setIsModalOpen}
     >
@@ -63,13 +63,13 @@ const ProjectDetailsModal: React.FC<TProjectDetailsModalProps> = ({
         <div className="flex flex-col gap-5 mt-5">
           <TextInput
             label="Title"
-            placeholder="eg.,  Online Gaming App"
+            placeholder="Enter title"
             value={formValues.title}
             onChange={(e) => handleChange("title", e.target.value)}
           />
           <TextArea
             label="Description"
-            placeholder="You can write about what was the goal of this project? How did you develop this project? and What are some important features of the project?"
+            placeholder="Enter description"
             cols={4}
             rows={4}
             value={formValues.description}
@@ -77,7 +77,7 @@ const ProjectDetailsModal: React.FC<TProjectDetailsModalProps> = ({
           />
           <TextInput
             label="Link"
-            placeholder="eg.,  Link Here"
+            placeholder="Enter link"
             value={formValues.link}
             onChange={(e) => handleChange("link", e.target.value)}
           />

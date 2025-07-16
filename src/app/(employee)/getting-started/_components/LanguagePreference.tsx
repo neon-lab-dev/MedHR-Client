@@ -71,7 +71,7 @@ const LanguagePreference: React.FC<TLanguagePreferenceProps> = ({
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           onKeyDown={handleKeyDown}
-          placeholder="Select a language or enter keyword"
+          placeholder="Enter the languages you speak"
           className="pl-12 pr-4 py-4 border border-neutral-300 rounded-xl focus:outline-none focus:border-primary-500 transition duration-300 w-full"
         />
         <Image

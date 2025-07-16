@@ -60,13 +60,13 @@ const CertificationModal:React.FC<TCertificationModalProps> = ({
       <div className="flex flex-col gap-5 mt-5">
       <TextInput
           label="Certificate Name"
-          placeholder="eg.,  UI UX Design Certificate"
+          placeholder="Enter certificate name"
           value={formValues.name}
             onChange={(e) => handleChange("name", e.target.value)}
         />
       <TextInput
           label="Organization/Institute Name"
-          placeholder="eg.,  UI UX Design Certificate"
+          placeholder="Enter organization name"
           value={formValues.issuingOrganization}
             onChange={(e) => handleChange("issuingOrganization", e.target.value)}
         />
@@ -79,7 +79,7 @@ const CertificationModal:React.FC<TCertificationModalProps> = ({
         <div className="flex items-center gap-5">
         <TextInput
           label="Certificate ID"
-          placeholder="Add link here"
+          placeholder="Enter certificate ID"
           value={formValues.credentialID}
             onChange={(e) => handleChange("credentialID", e.target.value)}
         />

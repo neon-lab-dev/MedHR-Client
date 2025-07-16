@@ -38,7 +38,7 @@ const Skills: React.FC<TSkillsProps> = ({ onChange }) => {
   return (
     <div className="flex flex-col gap-9 mt-12 font-plus-jakarta-sans">
       <h1 className="registration-form-heading">
-        Qualification/skills
+        Obtained Qualification/skills
       </h1>
 
       {/* Search Input */}

@@ -105,7 +105,7 @@ console.log(projects);
         resumeUrl={resumeUrl}
       />
       <Container>
-        <div className="flex flex-col gap-6 mt-5">
+        <div className="flex flex-col gap-6 mt-5 mb-10">
           <PersonalDetails personalDetails={personalDetails} isEditable={true} />
           <GuardianDetails guardianDetails={guardianDetails} isEditable={true} />
           <AddressDetails addressDetails={addressDetails} isEditable={true} />

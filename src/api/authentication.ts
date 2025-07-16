@@ -141,16 +141,20 @@ export const handleEmployerLogoutService = async (): Promise<string> => {
 
 export const handleEmployerSignupService = async (
   data: ISignupData
-): Promise<string> => {
+): Promise<{ success: boolean; message: string }> => {
   try {
     const res = await axiosInstance.post(api.employerRegistration, data, {
       withCredentials: true,
     });
-    return res.data?.message ?? "OTP sent successfully!";
+    return { success: true, message: res.data?.message ?? "OTP sent successfully!" };
   } catch (error: any) {
-    throw new Error(error?.response?.data?.message ?? "Signup failed");
+    return {
+      success: false,
+      message: error?.response?.data?.message ?? "Signup failed",
+    };
   }
 };
+
 
 export const handleEmployeeSignupService = async (
   data: ISignupData

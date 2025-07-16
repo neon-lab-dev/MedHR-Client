@@ -9,7 +9,7 @@ import Image from "next/image";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { useAppDispatch, useAppSelector } from "@/hooks/store";
-import { setAuthModalType } from "@/store/slices/authSlice";
+import { closeAuthModal, setAuthModalType } from "@/store/slices/authSlice";
 import { useMutation } from "@tanstack/react-query";
 import {
   handleEmployeeSignupService,
@@ -282,16 +282,21 @@ const Signup = () => {
     },
   });
 
-  const employer = useMutation({
-    mutationFn: handleEmployerSignupService,
-    onSuccess: (msg) => {
-      toast.success(msg);
+const employer = useMutation({
+  mutationFn: handleEmployerSignupService,
+  onSuccess: (data) => {
+    if (data.success) {
+      toast.success(data.message);
       dispatch(setAuthModalType("OTP"));
-    },
-    onError: (err: string) => {
-      toast.error(err);
-    },
-  });
+    } else {
+      toast.error(data.message);
+    }
+  },
+  onError: (err: any) => {
+    toast.error(err?.message ?? "Something went wrong");
+  },
+});
+
 
   const onSubmit = async (data: any) => {
     setData(data);
@@ -473,7 +478,7 @@ const Signup = () => {
 
         <p className="text-xs  text-neutral-700 text-start mt-5">
           By signing up, you agree to our{" "}
-          <Link href={""} className="text-primary-500">
+          <Link href={"/terms-and-conditions"} onClick={() => dispatch(closeAuthModal())} className="text-primary-500">
             Terms and Conditions.
           </Link>
         </p>

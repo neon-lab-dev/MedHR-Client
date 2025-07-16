@@ -99,14 +99,14 @@ const SocialLink: React.FC<TSocialLinkProps> = ({ setSelectedSocialLinks }) => {
     <div className="flex flex-col gap-5 mt-12 font-plus-jakarta-sans">
       <h1 className="registration-form-heading mb-4">Add Social Links</h1>
 
-      <div className="flex gap-4 mb-8">
+      <div className="flex flex-col md:flex-row gap-4 mb-8">
         {/* Dropdown */}
         <div ref={dropDownRef} className="relative font-plus-jakarta-sans">
           <label className="text-neutral-700 font-medium">Social Media</label>
           <button
             type="button"
             onClick={() => setOpen((prev) => !prev)}
-            className="p-4 rounded-xl bg-white border focus:outline-none focus:border-primary-500 flex items-center justify-between w-[210px] mt-2 cursor-pointer transition-all duration-300 ease-in-out transform active:scale-95 text-[#1D293D] font-medium"
+            className="p-4 rounded-xl bg-white border focus:outline-none focus:border-primary-500 flex items-center justify-between w-full md:w-[210px] mt-2 cursor-pointer transition-all duration-300 ease-in-out transform active:scale-95 text-[#1D293D] font-medium"
           >
             {selectedPlatform?.platform ?? "Select Social Media"}
             <Image
@@ -140,7 +140,8 @@ const SocialLink: React.FC<TSocialLinkProps> = ({ setSelectedSocialLinks }) => {
           </div>
         </div>
 
-        {/* Link input */}
+        <div className="flex gap-4">
+          {/* Link input */}
         <div className="flex-1">
           <label className="text-neutral-700 font-medium">Profile Link</label>
           <input
@@ -160,6 +161,7 @@ const SocialLink: React.FC<TSocialLinkProps> = ({ setSelectedSocialLinks }) => {
         >
           <Image src={ICONS.addCircle} alt="add-icon" className="size-7" />
         </button>
+        </div>
       </div>
 
       {/* Display added links */}

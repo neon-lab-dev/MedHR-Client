@@ -72,7 +72,7 @@ const PersonalInfoForm: React.FC<TPersonalInfoFormProps> = ({
           </label>
           <div className="flex gap-2">
             <select
-              className="px-4 py-3 rounded-xl bg-white border border-neutral-300 focus:outline-none focus:border-primary-500 transition duration-300 cursor-pointer"
+              className="w-[40%] sm:w-fit text-[10px] sm:text-base px-4 py-3 rounded-xl bg-white border border-neutral-300 focus:outline-none focus:border-primary-500 transition duration-300 cursor-pointer"
               {...register("guardian.countryCode", {
                 required: "Country code is required",
               })}
@@ -85,7 +85,8 @@ const PersonalInfoForm: React.FC<TPersonalInfoFormProps> = ({
               ))}
             </select>
 
-            <TextInput
+            <div className="w-[60%] sm:w-full">
+              <TextInput
               placeholder="Enter your guardian phone number"
               type="number"
               error={errors.guardian?.phoneNumber}
@@ -94,6 +95,7 @@ const PersonalInfoForm: React.FC<TPersonalInfoFormProps> = ({
               })}
               isRequired={false}
             />
+            </div>
           </div>
         </div>
       </div>

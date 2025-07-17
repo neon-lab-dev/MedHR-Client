@@ -180,7 +180,7 @@ const AddNewHiring = ({
 
   return (
     <div className="bg-[#f5f6fa] p-6 flex flex-col font-plus-jakarta-sans">
-      <div className="bg-white p-6 rounded-lg shadow-md flex flex-col gap-4 max-w-[800px] w-full mx-auto min-h-screen">
+      <div className="bg-white p-6 rounded-lg shadow-md flex flex-col gap-4 max-w-[850px] w-full mx-auto min-h-screen">
         <div className="flex justify-between">
           <div className="flex gap-2 items-center">
             <Link href={`${path}/${backNavigationPath}`}>

@@ -139,7 +139,7 @@ const WorkExperienceModal: React.FC<TWorkExperienceModalProps> = ({
         />
         <TextArea
           label="Work Description"
-          placeholder="What was the project assigned? What was your contribution to the project? What are the some important features of the project."
+          placeholder="Enter description"
           cols={2}
           rows={4}
           value={formValues.description}

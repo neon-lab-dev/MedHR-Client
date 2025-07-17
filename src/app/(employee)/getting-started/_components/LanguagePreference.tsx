@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import ISO6391 from "iso-639-1";
+// import ISO6391 from "iso-639-1"; //for all languages
 import { ICONS } from "@/assets";
 import Chip from "@/components/Chip";
 import Image from "next/image";
@@ -9,6 +9,19 @@ type TLanguagePreferenceProps = {
   onChange: (languages: string[]) => void;
 };
 
+const languages = [
+  "Arabic",
+  "English",
+  "French",
+  "German",
+  "Italian",
+  "Japanese",
+  "Chinese",
+  "Portuguese",
+  "Russian",
+  "Spanish",
+];
+
 const LanguagePreference: React.FC<TLanguagePreferenceProps> = ({
   onChange,
 }) => {
@@ -16,10 +29,14 @@ const LanguagePreference: React.FC<TLanguagePreferenceProps> = ({
   const [selectedLanguages, setSelectedLanguages] = useState<string[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
 
+  // useEffect(() => {
+  //   const sortedLanguages = ISO6391.getAllNames().sort((a, b) =>
+  //     a.localeCompare(b)
+  //   );
+  //   setLanguageList(sortedLanguages);
+  // }, []);
   useEffect(() => {
-    const sortedLanguages = ISO6391.getAllNames().sort((a, b) =>
-      a.localeCompare(b)
-    );
+    const sortedLanguages = languages.sort((a, b) => a.localeCompare(b));
     setLanguageList(sortedLanguages);
   }, []);
 

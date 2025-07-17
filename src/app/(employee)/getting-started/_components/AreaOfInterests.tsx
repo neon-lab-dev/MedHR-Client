@@ -11,12 +11,13 @@ type TAreaOfInterestsProps = {
 const AreaOfInterests: React.FC<TAreaOfInterestsProps> = ({ onChange }) => {
   // Interests
   const interests = [
-    "Allopathy",
-    "Ayurveda",
-    "Homeopathy",
-    "Diagnostic Centers",
-    "Imaging Centers",
+    "Allopathy Hospital",
+    "Ayurveda Hospital",
+    "Homeopathy Hospital",
+    "Diagnostic Centres",
+    "Imaging Centres",
     "Educational Institution",
+    "Health Centres",
   ];
 
   const [selectedInterest, setSelectedInterest] = useState<string[]>([]);

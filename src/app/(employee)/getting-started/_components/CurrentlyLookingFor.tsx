@@ -65,6 +65,7 @@ const CurrentlyLookingFor: React.FC<TCurrentlyLookingForProps> = ({
     "BPT",
     "Medical technologies",
     "BOT",
+    "Hospital Administration",
   ];
 
   return (

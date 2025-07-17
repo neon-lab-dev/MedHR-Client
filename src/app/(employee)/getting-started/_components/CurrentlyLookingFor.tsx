@@ -3,23 +3,27 @@ import { Dispatch, SetStateAction, useState } from "react";
 import { ICONS } from "@/assets";
 import Chip from "@/components/Chip";
 import Image from "next/image";
-import { departments } from "@/mockData/departments";
 
 type TCurrentlyLookingForProps = {
-  onChange : (interests: string[]) => void;
+  onChange: (interests: string[]) => void;
   interestedDepartments: string[];
   setInterestedDepartments: Dispatch<SetStateAction<string[]>>;
   setInterestedCountries: Dispatch<SetStateAction<string[]>>;
   interestedCountries: string[];
-}
+};
 
-const CurrentlyLookingFor:React.FC<TCurrentlyLookingForProps> = ({ onChange, interestedDepartments, setInterestedDepartments, setInterestedCountries, interestedCountries }) => {
+const CurrentlyLookingFor: React.FC<TCurrentlyLookingForProps> = ({
+  onChange,
+  interestedDepartments,
+  setInterestedDepartments,
+  setInterestedCountries,
+  interestedCountries,
+}) => {
   const interests = ["Internship", "Skill Programs", "Courses", "Jobs"];
   const countries = ["India", "Canada", "Germany"];
 
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedInterests, setSelectedInterests] = useState<string[]>([]);
-  
 
   const handleAddInterest = (interest: string) => {
     if (!selectedInterests.includes(interest)) {
@@ -50,6 +54,18 @@ const CurrentlyLookingFor:React.FC<TCurrentlyLookingForProps> = ({ onChange, int
   const filteredInterests = interests.filter((interest) =>
     interest.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  const streams = [
+    "For MBBS",
+    "For BDS",
+    "For BAMS",
+    "BHMS",
+    "Pharmacy",
+    "Nursing",
+    "BPT",
+    "Medical technologies",
+    "BOT",
+  ];
 
   return (
     <div className="flex flex-col gap-9 mt-12 font-plus-jakarta-sans">
@@ -128,16 +144,22 @@ const CurrentlyLookingFor:React.FC<TCurrentlyLookingForProps> = ({ onChange, int
       <div className="flex flex-col md:flex-row gap-5">
         {/* Department Dropdown */}
         <div className="w-full">
-          <label className="text-sm font-medium mb-1 block">Section/Department</label>
+          <label className="text-sm font-medium mb-1 block">Streams</label>
           <select
             onChange={(e) =>
-              handleMultiSelect(interestedDepartments, setInterestedDepartments, e.target.value)
+              handleMultiSelect(
+                interestedDepartments,
+                setInterestedDepartments,
+                e.target.value
+              )
             }
             className="w-full border border-gray-300 rounded-xl py-3 px-4"
             value=""
           >
-            <option value="" disabled hidden>Select Department</option>
-            {departments.map((dept) => (
+            <option value="" disabled hidden>
+              Select Department
+            </option>
+            {streams.map((dept) => (
               <option key={dept} value={dept}>
                 {dept}
               </option>
@@ -145,11 +167,13 @@ const CurrentlyLookingFor:React.FC<TCurrentlyLookingForProps> = ({ onChange, int
           </select>
           {/* Selected */}
           <div className="mt-2 flex flex-wrap gap-2">
-            {interestedDepartments.map((dept:string) => (
+            {interestedDepartments.map((dept: string) => (
               <Chip
                 key={dept}
                 onClick={() =>
-                  setInterestedDepartments(interestedDepartments.filter((d:string) => d !== dept))
+                  setInterestedDepartments(
+                    interestedDepartments.filter((d: string) => d !== dept)
+                  )
                 }
                 variant="close"
               >
@@ -164,12 +188,18 @@ const CurrentlyLookingFor:React.FC<TCurrentlyLookingForProps> = ({ onChange, int
           <label className="text-sm font-medium mb-1 block">At Country</label>
           <select
             onChange={(e) =>
-              handleMultiSelect(interestedCountries, setInterestedCountries, e.target.value)
+              handleMultiSelect(
+                interestedCountries,
+                setInterestedCountries,
+                e.target.value
+              )
             }
             className="w-full border border-gray-300 rounded-xl py-3 px-4"
             value=""
           >
-            <option value="" disabled hidden>Select Country</option>
+            <option value="" disabled hidden>
+              Select Country
+            </option>
             {countries.map((country) => (
               <option key={country} value={country}>
                 {country}
@@ -178,11 +208,13 @@ const CurrentlyLookingFor:React.FC<TCurrentlyLookingForProps> = ({ onChange, int
           </select>
           {/* Selected */}
           <div className="mt-2 flex flex-wrap gap-2">
-            {interestedCountries.map((country:string) => (
+            {interestedCountries.map((country: string) => (
               <Chip
                 key={country}
                 onClick={() =>
-                  setInterestedCountries(interestedCountries.filter((c:string) => c !== country))
+                  setInterestedCountries(
+                    interestedCountries.filter((c: string) => c !== country)
+                  )
                 }
                 variant="close"
               >

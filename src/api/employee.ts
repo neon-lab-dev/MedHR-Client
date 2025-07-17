@@ -1,13 +1,13 @@
 import api from ".";
-import { IEmployee } from "@/types/employee";
 import { IJob } from "@/types/job";
 import axiosInstance from "./axiosInstance";
+import { TEmployee } from "@/types/employer";
 
 export const handleGetAllEmployeesForAdminService = async ({
   keyword,
 }: {
   keyword?: string;
-}): Promise<IEmployee[]> => {
+}): Promise<TEmployee[]> => {
   try {
     const url = keyword
       ? `${api.allEmployees}?full_name=${keyword}`
@@ -36,7 +36,7 @@ export const handleDeleteEmployeeService = async (
 
 export const handleGetSingleEmployeeByAdminService = async (
   id: string
-): Promise<IEmployee> => {
+): Promise<TEmployee> => {
   try {
     const res = await axiosInstance.get(`${api.adminEmployee}/${id}`, {
       withCredentials: true,

@@ -173,6 +173,7 @@ const EmployeeProfileDetails = ({ params }: Props) => {
           {data?.resumes?.url ? (
             <Link
               href={data?.resumes?.url ? data?.resumes?.url : ""}
+              target="_blank"
               className="flex items-center gap-2 px-6 py-4 bg-[#D0D7E7] border border-[#778DB9] text-[#303D5C] font-medium rounded-[14px] cursor-pointer"
             >
               Download Resume

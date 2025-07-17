@@ -71,7 +71,7 @@ const SkillProgrammesDashboard = ({skillProgrammes, isLoading, navigatePath} : {
     { header: "Name", accessor: "name" },
     { header: "Total Applications", accessor: "applications" },
     { header: "Programme Type", accessor: "programmeType" },
-    { header: "Department", accessor: "department" },
+    { header: "Stream", accessor: "department" },
     { header: "Duration", accessor: "duration" },
     { header: "Pricing Type", accessor: "pricingType" },
     { header: "Fee", accessor: "fee" },

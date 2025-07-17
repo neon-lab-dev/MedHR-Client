@@ -152,7 +152,7 @@ const CreateCourse = ({ navigatePath }: { navigatePath: string }) => {
         />
 
         <DropdownInput
-          label="Department"
+          label="Stream"
           options={departments}
           value={selectedDepartment}
           onChange={(e) => {

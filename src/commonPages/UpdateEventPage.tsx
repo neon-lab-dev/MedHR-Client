@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
- 
+
 "use client";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -15,6 +15,7 @@ import api from "@/api";
 import SelectDropdownInput from "@/components/Reusable/SelectDropdownInput/SelectDropdownInput";
 import { departments } from "@/mockData/departments";
 import axiosInstance from "@/api/axiosInstance";
+import { typesOfOrganizationType } from "@/mockData/typesOfOrganizations";
 
 type EventFormValues = {
   eventName: string;
@@ -30,7 +31,13 @@ type EventFormValues = {
   image: FileList;
 };
 
-const UpdateEventPage = ({ id, navigateRoute }: { id: string, navigateRoute: string }) => {
+const UpdateEventPage = ({
+  id,
+  navigateRoute,
+}: {
+  id: string;
+  navigateRoute: string;
+}) => {
   const router = useRouter();
   const {
     register,
@@ -104,13 +111,9 @@ const UpdateEventPage = ({ id, navigateRoute }: { id: string, navigateRoute: str
     }
 
     try {
-      await axiosInstance.put(
-        `${api.updateEvent}/${id}`,
-        formData,
-        {
-          withCredentials: true,
-        }
-      );
+      await axiosInstance.put(`${api.updateEvent}/${id}`, formData, {
+        withCredentials: true,
+      });
       toast.success("Event updated successfully!");
       router.push(navigateRoute);
     } catch (error) {
@@ -120,20 +123,6 @@ const UpdateEventPage = ({ id, navigateRoute }: { id: string, navigateRoute: str
       setIsSubmitting(false);
     }
   };
-
-  const typeOfOrganizations = [
-    "Allopathy Hospital",
-    "Allopathy Clinic",
-    "Ayurveda Hospital",
-    "Ayurveda Clinic",
-    "Homeopathy Hospital",
-    "Homeopathy Clinic",
-    "Nursing Home",
-    "Diagnostic Centers",
-    "Imaging Centers",
-    "Educational Institution",
-    "Consultant (Others)"
-  ];
 
   if (isLoading) return <Loading className="h-[60vh] w-full" />;
   if (!event?.data) return <NotFound />;
@@ -182,44 +171,44 @@ const UpdateEventPage = ({ id, navigateRoute }: { id: string, navigateRoute: str
       />
 
       <TextInput
-          label="Name of Organizer"
-          placeholder="Enter company name"
-          error={errors.organizerName}
-          {...register("organizerName", {
-            required: "Organizer name is required",
-          })}
-        />
+        label="Name of Organizer"
+        placeholder="Enter company name"
+        error={errors.organizerName}
+        {...register("organizerName", {
+          required: "Organizer name is required",
+        })}
+      />
 
-        <SelectDropdownInput
-          label="Type of Organization"
-          {...register("organizationType")}
-          error={errors?.organizationType}
-          options={typeOfOrganizations}
-          // onChange={(e: ChangeEvent<HTMLSelectElement>) =>
-          //   handleBankInfoChange(e, "accType")
-          // }
-          isRequired={false}
-        />
+      <SelectDropdownInput
+        label="Type of Organization"
+        {...register("organizationType")}
+        error={errors?.organizationType}
+        options={typesOfOrganizationType}
+        // onChange={(e: ChangeEvent<HTMLSelectElement>) =>
+        //   handleBankInfoChange(e, "accType")
+        // }
+        isRequired={false}
+      />
 
-        <SelectDropdownInput
-          label="Department"
-          {...register("department")}
-          error={errors?.department}
-          options={departments}
-          // onChange={(e: ChangeEvent<HTMLSelectElement>) =>
-          //   handleBankInfoChange(e, "accType")
-          // }
-          isRequired={false}
-        />
+      <SelectDropdownInput
+        label="Stream"
+        {...register("department")}
+        error={errors?.department}
+        options={departments}
+        // onChange={(e: ChangeEvent<HTMLSelectElement>) =>
+        //   handleBankInfoChange(e, "accType")
+        // }
+        isRequired={false}
+      />
 
       <TextInput
-          label="Event Link/URL"
-          placeholder="Enter your event link"
-          error={errors.eventUrl}
-          {...register("eventUrl", {
-            required: "Event link is required",
-          })}
-        />
+        label="Event Link/URL"
+        placeholder="Enter your event link"
+        error={errors.eventUrl}
+        {...register("eventUrl", {
+          required: "Event link is required",
+        })}
+      />
 
       <div className="w-full">
         <label className="text-neutral-700 font-medium font-plus-jakarta-sans">

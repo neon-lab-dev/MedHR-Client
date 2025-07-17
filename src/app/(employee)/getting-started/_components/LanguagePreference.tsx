@@ -4,23 +4,13 @@ import { useEffect, useState } from "react";
 import { ICONS } from "@/assets";
 import Chip from "@/components/Chip";
 import Image from "next/image";
+import { languages } from "@/mockData/languages";
 
 type TLanguagePreferenceProps = {
   onChange: (languages: string[]) => void;
 };
 
-const languages = [
-  "Arabic",
-  "English",
-  "French",
-  "German",
-  "Italian",
-  "Japanese",
-  "Chinese",
-  "Portuguese",
-  "Russian",
-  "Spanish",
-];
+
 
 const LanguagePreference: React.FC<TLanguagePreferenceProps> = ({
   onChange,

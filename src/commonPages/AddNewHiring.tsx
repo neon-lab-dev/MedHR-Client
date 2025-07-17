@@ -6,6 +6,7 @@ import SelectDropdownInput from "@/components/Reusable/SelectDropdownInput/Selec
 import TextArea from "@/components/Reusable/TextArea/TextArea";
 import TextInput from "@/components/Reusable/TextInput/TextInput";
 import { departments } from "@/mockData/departments";
+import { typesOfOrganizationType } from "@/mockData/typesOfOrganizations";
 import {
   useMutation,
   UseMutationResult,
@@ -62,37 +63,6 @@ const AddNewHiring = ({
       requiredSkills: requiredSkills.split(",").map((skill) => skill.trim()),
     };
   };
-
-  // const createJobRequest = async (data: FormData) => {
-  //   const payload = formatFormData(data);
-  //   const response = await axiosInstance.post(api.creatrjob, payload, {
-  //     withCredentials: true,
-  //   });
-
-  //   if (response.status !== 201) {
-  //     throw new Error("Failed to create job");
-  //   }
-  //   return response.data;
-  // };
-  // const useCreateJobMutation = (): UseMutationResult<any, Error, FormData> => {
-  //   const router = useRouter();
-  //   const queryClient = useQueryClient();
-  //   return useMutation({
-  //     mutationFn: createJobRequest,
-  //     onSuccess: () => {
-  //       toast.success(`${jobType.toUpperCase()} created successfully`);
-  //       queryClient.invalidateQueries({ queryKey: ["jobs-employer-job"] });
-  //       queryClient.invalidateQueries({ queryKey: ["jobs"] });
-
-  //       const navigateRoute = jobType === "job" ? "jobs" : "internships";
-  //       router.push(`${path}/${navigateRoute}`);
-  //     },
-  //     onError: (error: Error) => {
-  //       console.error("Error creating job:", error);
-  //       toast.error(error.message || "Failed to create job");
-  //     },
-  //   });
-  // };
 
   const {
     register,
@@ -208,18 +178,6 @@ const AddNewHiring = ({
   const internshipEmploymentTypes = ["Internship"];
   const internshipTypes = ["Shadow Internship", "Practice Internship"];
 
-  const organizationType = [
-    "Allopathy Hospital",
-    "Allopathy Clinic",
-    "Ayurveda Hospital",
-    "Ayurveda Clinic",
-    "Homeopathy Hospital",
-    "Homeopathy Clinic",
-    "Nursing Home",
-    "Diagnostic Centers",
-    "Imaging Centers",
-    "Consultant (Others)"
-  ];
   return (
     <div className="bg-[#f5f6fa] p-6 flex flex-col font-plus-jakarta-sans">
       <div className="bg-white p-6 rounded-lg shadow-md flex flex-col gap-4 max-w-[800px] w-full mx-auto min-h-screen">
@@ -387,14 +345,14 @@ const AddNewHiring = ({
                   required: "Organization type is required",
                 })}
                 error={errors?.typeOfOrganization}
-                options={organizationType}
+                options={typesOfOrganizationType}
                 isRequired={true}
               />
 
               <SelectDropdownInput
-                label="Department"
+                label="Stream"
                 {...register("department", {
-                  required: "Department is required",
+                  required: "Stream is required",
                 })}
                 error={errors?.department}
                 options={departments}

@@ -10,6 +10,7 @@ import Successfully from "@/app/(employee)/getting-started/_components/Successfu
 import api from "@/api";
 import { toast } from "sonner";
 import axiosInstance from "@/api/axiosInstance";
+import { typesOfOrganizationType } from "@/mockData/typesOfOrganizations";
 
 const Page = () => {
   interface FormData {
@@ -155,19 +156,6 @@ const Page = () => {
       setStep(step - 1);
     }
   };
-
-  const organizationType = [
-    "Allopathy Hospital",
-    "Allopathy Clinic",
-    "Ayurveda Hospital",
-    "Ayurveda Clinic",
-    "Homeopathy Hospital",
-    "Homeopathy Clinic",
-    "Nursing Home",
-    "Diagnostic Centers",
-    "Imaging Centers",
-    "Consultant (Others)"
-  ];
 
   return (
     <GetStartedLayout progress={step * 25} goToPreviousStep={goToPreviousStep}>
@@ -361,7 +349,7 @@ const Page = () => {
                             <option value="" selected disabled>
                               Organization Type
                             </option>
-                            {organizationType?.map((department) => (
+                            {typesOfOrganizationType?.map((department) => (
                               <option key={department} value={department}>
                                 {department}
                               </option>

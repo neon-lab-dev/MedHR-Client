@@ -47,7 +47,7 @@ const EventsDashboard = ({
     { header: "Company Location", accessor: "companyLocation" },
     { header: "Type of Organization", accessor: "organizationType" },
     { header: "Organizer Name", accessor: "organizerName" },
-    { header: "Department", accessor: "department" },
+    { header: "Stream", accessor: "department" },
     { header: "Date and Time", accessor: "dateAndTime" },
     { header: "Skills Covered", accessor: "skillCovered" },
     { header: "Actions", accessor: "actions" },

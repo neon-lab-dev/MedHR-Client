@@ -32,13 +32,13 @@ const Department: React.FC<TDepartmentProps> = ({
 
   return (
     <div className="flex flex-col gap-[6px]">
-      <label className="text-neutral-960 text-base font-medium">Department</label>
+      <label className="text-neutral-960 text-base font-medium">Stream</label>
       <div className="relative" ref={dropdownRef}>
         <div
           onClick={() => setIsDropdownOpen((prev) => !prev)}
           className="bg-white rounded-xl border border-neutral-650 p-4 text-sm font-normal flex items-center justify-between cursor-pointer"
         >
-          {department || "Select Depatment"}
+          {department || "Select Stream"}
         </div>
         {isDropdownOpen && (
           <ul className="absolute left-0 right-0 mt-2 bg-base-100 rounded-box z-10 w-full p-4 shadow flex flex-col gap-4 h-60 overflow-y-auto">

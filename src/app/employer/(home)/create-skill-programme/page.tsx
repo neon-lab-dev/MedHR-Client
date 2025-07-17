@@ -161,7 +161,7 @@ const CreateSkillProgramme = () => {
         />
 
         <DropdownInput
-          label="Department"
+          label="Stream"  // earlier it was department
           options={departments}
           value={selectedDepartment}
           onChange={(e) => {

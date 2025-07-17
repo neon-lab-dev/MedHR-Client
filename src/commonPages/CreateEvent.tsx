@@ -9,6 +9,7 @@ import api from "@/api";
 import SelectDropdownInput from "@/components/Reusable/SelectDropdownInput/SelectDropdownInput";
 import { departments } from "@/mockData/departments";
 import axiosInstance from "@/api/axiosInstance";
+import { typesOfOrganizationType } from "@/mockData/typesOfOrganizations";
 
 type TCreateEventFormValues = {
   eventName: string;
@@ -115,20 +116,6 @@ const CreateEvent = ({ navigateRoute }: { navigateRoute: string }) => {
       });
   };
 
-  const typeOfOrganizations = [
-    "Allopathy Hospital",
-    "Allopathy Clinic",
-    "Ayurveda Hospital",
-    "Ayurveda Clinic",
-    "Homeopathy Hospital",
-    "Homeopathy Clinic",
-    "Nursing Home",
-    "Diagnostic Centers",
-    "Imaging Centers",
-    "Educational Institution",
-    "Consultant (Others)"
-  ];
-
   return (
     <div className="bg-neutral-450 p-6 flex flex-col gap-[51px]">
       <form
@@ -186,12 +173,12 @@ const CreateEvent = ({ navigateRoute }: { navigateRoute: string }) => {
           label="Type of Organization"
           {...register("organizationType")}
           error={errors?.organizationType}
-          options={typeOfOrganizations}
+          options={typesOfOrganizationType}
           isRequired={false}
         />
 
         <SelectDropdownInput
-          label="Department"
+          label="Stream"
           {...register("department")}
           error={errors?.department}
           options={departments}

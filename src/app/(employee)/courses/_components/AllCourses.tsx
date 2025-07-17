@@ -91,7 +91,7 @@ const AllCourses = () => {
             containerWidth="w-full"
           />
           <FilterDropdown
-            label="Select Department"
+            label="Select Stream"
             items={departments}
             icon={ICONS.downArrow}
             onSelect={handleSelectDepartment}

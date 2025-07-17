@@ -75,7 +75,7 @@ const CoursesPageDashboard = ({courses, isLoading, navigatePath}: {courses: ICou
     { header: "Name", accessor: "name" },
     { header: "Course Type", accessor: "courseType" },
     { header: "Total Applications", accessor: "applications" },
-    { header: "Department", accessor: "department" },
+    { header: "Stream", accessor: "department" },
     { header: "Duration", accessor: "duration" },
     { header: "Pricing Type", accessor: "pricingType" },
     { header: "Fee (₹)", accessor: "fee" },

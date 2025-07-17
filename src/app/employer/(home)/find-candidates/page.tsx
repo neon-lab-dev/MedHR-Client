@@ -8,10 +8,13 @@ import CandidatesTable from "./_components/CandidatesTable";
 import { handleGetAllCandidatesService } from "@/api/employer";
 import MultiSelectDropdown from "@/components/Reusable/MultiSelectDropdown/MultiSelectDropdown";
 import { useQuery } from "@tanstack/react-query";
-import ISO6391 from "iso-639-1";
+// import ISO6391 from "iso-639-1"; //for all languages
 
 import countries from "i18n-iso-countries";
 import enLocale from "i18n-iso-countries/langs/en.json"; // load English names
+import { departments } from "@/mockData/departments";
+import { typesOfOrganizationType } from "@/mockData/typesOfOrganizations";
+import { languages } from "@/mockData/languages";
 
 countries.registerLocale(enLocale);
 
@@ -22,7 +25,7 @@ const countryList = Object.values(
 const FindCandidates = () => {
   const [languageList, setLanguageList] = useState<string[]>([]);
   useEffect(() => {
-    const sortedLanguages = ISO6391.getAllNames().sort((a, b) =>
+    const sortedLanguages = languages.sort((a, b) =>
       a.localeCompare(b)
     );
     setLanguageList(sortedLanguages);
@@ -78,48 +81,13 @@ const FindCandidates = () => {
     // },
     {
       label: "Type of Organization",
-      items: ["Medical", "Paramedical", "Paramedical Diploma", "Other"],
+      items: typesOfOrganizationType,
       icon: ICONS.downArrow,
       key: "designationType",
     },
     {
-      label: "Type of Department",
-      items: [
-        // Medical Courses
-        "Ayurvedic Medicine and Surgery",
-        "Dental Surgery",
-        "Medicine and Bachelor of Surgery",
-        "Naturopathy and Yoga Sciences",
-        "Siddha Medicine and Surgery",
-        "Unani Medicine and Surgery",
-        // Paramedical Courses
-        "Audiology and Speech Therapy",
-        "Biomedical Engineering",
-        "Biotechnology",
-        "Cardiac or Cardiovascular Technology",
-        "Healthcare Management",
-        "Medical Record Technology",
-        "Microbiology",
-        "Nursing and Midwifery",
-        "Nutrition and Dietetics",
-        "Occupational Therapy",
-        "Operation Theater Technology",
-        "Ophthalmic Technology",
-        "Optometry",
-        "Physiotherapy",
-        "Psychology",
-        "Radiography and Medical Imaging",
-        "Respiratory Therapy",
-        "X-Ray Technology",
-        // Paramedical Diploma Courses
-        "Anaesthesia Technology",
-        "Dialysis Technology",
-        "ECG Technology",
-        "Hearing Language and Speech",
-        "Medical Laboratory Technology",
-        "Nursing Care Assistance",
-        "Sanitary Inspection",
-      ],
+      label: "Type of Stream",
+      items: departments,
 
       icon: ICONS.downArrow,
       key: "courseName",

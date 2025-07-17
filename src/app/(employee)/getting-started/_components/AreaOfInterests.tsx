@@ -3,23 +3,13 @@ import { useState } from "react";
 import { ICONS } from "@/assets";
 import Chip from "@/components/Chip";
 import Image from "next/image";
+import { typesOfOrganizationType } from "@/mockData/typesOfOrganizations";
 
 type TAreaOfInterestsProps = {
   onChange: (interests: string[]) => void;
 };
 
 const AreaOfInterests: React.FC<TAreaOfInterestsProps> = ({ onChange }) => {
-  // Interests
-  const interests = [
-    "Allopathy Hospital",
-    "Ayurveda Hospital",
-    "Homeopathy Hospital",
-    "Diagnostic Centres",
-    "Imaging Centres",
-    "Educational Institution",
-    "Health Centres",
-  ];
-
   const [selectedInterest, setSelectedInterest] = useState<string[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -38,7 +28,7 @@ const AreaOfInterests: React.FC<TAreaOfInterestsProps> = ({ onChange }) => {
     onChange(updated);
   };
 
-  const filteredInterests = interests.filter((interest) =>
+  const filteredInterests = typesOfOrganizationType.filter((interest) =>
     interest.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
@@ -66,7 +56,7 @@ const AreaOfInterests: React.FC<TAreaOfInterestsProps> = ({ onChange }) => {
 
       {/* Add Custom Interest */}
       {searchTerm &&
-        !interests
+        !typesOfOrganizationType
           .map((i) => i.toLowerCase())
           .includes(searchTerm.toLowerCase()) &&
         !selectedInterest

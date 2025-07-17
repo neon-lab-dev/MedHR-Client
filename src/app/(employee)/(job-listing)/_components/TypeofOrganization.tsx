@@ -1,3 +1,4 @@
+import { typesOfOrganizationType } from "@/mockData/typesOfOrganizations";
 import React, { useEffect, useRef, useState } from "react";
 
 type TDepartmentProps = {
@@ -29,19 +30,6 @@ const TypeofOrganization: React.FC<TDepartmentProps> = ({
     };
   }, []);
 
-    const organizationType = [
-    "Allopathy Hospital",
-    "Allopathy Clinic",
-    "Ayurveda Hospital",
-    "Ayurveda Clinic",
-    "Homeopathy Hospital",
-    "Homeopathy Clinic",
-    "Nursing Home",
-    "Diagnostic Centers",
-    "Imaging Centers",
-    "Consultant (Others)"
-  ];
-
   return (
     <div className="flex flex-col gap-[6px]">
       <label className="text-neutral-960 text-base font-medium">Type of Organization</label>
@@ -54,7 +42,7 @@ const TypeofOrganization: React.FC<TDepartmentProps> = ({
         </div>
         {isDropdownOpen && (
           <ul className="absolute left-0 right-0 mt-2 bg-base-100 rounded-box z-10 w-full p-4 shadow flex flex-col gap-4 h-60 overflow-y-auto">
-            {organizationType.map((item, index) => (
+            {typesOfOrganizationType.map((item, index) => (
               <li
                 key={index}
                 onClick={() => {

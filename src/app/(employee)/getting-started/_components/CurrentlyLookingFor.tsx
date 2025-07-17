@@ -158,7 +158,7 @@ const CurrentlyLookingFor: React.FC<TCurrentlyLookingForProps> = ({
             value=""
           >
             <option value="" disabled hidden>
-              Select Department
+              Select Stream
             </option>
             {streams.map((dept) => (
               <option key={dept} value={dept}>

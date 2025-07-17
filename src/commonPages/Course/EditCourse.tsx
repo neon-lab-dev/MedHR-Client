@@ -183,7 +183,7 @@ const EditCourse = ({ id, navigatePath }: { id: string, navigatePath: string }) 
           />
 
           <DropdownInput
-            label="Department"
+            label="Stream"
             options={departments}
             value={selectedDepartment}
             onChange={(e) => {

@@ -205,7 +205,7 @@ const UpdateSkillProgrammeDashboard = ({
           />
 
           <DropdownInput
-            label="Department"
+            label="Stream"
             options={departments}
             value={selectedDepartment}
             onChange={(e) => {

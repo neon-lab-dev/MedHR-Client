@@ -87,7 +87,7 @@ const Employers = () => {
               {jobThatIsBeingDeleted === item.actions && isPending ? (
                 <span className="loading loading-spinner loading-sm"></span>
               ) : (
-                <Image src={menuDots} alt="menu-dots-icon" />
+                <Image src={menuDots} alt="menu-dots-icon" className="cursor-pointer" />
               )}
             </div>
             <ul

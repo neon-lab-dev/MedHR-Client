@@ -1,3 +1,4 @@
+"use client"
 import { handleGEtEmployerByIdForAdminService } from "@/api/employer";
 import { ICONS } from "@/assets";
 import Loading from "@/components/Loading";

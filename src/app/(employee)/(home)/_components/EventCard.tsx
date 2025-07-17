@@ -56,7 +56,7 @@ const EventCard: React.FC<TEventCardProps> = ({
             <img
               src={image?.url}
               alt=""
-              className="h-full w-full object-cover rounded-2xl transition-all duration-300 ease-in-out transform group-hover:scale-105"
+              className="h-full w-full  rounded-2xl transition-all duration-300 ease-in-out transform group-hover:scale-105"
             />
           </Link>
         )}
@@ -84,8 +84,8 @@ const EventCard: React.FC<TEventCardProps> = ({
       </Link>
 
       {/* Company Info */}
-      <div className="flex items-center gap-2 mt-4 sm:mt-2 text-neutral-400 text-xs sm:text-[15px]">
-        <div className="flex gap-2">
+      <div className="flex flex-col gap-2 mt-4 sm:mt-2 text-neutral-400 text-xs sm:text-[15px]">
+        <div className="flex items-center gap-2">
           <Image
             src={ICONS.company}
             alt=""
@@ -93,8 +93,14 @@ const EventCard: React.FC<TEventCardProps> = ({
           />
           <p className="">{company?.companyName}</p>
         </div>
-        <div className="bg-neutral-400 size-[5px] rounded-full"></div>
-        <p className="">{company?.companyLocation}</p>
+        <div className="flex items-center gap-2">
+          <Image
+            src={ICONS.location}
+            alt=""
+            className="size-5 object-cover rounded-full opacity-60"
+          />
+          <p className="">{company?.companyLocation}</p>
+        </div>
       </div>
 
       <div className="w-full mt-4 sm:mt-3">

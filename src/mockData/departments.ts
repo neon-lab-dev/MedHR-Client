@@ -51,14 +51,16 @@
 //   ];
 export const departments: string[] = [
   //currently it's stream
-  "For MBBS",
-  "For BDS",
-  "For BAMS",
+  "11th Science",
+  "12th Science",
+  "MBBS",
+  "BDS",
+  "BAMS",
   "BHMS",
   "Pharmacy",
   "Nursing",
   "BPT",
-  "Medical Technologies",
+  "Paramedical",
   "BOT",
   "Hospital Administration",
 ];

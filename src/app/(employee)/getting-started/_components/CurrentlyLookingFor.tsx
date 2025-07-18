@@ -3,6 +3,7 @@ import { Dispatch, SetStateAction, useState } from "react";
 import { ICONS } from "@/assets";
 import Chip from "@/components/Chip";
 import Image from "next/image";
+import { departments } from "@/mockData/departments";
 
 type TCurrentlyLookingForProps = {
   onChange: (interests: string[]) => void;
@@ -54,19 +55,6 @@ const CurrentlyLookingFor: React.FC<TCurrentlyLookingForProps> = ({
   const filteredInterests = interests.filter((interest) =>
     interest.toLowerCase().includes(searchTerm.toLowerCase())
   );
-
-  const streams = [
-    "For MBBS",
-    "For BDS",
-    "For BAMS",
-    "BHMS",
-    "Pharmacy",
-    "Nursing",
-    "BPT",
-    "Medical technologies",
-    "BOT",
-    "Hospital Administration",
-  ];
 
   return (
     <div className="flex flex-col gap-9 mt-12 font-plus-jakarta-sans">
@@ -160,7 +148,7 @@ const CurrentlyLookingFor: React.FC<TCurrentlyLookingForProps> = ({
             <option value="" disabled hidden>
               Select Stream
             </option>
-            {streams.map((dept) => (
+            {departments.map((dept) => (
               <option key={dept} value={dept}>
                 {dept}
               </option>

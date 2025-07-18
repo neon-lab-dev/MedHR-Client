@@ -18,16 +18,14 @@ import { languages } from "@/mockData/languages";
 
 countries.registerLocale(enLocale);
 
-const countryList = Object.values(
-  countries.getNames("en", { select: "official" })
-).sort((a, b) => a.localeCompare(b));
+// const countryList = Object.values(
+//   countries.getNames("en", { select: "official" })
+// ).sort((a, b) => a.localeCompare(b));
 
 const FindCandidates = () => {
   const [languageList, setLanguageList] = useState<string[]>([]);
   useEffect(() => {
-    const sortedLanguages = languages.sort((a, b) =>
-      a.localeCompare(b)
-    );
+    const sortedLanguages = languages.sort((a, b) => a.localeCompare(b));
     setLanguageList(sortedLanguages);
   }, []);
 
@@ -80,42 +78,57 @@ const FindCandidates = () => {
     //   key: "gender",
     // },
     {
-      label: "Type of Organization",
-      items: typesOfOrganizationType,
+      label: "Interested in Organization",
+      items: [...typesOfOrganizationType, "HR Service "],
       icon: ICONS.downArrow,
       key: "designationType",
     },
     {
-      label: "Type of Stream",
+      label: "Interested In Streams",
       items: departments,
-
       icon: ICONS.downArrow,
       key: "courseName",
     },
     {
-      label: "Interested In",
+      label: "Interested In Program",
       items: [
-        "Shadow Internship",
-        "Practice Internship",
-        "Offline Programs",
-        "Online Programs",
-        "Fellowship",
-        "Scholarships",
-        "Events",
-        "Certification Course",
-        "Diploma Course",
-        "Bachelor Degree",
-        "Master Degree",
-        "Part Time",
-        "Full Time",
-        "Contract",
+        // "Shadow Internship",
+        // "Practice Internship",
+        // "Offline Programs",
+        // "Online Programs",
+        // "Fellowship",
+        // "Scholarships",
+        // "Events",
+        // "Certification Course",
+        // "Diploma Course",
+        // "Bachelor Degree",
+        // "Master Degree",
+        // "Part Time",
+        // "Full Time",
+        // "Contract",
+        "Internship",
+        "Skill Programs",
+        "Courses",
+        "Jobs",
       ],
       icon: ICONS.downArrow,
       key: "currentlyLookingFor",
     },
     {
       label: "Country",
-      items: countryList,
+      // items: countryList,
+      items: [
+        "Gulf",
+        "Spain",
+        "US",
+        "UK",
+        "Europe",
+        "Germany",
+        "Italy",
+        "Japan",
+        "China",
+        "Russian",
+      ],
       icon: ICONS.downArrow,
       key: "country",
     },
@@ -126,7 +139,7 @@ const FindCandidates = () => {
       key: "city",
     },
     {
-      label: "Qualification/Skills",
+      label: "Aspirants Qualifications/Streams",
       items: [
         "Under Graduation",
         "Medical Bachelor Degree",
@@ -145,13 +158,13 @@ const FindCandidates = () => {
       key: "language",
     },
     {
-      label: "Experience (Years)",
-      items: ["1", "2", "3", "4", "5", "6", "7", "8"],
+      label: "Pursuing Qualification/Streams",
+      items: departments,
       icon: ICONS.downArrow,
       key: "experience",
     },
     {
-      label: "Designation",
+      label: "Aspirants Designation",
       items: ["Student", "Working Professional"],
       icon: ICONS.downArrow,
       key: "designation",

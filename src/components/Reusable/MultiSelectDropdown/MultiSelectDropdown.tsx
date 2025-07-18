@@ -39,7 +39,7 @@ const MultiSelectDropdown: React.FC<TMultiSelectDropdownProps> = ({
     <div ref={dropDownRef} className="relative text-white">
       <button
         onClick={() => setOpen((prev) => !prev)}
-       className="px-4 py-[14px] bg-white border border-[#CAD5E2] flex items-center justify-between leading-6 rounded-lg w-[277px] cursor-pointer 
+       className="px-4 py-[14px] bg-white border border-[#CAD5E2] flex items-center justify-between leading-6 rounded-lg min-w-[277px] w-fit cursor-pointer 
         transition-all duration-300 ease-in-out transform active:scale-95 text-[#1D293D]"
       >
         {selectedData.length > 0 ? selectedData.join(", ") : label}

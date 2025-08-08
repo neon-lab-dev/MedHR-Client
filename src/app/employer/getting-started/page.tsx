@@ -347,7 +347,7 @@ const Page = () => {
                             className="py-4 px-2 border-none text-sm w-full border-neutral-300 max-md:text-xs focus:outline-none"
                           >
                             <option value="" selected disabled>
-                              Organization Type
+                              Industry Type
                             </option>
                             {typesOfOrganizationType?.map((department) => (
                               <option key={department} value={department}>

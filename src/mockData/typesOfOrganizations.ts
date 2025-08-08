@@ -6,4 +6,5 @@ export const typesOfOrganizationType = [
   "Imaging Centres",
   "Educational Institution",
   "Health Centres",
+  "HR/Consultancy Services",
 ];

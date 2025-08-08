@@ -133,7 +133,7 @@ const CurrentlyLookingFor: React.FC<TCurrentlyLookingForProps> = ({
       <div className="flex flex-col md:flex-row gap-5">
         {/* Department Dropdown */}
         <div className="w-full">
-          <label className="text-sm font-medium mb-1 block">Streams</label>
+          <label className="text-sm font-medium mb-1 block">Your Streams</label>
           <select
             onChange={(e) =>
               handleMultiSelect(

@@ -123,7 +123,7 @@ const CurrentlyLookingFor: React.FC<TCurrentlyLookingForProps> = ({
             key={interest}
             onClick={() => handleAddInterest(interest)}
             variant="add"
-          >
+          >r
             {interest}
           </Chip>
         ))}

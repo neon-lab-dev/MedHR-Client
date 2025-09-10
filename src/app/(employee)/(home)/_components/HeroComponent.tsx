@@ -132,10 +132,10 @@ const HeroComponent = () => {
       label: "Internship",
       children: ["Shadow Internship", "Practice Internship"],
     },
-    {
-      label: "Course",
-      children: ["Certificate", "Diploma", "Bachelor", "Master"],
-    },
+    // {
+    //   label: "Course",
+    //   children: ["Certificate", "Diploma", "Bachelor", "Master"],
+    // },
     {
       label: "Skill Programmes",
       children: ["Offline", "Online", "Fellowship", "Scholarships", "Events"],

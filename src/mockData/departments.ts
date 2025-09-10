@@ -53,7 +53,7 @@ export const departments: string[] = [
   //currently it's stream
   "11th Science",
   "12th Science",
-  "MBBS",
+  "Medical",
   "BDS",
   "BAMS",
   "BHMS",

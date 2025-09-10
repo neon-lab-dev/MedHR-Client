@@ -16,13 +16,16 @@ const SkillsAndExtraBenefits = ({
   return (
     <div className={twMerge("w-full xl:w-[70%] flex flex-col gap-6", className)}>
       <SkillsContainerComponent title="Skills" labels={skills} />
-      <SkillsContainerComponent
+      {
+        extraBenefits &&
+        <SkillsContainerComponent
         title="Extra Benefits"
         labels={extraBenefits
           .split(",")
           .filter((label) => label !== "")
           .map((label) => label.trim())}
       />
+      }
     </div>
   );
 };

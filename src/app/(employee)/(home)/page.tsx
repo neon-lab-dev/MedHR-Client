@@ -4,10 +4,10 @@ import HeroComponent from "./_components/HeroComponent";
 import WhatWeDoComponent from "../../../components/WhatWeDo";
 import OurValuableHiringPartners from "@/components/OurValuableHiringPartners";
 import SkillProgrammes from "./_components/SkillProgrammes";
-import AvailableCourses from './_components/AvailableCourses';
+// import AvailableCourses from './_components/AvailableCourses';
 import LatestJobs from "./_components/LatestJobs/LatestJobs";
 import LatestInternships from "./_components/LatestInternships/LatestInternships";
-import Events from "./_components/Events";
+// import Events from "./_components/Events";
 
 const HomePage = () => {
   return (
@@ -17,8 +17,8 @@ const HomePage = () => {
       {/* <TrendingToday /> */}
       <LatestJobs />
       <LatestInternships />
-      <AvailableCourses/>
-      <Events/>
+      {/* <AvailableCourses/> */}
+      {/* <Events/> */}
       <OurValuableHiringPartners />
       <WhatWeDoComponent />
     </div>

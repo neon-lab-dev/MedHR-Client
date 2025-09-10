@@ -10,6 +10,8 @@ import JobCarousel from "./JobCarousel";
 
 const LatestJobs = async () => {
   const jobs = await getLatestJobs();
+
+  console.log(jobs);
   if (!jobs || jobs.length === 0) return null;
   return (
     <Container>

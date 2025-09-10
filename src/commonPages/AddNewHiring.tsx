@@ -5,7 +5,6 @@ import Button from "@/components/Button";
 import SelectDropdownInput from "@/components/Reusable/SelectDropdownInput/SelectDropdownInput";
 import TextArea from "@/components/Reusable/TextArea/TextArea";
 import TextInput from "@/components/Reusable/TextInput/TextInput";
-import { departments } from "@/mockData/departments";
 import { typesOfOrganizationType } from "@/mockData/typesOfOrganizations";
 import {
   useMutation,
@@ -178,6 +177,19 @@ const AddNewHiring = ({
   const internshipEmploymentTypes = ["Internship"];
   const internshipTypes = ["Shadow Internship", "Practice Internship"];
 
+  const departments: string[] = [
+  "Medical",
+  "BDS",
+  "BAMS",
+  "BHMS",
+  "Pharmacy",
+  "Nursing",
+  "BPT",
+  "Paramedical",
+  "BOT",
+  "Hospital Administration",
+];
+
   return (
     <div className="bg-[#f5f6fa] p-6 flex flex-col font-plus-jakarta-sans">
       <div className="bg-white p-6 rounded-lg shadow-md flex flex-col gap-4 max-w-[850px] w-full mx-auto min-h-screen">
@@ -331,10 +343,8 @@ const AddNewHiring = ({
                 type="number"
                 placeholder="e.g., 3"
                 error={errors.employmentDuration}
-                {...register("employmentDuration", {
-                  required: "Employment duration is required",
-                  valueAsNumber: true,
-                })}
+                {...register("employmentDuration")}
+                isRequired={false}
               />
             </div>
 
@@ -366,19 +376,16 @@ const AddNewHiring = ({
                 type="number"
                 placeholder="e.g., 10000000"
                 error={errors.salary}
-                {...register("salary", {
-                  required: "Salary is required",
-                  valueAsNumber: true,
-                })}
+                {...register("salary")}
+                isRequired={false}
               />
 
               <TextInput
                 label="Application Deadline"
                 type="date"
                 error={errors.applicationDeadline}
-                {...register("applicationDeadline", {
-                  required: "Application deadline is required",
-                })}
+                {...register("applicationDeadline")}
+                isRequired={false}
               />
             </div>
             <div className="flex justify-center gap-6">
@@ -387,6 +394,7 @@ const AddNewHiring = ({
                 placeholder="e.g., Professional development programs, Health insurance"
                 error={errors.extraBenefits}
                 {...register("extraBenefits")}
+                isRequired={false}
               />
 
               <TextInput
@@ -395,6 +403,7 @@ const AddNewHiring = ({
                 placeholder="e.g., 5"
                 error={errors.experience}
                 {...register("experience")}
+                isRequired={false}
               />
             </div>
             <div className="flex items-center justify-end gap-3">

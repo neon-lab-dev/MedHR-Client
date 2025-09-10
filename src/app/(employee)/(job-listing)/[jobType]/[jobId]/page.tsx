@@ -74,26 +74,19 @@ const JobIdPage = async ({
                 </span>
               </h3>
               <p className=" text-neutral-700 flex flex-col gap-3 lg:gap-6">
-                {job.description
-                  .split("\n")
-                  .filter((res) => res)
-                  .map((para, index) => (
-                    <span key={index}>{para}</span>
-                  ))}
+                {job.description}
               </p>{" "}
-              <h3 className="capitalize font-semibold text-neutral-800 mt-2 lg:mt-6">
+              {
+                job.responsibilities &&
+                <>
+                <h3 className="capitalize font-semibold text-neutral-800 mt-2 lg:mt-6">
                 Roles and Responsibilities
               </h3>
               <ul className=" text-neutral-700 flex flex-col gap-1 list-disc">
-                {job.responsibilities
-                  .split("\n")
-                  .filter((res) => res)
-                  .map((res, index) => (
-                    <li key={index} className="ml-8">
-                      {res}
-                    </li>
-                  ))}
+                {job.responsibilities}
               </ul>
+                </>
+              }
               <h3 className="capitalize font-semibold text-neutral-800 mt-2 lg:mt-6">
                 Requirements
               </h3>
@@ -184,12 +177,7 @@ const JobIdPage = async ({
               </div>
               <hr className="border border-neutral-500/20" />
               <p className=" text-neutral-700 flex flex-col gap-6">
-                {job.companyDetails.bio
-                  .split("\n")
-                  .filter((res) => res)
-                  .map((para, index) => (
-                    <span key={index}>{para}</span>
-                  ))}
+                {job.companyDetails.bio}
               </p>
             </div>
           </div>

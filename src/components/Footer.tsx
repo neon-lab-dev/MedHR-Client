@@ -48,12 +48,12 @@ const Footer = () => {
         window.location.href = "/skill-programmes";
       },
     },
-    {
-      label: "Courses",
-      action: () => {
-        window.location.href = "/courses";
-      },
-    },
+    // {
+    //   label: "Courses",
+    //   action: () => {
+    //     window.location.href = "/courses";
+    //   },
+    // },
     {
       label: "Trending Today",
       action: () => {
@@ -61,13 +61,13 @@ const Footer = () => {
         if (section) section.scrollIntoView({ behavior: "smooth" });
       },
     },
-    {
-      label: "Events",
-      action: () => {
-        const section = document.getElementById("events");
-        if (section) section.scrollIntoView({ behavior: "smooth" });
-      },
-    },
+    // {
+    //   label: "Events",
+    //   action: () => {
+    //     const section = document.getElementById("events");
+    //     if (section) section.scrollIntoView({ behavior: "smooth" });
+    //   },
+    // },
   ];
 
   const contactInfo = [

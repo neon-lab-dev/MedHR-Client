@@ -49,10 +49,10 @@ const Navbar = () => {
       text: "Skill Programmes",
       path : "/skill-programmes"
     },
-    {
-      text: "Courses",
-      path : "/courses"
-    },
+    // {
+    //   text: "Courses",
+    //   path : "/courses"
+    // },
   ];
   const { isAuthModalOpen, employerProfile, studentProfile } =
     useAppSelector((state) => state.auth);

@@ -10,7 +10,7 @@ export default function EmployeeRootLayout({
   return (
     <div>
       <Navbar />
-      <main className="min-h-screen">{children}</main>
+      <main className="">{children}</main>
       <Footer />
     </div>
   );

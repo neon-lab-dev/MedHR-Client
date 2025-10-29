@@ -65,8 +65,6 @@ const Dashboard = () => {
     interestedDepartments
   } = data.user;
 
-console.log(projects);
-
   const avatarUrl = avatar?.url || "/path/to/default-avatar.png";
   const resumeUrl = resumes?.url;
 

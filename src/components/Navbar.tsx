@@ -20,7 +20,7 @@ import { toast } from "sonner";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
 import Container from "./Container";
- import Cookies from "js-cookie";
+import Cookies from "js-cookie";
 
 const pfileItems = [
   { text: "My Applications", href: "/applications" },
@@ -35,66 +35,64 @@ const Navbar = () => {
   const navItems = [
     {
       text: "Home",
-      path : "/"
+      path: "/",
     },
     {
       text: "Internships",
-      path : "/internships"
+      path: "/internships",
     },
     {
       text: "Jobs",
-      path : "/jobs"
+      path: "/jobs",
     },
     {
       text: "Skill Programmes",
-      path : "/skill-programmes"
+      path: "/skill-programmes",
     },
     // {
     //   text: "Courses",
     //   path : "/courses"
     // },
   ];
-  const { isAuthModalOpen, employerProfile, studentProfile } =
-    useAppSelector((state) => state.auth);
+  const { isAuthModalOpen, employerProfile, studentProfile } = useAppSelector(
+    (state) => state.auth
+  );
   const queryClient = useQueryClient();
   const dispatch = useAppDispatch();
 
+  const { mutate, isPending } = useMutation({
+    mutationFn: handleEmployeeLogoutService,
+    onSuccess: () => {
+      toast.success("Logged out successfully");
 
+      // ✅ Remove employee token
+      Cookies.remove("employee_auth_token");
 
-const { mutate, isPending } = useMutation({
-  mutationFn: handleEmployeeLogoutService,
-  onSuccess: () => {
-    toast.success("Logged out successfully");
+      queryClient.setQueryData(["student-profile"], null);
+      dispatch(setEmployeeProfile(null));
+      router.push("/");
+    },
+    onError: () => {
+      toast.error("An error occurred while logging out!");
+    },
+  });
 
-    // ✅ Remove employee token
-    Cookies.remove("employee_auth_token");
+  const { mutate: employerMutate, isPending: isEmployerPending } = useMutation({
+    mutationFn: handleEmployerLogoutService,
+    onSuccess: () => {
+      toast.success("Logged out successfully");
 
-    queryClient.setQueryData(["student-profile"], null);
-    dispatch(setEmployeeProfile(null));
-    router.push("/");
-  },
-  onError: () => {
-    toast.error("An error occurred while logging out!");
-  },
-});
+      // ✅ Remove employer token
+      Cookies.remove("employeer_auth_token");
 
-const { mutate: employerMutate, isPending: isEmployerPending } = useMutation({
-  mutationFn: handleEmployerLogoutService,
-  onSuccess: () => {
-    toast.success("Logged out successfully");
-
-    // ✅ Remove employer token
-    Cookies.remove("employeer_auth_token");
-
-    queryClient.setQueryData(["employer-profile"], null);
-    dispatch(setEmployerProfile(null));
-    router.push("/");
-  },
-  onError: () => {
-    toast.error("An error occurred while logging out!");
-  },
-});
-
+      queryClient.setQueryData(["employer-profile"], null);
+      dispatch(setEmployerProfile(null));
+      router.push("/");
+    },
+    onError: () => {
+      toast.error("An error occurred while logging out!");
+    },
+  });
 
   // close the sidebar on route change
   useEffect(() => {
@@ -121,18 +119,18 @@ const { mutate: employerMutate, isPending: isEmployerPending } = useMutation({
             {navItems.map((item, index) => (
               <li key={index}>
                 <Link
-                href={item.path}
-                className="hover:text-primary-500 transition duration-300 max-xl:text-[13px] cursor-pointer px-2 py-1 hover-item"
-              >
-                {item.text}
-              </Link>
-              <Link
-                key={index}
-                href={item.path}
-                className="hover:text-primary-500 transition duration-300 max-xl:text-[13px] cursor-pointer px-2 py-1 hover-item2"
-              >
-                {item.text}
-              </Link>
+                  href={item.path}
+                  className="hover:text-primary-500 transition duration-300 max-xl:text-[13px] cursor-pointer px-2 py-1 hover-item"
+                >
+                  {item.text}
+                </Link>
+                <Link
+                  key={index}
+                  href={item.path}
+                  className="hover:text-primary-500 transition duration-300 max-xl:text-[13px] cursor-pointer px-2 py-1 hover-item2"
+                >
+                  {item.text}
+                </Link>
               </li>
             ))}
           </ul>
@@ -173,6 +171,11 @@ const { mutate: employerMutate, isPending: isEmployerPending } = useMutation({
                             </Link>
                           </li>
                         ))}
+                        {!studentProfile?.isPaid && (
+                          <li className="hover:text-primary-500 py-0.5 font-bold">
+                            <Link href={"/payment"}>Payment</Link>
+                          </li>
+                        )}
                       </ul>
                     }
                     <hr />
@@ -330,7 +333,9 @@ const { mutate: employerMutate, isPending: isEmployerPending } = useMutation({
                   <p>{studentProfile?.full_name[0]}</p>
                 </div>
                 <div className="flex flex-col">
-                  <span className=" font-bold">{studentProfile?.full_name}</span>
+                  <span className=" font-bold">
+                    {studentProfile?.full_name}
+                  </span>
                   <span>{studentProfile?.email}</span>
                 </div>
               </div>
@@ -346,6 +351,14 @@ const { mutate: employerMutate, isPending: isEmployerPending } = useMutation({
                   {item.text}
                 </Link>
               ))}
+              {!studentProfile?.isPaid && (
+                <Link
+                  href={"/payment"}
+                  className="hover:text-primary-500 transition duration-300 cursor-pointer px-2 py-1"
+                >
+                  Payment
+                </Link>
+              )}
             </ul>
 
             <hr />
@@ -354,7 +367,7 @@ const { mutate: employerMutate, isPending: isEmployerPending } = useMutation({
                 pfileItems.map((item, index) => (
                   <li
                     key={index}
-                     className="hover:text-primary-500 transition duration-300 cursor-pointer px-2 py-1"
+                    className="hover:text-primary-500 transition duration-300 cursor-pointer px-2 py-1"
                   >
                     <Link href={item.href}>
                       <div>{item.text}</div>

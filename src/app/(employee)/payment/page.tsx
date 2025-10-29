@@ -2,12 +2,19 @@
 import React, { useState } from "react";
 import { load } from "@cashfreepayments/cashfree-js";
 import { useRouter } from "next/navigation";
+import { fetchUserData } from "@/api/employee";
+import { useQuery } from "@tanstack/react-query";
 
 const Payment: React.FC = () => {
   const router = useRouter();
+  const { data, isLoading } = useQuery({
+    queryKey: ["user"],
+    queryFn: fetchUserData,
+  });
+
   const [isProcessing, setIsProcessing] = useState(false);
 
-  let cashfree;
+  let cashfree:any;
 
   const initializeCashfree = async () => {
     cashfree = await load({
@@ -20,22 +27,20 @@ const Payment: React.FC = () => {
     try {
       setIsProcessing(true);
 
-      // 1) Call backend to create payment order
+      // Calling backend to create payment order
       const r = await fetch("http://localhost:7000/api/v1/payment/create", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           amount: 500,
-          paidBy: "68790d3b22e59297cfea46fb",
-          customerPhone: "9420832505",
-          customerEmail: "test@gmail.com",
+          paidBy: data?.user?._id,
+          customerPhone: String(data?.user?.mobilenumber),
+          customerEmail: data?.user?.email,
         }),
       });
 
       const resData = await r.json();
-      console.log(resData);
 
-      // Adjust according to backend response
       const orderId = resData?.data?.order_id;
       const paymentSessionId = resData?.data?.payment_session_id;
 
@@ -48,7 +53,7 @@ const Payment: React.FC = () => {
         redirectTarget: "_modal",
       };
 
-      cashfree.checkout(checkoutOptions).then((response) => {
+      cashfree.checkout(checkoutOptions).then((response:any) => {
         console.log("Payment successful:", response);
         router.push(`/payment/success?orderId=${orderId}`);
       });
@@ -58,6 +63,10 @@ const Payment: React.FC = () => {
       setIsProcessing(false);
     }
   };
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="bg-gradient-to-br from-blue-50 to-green-50 py-8 px-4">
@@ -74,7 +83,9 @@ const Payment: React.FC = () => {
               </span>
             </div>
           </div>
-          <p className="text-blue-100 mt-2">Join our healthcare community</p>
+          <p className="text-blue-100 mt-2">
+            Join medHr+ and unlock your career
+          </p>
         </div>
 
         {/* Payment Details */}

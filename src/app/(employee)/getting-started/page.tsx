@@ -288,8 +288,6 @@ const GettingStarted = () => {
         await updateUserDetails(formData);
        if(step !== 12){
         toast.success("Details Updated! Go to next step.");
-       } else {
-        toast.success("Registration successful!");
        }
         setStep(step + 1);
       } catch (error: any) {
@@ -371,8 +369,6 @@ const GettingStarted = () => {
         await updateUserDetails(formData);
        if(step !== 12){
         toast.success("Details Updated! Go to next step.");
-       } else {
-        toast.success("Registration successful!");
        }
         setStep(step + 1);
       } catch (error: any) {

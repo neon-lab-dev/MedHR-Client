@@ -60,4 +60,5 @@ export interface IEmployee {
     credentialID: string;
     credentialURL: string;
   }[];
+  isPaid : boolean
 }

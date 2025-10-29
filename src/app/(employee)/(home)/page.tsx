@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import HeroComponent from "./_components/HeroComponent";
 // import TrendingToday from "../../../components/TrendingCourseToday";

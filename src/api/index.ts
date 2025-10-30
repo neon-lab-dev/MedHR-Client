@@ -74,6 +74,7 @@ const api = {
   deleteCourse: "/courses",
   video: "/video",
   deleteEvent: "/events", // :id,
+  payments: "/payment", // :id,
 };
 
 export default api;

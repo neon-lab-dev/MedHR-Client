@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import "../styles/utilities.css"
+import "../styles/utilities.css";
 import { ReactQueryClientProvider } from "@/providers/QueryClientProvider";
 import StoreProvider from "@/providers/StoreProvider";
 import AuthProvider from "@/providers/AuthProvider";
-import { Toaster } from 'sonner';
+import { Toaster } from "sonner";
 import TopLoader from "@/components/TopLoader";
 
 export const metadata: Metadata = {

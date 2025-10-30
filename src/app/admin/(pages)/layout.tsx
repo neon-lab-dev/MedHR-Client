@@ -34,54 +34,58 @@ import { ICONS } from "@/assets";
 //   },
 // ];
 
-
 const navLinks = [
-    {
-      label: "Dashboard",
+  {
+    label: "Dashboard",
     path: "/admin",
-      icon: ICONS.home
-    },
-    {
-      label: "Aspirants",
+    icon: ICONS.home,
+  },
+  {
+    label: "Aspirants",
     path: "/admin/employees",
-      icon: ICONS.employee
-    },
-    {
-      label: "Employers",
+    icon: ICONS.employee,
+  },
+  {
+    label: "Employers",
     path: "/admin/employers",
-      icon: ICONS.employer
-    },
-    {
-       label: "Jobs Posted",
+    icon: ICONS.employer,
+  },
+  {
+    label: "Jobs Posted",
     path: "/admin/jobs-posted",
-      icon: ICONS.jobs
-    },
-    {
-       label: "Jobs",
+    icon: ICONS.jobs,
+  },
+  {
+    label: "Jobs",
     path: "/admin/jobs",
-      icon: ICONS.jobs
-    },
-    {
-       label: "Internships",
+    icon: ICONS.jobs,
+  },
+  {
+    label: "Internships",
     path: "/admin/internships",
-      icon: ICONS.internship
-    },
-    {
-      label: "Courses",
+    icon: ICONS.internship,
+  },
+  {
+    label: "Courses",
     path: "/admin/courses",
-      icon: ICONS.course
-    },
-    {
-       label: "Skill Programmes",
+    icon: ICONS.course,
+  },
+  {
+    label: "Skill Programmes",
     path: "/admin/skill-programmes",
-      icon: ICONS.skillProgramme
-    },
-    {
-      label: "Events",
+    icon: ICONS.skillProgramme,
+  },
+  {
+    label: "Events",
     path: "/admin/events",
-      icon: ICONS.events
-    },
-  ];
+    icon: ICONS.events,
+  },
+  {
+    label: "Payments",
+    path: "/admin/payments",
+    icon: ICONS.payment,
+  },
+];
 
 const AdminLayout = ({ children }: { children: React.ReactNode }) => {
   return (

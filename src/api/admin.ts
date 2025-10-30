@@ -90,3 +90,13 @@ export const getSingleCourse = async (id: string): Promise<any> => {
       .catch((err) => reject(err?.response?.message ?? "Something went wrong"));
   });
 };
+
+
+export const getAllPayments = async (): Promise<any> => {
+  return new Promise((resolve, reject) => {
+    axiosInstance
+      .get(api.payments)
+      .then((res) => resolve(res.data ?? null))
+      .catch((err) => reject(err?.response?.message ?? "Something went wrong"));
+  });
+};

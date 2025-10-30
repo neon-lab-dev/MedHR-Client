@@ -72,6 +72,7 @@ import events from "@/assets/icons/events.svg";
 import employee from "@/assets/icons/employee.svg";
 import employer from "@/assets/icons/employer.svg";
 import binWhite from "@/assets/icons/bin-white.svg";
+import payment from "@/assets/icons/payment.svg";
 
 import behance from "@/assets/icons/social media/behance.svg";
 import discord from "@/assets/icons/social media/discord.svg";
@@ -215,4 +216,5 @@ export const ICONS = {
   lesson,
   success2,
   events,
+  payment,
 };

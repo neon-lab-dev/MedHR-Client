@@ -1,3 +1,4 @@
+"use client";
 import Button from "@/components/Button";
 import { getLatestJobs } from "@/api/jobs";
 import Link from "next/link";
@@ -7,12 +8,16 @@ import SectionHeading from "@/components/Reusable/SectionHeading/SectionHeading"
 import Container from "@/components/Container";
 
 import JobCarousel from "./JobCarousel";
+import { useQuery } from "@tanstack/react-query";
 
-const LatestJobs = async () => {
-  const jobs = await getLatestJobs();
+const LatestJobs = () => {
+  const { data } = useQuery({
+    queryKey: ["latestJobs"],
+    queryFn: getLatestJobs,
+  });
 
-  console.log(jobs);
-  if (!jobs || jobs.length === 0) return null;
+  if (!data || data.length === 0) return null;
+
   return (
     <Container>
       <div className="py-section flex flex-col items-center justify-center gap-14">
@@ -22,12 +27,12 @@ const LatestJobs = async () => {
           align="left"
         />
 
-        {jobs?.length === 0 ? (
+        {data?.length === 0 ? (
           <NoDataFound message="No Jobs Available" />
         ) : (
-          <JobCarousel jobs={jobs} />
+          <JobCarousel jobs={data} />
         )}
-        {jobs?.length > 0 && (
+        {data?.length > 0 && (
           <Link href="/jobs">
             <Button variant="normal" className="px-9 py-4">
               View all openings

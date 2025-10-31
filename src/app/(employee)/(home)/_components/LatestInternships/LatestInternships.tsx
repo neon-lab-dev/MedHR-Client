@@ -8,9 +8,15 @@ import Image from "next/image";
 import { IMAGES } from "@/assets";
 import InternshipCarousel from "./InternshipCarousel";
 import Container from "@/components/Container";
+import { useQuery } from "@tanstack/react-query";
 
-const LatestInternships = async () => {
-  const internships = await getLatestInternships();
+const LatestInternships = () => {
+  const { data } = useQuery({
+    queryKey: ["latestInternship"],
+    queryFn: getLatestInternships,
+  });
+
+  if (!data || data.length === 0) return null;
   return (
     <div className="bg-gradient-to-r from-slate-50 to-blue-50 py-10 relative">
       <Image
@@ -25,12 +31,12 @@ const LatestInternships = async () => {
             normalText="For You"
             align="left"
           />
-          {internships?.length < 1 ? (
+          {data?.length < 1 ? (
             <NoDataFound message="No Internship Found" />
           ) : (
-            <InternshipCarousel internships={internships} />
+            <InternshipCarousel internships={data} />
           )}
-          {internships?.length > 0 && (
+          {data?.length > 0 && (
             <Link href="/internships">
               <Button variant="normal" className="px-9 py-4 z-10 relative">
                 View all openings

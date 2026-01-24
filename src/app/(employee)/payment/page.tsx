@@ -1,12 +1,14 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { load } from "@cashfreepayments/cashfree-js";
 import { useRouter } from "next/navigation";
 import { fetchUserData } from "@/api/employee";
 import { useQuery } from "@tanstack/react-query";
+import axiosInstance from "@/api/axiosInstance";
 
 const Payment: React.FC = () => {
   const router = useRouter();
+
   const { data, isLoading } = useQuery({
     queryKey: ["user"],
     queryFn: fetchUserData,
@@ -14,55 +16,61 @@ const Payment: React.FC = () => {
 
   const [isProcessing, setIsProcessing] = useState(false);
 
-  let cashfree:any;
+  // ✅ Persist Cashfree instance
+  const cashfreeRef = useRef<any>(null);
 
-  const initializeCashfree = async () => {
-    cashfree = await load({
-      mode: "sandbox",
+  // ✅ Load Cashfree ONLY ONCE
+  useEffect(() => {
+    const initCashfree = async () => {
+      cashfreeRef.current = await load({
+        mode: "sandbox",
+      });
+    };
+
+    initCashfree();
+  }, []);
+
+const handlePay = async () => {
+  try {
+    setIsProcessing(true);
+
+    // 1️⃣ Create order from backend (AUTH INCLUDED AUTOMATICALLY)
+    const res = await axiosInstance.post("/payment/create", {
+      amount: 500,
+      paidBy: data?.user?._id,
+      customerPhone: String(data?.user?.mobilenumber),
+      customerEmail: data?.user?.email,
     });
-  };
 
-  initializeCashfree();
-  const handlePay = async () => {
-    try {
-      setIsProcessing(true);
+    const paymentSessionId = res.data?.data?.payment_session_id;
+    const orderId = res.data?.data?.order_id;
 
-      // Calling backend to create payment order
-      const r = await fetch("http://localhost:7000/api/v1/payment/create", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          amount: 500,
-          paidBy: data?.user?._id,
-          customerPhone: String(data?.user?.mobilenumber),
-          customerEmail: data?.user?.email,
-        }),
-      });
+    console.log("Session ID:", paymentSessionId);
 
-      const resData = await r.json();
-
-      const orderId = resData?.data?.order_id;
-      const paymentSessionId = resData?.data?.payment_session_id;
-
-      if (!paymentSessionId) {
-        throw new Error("Payment session id not found from backend");
-      }
-
-      const checkoutOptions = {
-        paymentSessionId,
-        redirectTarget: "_modal",
-      };
-
-      cashfree.checkout(checkoutOptions).then((response:any) => {
-        console.log("Payment successful:", response);
-        router.push(`/payment/success?orderId=${orderId}`);
-      });
-    } catch (err) {
-      console.error("Payment failed:", err);
-    } finally {
-      setIsProcessing(false);
+    if (!paymentSessionId) {
+      throw new Error("Payment session id missing from backend");
     }
-  };
+
+    if (!cashfreeRef.current) {
+      throw new Error("Cashfree SDK not initialized");
+    }
+
+    // 2️⃣ Open Cashfree Checkout
+    await cashfreeRef.current.checkout({
+      paymentSessionId,
+      redirectTarget: "_modal",
+    });
+
+    // 3️⃣ Redirect after successful payment
+    router.push(`/payment/success?orderId=${orderId}`);
+  } catch (err: any) {
+    console.error("Payment failed:", err?.response?.data || err);
+    alert("Payment failed. Please try again.");
+  } finally {
+    setIsProcessing(false);
+  }
+};
+
 
   if (isLoading) {
     return <div>Loading...</div>;

@@ -20,15 +20,12 @@ const Payment: React.FC = () => {
   const cashfreeRef = useRef<any>(null);
 
   // ✅ Load Cashfree ONLY ONCE
-  useEffect(() => {
-    const initCashfree = async () => {
-      cashfreeRef.current = await load({
-        mode: "sandbox",
-      });
-    };
+useEffect(() => {
+  load({ mode: "production" }).then((cf) => {
+    cashfreeRef.current = cf;
+  });
+}, []);
 
-    initCashfree();
-  }, []);
 
 const handlePay = async () => {
   try {

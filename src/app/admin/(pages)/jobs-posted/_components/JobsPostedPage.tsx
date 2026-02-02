@@ -1,7 +1,6 @@
 "use client";
 
 import { handleGetJobByIdForAdminService } from "@/api/jobs";
-import SkillsAndExtraBenefits from "@/app/(employee)/(job-listing)/[jobType]/[jobId]/_components/SkillsAndExtraBenefits";
 import { ICONS } from "@/assets";
 import Loading from "@/components/Loading";
 import NotFound from "@/components/NotFound";
@@ -93,11 +92,6 @@ const JobsPostedPage = ({ id }: { id: string }) => {
                 <span>Location: {job.location}</span>
               </div>
             </div>
-            <SkillsAndExtraBenefits
-              extraBenefits={job.extraBenefits}
-              skills={job.requiredSkills}
-              className="grid grid-cols-2 gap-6"
-            />
             <div className="p-4 lg:p-6 rounded-[22px] border border-secondary-200 text-xl flex flex-col gap-6">
               <h3 className="capitalize font-semibold text-neutral-800 text-2xl">
                 About the Company

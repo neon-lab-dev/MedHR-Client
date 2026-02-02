@@ -66,7 +66,7 @@ const InternshipCard: React.FC<TInternshipCardProps> = ({
           </div>
           <div className="flex items-center gap-1">
             <Image
-              src={ICONS.sallary}
+              src={ICONS.salary}
               alt="clock-icon"
               className="size-[18px]"
             />

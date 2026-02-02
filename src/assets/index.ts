@@ -42,10 +42,14 @@ import search from "@/assets/icons/search-2.svg";
 import downArrow from "@/assets/icons/down-arrow-2.svg";
 import jobType from "@/assets/icons/job-type.svg";
 import clock from "@/assets/icons/clock.svg";
-import sallary from "@/assets/icons/sallary.svg";
+import deadline from "@/assets/icons/deadline.svg";
+import department from "@/assets/icons/department.svg";
+import employmentType from "@/assets/icons/employment-type.svg";
+import duration from "@/assets/icons/duration.svg";
+import salary from "@/assets/icons/salary.svg";
 import rightArrow from "@/assets/icons/right-arrow.svg";
 import rightArrowCourse from "@/assets/icons/right-arrow-course.svg";
-import calender from "@/assets/icons/calender.svg";
+import calender from "@/assets/icons/calendar.svg";
 import noData from "@/assets/icons/no-data.svg";
 import company from "@/assets/icons/company.svg";
 import searchGray from "@/assets/icons/search-gray.svg";
@@ -169,7 +173,11 @@ export const ICONS = {
   downArrow,
   clock,
   jobType,
-  sallary,
+  salary,
+  deadline,
+  department,
+  employmentType,
+  duration,
   rightArrow,
   leftArrow,
   rightArrowCourse,

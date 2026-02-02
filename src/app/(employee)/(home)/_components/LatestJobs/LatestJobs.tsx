@@ -6,9 +6,8 @@ import React from "react";
 import NoDataFound from "@/components/NoDataFound";
 import SectionHeading from "@/components/Reusable/SectionHeading/SectionHeading";
 import Container from "@/components/Container";
-
-import JobCarousel from "./JobCarousel";
 import { useQuery } from "@tanstack/react-query";
+import JobDetailCard from "@/components/JobDetailCard";
 
 const LatestJobs = () => {
   const { data } = useQuery({
@@ -23,14 +22,21 @@ const LatestJobs = () => {
       <div className="py-section flex flex-col items-center justify-center gap-14">
         <SectionHeading
           highlightedText="Jobs"
-          normalText="You Might Like"
+          normalText="You Might Likes"
           align="left"
         />
 
         {data?.length === 0 ? (
           <NoDataFound message="No Jobs Available" />
         ) : (
-          <JobCarousel jobs={data} />
+          <div className="grid grid-cols-3 gap-5">
+      {data?.map((details, index) => (
+        <JobDetailCard
+          key={index}
+          job={details}
+        />
+      ))}
+    </div>
         )}
         {data?.length > 0 && (
           <Link href="/jobs">

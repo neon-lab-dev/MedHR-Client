@@ -1,15 +1,12 @@
 import NotFound from "@/components/NotFound";
 import JobShareButton from "./_components/JobShareButtonComponent";
-import Link from "next/link";
 import { AVAILABLE_JOB_TYPES } from "@/constants/jobTypes";
-import SimilarJobsForYou from "./_components/SimilarJobsForYouComponent";
-// import TrendingCourseToday from "@/components/TrendingCourseToday";
-// import OurValuableHiringPartners from "@/components/OurValuableHiringPartners";
-// import WhatWeDo from "@/components/WhatWeDo";
-import SkillsAndExtraBenefits from "./_components/SkillsAndExtraBenefits";
 import { getJobById } from "@/api/jobs";
 import ApplyJob from "./_components/ApplyJob";
 import Container from "@/components/Container";
+import Image from "next/image";
+import { ICONS } from "@/assets";
+import { convertDate } from "@/helpers/convertDate";
 
 const JobIdPage = async ({
   params,
@@ -24,27 +21,25 @@ const JobIdPage = async ({
   const job = await getJobById(jobId);
   if (!job) return <NotFound />;
 
-  const isClosed =
-    job.status !== "Open";
+  const isClosed = job.status !== "Open";
+
+  const headingStyle = "capitalize font-semibold text-[26px] text-neutral-800";
+
   return (
     <Container>
-      <div className="wrapper flex flex-col pb-6">
+      <div className="wrapper flex flex-col pb-6 font-poppins">
         {/* job titles and cta */}
         <div className="py-16 flex items-end justify-between">
           <div className="flex gap-5 items-center">
-            {/* <Image
-              src={job.companyDetails.logo}
-              alt="Company Logo"
-              height={99}
-              width={99}
-              className="h-[62px] w-[62px] xl:h-[99px] xl:w-[99px] rounded-lg"
-            /> */}
-
             <div className="bg-primary-550 p-2 rounded-full size-16 flex items-center justify-center text-white">
               <p className="text-xs xl:text-2xl font-semibold -tracking-[0.32px]">
                 {job?.companyDetails?.companyName
-                  ? job.companyDetails.companyName.charAt(0)
-                  : "?"}
+                  ? job.companyDetails.companyName
+                      .split(" ")
+                      .map((word) => word.charAt(0))
+                      .join("")
+                      .toUpperCase()
+                  : "N/A"}
               </p>
             </div>
             <div className="flex flex-col gap-0.5">
@@ -63,34 +58,153 @@ const JobIdPage = async ({
             <ApplyJob jobId={jobId} disabled={isClosed} />
           </div>
         </div>
+
+
         {/* job details */}
         <div className="flex gap-6">
-          <div className="flex flex-col gap-4 xl:gap-6 w-full xl:w-[30%]">
-            <div className="p-6 rounded-[22px] border border-secondary-200 text-base lg:text-xl flex flex-col gap-3 lg:gap-3">
-              <h3 className="capitalize font-semibold text-neutral-800">
-                About {jobType.substring(0, jobType.length - 1)}{" "}
-                <span className="ml-2 text-sm text-red-500">
-                  {isClosed ? "(Status: Closed)" : null}
-                </span>
+          <div className="p-6 rounded-xl border border-secondary-200 text-base flex flex-col gap-6 w-full xl:w-[30%] h-fit sticky top-10">
+            <h3 className="capitalize font-semibold text-xl text-neutral-800">
+              {jobType.substring(0, jobType.length - 1)} Details
+              <span className="ml-2 text-sm text-red-500">
+                {isClosed ? "(Status: Closed)" : null}
+              </span>
+            </h3>
+            <div className="flex flex-col gap-3">
+              <div className="flex items-center gap-2">
+                <Image
+                  src={ICONS.location}
+                  alt="location-icon"
+                  className="size-[18px]"
+                />
+                <p className="text-neutral-400">
+                  <span className="font-medium text-neutral-700">
+                    Location:
+                  </span>{" "}
+                  {job?.city}, {job?.country}
+                </p>
+              </div>
+              <div className="flex items-center gap-2">
+                <Image
+                  src={ICONS.jobType}
+                  alt="clock-icon"
+                  className="size-[18px]"
+                />
+                <p className="text-neutral-400">
+                  <span className="font-medium text-neutral-700">
+                    Location Type:
+                  </span>{" "}
+                  {job?.locationType}
+                </p>
+              </div>
+              <div className="flex items-center gap-2">
+                <Image
+                  src={ICONS.department}
+                  alt="clock-icon"
+                  className="size-[18px]"
+                />
+                <p className="text-neutral-400">
+                  <span className="font-medium text-neutral-700">
+                    Department:
+                  </span>{" "}
+                  {job?.department}
+                </p>
+              </div>
+              <div className="flex items-center gap-2">
+                <Image
+                  src={ICONS.employmentType}
+                  alt="clock-icon"
+                  className="size-[18px]"
+                />
+                <p className="text-neutral-400">
+                  <span className="font-medium text-neutral-700">
+                    Employment type:
+                  </span>{" "}
+                  {job?.employmentTypeCategory}
+                </p>
+              </div>
+              <div className="flex items-center gap-2">
+                <Image
+                  src={ICONS.duration}
+                  alt="clock-icon"
+                  className="size-[18px]"
+                />
+                <p className="text-neutral-400">
+                  <span className="font-medium text-neutral-700">
+                    Duration:
+                  </span>{" "}
+                  {job?.duration} months
+                </p>
+              </div>
+              <div className="flex items-center gap-2">
+                <Image
+                  src={ICONS.salary}
+                  alt="clock-icon"
+                  className="size-[18px]"
+                />
+                <p className="text-neutral-400">
+                  <span className="font-medium text-neutral-700">Salary:</span>{" "}
+                  {job?.salary}/month
+                </p>
+              </div>
+              <div className="flex items-center gap-2">
+                <Image
+                  src={ICONS.deadline}
+                  alt="clock-icon"
+                  className="size-[18px]"
+                />
+                <p className="text-neutral-400">
+                  <span className="font-medium text-neutral-700">
+                    Deadline:
+                  </span>{" "}
+                  {convertDate(job?.applicationDeadline)}
+                </p>
+              </div>
+              <div className="flex items-center gap-2">
+                <Image
+                  src={ICONS.company}
+                  alt="clock-icon"
+                  className="size-[18px]"
+                />
+                <p className="text-neutral-400">
+                  <span className="font-medium text-neutral-700">Company:</span>{" "}
+                  <a
+                    href={job?.companyDetails?.websiteLink || "#"}
+                    className="text-primary-500 underline"
+                  >
+                    {job?.companyDetails?.companyName}
+                  </a>
+                </p>
+              </div>
+            </div>
+            <ApplyJob jobId={jobId} disabled={isClosed} />
+          </div>
+
+          <div className="p-6 rounded-xl border border-secondary-200 text-base flex flex-col gap-10 w-full xl:w-[70%]">
+            {/* Header */}
+            <div className="flex items-center gap-2">
+              <Image
+                src={ICONS.calender}
+                alt="clock-icon"
+                className="size-[18px]"
+              />
+              <p className="text-neutral-400">
+                <span className="font-medium text-neutral-700">Posted:</span>{" "}
+                {convertDate(job?.postedAt)}
+              </p>
+            </div>
+
+            {/* Job Description */}
+            <div>
+              <h3 className={headingStyle}>
+                {jobType.substring(0, jobType.length - 1)} Description
               </h3>
-              <p className=" text-neutral-700 flex flex-col gap-3 lg:gap-6">
-                {job.description}
-              </p>{" "}
-              {
-                job.responsibilities &&
-                <>
-                <h3 className="capitalize font-semibold text-neutral-800 mt-2 lg:mt-6">
-                Roles and Responsibilities
-              </h3>
-              <ul className=" text-neutral-700 flex flex-col gap-1 list-disc">
-                {job.responsibilities}
-              </ul>
-                </>
-              }
-              <h3 className="capitalize font-semibold text-neutral-800 mt-2 lg:mt-6">
-                Requirements
-              </h3>
-              <ul className=" text-neutral-700 flex flex-col gap-1 list-disc">
+              <p className="text-neutral-700 mt-2">{job.description}</p>
+            </div>
+
+            {/* Requirements */}
+            <div>
+              <h3 className={headingStyle}>Requirements</h3>
+              <ul className="text-neutral-700 flex flex-col gap-1 list-disc mt-2">
                 {job.requirements
                   .split("\n")
                   .filter((res) => res)
@@ -100,98 +214,43 @@ const JobIdPage = async ({
                     </li>
                   ))}
               </ul>
-              <div className="flex flex-col gap-1  mt-2 text-neutral-700">
-                <span>Job-Type: {job.employmentType}</span>
-                <span>Location: {job?.city}, {job?.country}</span>
-                <span>Location Type: {job.locationType}</span>
-                {job.employmentType === "Internship" ? (
-                  <span>Duration: {job.employmentDuration} months</span>
-                ) : null}
-                {
-                  <span>
-                    {job.employmentType === "Internship"
-                      ? "Stipend: "
-                      : "Salary: "}
-                    {job.salary ? `₹ ${job.salary}/month` : `Unpaid`}
-                  </span>
-                }
-                {job.applicationDeadline && (
-                  <span>
-                    Application Deadline:{" "}
-                    {new Date(job.applicationDeadline).toLocaleDateString()}
-                  </span>
-                )}
-                <span>
-                  Posted At: {new Date(job.postedAt).toLocaleDateString()}
-                </span>
+            </div>
+
+            {/* Roles and Responsibilities */}
+            {job.responsibilities && (
+              <div>
+                <h3 className={headingStyle}>Roles and Responsibilities</h3>
+                <ul className=" text-neutral-700 flex flex-col gap-1 list-disc mt-2">
+                  {job.responsibilities}
+                </ul>
+              </div>
+            )}
+
+            {/* Skills Required */}
+            <div>
+              <h3 className={headingStyle}> Skills Required</h3>
+              <div className="flex flex-wrap gap-3 mt-2">
+                {job?.requiredSkills.map((label) => (
+                  <div
+                    className="rounded-md border border-neutral-400/30 text-neutral-700 px-2 py-1 text-xs"
+                    key={label}
+                  >
+                    {label}
+                  </div>
+                ))}
               </div>
             </div>
-            <SkillsAndExtraBenefits
-              extraBenefits={job.extraBenefits}
-              skills={job.requiredSkills}
-              className="xl:hidden"
-            />
-            <div className="p-4 lg:p-6 rounded-[22px] border border-secondary-200 text-xl flex flex-col gap-6">
-              <h3 className="capitalize font-semibold text-neutral-800 text-2xl">
-                About the Company
-              </h3>
-              <hr className="border border-neutral-500/20" />
-              <div className="flex justify-between items-center">
-                <div className="flex flex-col gap-1">
-                  <span className="font-bold text-lg lg:text-xl text-neutral-800">
-                    {job.companyDetails.companyName}
-                  </span>
-                  <div className="flex gap-3 lg:gap-6 items-center text-sm lg:text-base font-medium text-primary-500">
-                    {job.companyDetails.websiteLink ? (
-                      <Link
-                        href={job.companyDetails.websiteLink}
-                        target="_blank"
-                      >
-                        Website
-                      </Link>
-                    ) : (
-                      "Website not available"
-                    )}
 
-                    <div className="h-2 w-2 rounded-full bg-secondary-100" />
-                    <span>{job.location}</span>
-                  </div>
-                  <div className="flex gap-6 items-center text-base font-medium text-secondary-400">
-                    <span>{job.companyDetails.industryType}</span>
-                  </div>
-                </div>
-                {/* <Image
-                  src={job.companyDetails.logo}
-                  alt="Company Logo"
-                  height={56}
-                  width={56}
-                  className="h-[56px] w-[56px] rounded-full"
-                /> */}
-                <div className="bg-primary-550 p-2 rounded-full size-10 flex items-center justify-center text-white">
-                  <p className="text-xs xl:text-[16px] -tracking-[0.32px]">
-                    {job?.companyDetails?.companyName
-                      ? job.companyDetails.companyName.charAt(0)
-                      : "?"}
-                  </p>
-                </div>
-              </div>
-              <hr className="border border-neutral-500/20" />
-              <p className=" text-neutral-700 flex flex-col gap-6">
-                {job.companyDetails.bio}
-              </p>
+            {/* Extra Benefits */}
+            <div>
+              <h3 className={headingStyle}> Extra Benefits</h3>
+              <ul className=" text-neutral-700 flex flex-col gap-1 list-disc mt-2">
+                {job.extraBenefits}
+              </ul>
             </div>
           </div>
-          <SkillsAndExtraBenefits
-            extraBenefits={job.extraBenefits}
-            skills={job.requiredSkills}
-            className="hidden xl:flex"
-          />
         </div>
       </div>
-      <SimilarJobsForYou title={job.title} type={jobType} ignore={jobId} />
-      {/* <TrendingCourseToday />
-      <OurValuableHiringPartners />
-      <WhatWeDo /> */}
     </Container>
   );
 };

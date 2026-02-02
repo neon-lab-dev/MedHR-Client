@@ -30,6 +30,9 @@ export interface IJob {
   applicationDeadline: string;
   extraBenefits: string;
   experience: string;
+  department: string;
+  employmentTypeCategory: string;
+  duration: string;
   location: string;
   postedAt: string;
   __v: number;

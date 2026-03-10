@@ -36,7 +36,7 @@ const Country: React.FC<TCountryProps> = ({
         </div>
         <ul
           tabIndex={0}
-          className="dropdown-content menu bg-base-100 rounded-box z-[1] w-full p-4 shadow flex flex-col gap-4 h-fit"
+          className="dropdown-content menu bg-white rounded-box z-[1] w-full p-4 shadow flex flex-col gap-4 h-fit"
         >
           {countries?.map((country, index) => (
             <li

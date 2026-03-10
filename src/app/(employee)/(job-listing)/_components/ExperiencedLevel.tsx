@@ -33,7 +33,7 @@ const ExperiencedLevel: React.FC<TExperiencedLevelProps> = ({
         </div>
         <ul
           tabIndex={0}
-          className="dropdown-content menu bg-base-100 rounded-box z-[1] w-full p-4 shadow flex flex-col gap-4 h-60 "
+          className="dropdown-content menu bg-white rounded-box z-[1] w-full p-4 shadow flex flex-col gap-4 h-60 "
         >
           {[
             "1 Year",

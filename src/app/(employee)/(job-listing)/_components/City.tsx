@@ -97,7 +97,7 @@ useEffect(() => {
             {selectedState || "Select State"}
           </div>
           {isStateOpen && (
-            <ul className="absolute left-0 right-0 mt-2 bg-base-100 rounded-box z-10 w-full p-4 shadow flex flex-col gap-4 h-60 overflow-y-auto">
+            <ul className="absolute left-0 right-0 mt-2 bg-white rounded-box z-10 w-full p-4 shadow flex flex-col gap-4 h-60 overflow-y-auto">
               {stateOptions.map((state, index) => (
                 <li
                   key={index}

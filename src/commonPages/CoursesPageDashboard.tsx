@@ -74,12 +74,12 @@ const CoursesPageDashboard = ({courses, isLoading, navigatePath}: {courses: ICou
   const headers: Header<IDataItem>[] = [
     { header: "Name", accessor: "name" },
     { header: "Course Type", accessor: "courseType" },
-    { header: "Total Applications", accessor: "applications" },
     { header: "Stream", accessor: "department" },
     { header: "Duration", accessor: "duration" },
     { header: "Pricing Type", accessor: "pricingType" },
     { header: "Fee (₹)", accessor: "fee" },
     { header: "Posted Date", accessor: "postedDate" },
+    { header: "Total Applicants Applied", accessor: "applications" },
     { header: "Actions", accessor: "actions" },
   ];
 

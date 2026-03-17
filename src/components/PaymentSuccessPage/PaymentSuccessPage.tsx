@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
+import axiosInstance from "@/api/axiosInstance";
 
 const PaymentSuccessPage = () => {
   const searchParams = useSearchParams();
@@ -19,7 +20,7 @@ const PaymentSuccessPage = () => {
     const verifyPayment = async () => {
       try {
         setIsVerifying(true);
-        const res = await fetch("http://localhost:7000/api/v1/payment/verify", {
+        const res = await fetch(`${axiosInstance}/payment/verify`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ orderId }),

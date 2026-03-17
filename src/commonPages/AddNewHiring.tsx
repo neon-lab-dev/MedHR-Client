@@ -54,6 +54,7 @@ const AddNewHiring = ({
   actionType?: string;
   backNavigationPath?: string;
 }) => {
+  console.log(path);
   // Function to format form data
   const formatFormData = (data: FormData) => {
     const { requiredSkills, ...restData } = data;
@@ -329,7 +330,7 @@ const AddNewHiring = ({
               />
 
               <SelectDropdownInput
-                label="Job Type"
+                label={jobType === "job" ? "Job Type" : "Internship Type"}
                 {...register("employmentTypeCategory", {
                   required: "Job type is required",
                 })}

@@ -27,7 +27,7 @@ const InternshipCarousel = ({ internships }: { internships: any[] }) => {
           640: { slidesPerView: 1.7 },
           768: { slidesPerView: 1.8 },
           1024: { slidesPerView: 2.5 },
-          1366: { slidesPerView: 3.7 },
+          1366: { slidesPerView: 3.2 },
         }}
         className="w-full mt-10"
       >

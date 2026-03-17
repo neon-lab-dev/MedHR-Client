@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 /* eslint-disable @typescript-eslint/no-unsafe-function-type */
 import React, { useState, useEffect } from "react";
 import Button from "../Button";
@@ -70,7 +71,7 @@ const OTP = ({
   const employer = useMutation({
     mutationFn: handleVerifyEmployerOTPService,
     onSuccess: (data) => {
-       // ✅ Set employer token in cookie
+      // ✅ Set employer token in cookie
       if (data?.accessToken) {
         Cookies.set("employeer_auth_token", data.accessToken, {
           expires: 7,
@@ -150,6 +151,10 @@ const OTP = ({
           </button>
         </div>
 
+        <p className="text-primary-500 font-Poppins text-xs mt-2">
+          If you don't see the email, check your spam folder
+        </p>
+
         <div className="flex flex-col gap-5 mt-8">
           {/* OTP Input */}
           <div className="flex flex-col gap-[6px]">
@@ -174,9 +179,11 @@ const OTP = ({
               </span>
             )}
           </div>
+
+          <p className="text-xs text-left"></p>
         </div>
 
-        <Button className="w-full mt-5" variant="primary">
+        <Button className="w-full" variant="primary">
           {employee.isPending || employer.isPending
             ? "Loading..."
             : "Verify OTP"}
@@ -191,8 +198,8 @@ const OTP = ({
           {isResendLoading
             ? "Sending OTP Resquest"
             : timer > 0
-            ? `Resend OTP in ${timer}s`
-            : "Resend OTP"}
+              ? `Resend OTP in ${timer}s`
+              : "Resend OTP"}
         </button>
       </form>
     </div>

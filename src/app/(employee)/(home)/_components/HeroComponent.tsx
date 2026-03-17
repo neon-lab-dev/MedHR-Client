@@ -173,7 +173,7 @@ const HeroComponent = () => {
             />
           </h1>
           <p className="text-secondary-600 xl:max-w-3xl text-base sm:text-lg xl:text-xl leading-[126%] max-w-sm md:max-w-3xl font-Poppins text-center">
-            Grab the best opportunities from leading healthcare providers, such as internships, jobs, skill programs, courses, and events.
+            Grab the best opportunities from leading healthcare providers, such as internships, jobs, skill programs, courses etc.
           </p>
 
           <div className="xl:flex gap-3 items-center justify-center mt-7 hidden z-10">

@@ -22,7 +22,7 @@ const InternshipCarousel = ({ internships }: { internships: any[] }) => {
         }}
         breakpoints={{
           360: { slidesPerView: 1 },
-          375: { slidesPerView: 1 },
+          375: { slidesPerView: 1.2 },
           425: { slidesPerView: 1 },
           640: { slidesPerView: 1.7 },
           768: { slidesPerView: 1.8 },

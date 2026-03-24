@@ -29,14 +29,11 @@ const LatestJobs = () => {
         {data?.length === 0 ? (
           <NoDataFound message="No Jobs Available" />
         ) : (
-          <div className="grid grid-cols-3 gap-5">
-      {data?.map((details, index) => (
-        <JobDetailCard
-          key={index}
-          job={details}
-        />
-      ))}
-    </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            {data?.slice(0, 6)?.map((details, index) => (
+              <JobDetailCard key={index} job={details} />
+            ))}
+          </div>
         )}
         {data?.length > 0 && (
           <Link href="/jobs">

@@ -18,7 +18,7 @@ const InternshipCard: React.FC<TInternshipCardProps> = ({
   return (
     <div
       className={twMerge(
-        "w-[380px] h-[510px] bg-white hover:bg-neutral-450/30 font-plus-jakarta-sans border-2 border-neutral-100 rounded-2xl shadow-job-card-shadow relative hover:border-primary-500 transition-all duration-300 ease-in-out transform ",
+        "w-full md:w-[380px] h-[510px] bg-white hover:bg-neutral-450/30 font-plus-jakarta-sans border-2 border-neutral-100 rounded-2xl shadow-job-card-shadow relative hover:border-primary-500 transition-all duration-300 ease-in-out transform ",
         wrapperClassName
       )}
     >

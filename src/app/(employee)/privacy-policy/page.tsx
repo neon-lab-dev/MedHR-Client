@@ -38,7 +38,7 @@ const page = () => {
         </p>
         <br />
         <p>
-          User data collection on MeDHr+ is made to simplify the process of
+          User data collection on Med HR Plus is made to simplify the process of
           data presentation by collecting the user name, age, address,
           educational qualification, field of interest, present status, etc.
           Through creating a user account (login/signup) visitor agrees with the
@@ -97,7 +97,7 @@ const page = () => {
         <p>
           Display banner (and similar) advertising to you in connection with the
           site that is more targeted to you specifically. In doing this type of
-          targeting, MeDHr+ or its associates, connect you with the targeting
+          targeting, Med HR Plus or its associates, connect you with the targeting
           criteria for better mentorship support.
         </p>
         <br />
@@ -143,7 +143,7 @@ const page = () => {
           shall be exclusive to us and no such or similar shall be published,
           copied, reproduced by the user or any person visiting the website on
           any of the other online portals, without obtaining prior consent in
-          writing by Monchi enterprise (MeDHr+). The user is free to remove or
+          writing by Monchi enterprise (Med HR Plus). The user is free to remove or
           remove his/her content if such content is posted either accidentally
           or unintentionally on the https://medhrplus.com website.
         </p>
@@ -197,7 +197,7 @@ const page = () => {
         <p>
           We do reserve the right to share your name and email address with
           other companies, institutions, organizations, or websites that provide
-          content, products, or services to MeDHr+. You also agree that, if
+          content, products, or services to Med HR Plus. You also agree that, if
           &quot;MONCHI ENTERPRISE&quot; is acquired by, merges with, or becomes
           aligned with another company or organization, as other company or
           organization shall be entitled to use your personal information under
@@ -209,7 +209,7 @@ const page = () => {
           any Recourses, messages, information, or content
           (&quot;Postings&quot;) posted on the website by Users and assumes no
           responsibility or liability relating to any such posting.
-          Notwithstanding the above, MeDHr+ May from time to time monitor the
+          Notwithstanding the above, Med HR Plus May from time to time monitor the
           Postings on the website and may decline to accept and/or remove any
           Postings that contain
         </p>
@@ -226,7 +226,7 @@ const page = () => {
               addresses, or employer references.
             </li>
             <li>
-              Any messages by nonemployees or mentors or MeDHr+ purporting to
+              Any messages by nonemployees or mentors or Med HR Plus purporting to
               speak on behalf of MONCHI ENTERPRISE.
             </li>
             <li>
@@ -246,20 +246,20 @@ const page = () => {
         </p>
         <br />
         <p>
-          By using the site, you agree that MeDHr+ will not be liable for any
+          By using the site, you agree that Med HR Plus will not be liable for any
           legal theory or contracts for any kind of issues caused by any other
           party. The website is also not liable to verify or justify information
           provided by participants of the website i.e. educational institutions,
           coaching institutes, individual comments, consultants, mentors,
           organizations, institutions, etc. To prevent the loss to visitors it
           is highly recommended that every information available on the website
-          must be verified before considering it. MeDHr+ is not liable for any
+          must be verified before considering it. Med HR Plus is not liable for any
           misinformation, data theft, any kind of loss, or system damage
           occurring due to the use of these external links. https://medhrplus.com
           declares that it will not be used to propagate any malicious or
           harmful software so, in any case of program loss or system damage, the
           website can&#39;t be held responsible. The terms and policies of
-          MeDHr+ do not govern the use of third-party websites.
+          Med HR Plus do not govern the use of third-party websites.
         </p>
         <br />
         <p>

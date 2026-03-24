@@ -89,7 +89,7 @@ const handlePay = async () => {
             </div>
           </div>
           <p className="text-blue-100 mt-2">
-            Join medHr+ and unlock your career
+            Join Med HR Plus and unlock your career
           </p>
         </div>
 

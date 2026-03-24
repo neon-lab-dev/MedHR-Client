@@ -137,7 +137,7 @@ export const CertificateDocument = ({
 </Text>
 <Text style={styles.name}>{name}</Text>
 <Text style={styles.description}>
-  in recognition of successfully securing the position of {role} at {company} through MeDHr+.
+  in recognition of successfully securing the position of {role} at {company} through Med HR Plus.
 </Text>
 
         <Image

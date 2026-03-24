@@ -8,7 +8,7 @@ import { Toaster } from "sonner";
 import TopLoader from "@/components/TopLoader";
 
 export const metadata: Metadata = {
-  title: "MeDHr+",
+  title: "Med HR Plus",
   description: "Explore job and internships opportunities at MeDhr.",
 };
 

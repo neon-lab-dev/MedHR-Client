@@ -36,7 +36,7 @@ const page = () => {
           will be referred to any person, group, or entity subscribing to and/or
           using the resources or content according to the Terms and Conditions
           of the Agreement (each one a User and collectively &quot;Users&quot;.
-          Unless otherwise stated MONCHI ENTERPRISE or MedHr+, &quot;we&quot;,
+          Unless otherwise stated MONCHI ENTERPRISE or Med HR Plus, &quot;we&quot;,
           or &quot;Our&quot; will each refer to MONCHI ENTERPRISE (partnership),
           an Indian company.
         </p>

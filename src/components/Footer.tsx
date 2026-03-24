@@ -186,7 +186,7 @@ const Footer = () => {
 
           {/* Copyright and scroll to top button */}
         <div className="flex items-center justify-between">
-          <p className="text-secondary-960">@ All rights reserved by MedHr+</p>
+          <p className="text-secondary-960">@ All rights reserved by Med HR Plus</p>
           {/* Scroll to top button */}
           <button
             onClick={() => {

@@ -68,9 +68,9 @@ const AuthModal = () => {
                 ? "Password?"
                 : authModalType === "CHANGE_PASSWORD"
                 ? "Password"
-                : "to MeDHr+"
+                : "to Med HR Plus"
 
-              // modalType === "OTP" ? "Your Email" : "to MeDHr+"
+              // modalType === "OTP" ? "Your Email" : "to Med HR Plus"
             }
           </h1>
         </div>

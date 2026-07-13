@@ -43,7 +43,7 @@ const CurrentlyLookingFor: React.FC<TCurrentlyLookingForProps> = ({
   const handleMultiSelect = (
     selected: string[],
     setSelected: (val: string[]) => void,
-    value: string
+    value: string,
   ) => {
     if (selected.includes(value)) {
       setSelected(selected.filter((v) => v !== value));
@@ -53,7 +53,7 @@ const CurrentlyLookingFor: React.FC<TCurrentlyLookingForProps> = ({
   };
 
   const filteredInterests = interests.filter((interest) =>
-    interest.toLowerCase().includes(searchTerm.toLowerCase())
+    interest.toLowerCase().includes(searchTerm.toLowerCase()),
   );
 
   return (
@@ -123,7 +123,7 @@ const CurrentlyLookingFor: React.FC<TCurrentlyLookingForProps> = ({
             key={interest}
             onClick={() => handleAddInterest(interest)}
             variant="add"
-          >r
+          >
             {interest}
           </Chip>
         ))}
@@ -139,7 +139,7 @@ const CurrentlyLookingFor: React.FC<TCurrentlyLookingForProps> = ({
               handleMultiSelect(
                 interestedDepartments,
                 setInterestedDepartments,
-                e.target.value
+                e.target.value,
               )
             }
             className="w-full border border-gray-300 rounded-xl py-3 px-4"
@@ -161,7 +161,7 @@ const CurrentlyLookingFor: React.FC<TCurrentlyLookingForProps> = ({
                 key={dept}
                 onClick={() =>
                   setInterestedDepartments(
-                    interestedDepartments.filter((d: string) => d !== dept)
+                    interestedDepartments.filter((d: string) => d !== dept),
                   )
                 }
                 variant="close"
@@ -180,7 +180,7 @@ const CurrentlyLookingFor: React.FC<TCurrentlyLookingForProps> = ({
               handleMultiSelect(
                 interestedCountries,
                 setInterestedCountries,
-                e.target.value
+                e.target.value,
               )
             }
             className="w-full border border-gray-300 rounded-xl py-3 px-4"
@@ -202,7 +202,7 @@ const CurrentlyLookingFor: React.FC<TCurrentlyLookingForProps> = ({
                 key={country}
                 onClick={() =>
                   setInterestedCountries(
-                    interestedCountries.filter((c: string) => c !== country)
+                    interestedCountries.filter((c: string) => c !== country),
                   )
                 }
                 variant="close"

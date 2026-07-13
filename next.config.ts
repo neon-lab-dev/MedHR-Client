@@ -1,14 +1,17 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+import type { NextConfig } from "next";
+
+const config = {
+  output: "standalone",
   images: {
     remotePatterns: [
       {
-        hostname:"ik.imagekit.io",
-        pathname: "**/*",
         protocol: "https",
+        hostname: "ik.imagekit.io",
+        pathname: "/**",
       },
     ],
   },
-};
+} satisfies NextConfig;
 
-export default nextConfig;
+export default config;
